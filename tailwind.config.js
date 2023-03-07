@@ -5,8 +5,9 @@ module.exports = {
         extend: {
             fontFamily: {
                 inter : ['Inter', 'sans-serif'],
-                andada: ['Andada Pro', 'serif']
-
+                andada: ['Andada Pro', 'serif'],
+                arvo: ['Arvo', 'sans-serif'],
+                amiri: ['Amiri', 'serif']
             }
         },
     },
