@@ -7,7 +7,8 @@ module.exports = {
                 inter : ['Inter', 'sans-serif'],
                 andada: ['Andada Pro', 'serif'],
                 arvo: ['Arvo', 'sans-serif'],
-                amiri: ['Amiri', 'serif']
+                amiri: ['Amiri', 'serif'],
+                sans: ['Open Sans', 'sans-serif']
             }
         },
     },

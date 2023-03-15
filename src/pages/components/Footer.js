@@ -2,7 +2,7 @@ const Footer = () => (
     <div className="bg-[#ffffff] py-[40px]">
         <div className="flex flex-row justify-around items-center">
             <div className="flex flex-col">
-                <div className='text-3xl mb-[50px]'>LOGO</div>
+                <div className='text-4xl w-full mb-[50px] font-semibold'>LOGO</div>
                 <div className="font-andada text-[24px] w-[450px] mb-[50px]">
                     Follow ... to get support and lots of great ideas on budgeting.
                 </div>
