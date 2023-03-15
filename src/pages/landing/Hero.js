@@ -1,6 +1,6 @@
 const Hero = () => {
     return (
-        <div className='font-andada w-full mx-auto h-full mb-48 mt-24 relative'>
+        <div id='hero' className='font-andada w-full mx-auto h-full mb-48 mt-24 relative'>
             <div className="flex justify-center items-center max-w-[1550px] mx-auto">
                 <div className="flex flex-col w-full">
                     <div className='text-[96px] font-bold text-[#240150] leading-none mb-[50px] max-w-[550px]'>

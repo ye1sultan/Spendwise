@@ -1,24 +1,29 @@
 import {React} from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import Page2 from './components/Page2';
-import Page3 from './components/Page3';
-import Page4 from './components/Page4';
-import Page5 from './components/Page5';
-import Page6 from './components/Page6';
-import Page7 from './components/Page7';
-import Footer from './components/Footer';
-import Signin from './Signin';
-import Signup from './Signup';
-import ForgotPassword from './ForgotPassword';
-import RestorePassword from './RestorePassword';
+import Header from './landing/Header';
+import Hero from './landing/Hero';
+import Objective1 from './landing/Objective1';
+import Traking from './landing/Traking';
+import Report from './landing/Report';
+import Secure from './landing/Secure';
+import Objective2 from './landing/Objective2';
+import Try from './landing/Try';
+import Footer from './landing/Footer';
+
 
 const Landing = () => {
     return (
         <div className="bg-gradient-to-r from-purple-300 via-purple-300 to-pink-100">
-            <RestorePassword />
+            <Header />
+            <Hero />
+            <Objective1 />
+            <Traking />
+            <Report />
+            <Secure /> 
+            <Objective2 />
+            <Try />
+            <Footer />
         </div>
-    )
+    );
 }
 
 export default Landing;
