@@ -1,3 +1,5 @@
+import Button from '../components/Button';
+
 const Traking = () => {
     return (
         <div id='tracking' className="bg-[#ffffff] py-[150px] w-full relative">
@@ -10,9 +12,11 @@ const Traking = () => {
                         With this site you can monitor your financial status at any time. It is very convenient.
                     </div>
                     <div>
-                        <button className="w-[290px] h-[80px] rounded-[20px] text-[32px] text-white font-bold bg-[#19AD50CC] font-inter">
+                        {/* <button className="w-[290px] h-[80px] rounded-[20px] text-[32px] text-white font-bold bg-[#19AD50CC] font-inter">
                             Try Now
-                        </button>
+                        </button> */}
+                        <Button route='/signup' text='Try Now' width='290px' height='80px' bg='#19AD50CC' rounded='20px' size='32px' color='white' bold='bold' font='inter' />
+
                     </div>
                 </div>
                 <div>

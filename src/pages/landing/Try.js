@@ -1,3 +1,5 @@
+import Button from '../components/Button';
+
 const Try = () => {
     return (
         <div id='try' className="py-[70px] w-full h-full font-andada bg-gradient-to-r from-purple-300 via-purple-200 to-pink-200 transform -skew-x-10">
@@ -13,13 +15,15 @@ const Try = () => {
                 <div className="text-[32px] mb-[55px]">
                     Start saving and spending with confidence and clarity.
                 </div>
-                <div className="flex flex-col">
-                    <button className="w-[420px] h-[64px] rounded-[10px] text-[25px] text-white font-semibold bg-[#19AD50CC] font-inter mb-[20px]">
+                <div className="flex flex-col gap-4">
+                    {/* <button className="w-[420px] h-[64px] rounded-[10px] text-[25px] text-white font-semibold bg-[#19AD50CC] font-inter mb-[20px]">
                         Try Free
                     </button>
                     <button className="w-[420px] h-[64px] rounded-[10px] text-[25px] text-black font-semibold bg-[#ffffff] font-inter">
                         See Site Features
-                    </button>
+                    </button> */}
+                    <Button route='/signup' text='Try Free' width='420px' height='64px' bg='#19AD50CC' rounded='10px' size='25px' color='white' bold='semibold' font='inter' />
+                    <Button route='/signup' text='See Site Features' width='420px' height='64px' bg='#ffffff' rounded='10px' size='25px' color='black' bold='semibold' font='inter' />
                 </div>
             </div>
         </div>

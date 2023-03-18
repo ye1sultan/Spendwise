@@ -1,6 +1,8 @@
+import Button from "../components/Button";
+
 const Hero = () => {
     return (
-        <div id='hero' className='font-andada w-full mx-auto h-full mb-48 mt-24 relative'>
+        <div id='hero' className='font-andada w-full mx-auto h-full mb-24 mt-24 relative'>
             <div className="flex justify-center items-center max-w-[1550px] mx-auto">
                 <div className="flex flex-col w-full">
                     <div className='text-[96px] font-bold text-[#240150] leading-none mb-[50px] max-w-[550px]'>
@@ -16,11 +18,12 @@ const Hero = () => {
                     <div className='text-[32px] font-medium text-[#240150] font-arvo mb-[50px]'>
                         Become financially independent today.
                     </div>
-                    <button className="w-[290px] h-[80px] rounded-[20px] text-[32px] text-white font-bold bg-[#19AD50CC] font-inter">
+                    {/* <button data-route="/signup" onClick={handleNavigation} className="w-[290px] h-[80px] rounded-[20px] text-[32px] text-white font-bold bg-[#19AD50CC] font-inter">
                         Get Started
-                    </button>
+                    </button> */}
+                    <Button route='/signup' text='Get Started' width='290px' height='80px' bg='#19AD50CC' rounded='20px' size='32px' color='white' bold='bold' font='inter'/>
                 </div>
-                <div className="">
+                <div>
                     <svg width="738" height="607" viewBox="0 0 738 607" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_132_198)">
                             <path d="M738 493.776H0V496.902H738V493.776Z" fill="#9F75D6" fill-opacity="0.910825" />

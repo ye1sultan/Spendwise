@@ -1,3 +1,5 @@
+import Button from '../components/Button';
+
 const Report = () => {
     return (
         <div id='report' className="bg-[#EBF0FEBF] py-[150px] w-full">
@@ -10,9 +12,10 @@ const Report = () => {
                         Based on expenses and income, we will make you a weekly/monthly report. It shows the progress or regression of finance.
                     </div>
                     <div>
-                        <button className="w-[290px] h-[80px] rounded-[20px] text-[32px] text-white font-bold bg-[#19AD50CC] font-inter">
+                        {/* <button className="w-[290px] h-[80px] rounded-[20px] text-[32px] text-white font-bold bg-[#19AD50CC] font-inter">
                             Get Report
-                        </button>
+                        </button> */}
+                        <Button route='/signup' text='Get Report' width='290px' height='80px' bg='#19AD50CC' rounded='20px' size='32px' color='white' bold='bold' font='inter' />
                     </div>
                 </div>
                 <div>
