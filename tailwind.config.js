@@ -4,11 +4,12 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                inter : ['Inter', 'sans-serif'],
+                inter: ['Inter', 'sans-serif'],
                 andada: ['Andada Pro', 'serif'],
                 arvo: ['Arvo', 'sans-serif'],
                 amiri: ['Amiri', 'serif'],
-                sans: ['Open Sans', 'sans-serif']
+                sans: ['Open Sans', 'sans-serif'],
+                cormorant: ['Cormorant Upright', 'serif']
             }
         },
     },

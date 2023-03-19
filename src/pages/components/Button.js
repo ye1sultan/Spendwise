@@ -13,7 +13,7 @@ const Button = (props) => {
     let bold = props.bold;
     let color = props.color;
 
-    let classes = `w-[${width}] h-[${height}] bg-[${bg}] rounded-[${rounded}] text-[${size}] font-${font} text-${color} font-${bold}`;
+    let classes = `${width} ${height} ${bg} ${rounded} ${size} ${font} ${color} ${bold}`;
 
     const navigate = useNavigate();
 
