@@ -2,7 +2,7 @@ const AboutUs = () => {
     return (
         <div id='about' className="bg-[#ffffff] py-[100px] sm:py-[150px] w-full relative">
             <div className="flex flex-col sm:justify-between sm:items-between max-w-[350px] sm:max-w-[1680px] h-full mx-auto z-10">
-                <div className="flex flex-col justify-start items-start sm:items-center mb-[100px] sm:mb-0 relative">
+                <div className="flex flex-col justify-start items-start mb-[100px] relative">
                     <div className="font-inter text-[36px] sm:text-[75px] text-[#502167] font-bold mb-[30px] sm:mb-0 z-10">
                         What is Spendwise?
                     </div>

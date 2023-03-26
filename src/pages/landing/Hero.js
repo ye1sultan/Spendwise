@@ -3,9 +3,9 @@ import Wave from 'react-wavify';
 
 const Hero = () => {
     return (
-        <div id='hero' className='font-andada w-full mx-auto h-full mb-24 mt-24 relative'>
+        <div id='hero' className='font-andada w-full mx-auto h-full mb-24 mt-24 sm:mt-12 relative'>
             <div className="flex flex-col sm:flex-row justify-center items-center max-w-[1550px] mx-auto">
-                <div className="flex flex-col justify-center items-center text-center w-full">
+                <div className="flex flex-col justify-center items-center sm:items-start text-center sm:text-left w-full">
                     <div className='text-[48px] sm:text-[96px] font-bold text-[#240150] leading-none mb-[30px] sm:mb-[50px] w-full sm:max-w-[550px] relative'>
                         Personal <br></br>Finance <br></br> Made Easy.
                         <div className="block sm:hidden absolute bottom-[-15px] right-[180px]">
@@ -79,7 +79,7 @@ const Hero = () => {
                             </defs>
                         </svg>
                     </div>
-                    <Button route='/signup' text='Get Started' width='w-[160px] sm:w-[290px]' height='h-[35px] sm:h-[80px]' bg='bg-[#19AD50CC]' rounded='rounded-[20px]' size='text-[16px] sm:text-[32px]' color='text-white' bold='font-bold' font='font-inter' />
+                    <Button route='/signup' text='Get Started' width='w-[160px] sm:w-[290px]' height='h-[40px] sm:h-[80px]' bg='bg-[#19AD50CC]' rounded='rounded-[20px]' size='text-[16px] sm:text-[32px]' color='text-white' bold='font-bold' font='font-inter' />
                 </div>
                 <div className="hidden sm:block">
                     <svg width="738" height="607" viewBox="0 0 738 607" fill="none" xmlns="http://www.w3.org/2000/svg">
