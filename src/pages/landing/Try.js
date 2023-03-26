@@ -16,8 +16,8 @@ const Try = () => {
                     Start saving and spending with confidence and clarity.
                 </div>
                 <div className="flex flex-col gap-4">
-                    <Button route='/signup' text='Try Free' width='420px' height='64px' bg='#19AD50CC' rounded='10px' size='25px' color='white' bold='semibold' font='inter' />
-                    <Button route='/signup' text='See Site Features' width='420px' height='64px' bg='#ffffff' rounded='10px' size='25px' color='black' bold='semibold' font='inter' />
+                    <Button route='/signup' text='Try Free' width='sm:w-[420px]' height='sm:h-[64px]' bg='bg-[#19AD50CC]' rounded='sm:rounded-[10px]' size='sm:text-[25px]' color='text-white' bold='font-bold' font='font-inter' />
+                    <Button route='/signup' text='See Site Features' width='sm:w-[420px]' height='sm:h-[64px]' bg='bg-[#ffffff]' rounded='sm:rounded-[10px]' size='sm:text-[25px]' color='text-black' bold='font-bold' font='font-inter' />
                 </div>
             </div>
         </div>

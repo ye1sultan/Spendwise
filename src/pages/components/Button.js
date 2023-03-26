@@ -12,8 +12,9 @@ const Button = (props) => {
     let font = props.font;
     let bold = props.bold;
     let color = props.color;
+    let display = props.display;
 
-    let classes = `${width} ${height} ${bg} ${rounded} ${size} ${font} ${color} ${bold}`;
+    let classes = `${width} ${height} ${bg} ${rounded} ${size} ${font} ${color} ${bold} ${display}`;
 
     const navigate = useNavigate();
 

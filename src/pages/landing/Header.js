@@ -21,8 +21,8 @@ const Header = () => {
                     <button data-id='support' className="text-[24px] font-light mr-[50px]" onClick={handleClickScroll}>Support</button>
                 </div>
                 <div className="flex flex-row border-l-[1px] border-black pl-8 gap-6">
-                    <Button route='/signin' text='Sign In' width='110px' height='48px' size='24px' color='black' bold='light' font='inter' />
-                    <Button route='/signup' text='Sign Up' width='110px' height='48px' bg='#000000' rounded='8px' size='24px' color='black' bold='light' font='inter' />
+                    <Button route='/signin' text='Sign In' width='sm:w-[110px]' height='sm:h-[48px]' size='text-[24px]' color='text-black' bold='font-light' font='font-inter' display='hidden sm:block'/>
+                    <Button route='/signup' text='Sign Up' width='sm:w-[110px]' height='sm:h-[48px]' bg='bg-[#EFCA47CC]' rounded='rounded-[8px]' size='sm:text-[24px]' color='text-black' bold='font-light' font='font-inter' display='hidden sm:block'/>
                 </div>
             </div>
             <AiOutlineMenu size={40} className="flex sm:hidden"/>

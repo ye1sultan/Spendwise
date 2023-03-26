@@ -1,6 +1,6 @@
 const Objective2 = () => {
     return (
-        <div id='objective-2' className="py-[100px] w-full h-full font-andada bg-[#EBF0FEBF]">
+        <div id='objective-2' className="py-[100px] w-full h-full font-andada bg-[#ffffff] sm:bg-[#EBF0FEBF]">
             <div className="flex flex-col justify-center items-center">
                 <div className="flex flex-col text-center mb-[70px]">
                     <div className="text-[85px] font-extrabold text-[#381C46]">

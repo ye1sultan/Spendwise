@@ -1,6 +1,6 @@
 const Secure = () => {
     return (
-        <div id='secure' className="bg-[#ffffff] py-[100px] relative">
+        <div id='secure' className="hidden sm:block bg-[#ffffff] py-[100px] relative">
             <div className="flex flex-col justify-center items-center">
                 <div className="mb-[28px]">
                     <svg width="96" height="94" viewBox="0 0 96 94" fill="none" xmlns="http://www.w3.org/2000/svg">
