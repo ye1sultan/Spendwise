@@ -5,7 +5,7 @@ const Traking = () => {
         <div id='tracking' className="bg-[#ffffff] py-[100px] sm:py-[150px] w-full relative">
             <div className="flex flex-col sm:flex-row justify-center items-center max-w-[350px] sm:max-w-full h-full mx-auto">
                 <div className="flex flex-col sm:w-[700px]">
-                    <div className="font-inter text-[40px] sm:text-[75px] font-semibold leading-tight mb-[30px] sm:mb-[40px]">
+                    <div className="font-inter text-[40px] sm:text-[75px] font-semibold leading-tight mb-[30px] sm:mb-[40px] z-10">
                         Traking your budget up to date
                     </div>
                     <div className="font-amiri text-[24px] sm:text-[42px] sm:w-[555px] mb-[15px] sm:mb-[60px]">
