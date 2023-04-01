@@ -1,18 +1,18 @@
 const Objective2 = () => {
     return (
-        <div id='objective-2' className="px-[20px] py-[70px] pb-[20px] sm:px-0 sm:py-[100px] font-andada bg-[#ffffff] sm:bg-[#EBF0FEBF] flex justify-center items-center w-full h-full">
-            <div className="flex flex-col justify-center items-center w-[370px] sm:w-full">
-                <div className="flex flex-col text-start sm:text-center mb-[45px] sm:mb-[70px]">
-                    <div className="text-[40px] sm:text-[85px] font-bold sm:font-extrabold text-[#381C46] mb-[25px] sm:mb-0">
+        <div id='objective-2' className="px-[20px] py-[70px] pb-[20px] 2xl:px-0 2xl:py-[100px] font-andada bg-[#ffffff] 2xl:bg-[#EBF0FEBF] flex justify-center items-center w-full h-full">
+            <div className="flex flex-col justify-center items-center w-[370px] 2xl:w-full">
+                <div className="flex flex-col text-start 2xl:text-center mb-[45px] 2xl:mb-[70px]">
+                    <div className="text-[40px] 2xl:text-[85px] font-bold 2xl:font-extrabold text-[#381C46] mb-[25px] 2xl:mb-0">
                         How ... Works?
                     </div>
-                    <div className="text-[15px] sm:text-[32px] sm:w-[1450px]">
+                    <div className="text-[15px] 2xl:text-[32px] 2xl:w-[1450px]">
                         Simplify your spending decisions without sacrificing the finer things in life, like fancy coffee drinks with hard-to-pronounce names.
                     </div>
                 </div>
-                <div className="flex flex-col sm:flex-row justify-center sm:justify-around items-center w-full h-full">
-                    <div className="flex flex-row sm:flex-col sm:justify-center items-center mb-[85px] sm:mb-0 w-full sm:w-max">
-                        <div className="hidden sm:block mb-[45px]">
+                <div className="flex flex-col 2xl:flex-row justify-center 2xl:justify-around items-center w-full h-full">
+                    <div className="flex flex-row 2xl:flex-col 2xl:justify-center items-center mb-[85px] 2xl:mb-0 w-full 2xl:w-max">
+                        <div className="hidden 2xl:block mb-[45px]">
                             <svg width="252" height="220" viewBox="0 0 252 220" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M235.851 1.69232H17.8753C8.99319 1.69232 1.72601 8.83576 1.72601 17.5667V185.51C1.72601 194.241 8.99319 201.385 17.8753 201.385H235.851C244.733 201.385 252 194.241 252 185.51V17.5668C252 8.8359 244.733 1.69246 235.851 1.69246L235.851 1.69232ZM244.276 178.691C244.276 187.421 237.009 194.565 228.127 194.565H24.4196C15.5375 194.565 8.27031 187.421 8.27031 178.691V24.1925C8.27031 15.4616 15.5375 8.31815 24.4196 8.31815H228.127C237.009 8.31815 244.276 15.4616 244.276 24.1925V178.691V178.691Z" fill="white" />
                                 <path d="M235.142 201.383H16.8582C7.56266 201.383 0 193.947 0 184.807V16.576C0 7.43598 7.56252 0 16.8582 0H235.142C244.437 0 252 7.43598 252 16.576V184.807C252 193.947 244.437 201.383 235.142 201.383ZM16.8582 1.34886C8.31894 1.34886 1.37181 8.17974 1.37181 16.576V184.807C1.37181 193.204 8.31894 200.035 16.8582 200.035H235.142C243.681 200.035 250.628 193.204 250.628 184.807V16.576C250.628 8.1796 243.681 1.34886 235.142 1.34886H16.8582ZM227.407 194.552H23.4117C14.1162 194.552 6.55369 187.116 6.55369 177.976V23.2129C6.55369 14.0729 14.1162 6.63692 23.4117 6.63692H227.407C236.703 6.63692 244.266 14.0729 244.266 23.2129V177.976C244.266 187.116 236.703 194.552 227.407 194.552ZM23.4117 7.98577C14.8726 7.98577 7.9255 14.8167 7.9255 23.2129V177.976C7.9255 186.372 14.8726 193.203 23.4117 193.203H227.407C235.947 193.203 242.894 186.372 242.894 177.976V23.2129C242.894 14.8165 235.947 7.98577 227.407 7.98577H23.4117Z" fill="#9F75D6" />
@@ -33,7 +33,7 @@ const Objective2 = () => {
                                 <path d="M205.034 82.9231C204.635 82.9231 204.236 82.8104 203.885 82.5843L173.543 62.9917C172.835 62.5345 172.481 61.7116 172.641 60.8953C172.8 60.079 173.44 59.4433 174.271 59.2756L199.433 54.1966C199.979 54.0863 200.537 54.1912 201.003 54.4922C201.469 54.7931 201.788 55.2538 201.9 55.7896L207.08 80.461C207.251 81.2751 206.908 82.1024 206.206 82.5689C205.851 82.8047 205.443 82.9228 205.034 82.9228V82.9231ZM175.77 61.4844L204.418 79.9827L199.527 56.6893L175.77 61.4844Z" fill="#9F75D6" />
                             </svg>
                         </div>
-                        <div className="block sm:hidden">
+                        <div className="block 2xl:hidden">
                             <svg width="131" height="104" viewBox="0 0 131 104" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M122.605 0.797363H9.29229C4.675 0.797363 0.897217 4.16325 0.897217 8.27712V87.4098C0.897217 91.5237 4.675 94.8895 9.29229 94.8895H122.605C127.222 94.8895 131 91.5237 131 87.4098V8.27719C131 4.16332 127.222 0.797426 122.605 0.797426L122.605 0.797363ZM126.985 84.1964C126.985 88.3103 123.207 91.6762 118.59 91.6762H12.6943C8.07699 91.6762 4.29921 88.3103 4.29921 84.1964V11.3991C4.29921 7.28525 8.07699 3.91936 12.6943 3.91936H118.59C123.207 3.91936 126.985 7.28525 126.985 11.3991V84.1965V84.1964Z" fill="white" />
                                 <path d="M122.236 94.889H8.76358C3.93138 94.889 0 91.3853 0 87.0786V7.81036C0 3.50373 3.93131 0 8.76358 0H122.236C127.069 0 131 3.50373 131 7.81036V87.0786C131 91.3853 127.069 94.889 122.236 94.889ZM8.76358 0.635562C4.32453 0.635562 0.713124 3.85418 0.713124 7.81036V87.0786C0.713124 91.0348 4.32453 94.2534 8.76358 94.2534H122.236C126.675 94.2534 130.287 91.0348 130.287 87.0786V7.81036C130.287 3.85411 126.675 0.635562 122.236 0.635562H8.76358ZM118.216 91.6702H12.1704C7.33819 91.6702 3.40688 88.1665 3.40688 83.8598V10.9376C3.40688 6.63095 7.33819 3.12722 12.1704 3.12722H118.216C123.048 3.12722 126.979 6.63095 126.979 10.9376V83.8598C126.979 88.1665 123.048 91.6702 118.216 91.6702ZM12.1704 3.76278C7.7314 3.76278 4.12 6.9814 4.12 10.9376V83.8598C4.12 87.816 7.7314 91.0346 12.1704 91.0346H118.216C122.655 91.0346 126.266 87.816 126.266 83.8598V10.9376C126.266 6.98133 122.655 3.76278 118.216 3.76278H12.1704Z" fill="#9F75D6" />
@@ -55,16 +55,16 @@ const Objective2 = () => {
                             </svg>
                         </div>
                         <div className="flex flex-col justify-center items-center w-full">
-                            <div className="text-[20px] sm:text-[40px] font-bold sm:mb-[15px]">
+                            <div className="text-[20px] 2xl:text-[40px] font-bold 2xl:mb-[15px]">
                                 Sign Up for Free
                             </div>
-                            <div className="text-[14px] sm:text-[32px] w-[185px] sm:w-[500px] font-amiri text-center">
+                            <div className="text-[14px] 2xl:text-[32px] w-[185px] 2xl:w-[500px] font-amiri text-center">
                                 Start your journey with Sing Up. It's easy—no credit card or commitment required.
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-row sm:flex-col sm:justify-center items-center mb-[85px] sm:mb-0 w-full sm:w-max">
-                        <div className="hidden sm:block mb-[45px]">
+                    <div className="flex flex-row 2xl:flex-col 2xl:justify-center items-center mb-[85px] 2xl:mb-0 w-full 2xl:w-max">
+                        <div className="hidden 2xl:block mb-[45px]">
                             <svg width="252" height="220" viewBox="0 0 252 220" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M198.14 77.9503C198.14 78.8238 197.331 79.5384 196.343 79.5384H92.2113C91.2232 79.5384 90.4147 78.8238 90.4147 77.9503V2.48629C90.4147 2.04779 90.8169 1.69226 91.313 1.69226H196.343C197.331 1.69226 198.14 2.40689 198.14 3.28033V77.9503Z" fill="white" />
                                 <path d="M195.441 79.5384H91.189C89.7013 79.5384 88.491 78.4684 88.491 77.1531V1.59015C88.491 0.71338 89.2979 0 90.2897 0H195.441C196.929 0 198.139 1.06997 198.139 2.38522V77.1531C198.139 78.4684 196.929 79.5384 195.441 79.5384ZM90.2897 1.59015V77.1531C90.2897 77.5916 90.693 77.9482 91.189 77.9482H195.441C195.937 77.9482 196.34 77.5916 196.34 77.1531V2.38522C196.34 1.94674 195.937 1.59015 195.441 1.59015H90.2897Z" fill="#9F75D6" />
@@ -90,7 +90,7 @@ const Objective2 = () => {
                                 <path d="M166.397 204.769C160.563 204.769 155.817 200.594 155.817 195.462C155.817 190.329 160.563 186.154 166.397 186.154C172.231 186.154 176.977 190.329 176.977 195.462C176.977 200.594 172.231 204.769 166.397 204.769ZM166.397 187.343C161.308 187.343 157.169 190.985 157.169 195.462C157.169 199.938 161.308 203.58 166.397 203.58C171.485 203.58 175.625 199.938 175.625 195.462C175.625 190.985 171.485 187.343 166.397 187.343Z" fill="#9F75D6" />
                             </svg>
                         </div>
-                        <div className="block sm:hidden">
+                        <div className="block 2xl:hidden">
                             <svg width="131" height="120" viewBox="0 0 131 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M103.001 42.5184C103.001 42.9948 102.581 43.3846 102.068 43.3846H47.9354C47.4217 43.3846 47.0015 42.9948 47.0015 42.5184V1.3562C47.0015 1.11702 47.2106 0.923096 47.4684 0.923096H102.068C102.581 0.923096 103.001 1.31289 103.001 1.78931V42.5184Z" fill="white" />
                                 <path d="M101.598 43.3846H47.4038C46.6304 43.3846 46.0012 42.8009 46.0012 42.0835V0.867353C46.0012 0.389116 46.4207 0 46.9363 0H101.598C102.372 0 103.001 0.58362 103.001 1.30103V42.0835C103.001 42.8009 102.372 43.3846 101.598 43.3846ZM46.9363 0.867353V42.0835C46.9363 42.3227 47.1459 42.5172 47.4038 42.5172H101.598C101.856 42.5172 102.066 42.3227 102.066 42.0835V1.30103C102.066 1.06186 101.856 0.867353 101.598 0.867353H46.9363Z" fill="#9F75D6" />
@@ -117,16 +117,16 @@ const Objective2 = () => {
                             </svg>
                         </div>
                         <div className="flex flex-col justify-center items-center w-full">
-                            <div className="text-[20px] sm:text-[40px] font-bold sm:mb-[15px]">
+                            <div className="text-[20px] 2xl:text-[40px] font-bold 2xl:mb-[15px]">
                                 Build Your Budget
                             </div>
-                            <div className="text-[14px] sm:text-[32px] w-[185px] sm:w-[500px] font-amiri text-center">
+                            <div className="text-[14px] 2xl:text-[32px] w-[185px] 2xl:w-[500px] font-amiri text-center">
                                 Add your accounts and expenses, set savings targets, and share your budget with loved ones.
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-row sm:flex-col sm:justify-center items-center mb-[85px] sm:mb-0 w-full sm:w-max">
-                        <div className="hidden sm:block mb-[45px]">
+                    <div className="flex flex-row 2xl:flex-col 2xl:justify-center items-center mb-[85px] 2xl:mb-0 w-full 2xl:w-max">
+                        <div className="hidden 2xl:block mb-[45px]">
                             <svg width="252" height="227" viewBox="0 0 252 227" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M209.982 12.223H51.9392C39.6921 12.223 29.7639 20.9912 29.7639 31.8072V207.416C29.7639 218.232 39.6921 227 51.9392 227H209.982C222.229 227 232.158 218.232 232.158 207.416V31.8072C232.158 20.9912 222.229 12.223 209.982 12.223Z" fill="white" />
                                 <path d="M209.188 227H50.7487C38.0835 227 27.7795 217.904 27.7795 206.723V30.7532C27.7795 19.5729 38.0835 10.4769 50.7487 10.4769H209.188C221.853 10.4769 232.157 19.5729 232.157 30.7532V206.723C232.157 217.904 221.853 227 209.188 227ZM50.7487 11.7804C38.8977 11.7804 29.2561 20.2917 29.2561 30.7532V206.723C29.2561 217.185 38.8977 225.696 50.7487 225.696H209.188C221.039 225.696 230.68 217.185 230.68 206.723V30.7532C230.68 20.2917 221.039 11.7804 209.188 11.7804H50.7487Z" fill="#9F75D6" />
@@ -147,7 +147,7 @@ const Objective2 = () => {
                                 <path d="M198.808 80.3228C198.424 80.3228 198.044 80.2062 197.744 79.9816L179.119 66.0562C178.634 65.6935 178.459 65.1266 178.673 64.612C178.886 64.0974 179.444 63.7446 180.092 63.7132L197.704 62.8637C198.586 62.8214 199.343 63.3879 199.394 64.127L200.407 78.9023C200.444 79.4465 200.09 79.9514 199.505 80.1885C199.282 80.2787 199.044 80.323 198.808 80.323L198.808 80.3228ZM181.307 65.3819L198.292 78.0812L197.368 64.6071L181.307 65.3819H181.307Z" fill="#9F75D6" />
                             </svg>
                         </div>
-                        <div className="block sm:hidden">
+                        <div className="block 2xl:hidden">
                             <svg width="131" height="120" viewBox="0 0 131 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M109.157 6.46143H27C20.6335 6.46143 15.4724 11.0966 15.4724 16.8143V109.647C15.4724 115.365 20.6335 120 27 120H109.157C115.524 120 120.685 115.365 120.685 109.647V16.8143C120.685 11.0966 115.524 6.46143 109.157 6.46143Z" fill="white" />
                                 <path d="M108.744 120H26.3812C19.7973 120 14.4409 115.191 14.4409 109.281V16.2572C14.4409 10.3469 19.7973 5.53845 26.3812 5.53845H108.744C115.328 5.53845 120.685 10.3469 120.685 16.2572V109.281C120.685 115.191 115.328 120 108.744 120ZM26.3812 6.22751C20.2206 6.22751 15.2085 10.7269 15.2085 16.2572V109.281C15.2085 114.811 20.2206 119.311 26.3812 119.311H108.744C114.905 119.311 119.917 114.811 119.917 109.281V16.2572C119.917 10.7269 114.905 6.22751 108.744 6.22751H26.3812Z" fill="#9F75D6" />
@@ -169,10 +169,10 @@ const Objective2 = () => {
                             </svg>
                         </div>
                         <div className="flex flex-col justify-center items-center w-full">
-                            <div className="text-[20px] sm:text-[40px] font-bold sm:mb-[15px]">
+                            <div className="text-[20px] 2xl:text-[40px] font-bold 2xl:mb-[15px]">
                                 Breathe Easier
                             </div>
-                            <div className="text-[14px] sm:text-[32px] w-[185px] sm:w-[500px] font-amiri text-center">
+                            <div className="text-[14px] 2xl:text-[32px] w-[185px] 2xl:w-[500px] font-amiri text-center">
                                 Start feeling confident, content, and secure in your financial life. You might even sleep better.
                             </div>
                         </div>

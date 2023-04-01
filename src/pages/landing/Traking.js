@@ -2,20 +2,20 @@ import Button from '../components/Button';
 
 const Traking = () => {
     return (
-        <div id='tracking' className="bg-[#ffffff] py-[100px] sm:py-[150px] w-full relative">
-            <div className="flex flex-col sm:flex-row justify-center items-center max-w-[350px] sm:max-w-full h-full mx-auto">
-                <div className="flex flex-col sm:w-[700px]">
-                    <div className="font-inter text-[40px] sm:text-[75px] font-semibold leading-tight mb-[30px] sm:mb-[40px] z-10">
+        <div id='tracking' className="bg-[#ffffff] py-[100px] 2xl:py-[150px] w-full relative">
+            <div className="flex flex-col 2xl:flex-row justify-center items-center max-w-[350px] 2xl:max-w-full h-full mx-auto">
+                <div className="flex flex-col 2xl:w-[700px]">
+                    <div className="font-inter text-[40px] 2xl:text-[75px] font-semibold leading-tight mb-[30px] 2xl:mb-[40px] z-10">
                         Traking your budget up to date
                     </div>
-                    <div className="font-amiri text-[24px] sm:text-[42px] sm:w-[555px] mb-[15px] sm:mb-[60px]">
+                    <div className="font-amiri text-[24px] 2xl:text-[42px] 2xl:w-[555px] mb-[15px] 2xl:mb-[60px]">
                         With this site you can monitor your financial status at any time. It is very convenient.
                     </div>
-                    <div className='hidden sm:block'>
-                        <Button route='/signup' text='Try Now' width='sm:w-[290px]' height='sm:h-[80px]' bg='bg-[#19AD50CC]' rounded='sm:rounded-[20px]' size='sm:text-[32px]' color='text-white' bold='font-bold' font='font-inter' />
+                    <div className='hidden 2xl:block'>
+                        <Button route='/signup' text='Try Now' width='2xl:w-[290px]' height='2xl:h-[80px]' bg='bg-[#19AD50CC]' rounded='2xl:rounded-[20px]' size='2xl:text-[32px]' color='text-white' bold='font-bold' font='font-inter' />
                     </div>
                 </div>
-                <div className='block sm:hidden mb-[50px]'>
+                <div className='block 2xl:hidden mb-[50px]'>
                     <svg width="332" height="229" viewBox="0 0 332 229" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_1_1580)">
                             <path d="M332 227.304H0V229H332V227.304Z" fill="#9F75D6" fill-opacity="0.910825" />
@@ -101,7 +101,7 @@ const Traking = () => {
                         </defs>
                     </svg>
                 </div>
-                <div className='hidden sm:block'>
+                <div className='hidden 2xl:block'>
                     <svg width="906" height="621" viewBox="0 0 906 621" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_136_154)">
                             <path d="M906 616.4H0V621H906V616.4Z" fill="#9F75D6" fill-opacity="0.910825" />
@@ -187,7 +187,7 @@ const Traking = () => {
                         </defs>
                     </svg>
                 </div>
-                <div className='block sm:hidden'>
+                <div className='block 2xl:hidden'>
                     <Button route='/signup' text='Try Now' width='w-[160px]' height='h-[40px]' bg='bg-[#19AD50CC]' rounded='rounded-[20px]' size='text-[16px]' color='text-white' bold='font-bold' font='font-inter' />
                 </div>
             </div>

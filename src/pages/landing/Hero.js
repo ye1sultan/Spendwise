@@ -3,26 +3,27 @@ import Wave from 'react-wavify';
 
 const Hero = () => {
     return (
-        <div id='hero' className='font-andada w-full mx-auto h-full mb-24 mt-24 sm:mt-12 relative'>
-            <div className="flex flex-col sm:flex-row justify-center items-center max-w-[1550px] mx-auto">
-                <div className="flex flex-col justify-center items-center sm:items-start text-center sm:text-left w-full">
-                    <div className='text-[48px] sm:text-[96px] font-bold text-[#240150] leading-none mb-[30px] sm:mb-[50px] w-full sm:max-w-[550px] relative'>
-                        Personal <br></br>Finance <br></br> Made Easy.
-                        <div className="block sm:hidden absolute bottom-[-15px] right-[180px]">
-                            <svg width="119" height="17" viewBox="0 0 119 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.54064 4.60191C2.84581 5.07173 1.24041 5.49451 0.982395 5.96433C0.35169 6.99792 1.61306 7.5149 5.59797 7.56189C5.62663 7.56189 109.091 3.70931 109.12 3.70931C113.793 3.38044 114.165 2.95769 114.165 2.15901C114.165 1.12541 112.904 0.420508 110.209 0.0916369C106.654 -0.42516 25.4652 1.26622 5.54064 4.60191ZM110.868 6.95099C109.607 7.04495 27.5007 10.1457 25.4366 10.4276C0.151028 13.4814 -1.79843 13.9513 0.925072 16.2064C2.24382 17.287 4.73797 17.2869 15.546 16.0654C41.6055 13.1995 115.799 12.8708 118.408 11.3204C119.612 10.5687 119.784 6.43419 110.868 6.95099Z" fill="#E868C4" />
-                            </svg>
-                        </div>
-                        <div className="hidden sm:block absolute bottom-0 right-[10px]">
+        <div id='hero' className='font-andada w-full mx-auto h-full mb-24 mt-24 2xl:mt-12 relative'>
+            <div className="flex flex-col 2xl:flex-row justify-center items-center max-w-[1550px] mx-auto">
+                <div className="flex flex-col justify-center items-center 2xl:items-start text-center 2xl:text-left w-full">
+                    <div className='text-[48px] 2xl:text-[96px] font-bold text-[#240150] leading-none mb-[30px] 2xl:mb-[50px] w-full 2xl:max-w-[550px] relative'>
+                        Personal <br></br>Finance <br></br> Made <span className="relative">Easy.
+                            <div className="block 2xl:hidden absolute bottom-[-10px] right-0">
+                                <svg width="119" height="17" viewBox="0 0 119 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.54064 4.60191C2.84581 5.07173 1.24041 5.49451 0.982395 5.96433C0.35169 6.99792 1.61306 7.5149 5.59797 7.56189C5.62663 7.56189 109.091 3.70931 109.12 3.70931C113.793 3.38044 114.165 2.95769 114.165 2.15901C114.165 1.12541 112.904 0.420508 110.209 0.0916369C106.654 -0.42516 25.4652 1.26622 5.54064 4.60191ZM110.868 6.95099C109.607 7.04495 27.5007 10.1457 25.4366 10.4276C0.151028 13.4814 -1.79843 13.9513 0.925072 16.2064C2.24382 17.287 4.73797 17.2869 15.546 16.0654C41.6055 13.1995 115.799 12.8708 118.408 11.3204C119.612 10.5687 119.784 6.43419 110.868 6.95099Z" fill="#E868C4" />
+                                </svg>
+                            </div>
+                        </span>
+                        <div className="hidden 2xl:block absolute bottom-[-10px] right-16">
                             <svg width="221" height="19" viewBox="0 0 221 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M10.2898 5.14331C5.28508 5.6684 2.30362 6.14093 1.82445 6.66602C0.653138 7.82121 2.99568 8.39901 10.3962 8.45152C10.4495 8.45152 202.597 4.1457 202.651 4.1457C211.329 3.77814 212.021 3.30566 212.021 2.41301C212.021 1.25782 209.679 0.469979 204.674 0.102418C198.072 -0.475179 47.2925 1.41519 10.2898 5.14331ZM205.898 7.76875C203.556 7.87377 51.0727 11.3393 47.2393 11.6543C0.280481 15.0674 -3.33994 15.5927 1.71799 18.1131C4.16709 19.3208 8.79909 19.3206 28.8711 17.9554C77.2674 14.7524 215.056 14.385 219.901 12.6522C222.137 11.8121 222.457 7.19115 205.898 7.76875Z" fill="#E868C4" />
                             </svg>
                         </div>
                     </div>
-                    <div className='text-[16px] sm:text-[32px] font-medium text-[#240150] font-arvo mb-[50px] sm:mb-[50px]'>
+                    <div className='text-[16px] 2xl:text-[32px] font-medium text-[#240150] font-arvo mb-[50px] 2xl:mb-[50px]'>
                         Become financially independent today.
                     </div>
-                    <div className="block sm:hidden mb-[50px]">
+                    <div className="block 2xl:hidden mb-[50px]">
                         <svg width="267" height="230" viewBox="0 0 267 230" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_1_1387)">
                                 <path d="M267 187.098H0V188.283H267V187.098Z" fill="#9F75D6" fill-opacity="0.910825" />
@@ -79,9 +80,9 @@ const Hero = () => {
                             </defs>
                         </svg>
                     </div>
-                    <Button route='/signup' text='Get Started' width='w-[160px] sm:w-[290px]' height='h-[40px] sm:h-[80px]' bg='bg-[#19AD50CC]' rounded='rounded-[20px]' size='text-[16px] sm:text-[32px]' color='text-white' bold='font-bold' font='font-inter' />
+                    <Button route='/signup' text='Get Started' width='w-[160px] 2xl:w-[290px]' height='h-[40px] 2xl:h-[80px]' bg='bg-[#19AD50CC]' rounded='rounded-[20px]' size='text-[16px] 2xl:text-[32px]' color='text-white' bold='font-bold' font='font-inter' />
                 </div>
-                <div className="hidden sm:block">
+                <div className="hidden 2xl:block">
                     <svg width="738" height="607" viewBox="0 0 738 607" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_132_198)">
                             <path d="M738 493.776H0V496.902H738V493.776Z" fill="#9F75D6" fill-opacity="0.910825" />

@@ -2,13 +2,13 @@ import Button from '../components/Button';
 
 const Report = () => {
     return (
-        <div id='report' className="bg-[#EBF0FEBF] py-[100px] sm:py-[150px] w-full">
-            <div className="flex flex-col sm:flex-row-reverse justify-center sm:justify-around items-center max-w-[350px] sm:max-w-full h-full mx-auto">
-                <div className="flex flex-col sm:w-[700px]">
-                    <div className="font-inter text-[40px] sm:text-[75px] font-semibold leading-tight mb-[60px] sm:mb-[40px]">
+        <div id='report' className="bg-[#EBF0FEBF] py-[100px] 2xl:py-[150px] w-full">
+            <div className="flex flex-col 2xl:flex-row-reverse justify-center 2xl:justify-around items-center max-w-[350px] 2xl:max-w-full h-full mx-auto">
+                <div className="flex flex-col 2xl:w-[700px]">
+                    <div className="font-inter text-[40px] 2xl:text-[75px] font-semibold leading-tight mb-[60px] 2xl:mb-[40px]">
                         Generate report
                     </div>
-                    <div className='block sm:hidden mb-[50px]'>
+                    <div className='block 2xl:hidden mb-[50px]'>
                         <svg width="355" height="229" viewBox="0 0 355 229" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_1_1632)">
                                 <path d="M99.6711 66.8511H77.9706C77.528 66.8511 77.1692 67.2107 77.1692 67.6542V227.431C77.1692 227.875 77.528 228.234 77.9706 228.234H99.6711C100.114 228.234 100.473 227.875 100.473 227.431V67.6542C100.473 67.2107 100.114 66.8511 99.6711 66.8511Z" fill="white" />
@@ -83,14 +83,14 @@ const Report = () => {
                             </defs>
                         </svg>
                     </div>
-                    <div className="font-amiri text-[24px] sm:text-[42px] sm:w-[660px] mb-[25px] sm:mb-[60px]">
+                    <div className="font-amiri text-[24px] 2xl:text-[42px] 2xl:w-[660px] mb-[25px] 2xl:mb-[60px]">
                         Based on expenses and income, we will make you a weekly/monthly report. It shows the progress or regression of finance.
                     </div>
                     <div>
-                        <Button route='/signup' text='Get Report' width='w-[160px] sm:w-[290px]' height='h-[40px] sm:h-[80px]' bg='bg-[#19AD50CC]' rounded='rounded-[20px]' size='text-[16px] sm:text-[32px]' color='text-white' bold='font-bold' font='font-inter' />
+                        <Button route='/signup' text='Get Report' width='w-[160px] 2xl:w-[290px]' height='h-[40px] 2xl:h-[80px]' bg='bg-[#19AD50CC]' rounded='rounded-[20px]' size='text-[16px] 2xl:text-[32px]' color='text-white' bold='font-bold' font='font-inter' />
                     </div>
                 </div>
-                <div className='hidden sm:block'>
+                <div className='hidden 2xl:block'>
                     <svg width="883" height="546" viewBox="0 0 883 546" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_135_35)">
                             <path d="M247.914 159.392H193.938C192.837 159.392 191.945 160.249 191.945 161.306V542.26C191.945 543.317 192.837 544.174 193.938 544.174H247.914C249.015 544.174 249.908 543.317 249.908 542.26V161.306C249.908 160.249 249.015 159.392 247.914 159.392Z" fill="white" />
