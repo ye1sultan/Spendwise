@@ -8,6 +8,8 @@ import Signup from './pages/sign/Signup';
 import ForgotPassword from './pages/sign/ForgotPassword';
 import RestorePassword from './pages/sign/RestorePassword';
 
+import Application from './pages/application/Application';
+
 function App() {
     return (
         <div className="App">
@@ -18,6 +20,9 @@ function App() {
                 <Route path='/signup' element={<Signup />} />
                 <Route path='/forgot-password' element={<ForgotPassword />} />
                 <Route path='/restore-password' element={<RestorePassword />} />
+
+                <Route path='/application/dashboard' element={<Application />} />
+
                 <Route path='*' element={<Navigate to="/home" />} />
             </Routes>
         </div>

@@ -9,7 +9,8 @@ module.exports = {
                 arvo: ['Arvo', 'sans-serif'],
                 amiri: ['Amiri', 'serif'],
                 sans: ['Open Sans', 'sans-serif'],
-                cormorant: ['Cormorant Upright', 'serif']
+                cormorant: ['Cormorant Upright', 'serif'],
+                montserrat: ['Montserrat', 'sans-serif']
             }
         },
     },
