@@ -1,23 +1,33 @@
-const Bie = () => {
+import { ReactComponent as Current } from "./Svgs/Current.svg";
+import { ReactComponent as Incomes } from "./Svgs/Incomes.svg";
+import { ReactComponent as Expenses } from "./Svgs/Expenses.svg";
+import { ReactComponent as Monthly } from "./Svgs/Monthly.svg";
+
+const Bie = (props) => {
+
+    let title = props.title;
+    let amount = props.amount;
+    let svg = props.svg;
+
     return (
-        <div className="flex flex-col justify-between items-start w-[297px] h-[138px] rounded-[30px] bg-white border-[1px] border-black relative p-[25px]">
+        <div className="flex flex-col justify-between items-start w-[297px] h-[138px] rounded-[30px] bg-white border-[1px] border-[#AEAEAE] relative p-[25px]">
             <div className="text-[24px] font-medium">
-                Current balance
+                {title}
             </div>
             <div className="text-[24px] font-medium">
-                0.00₸
+                {amount}
             </div>
-            <svg className="absolute right-4 top-[50%] translate-y-[-50%]" width="55" height="53" viewBox="0 0 55 53" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M54.5 26.5C54.5 40.8421 42.4293 52.5 27.5 52.5C12.5707 52.5 0.5 40.8421 0.5 26.5C0.5 12.1579 12.5707 0.5 27.5 0.5C42.4293 0.5 54.5 12.1579 54.5 26.5Z" fill="#85B0E2" stroke="#197BBD" />
-                <g clip-path="url(#clip0_268_2609)">
-                    <path d="M30.903 34.7492V29.4991C30.903 29.267 30.8038 29.0444 30.627 28.8803C30.4503 28.7163 30.2107 28.6241 29.9607 28.6241H26.1915C25.9416 28.6241 25.7019 28.7163 25.5252 28.8803C25.3485 29.0444 25.2492 29.267 25.2492 29.4991V34.7492C25.2492 34.9812 25.1499 35.2038 24.9732 35.3679C24.7966 35.5319 24.5569 35.6241 24.307 35.6242L18.6539 35.6249C18.5301 35.6249 18.4075 35.6023 18.2932 35.5583C18.1789 35.5143 18.075 35.4499 17.9875 35.3686C17.8999 35.2874 17.8305 35.1909 17.7832 35.0847C17.7358 34.9786 17.7114 34.8648 17.7114 34.7499V24.637C17.7114 24.5151 17.7389 24.3945 17.792 24.2831C17.8451 24.1716 17.9227 24.0716 18.0198 23.9896L27.4422 16.0342C27.6157 15.8878 27.8417 15.8066 28.0761 15.8066C28.3106 15.8066 28.5366 15.8878 28.71 16.0342L38.1338 23.9896C38.2309 24.0716 38.3085 24.1716 38.3616 24.2831C38.4148 24.3946 38.4422 24.5151 38.4422 24.637V34.7499C38.4422 34.8648 38.4178 34.9786 38.3705 35.0847C38.3231 35.1909 38.2537 35.2874 38.1662 35.3686C38.0786 35.4499 37.9748 35.5143 37.8604 35.5583C37.7461 35.6023 37.6235 35.6249 37.4998 35.6249L31.8452 35.6242C31.5953 35.6241 31.3557 35.5319 31.179 35.3679C31.0023 35.2038 30.903 34.9812 30.903 34.7492V34.7492Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                </g>
-                <defs>
-                    <clipPath id="clip0_268_2609">
-                        <rect width="30.1538" height="28" fill="white" transform="translate(13 12)" />
-                    </clipPath>
-                </defs>
-            </svg>
+            {
+                (() => {
+                    switch (svg) {
+                        case 'current': return <Current />
+                        case 'incomes': return <Incomes />
+                        case 'expenses': return <Expenses />
+                        case 'monthly': return <Monthly />
+                        default: return null;
+                    }
+                })()
+            }
         </div>
     );
 }

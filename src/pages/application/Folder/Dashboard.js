@@ -1,8 +1,8 @@
-import Header from "./components/Header";
-import Bie from "./components/Bie";
-import BieCharts from "./components/BieCharts";
+import Header from "../components/Header";
+import Bie from "../components/Bie";
+import BieCharts from "../components/BieCharts";
 
-import {BsChevronDown} from 'react-icons/bs';
+import { BsChevronDown } from 'react-icons/bs';
 
 const Dashboard = () => {
     return (
@@ -19,16 +19,16 @@ const Dashboard = () => {
                     </button>
                 </div>
                 <div className="flex justify-between items-center flex-wrap w-full pt-[50px]">
-                    <Bie />
-                    <Bie />
-                    <Bie />
-                    <Bie />
+                    <Bie title="Current balance" amount="0.00₸" svg="current" />
+                    <Bie title="Incomes" amount="0.00₸" svg="incomes" />
+                    <Bie title="Expenses" amount="0.00₸" svg="expenses" />
+                    <Bie title="Monthly balance" amount="0.00₸" svg="monthly" />
                 </div>
                 <div className="flex flex-wrap justify-between pt-[45px] w-full">
-                    <BieCharts />
-                    <BieCharts />
-                    <BieCharts />
-                    <BieCharts />
+                    <BieCharts content="none" title="Expenses by category" />
+                    <BieCharts content="none" title="Incomes by category" />
+                    <BieCharts content="none" title="Monthly balance" />
+                    <BieCharts content="none" title="Goals" />
                 </div>
             </div>
         </div>

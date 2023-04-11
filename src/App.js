@@ -21,7 +21,7 @@ function App() {
                 <Route path='/forgot-password' element={<ForgotPassword />} />
                 <Route path='/restore-password' element={<RestorePassword />} />
 
-                <Route path='/application/dashboard' element={<Application />} />
+                <Route path='/application' element={<Application />} />
 
                 <Route path='*' element={<Navigate to="/home" />} />
             </Routes>
