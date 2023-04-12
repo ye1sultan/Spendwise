@@ -3,9 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 import Switch from "react-switch";
 
-import Dashboard from "./Folder/Dashboard";
-import Transactions from "./Folder/Transactions";
-import Goals from "./Folder/Goals";
+import Header from "./components/Header";
+
+import Dashboard from "./folder/Dashboard";
+import Transactions from "./folder/Transactions";
+import Goals from "./folder/Goals";
+import Report from "./folder/Report";
+import Notifications from "./folder/Notifications";
 
 const Application = () => {
     const [value, setValue] = useState(false);
@@ -171,10 +175,10 @@ const Application = () => {
                                 checked={value}
                                 checkedIcon={false}
                                 uncheckedIcon={false}
-                                offColor="#BFA2E5"
-                                onColor="#ffffff"
-                                offHandleColor="#5C2F73"
-                                onHandleColor="#000000"
+                                offColor="#ccc"
+                                onColor="#BFA2E5"
+                                offHandleColor="#dacce2"
+                                onHandleColor="#5C2F73"
                                 handleDiameter={17}
                                 height={12}
                                 width={30}
@@ -193,13 +197,20 @@ const Application = () => {
                     Log out
                 </button>
             </div>
-            {
-                (() => {
-                    if (dashboard) return <Dashboard />;
-                    if(transactions) return <Transactions />;
-                    if(goals) return <Goals />
-                })()
-            }
+            <div className="w-full px-[60px] py-[50px]">
+                <Header />
+                <div className="flex flex-col justify-center items-center w-full pt-[30px]">
+                    {
+                        (() => {
+                            if (dashboard) return <Dashboard />;
+                            if (transactions) return <Transactions />;
+                            if (goals) return <Goals />;
+                            if (report) return <Report />;
+                            if (notifications) return <Notifications />;
+                        })()
+                    }
+                </div>
+            </div>
         </div>
     );
 }

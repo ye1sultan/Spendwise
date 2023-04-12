@@ -1,7 +1,7 @@
-import { ReactComponent as Current } from "./Svgs/Current.svg";
-import { ReactComponent as Incomes } from "./Svgs/Incomes.svg";
-import { ReactComponent as Expenses } from "./Svgs/Expenses.svg";
-import { ReactComponent as Monthly } from "./Svgs/Monthly.svg";
+import { ReactComponent as Current } from "./svgs/Current.svg";
+import { ReactComponent as Incomes } from "./svgs/Incomes.svg";
+import { ReactComponent as Expenses } from "./svgs/Expenses.svg";
+import { ReactComponent as Monthly } from "./svgs/Monthly.svg";
 
 const Bie = (props) => {
 
@@ -14,20 +14,22 @@ const Bie = (props) => {
             <div className="text-[24px] font-medium">
                 {title}
             </div>
+            <div className="absolute right-4 top-[50%] translate-y-[-50%]" >
+                {
+                    (() => {
+                        switch (svg) {
+                            case 'current': return <Current />;
+                            case 'incomes': return <Incomes />;
+                            case 'expenses': return <Expenses />;
+                            case 'monthly': return <Monthly />;
+                            default: return null;
+                        }
+                    })()
+                }
+            </div>
             <div className="text-[24px] font-medium">
                 {amount}
             </div>
-            {
-                (() => {
-                    switch (svg) {
-                        case 'current': return <Current />
-                        case 'incomes': return <Incomes />
-                        case 'expenses': return <Expenses />
-                        case 'monthly': return <Monthly />
-                        default: return null;
-                    }
-                })()
-            }
         </div>
     );
 }
