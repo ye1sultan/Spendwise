@@ -1,19 +1,16 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-import Switch from "react-switch";
+import { useNavigate } from 'react-router-dom';
 
 import Header from "./components/Header";
 
-import Dashboard from "./folder/Dashboard";
-import Transactions from "./folder/Transactions";
-import Goals from "./folder/Goals";
+import Dashboard from "./folder/Dashboard.js";
+import Transactions from "./folder/Transactions.js";
+import Goals from "./folder/Goals.js";
 import Report from "./folder/Report";
 import Notifications from "./folder/Notifications";
+import Settings from "./folder/Settings";
 
 const Application = () => {
-    const [value, setValue] = useState(false);
-
     const navigate = useNavigate();
 
     const handleExit = () => {
@@ -156,35 +153,6 @@ const Application = () => {
                             Settings
                         </div>
                     </button>
-
-                    <hr className="w-[200px] h-[2px] bg-black" />
-
-                    <div className="flex flex-col justify-center items-start w-[200px] my-[30px]">
-                        <div className="font-semibold text-[16px] text-[#381C46] uppercase mb-6">
-                            Preferences
-                        </div>
-                        <div className="flex flex-row justify-around items-center w-full">
-                            <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M22 12.4459C21.8161 14.4361 21.0692 16.3327 19.8467 17.9138C18.6242 19.4949 16.9768 20.6952 15.097 21.3742C13.2173 22.0532 11.183 22.1827 9.23233 21.7478C7.28163 21.3128 5.49515 20.3313 4.08192 18.9181C2.66869 17.5049 1.68717 15.7184 1.25221 13.7677C0.817252 11.817 0.946841 9.78273 1.62582 7.90299C2.30479 6.02325 3.50507 4.37575 5.0862 3.15328C6.66733 1.9308 8.56393 1.18391 10.5541 1C9.3889 2.57632 8.82822 4.51849 8.97399 6.47326C9.11976 8.42803 9.9623 10.2656 11.3484 11.6516C12.7344 13.0377 14.572 13.8802 16.5267 14.026C18.4815 14.1718 20.4237 13.6111 22 12.4459Z" stroke="#381C46" stroke-opacity="0.7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                            <div className="font-semibold text-[15px] text-[#381C46CC]">
-                                Dark Mode
-                            </div>
-                            <Switch
-                                onChange={setValue}
-                                checked={value}
-                                checkedIcon={false}
-                                uncheckedIcon={false}
-                                offColor="#ccc"
-                                onColor="#BFA2E5"
-                                offHandleColor="#dacce2"
-                                onHandleColor="#5C2F73"
-                                handleDiameter={17}
-                                height={12}
-                                width={30}
-                            />
-                        </div>
-                    </div>
                 </div>
 
                 <button onClick={handleExit} className="font-semibold text-[15px] text-[#381C46] flex justify-start items-center w-[200px]">
@@ -207,6 +175,7 @@ const Application = () => {
                             if (goals) return <Goals />;
                             if (report) return <Report />;
                             if (notifications) return <Notifications />;
+                            if (settings) return <Settings />
                         })()
                     }
                 </div>
