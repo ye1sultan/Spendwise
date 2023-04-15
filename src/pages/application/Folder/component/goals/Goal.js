@@ -6,9 +6,16 @@ const Goal = (props) => {
     let name = props.name;
     let icon = props.icon;
     let deadline = props.deadline;
-    let progress = props.progress + '%';
     let totalAmount = props.totalAmount;
     let amount = props.amount;
+    let color = props.color;
+
+    const getPercent = (amount, totalAmount) => {
+        let res = parseFloat(((amount / totalAmount) * 100).toFixed(2));
+        return (res);
+    }
+
+    let progress = getPercent(amount, totalAmount);
 
     return (
         <div className="w-[530px] h-[315px] bg-white rounded-[40px] border-[1px] border-[#CED4DA] m-[30px] p-[30px] flex flex-col justify-between items-start">
@@ -30,11 +37,11 @@ const Goal = (props) => {
                     </div>
                 </div>
                 <div className="text-[36px] font-medium">
-                    {progress}
+                    {progress + " %"}
                 </div>
             </div>
             <div className="w-full h-[20px] bg-[#EEECEC] rounded-[10px]">
-                <div className={`w-[${progress}] h-full bg-[#19AD50] bg-opacity-50 rounded-[10px]`}></div>
+                <div className="h-full bg-[#19AD50] bg-opacity-50 rounded-[10px]"  style={{ width: progress + "%" }}></div>
             </div>
             <div className="text-[16px] font-semibold text-[#696969]">
                 {`₸ ${amount} / ₸ ${totalAmount}`}

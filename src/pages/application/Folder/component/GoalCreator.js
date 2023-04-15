@@ -1,19 +1,17 @@
 import { TbCurrencyTenge } from 'react-icons/tb';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useState } from 'react';
-import Goal from './goals/Goal';
 
 const GoalCreator = (props) => {
 
     let modal = props.modal;
     let setModal = props.setModal;
-
     let goals = props.goals;
 
     const [name, setName] = useState('');
-    const [goalValue, setGoalValue] = useState('');
+    const [amount, setAmount] = useState('');
     const [deadline, setDeadline] = useState('');
-    const [totalValue, setTotalValue] = useState('');
+    const [totalAmount, setTotalAmount] = useState('');
 
 
     const [icon, setIcon] = useState('');
@@ -22,17 +20,18 @@ const GoalCreator = (props) => {
     const [description, setDescription] = useState('');
 
     const saveGoal = () => {
-        // if (name && goalValue && deadline && totalValue) {
-        //     goals.push(<Goal name={name} deadline={deadline} progress={getPercent(goalValue, totalValue)} />);
-        // }
-        goals.push(<Goal name={name} deadline={deadline} progress={getPercent(goalValue, totalValue)} />);
+        if (name) {
+            let obj = {
+                name: name,
+                deadline: deadline,
+                amount: amount,
+                totalAmount: totalAmount,
+                color: color
+            }
 
-        console.log(goals);
-        setModal(false);
-    }
-
-    const getPercent = (num1, num2) => {
-        return (num1 / num2) * 100;
+            goals.push(obj);
+            setModal(false);
+        }
     }
 
     return (
@@ -64,7 +63,7 @@ const GoalCreator = (props) => {
                         </div>
                     </div>
                     <div className="relative w-[500px] h-[70px]">
-                        <input className="w-full h-full text-[32px] font-normal text-[#696969] pl-[60px] border-b-[1px] border-[#696969]" type="number" placeholder="Goal value" onChange={e => setGoalValue(e.target.value)} />
+                        <input className="w-full h-full text-[32px] font-normal text-[#696969] pl-[60px] border-b-[1px] border-[#696969]" type="number" placeholder="Goal value" onChange={e => setAmount(e.target.value)} />
                         <div className="absolute top-[50%] translate-y-[-50%] left-0">
                             <TbCurrencyTenge size={45} color="#696969" />
                         </div>
@@ -84,7 +83,7 @@ const GoalCreator = (props) => {
                         </div>
                     </div>
                     <div className="relative w-[500px] h-[70px]">
-                        <input className="w-full h-full text-[32px] font-normal text-[#696969] pl-[60px] border-b-[1px] border-[#696969]" type="number" placeholder="Initial goal value" onChange={e => setTotalValue(e.target.value)} />
+                        <input className="w-full h-full text-[32px] font-normal text-[#696969] pl-[60px] border-b-[1px] border-[#696969]" type="number" placeholder="Initial goal value" onChange={e => setTotalAmount(e.target.value)} />
                         <div className="absolute top-[50%] translate-y-[-50%] left-0">
                             <TbCurrencyTenge size={45} color="#696969" />
                         </div>
