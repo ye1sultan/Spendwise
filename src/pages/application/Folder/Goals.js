@@ -8,50 +8,142 @@ import Goal from "./component/goals/Goal";
 
 const Goals = () => {
     const [goalModal, setGoalModal] = useState(false);
+    const [goals, setGoals] = useState([]);
+    const [deleteGoalModal, setDeleteGoalModal] = useState(false);
+    const [goalToDelete, setGoalToDelete] = useState(null);
 
-    let goals = [];
+    const [showDropDown, setShowDropDown] = useState(false);
 
-    let obj2 = {
-        name: 'Bugatti',
-        deadline: '01-01-2024',
-        amount: 800000,
-        totalAmount: 1000000
-    }
-
-    let obj1 = {
-        name: 'Villa',
-        deadline: '01-01-2025',
-        amount: 600,
-        totalAmount: 800
-    }
-
-    goals.push(obj1);
-    goals.push(obj2);
+    const [goalFilter, setGoalFilter] = useState('active');
 
     const createGoal = () => {
+        setShowDropDown(false);
+
         setGoalModal(true);
     }
 
+    const deleteGoal = (index) => {
+        setGoals(goals.filter((_, i) => i !== index));
+        setDeleteGoalModal(false);
+    }
+
+    const pauseGoal = (index) => {
+        setGoals(goals.map((goal, i) => {
+            if (i === index) {
+                return {
+                    ...goal,
+                    isPaused: !goal.isPaused,
+                };
+            }
+            return goal;
+        }));
+    }
+
+    const reachGoal = (index) => {
+        setGoals(goals.map((goal, i) => {
+            if (i === index) {
+                return {
+                    ...goal,
+                    isReached: !goal.isReached,
+                };
+            }
+            return goal;
+        }));
+    }
+
+    const NewGoalButton = ({ onClick }) => {
+        return (
+            <div className="w-[530px] h-[315px] bg-white rounded-[40px] border-[1px] border-[#CED4DA] self-start flex flex-col justify-center items-center m-[30px] cursor-pointer" onClick={onClick}>
+                <AiOutlinePlus size={40} />
+                <div className="text-[40px] font-medium">New goal</div>
+            </div>
+        );
+    }
+
+    const GoalsDropDown = ({ onSelect }) => {
+        return (
+            <div className="absolute top-full mt-2 w-[220px] bg-white border-[1px] border-[#CED4DA] rounded-xl shadow-lg">
+                <button className="w-full px-4 py-2 text-left text-[22px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('active')}>
+                    Active Goals
+                </button>
+                <button className="w-full px-4 py-2 text-left text-[22px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('paused')}>
+                    Paused Goals
+                </button>
+                <button className="w-full px-4 py-2 text-left text-[22px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('reached')}>
+                    Reached Goals
+                </button>
+            </div>
+        );
+    }
+
+    const handleFilterSelect = (filter) => {
+        setGoalFilter(filter);
+        setShowDropDown(false);
+    }
+
+    const filterGoals = (goals) => {
+        return goals.filter(goal => {
+            if (goalFilter === 'active') return !goal.isPaused && !goal.isReached;
+            if (goalFilter === 'paused') return goal.isPaused;
+            if (goalFilter === 'reached') return goal.isReached;
+            return true;
+        });
+    }
+
+    const filteredGoals = filterGoals(goals);
+
     return (
-        <>
-            <GoalCreator modal={goalModal} setModal={setGoalModal} goals={goals} />
+        <div className="w-full h-full flex flex-col items-center">
+            <GoalCreator modal={goalModal} setModal={setGoalModal} goals={goals} setGoals={setGoals} />
             <Title title={'My Goals'} />
-            <button className="w-[220px] h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[22px] self-start flex justify-between items-center px-5">
-                <BsChevronDown />
-                Active Goals
-            </button>
+            <div className="relative self-start z-10">
+                <button className="w-[220px] h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[20
+                    px] flex justify-between items-center px-5 z-10" onClick={() => setShowDropDown(!showDropDown)}>
+                    <BsChevronDown />
+                    {goalFilter.charAt(0).toUpperCase() + goalFilter.slice(1)} Goals
+                </button>
+                {showDropDown && <GoalsDropDown onSelect={handleFilterSelect} />}
+            </div>
             <div className="self-start flex flex-wrap">
-                <div className="w-[530px] h-[315px] bg-white rounded-[40px] border-[1px] border-[#CED4DA] self-start flex flex-col justify-center items-center m-[30px] cursor-pointer" onClick={createGoal}>
-                    <AiOutlinePlus size={40} />
-                    <div className="text-[40px] font-medium">
-                        New goal
-                    </div>
-                </div>
-                {goals.map((goal, index) => (
-                    <Goal key={index} name={goal.name} deadline={goal.deadline} amount={goal.amount} totalAmount={goal.totalAmount} />
+                <NewGoalButton onClick={createGoal} />
+                {filteredGoals.map((goal, index) => (
+                    <Goal
+                        key={index}
+                        index={index}
+                        name={goal.name}
+                        deadline={goal.deadline}
+                        amount={goal.amount}
+                        totalAmount={goal.totalAmount}
+                        color={goal.color}
+                        icon={goal.icon}
+                        isPaused={goal.isPaused}
+                        isReached={goal.isReached}
+                        onDelete={() => {
+                            setGoalToDelete(index);
+                            setDeleteGoalModal(true);
+                        }}
+                        onPause={() => pauseGoal(index)}
+                        onReach={() => reachGoal(index)}
+                    />
                 ))}
             </div>
-        </>
+            <div className={`z-50 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[850px] h-[400px] rounded-[50px] bg-white px-[65px] py-[40px] ${deleteGoalModal ? 'flex' : 'hidden'} flex-col justify-between items-center`}>
+                <div className="text-[45px] font-medium">
+                    Delete goal
+                </div>
+                <div className="text-[32px] font-medium text-[#696969]">
+                    Do you really want to delete this goal?
+                </div>
+                <div className="flex justify-between w-full">
+                    <button className="uppercase w-[220px] h-[50px] rounded-[50px] text-[22px] font-medium" onClick={() => setDeleteGoalModal(false)}>
+                        cancel
+                    </button>
+                    <button className="uppercase w-[220px] h-[50px] rounded-[50px] bg-[#BFA2E5] text-[22px] font-medium" onClick={() => deleteGoal(goalToDelete)}>
+                        confirm
+                    </button>
+                </div>
+            </div>
+        </div>
     );
 }
 
