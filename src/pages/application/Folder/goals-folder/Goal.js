@@ -1,9 +1,9 @@
 import React from 'react';
 import { AiFillDelete, AiOutlineCar, AiOutlineGift, AiOutlineShoppingCart } from 'react-icons/ai';
 import { IoEarthOutline } from 'react-icons/io5';
-import { BsCheckAll, BsFillPauseFill } from 'react-icons/bs';
+import { BsCheckAll, BsFillPauseFill, BsFillPlayFill } from 'react-icons/bs';
 
-const Goal = ({ name, icon, deadline, totalAmount, amount, color, index, onDelete, onPause, onReach }) => {
+const Goal = ({ name, icon, deadline, totalAmount, amount, color, index, onDelete, onPause, onComplete, status }) => {
     const getPercent = (amount, totalAmount) => {
         let res = parseFloat(((amount / totalAmount) * 100).toFixed(2));
         return (res);
@@ -34,8 +34,8 @@ const Goal = ({ name, icon, deadline, totalAmount, amount, color, index, onDelet
         onPause(index);
     }
 
-    const handleReach = () => {
-        onReach(index);
+    const handleComplete = () => {
+        onComplete(index);
     }
 
     const classNames = {
@@ -85,13 +85,13 @@ const Goal = ({ name, icon, deadline, totalAmount, amount, color, index, onDelet
                 {`₸ ${amount} / ₸ ${totalAmount}`}
             </div>
             <div className={classNames.actionButtonsWrapper}>
-                <button className={classNames.deleteButton} onClick={handlePause}>
-                    <BsFillPauseFill size={30} />
+                <button className={`${classNames.deleteButton} ${status === 'reached' ? 'hidden' : 'block'}`} onClick={handlePause}>
+                    {status === 'paused' ? <BsFillPlayFill size={30} /> : <BsFillPauseFill size={30} />}
                 </button>
                 <button className={classNames.deleteButton} onClick={handleDelete}>
                     <AiFillDelete size={30} />
                 </button>
-                <button className={classNames.checkButton} onClick={handleReach}>
+                <button className={`${classNames.checkButton} ${status === 'reached' ? 'hidden' : 'block'}`} onClick={handleComplete}>
                     <BsCheckAll size={35} />
                 </button>
             </div>

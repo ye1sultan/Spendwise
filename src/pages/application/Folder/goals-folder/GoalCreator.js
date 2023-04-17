@@ -37,8 +37,8 @@ const GoalCreator = (props) => {
         setAmount(0);
         setTotalAmount(0);
         setDeadline('0');
-        setIcon('');
-        setColor('');
+        setIcon('car');
+        setColor('#19AD50');
         setDescription('');
     }
 
@@ -82,13 +82,13 @@ const GoalCreator = (props) => {
                 </div>
                 <div className="w-full flex flex-wrap justify-between items-center">
                     <div className="relative w-[500px] h-[70px]">
-                        <input className={inputStyle} type="text" placeholder="Goal name" onChange={e => setName(e.target.value)} />
+                        <input className={inputStyle} type="text" placeholder="Goal name" onChange={e => setName(e.target.value)} value={name}/>
                         <div className="absolute top-[50%] translate-y-[-50%] left-0">
                             <BsCheckSquare size={45} color="#696969" />
                         </div>
                     </div>
                     <div className="relative w-[500px] h-[70px]">
-                        <input className={inputStyle} type="number" placeholder="Your current balance" onChange={e => setAmount(e.target.value)} />
+                        <input className={inputStyle} type="number" placeholder="Your current balance" onChange={e => setAmount(e.target.value)} value={amount} />
                         <div className="absolute top-[50%] translate-y-[-50%] left-0">
                             <TbCurrencyTenge size={45} color="#696969" />
                         </div>
@@ -96,13 +96,13 @@ const GoalCreator = (props) => {
                 </div>
                 <div className="w-full flex flex-wrap justify-between items-center">
                     <div className="relative w-[500px] h-[70px]">
-                        <input className={inputStyle} type="date" placeholder="Deadline" onChange={e => setDeadline(e.target.value)} />
+                        <input className={inputStyle} type="date" placeholder="Deadline" onChange={e => setDeadline(e.target.value)} value={deadline}/>
                         <div className="absolute top-[50%] translate-y-[-50%] left-0">
                             <AiOutlineCalendar size={45} color="#696969" />
                         </div>
                     </div>
                     <div className="relative w-[500px] h-[70px]">
-                        <input className={inputStyle} type="number" placeholder="Goal value" onChange={e => setTotalAmount(e.target.value)} />
+                        <input className={inputStyle} type="number" placeholder="Goal value" onChange={e => setTotalAmount(e.target.value)} value={totalAmount}/>
                         <div className="absolute top-[50%] translate-y-[-50%] left-0">
                             <TbCurrencyTenge size={45} color="#696969" />
                         </div>

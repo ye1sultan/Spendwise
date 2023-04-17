@@ -1,16 +1,31 @@
 import { useState } from "react";
-import Title from "../components/Title";
+import Title from "../../components/Title";
 
 import { BsChevronDown } from 'react-icons/bs';
 import { AiOutlinePlus } from 'react-icons/ai';
-import GoalCreator from "./component/GoalCreator";
-import Goal from "./component/goals/Goal";
+import GoalCreator from "./GoalCreator";
+import Goal from "./Goal";
 
 const Goals = () => {
     const [goalModal, setGoalModal] = useState(false);
-    const [goals, setGoals] = useState([]);
+    const [goals, setGoals] = useState([
+        {
+            name: "Initial Goal",
+            deadline: "2023-12-31",
+            amount: 100,
+            totalAmount: 1000,
+            color: "#BFA2E5",
+            icon: "car",
+            isPaused: false,
+            isCompleted: false,
+        }
+    ]);
+
     const [deleteGoalModal, setDeleteGoalModal] = useState(false);
+    const [completeGoalModal, setCompleteGoalModal] = useState(false);
+
     const [goalToDelete, setGoalToDelete] = useState(null);
+    const [goalToComplete, setGoalToComplete] = useState(null);
 
     const [showDropDown, setShowDropDown] = useState(false);
 
@@ -18,7 +33,6 @@ const Goals = () => {
 
     const createGoal = () => {
         setShowDropDown(false);
-
         setGoalModal(true);
     }
 
@@ -39,16 +53,18 @@ const Goals = () => {
         }));
     }
 
-    const reachGoal = (index) => {
+    const completeGoal = (index) => {
         setGoals(goals.map((goal, i) => {
             if (i === index) {
                 return {
                     ...goal,
-                    isReached: !goal.isReached,
+                    isCompleted: !goal.isCompleted,
                 };
             }
             return goal;
         }));
+
+        setCompleteGoalModal(false);
     }
 
     const NewGoalButton = ({ onClick }) => {
@@ -83,9 +99,9 @@ const Goals = () => {
 
     const filterGoals = (goals) => {
         return goals.filter(goal => {
-            if (goalFilter === 'active') return !goal.isPaused && !goal.isReached;
+            if (goalFilter === 'active') return !goal.isPaused && !goal.isCompleted;
             if (goalFilter === 'paused') return goal.isPaused;
-            if (goalFilter === 'reached') return goal.isReached;
+            if (goalFilter === 'reached') return goal.isCompleted;
             return true;
         });
     }
@@ -97,8 +113,7 @@ const Goals = () => {
             <GoalCreator modal={goalModal} setModal={setGoalModal} goals={goals} setGoals={setGoals} />
             <Title title={'My Goals'} />
             <div className="relative self-start z-10">
-                <button className="w-[220px] h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[20
-                    px] flex justify-between items-center px-5 z-10" onClick={() => setShowDropDown(!showDropDown)}>
+                <button className="w-[220px] h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[20px] flex justify-between items-center px-5 z-10" onClick={() => setShowDropDown(!showDropDown)}>
                     <BsChevronDown />
                     {goalFilter.charAt(0).toUpperCase() + goalFilter.slice(1)} Goals
                 </button>
@@ -117,17 +132,21 @@ const Goals = () => {
                         color={goal.color}
                         icon={goal.icon}
                         isPaused={goal.isPaused}
-                        isReached={goal.isReached}
+                        isCompleted={goal.isCompleted}
                         onDelete={() => {
                             setGoalToDelete(index);
                             setDeleteGoalModal(true);
                         }}
                         onPause={() => pauseGoal(index)}
-                        onReach={() => reachGoal(index)}
+                        onComplete={() => {
+                            setGoalToComplete(index);
+                            setCompleteGoalModal(true);
+                        }}
+                        status={goalFilter}
                     />
                 ))}
             </div>
-            <div className={`z-50 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[850px] h-[400px] rounded-[50px] bg-white px-[65px] py-[40px] ${deleteGoalModal ? 'flex' : 'hidden'} flex-col justify-between items-center`}>
+            <div className={`z-50 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[850px] h-[400px] rounded-[50px] bg-white px-[65px] py-[40px] ${deleteGoalModal ? 'flex' : 'hidden'} flex-col justify-between items-center border-[1px] border-[#AEAEAE]`}>
                 <div className="text-[45px] font-medium">
                     Delete goal
                 </div>
@@ -139,6 +158,22 @@ const Goals = () => {
                         cancel
                     </button>
                     <button className="uppercase w-[220px] h-[50px] rounded-[50px] bg-[#BFA2E5] text-[22px] font-medium" onClick={() => deleteGoal(goalToDelete)}>
+                        confirm
+                    </button>
+                </div>
+            </div>
+            <div className={`z-50 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[850px] h-[400px] rounded-[50px] bg-white px-[65px] py-[40px] ${completeGoalModal ? 'flex' : 'hidden'} flex-col justify-between items-center border-[1px] border-[#AEAEAE]`}>
+                <div className="text-[45px] font-medium">
+                    Complete goal
+                </div>
+                <div className="text-[32px] font-medium text-[#696969]">
+                    Do you really want to complete this goal?
+                </div>
+                <div className="flex justify-between w-full">
+                    <button className="uppercase w-[220px] h-[50px] rounded-[50px] text-[22px] font-medium" onClick={() => setCompleteGoalModal(false)}>
+                        cancel
+                    </button>
+                    <button className="uppercase w-[220px] h-[50px] rounded-[50px] bg-[#BFA2E5] text-[22px] font-medium" onClick={() => completeGoal(goalToComplete)}>
                         confirm
                     </button>
                 </div>
