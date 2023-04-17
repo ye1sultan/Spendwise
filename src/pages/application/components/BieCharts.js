@@ -1,4 +1,4 @@
-import Goal from "../folder/goals-folder/Goal.js";
+import Goal from "../folder/goals/Goal.js";
 import NoBieChartContent from "./NoBieChartContent.js";
 import NoGoalsContent from "./NoGoalsContent.js";
 

@@ -5,8 +5,8 @@ import Header from "./components/Header";
 
 import Dashboard from "./folder/Dashboard";
 import Transactions from "./folder/Transactions";
-import Goals from "./folder/goals-folder/Goals";
-import Report from "./folder/Report";
+import Goals from "./folder/goals/Goals";
+import Report from "./folder/report/Report";
 import Notifications from "./folder/Notifications";
 import Settings from "./folder/Settings";
 
@@ -44,7 +44,7 @@ const Application = () => {
     ];
 
     return (
-        <div className="flex bg-[#B8C9F5] bg-opacity-20 font-montserrat">
+        <div className="flex bg-[#B8C9F5] bg-opacity-20 font-montserrat h-full">
             <div className="sticky left-0 top-0 bg-white flex flex-col justify-between items-center h-screen py-14 px-[30px] shadow-sm">
                 <div className="flex flex-col justify-center items-start">
                     <div className='text-3xl w-[230px] font-semibold z-50 p-2 mb-4'>LOGO</div>
@@ -66,9 +66,9 @@ const Application = () => {
                     Log out
                 </button>
             </div>
-            <div className="w-full px-[60px] py-[50px]">
+            <div className="w-full px-[60px] py-[50px] h-full">
                 <Header />
-                <div className="flex flex-col justify-center items-center w-full pt-[30px]">
+                <div className="flex flex-col justify-center items-center w-full pt-[30px] h-full">
                     {views[activeView]}
                 </div>
             </div>
