@@ -3,10 +3,9 @@ import { useState } from "react";
 import Title from "../../components/Title";
 import BarChart from "./charts/BarChart";
 import PieChart from "./charts/PieChart";
+import MonthSelector from "./MonthSelector";
 
 import { ReactComponent as NoResultRp } from "../../components/svgs/NoResultRp.svg";
-
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { FiBarChart, FiPieChart } from "react-icons/fi";
 
 const Report = () => {
@@ -73,22 +72,6 @@ const Report = () => {
 
     const currentData = initialData[`${currentMonth.year}-${currentMonth.month.toString().padStart(2, "0")}`] || { expenses: [], incomes: 0 };
 
-    const handlePrevMonth = () => {
-        setCurrentMonth((prevState) => {
-            const newMonth = prevState.month - 1;
-            const newYear = newMonth === -1 ? prevState.year - 1 : prevState.year;
-            return { month: (newMonth + 12) % 12, year: newYear };
-        });
-    };
-
-    const handleNextMonth = () => {
-        setCurrentMonth((prevState) => {
-            const newMonth = prevState.month + 1;
-            const newYear = newMonth === 12 ? prevState.year + 1 : prevState.year;
-            return { month: newMonth % 12, year: newYear };
-        });
-    };
-
     function getTotalExpense(expenses) {
         return expenses.reduce((total, expense) => total + expense.value, 0);
     }
@@ -107,42 +90,10 @@ const Report = () => {
                 <FiBarChart className="absolute top-[50%] translate-y-[-50%] right-[20%] z-50" size={35} />
             </button>
             <div className="w-full h-full min-h-[550px] max-h-[1000px] bg-white rounded-[40px] mt-[40px] border-[1px] border-[#AEAEAE] pt-[35px] px-[60px] overflow-auto">
-                <div className="flex justify-center items-center w-full mb-[40px]">
-                    <button onClick={handlePrevMonth}>
-                        <BsChevronLeft size={25} color="#9F75D6" />
-                    </button>
-                    <div className="mx-[35px] h-[55px] rounded-[30px] border-[2px] border-[#9F75D6] text-[24px] font-medium text-[#9F75D6] flex justify-center items-center px-6">
-                        <span className="font-bold mr-2">
-                            {currentMonth.month === 0
-                                ? "January"
-                                : currentMonth.month === 1
-                                    ? "February"
-                                    : currentMonth.month === 2
-                                        ? "March"
-                                        : currentMonth.month === 3
-                                            ? "April"
-                                            : currentMonth.month === 4
-                                                ? "May"
-                                                : currentMonth.month === 5
-                                                    ? "June"
-                                                    : currentMonth.month === 6
-                                                        ? "July"
-                                                        : currentMonth.month === 7
-                                                            ? "August"
-                                                            : currentMonth.month === 8
-                                                                ? "September"
-                                                                : currentMonth.month === 9
-                                                                    ? "October"
-                                                                    : currentMonth.month === 10
-                                                                        ? "November"
-                                                                        : "December"}
-                        </span>
-                        {currentMonth.year}
-                    </div>
-                    <button onClick={handleNextMonth}>
-                        <BsChevronRight size={25} color="#9F75D6" />
-                    </button>
-                </div>
+                <MonthSelector
+                    currentMonth={currentMonth}
+                    setCurrentMonth={setCurrentMonth}
+                />
                 <div className={`${currentData.expenses && currentData.expenses.length > 0 ? 'hidden' : 'flex'} flex-col justify-center items-center`}>
                     <NoResultRp />
                     <div className="font-medium text-[24px] text-[#696969] w-full flex justify-center items-center mt-6">

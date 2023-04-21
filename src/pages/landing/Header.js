@@ -4,7 +4,6 @@ import Button from "./components/Button";
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 
 const Header = () => {
-
     const [menu, setMenu] = useState(false);
 
     const handleClickScroll = (e) => {
@@ -30,7 +29,7 @@ const Header = () => {
                     <button data-id='support' className="text-[24px] font-light mr-[50px]" onClick={handleClickScroll}>Support</button>
                 </div>
                 <div className="flex flex-row border-l-[1px] border-black pl-8 gap-6">
-                    <Button route='/application' text='Sign In' width='2xl:w-[110px]' height='2xl:h-[48px]' size='text-[24px]' color='text-black' bold='font-light' font='font-inter' display='hidden 2xl:block' />
+                    <Button route='/signin' text='Sign In' width='2xl:w-[110px]' height='2xl:h-[48px]' size='text-[24px]' color='text-black' bold='font-light' font='font-inter' display='hidden 2xl:block' />
                     <Button route='/signup' text='Sign Up' width='2xl:w-[110px]' height='2xl:h-[48px]' bg='bg-[#EFCA47CC]' rounded='rounded-[8px]' size='2xl:text-[24px]' color='text-black' bold='font-light' font='font-inter' display='hidden 2xl:block' />
                 </div>
             </div>
@@ -49,7 +48,6 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-
             <button className="flex 2xl:hidden z-50" onClick={handleClick}>
                 <AiOutlineMenu size={30} className={`${menu === true ? 'hidden' : 'flex'}`} />
                 <AiOutlineClose size={30} className={`${menu === true ? 'flex' : 'hidden'}`} />

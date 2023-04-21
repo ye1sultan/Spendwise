@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import EmailModal from "./modals/EmailModal";
-import PasswordModal from './modals/PasswordModal';
+
+import EmailModal from "./EmailModal";
+import PasswordModal from './PasswordModal';
 
 const Security = () => {
     const [emailModal, setEmailModal] = useState(false);

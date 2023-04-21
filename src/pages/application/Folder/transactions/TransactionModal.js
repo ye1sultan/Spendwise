@@ -22,6 +22,7 @@ const TransactionModal = ({ transaction, onSave, onCancel }) => {
                     className="px-4 block w-full h-[50px] border-b-[1px] border-[#000000] text-[18px]"
                     type="date"
                     name="date"
+                    value={editedTransaction.date}
                     onChange={handleChange}
                 />
             </label>

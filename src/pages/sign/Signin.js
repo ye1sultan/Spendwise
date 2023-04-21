@@ -1,15 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Google from './imgs/Google.png';
-import Facebook from './imgs/Facebook.png';
 import Apple from './imgs/Apple.png';
 
 const Signin = () => {
-    const [email, setEmail] = useState(false);
-    const [password, setPassword] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const [rememberMe, setRememberMe] = useState(false);
+
+    const correctEmail = "niyaztaye@gmail.com";
+    const correctPassword = "elsik0000";
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const savedRememberMe = localStorage.getItem("rememberMe") === "true";
+        setRememberMe(savedRememberMe);
+    }, []);
 
     const handleNavigation = (e) => {
         const route = e.currentTarget.getAttribute('data-route');
@@ -18,15 +27,18 @@ const Signin = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        if (email || password) {
-            console.log("Submitted!");
-            console.log(email);
-            console.log(password);
+        if (email === correctEmail && password === correctPassword) {
+            console.log("Access granted!");
+            localStorage.setItem("rememberMe", rememberMe);
+            navigate("/application");
         } else {
-            console.log("Some error occured...");
+            console.log("Invalid email or password.");
         }
-    }
+    };
+
+    const handleRememberMeChange = (e) => {
+        setRememberMe(e.target.checked);
+    };
 
     return (
         <div className="bg-white h-screen flex justify-center items-center relative font-sans">
@@ -39,9 +51,6 @@ const Signin = () => {
                 <div className="flex flex-row justify-center items-center w-[176px] mb-[32px]">
                     <div className="w-[50px] h-[50px] p-[10px] border-[1px] rounded-[8px] border-[#CED4DA] mr-[12px]">
                         <img src={Google} alt="Google" />
-                    </div>
-                    <div className="w-[50px] h-[50px] p-[10px] border-[1px] rounded-[8px] border-[#CED4DA] mr-[12px]">
-                        <img src={Facebook} alt="Google" />
                     </div>
                     <div className="w-[50px] h-[50px] p-[10px] border-[1px] rounded-[8px] border-[#CED4DA]">
                         <img src={Apple} alt="Google" />
@@ -58,9 +67,18 @@ const Signin = () => {
                     <button data-route='/forgot-password' className='text-[12px] font-semibold text-[#758697] mb-[24px]' onClick={handleNavigation}>
                         Forgot Password?
                     </button>
-                    <div className='mb-[24px] text-black font-semibold flex flex-row justify-start items-center w-[382px]'>
-                        <input id='checkbox' type='checkbox' value='' className='w-[18px] h-[18px] mr-[24px]' />
-                        <label for='checkbox' className='text-[12px]'>Remember me</label>
+                    <div className="mb-[24px] text-black font-semibold flex flex-row justify-start items-center w-[382px]">
+                        <input
+                            id="checkbox"
+                            type="checkbox"
+                            value=""
+                            className="w-[18px] h-[18px] mr-[24px]"
+                            checked={rememberMe}
+                            onChange={handleRememberMeChange}
+                        />
+                        <label htmlFor="checkbox" className="text-[12px]">
+                            Remember me
+                        </label>
                     </div>
                     <button className='bg-[#343A40] text-white font-semibold text-[12px] w-[382px] h-[40px] rounded-[8px] mb-[32px]' type='submit'>
                         Sign in

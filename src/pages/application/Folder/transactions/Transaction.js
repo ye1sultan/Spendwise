@@ -9,7 +9,7 @@ const Transaction = ({ transaction, transactionDate, isLast, deleteTransaction, 
     };
 
     return (
-        <div className={`w-full flex justify-around items-center mb-4 ${isLast ? '' : 'border-b'} border-black py-4`}>
+        <div className={`w-full flex justify-around items-center ${isLast ? '' : 'border-b'} border-black py-4`}>
             <div className="text-[22px] text-[#443A3A] font-medium w-1/6 text-center">{transactionDate}</div>
             <div className="text-[22px] text-[#443A3A] font-medium w-1/6 text-center">{category}</div>
             <div className="text-[22px] text-[#443A3A] font-medium w-1/6 text-center">{description}</div>

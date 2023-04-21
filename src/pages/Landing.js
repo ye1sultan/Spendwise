@@ -1,4 +1,4 @@
-import {React} from 'react';
+import { React } from 'react';
 
 import Header from './landing/Header';
 import Hero from './landing/Hero';
@@ -11,7 +11,6 @@ import Try from './landing/Try';
 import Footer from './landing/Footer';
 import AboutUs from './landing/AboutUs';
 
-
 const Landing = () => {
     return (
         <div className="bg-gradient-to-r from-purple-300 via-purple-300 to-pink-100">
@@ -21,7 +20,7 @@ const Landing = () => {
             <Objective1 />
             <Traking />
             <Report />
-            <Secure /> 
+            <Secure />
             <Objective2 />
             <Try />
             <Footer />

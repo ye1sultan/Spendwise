@@ -33,121 +33,75 @@ const Transactions = () => {
 const TransactionTable = () => {
     const [showModal, setShowModal] = useState(false);
 
-    const [transactions, setTransactions] = useState(
+    const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+    const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+
+    const [transactions, setTransactions] = useState([
         {
-            "2023-04-21": [
-                {
-                    id: 1,
-                    category: "Food",
-                    description: "Lunch at the restaurant",
-                    payMethod: "Credit Card",
-                    amount: -25,
-                    type: "expense",
-                },
-                {
-                    id: 2,
-                    category: "Salary",
-                    description: "Monthly Salary",
-                    payMethod: "Bank Transfer",
-                    amount: 5000,
-                    type: "income",
-                },
-            ],
-            "2023-04-22": [
-                {
-                    id: 3,
-                    category: "Groceries",
-                    description: "Weekly shopping",
-                    payMethod: "Debit Card",
-                    amount: -120,
-                    type: "expense",
-                },
-                {
-                    id: 4,
-                    category: "Investment",
-                    description: "Stock purchase",
-                    payMethod: "Bank Transfer",
-                    amount: 1000,
-                    type: "income",
-                },
-            ],
-            "2023-04-24": [
-                {
-                    id: 5,
-                    category: "Transport",
-                    description: "Gasoline",
-                    payMethod: "Cash",
-                    amount: -30,
-                    type: "expense",
-                },
-            ],
-            "2023-04-27": [
-                {
-                    id: 6,
-                    category: "Utilities",
-                    description: "Water bill",
-                    payMethod: "Bank Transfer",
-                    amount: -45,
-                    type: "expense",
-                },
-            ],
-            "2023-05-02": [
-                {
-                    id: 7,
-                    category: "Entertainment",
-                    description: "Movie tickets",
-                    payMethod: "Credit Card",
-                    amount: -20,
-                    type: "expense",
-                },
-            ],
-            "2023-05-05": [
-                {
-                    id: 8,
-                    category: "Freelance",
-                    description: "Client payment",
-                    payMethod: "Bank Transfer",
-                    amount: 800,
-                    type: "income",
-                },
-            ],
-        }
-    );
+            id: 1,
+            date: "2023-03-15",
+            category: "Food",
+            description: "Dinner at a restaurant",
+            payMethod: "Credit Card",
+            amount: -50,
+            type: "expense",
+        },
+        {
+            id: 2,
+            date: "2023-03-20",
+            category: "Salary",
+            description: "Monthly Salary",
+            payMethod: "Bank Transfer",
+            amount: 4000,
+            type: "income",
+        },
+        {
+            id: 3,
+            date: "2023-04-05",
+            category: "Groceries",
+            description: "Weekly shopping",
+            payMethod: "Debit Card",
+            amount: -100,
+            type: "expense",
+        },
+        {
+            id: 4,
+            date: "2023-04-10",
+            category: "Investment",
+            description: "Stock purchase",
+            payMethod: "Bank Transfer",
+            amount: 1500,
+            type: "income",
+        },
+    ]);
 
     const [editingTransaction, setEditingTransaction] = useState(null);
 
     const startEditingTransaction = (transaction, date) => {
-        setEditingTransaction(transaction);
+        setEditingTransaction({ ...transaction, date });
         setShowModal(true);
     };
 
 
     const updateTransaction = (updatedTransaction) => {
         setTransactions((prevTransactions) => {
-            const date = Object.keys(prevTransactions).find((date) =>
-                prevTransactions[date].find((transaction) => transaction.id === updatedTransaction.id),
+            const updatedTransactions = prevTransactions.filter(
+                (transaction) => transaction.id !== updatedTransaction.id
             );
 
-            const updatedTransactions = { ...prevTransactions };
-            const transactionIndex = updatedTransactions[date].findIndex(
-                (transaction) => transaction.id === updatedTransaction.id,
+            return [...updatedTransactions, updatedTransaction].sort(
+                (a, b) => new Date(a.date) - new Date(b.date)
             );
-
-            updatedTransactions[date][transactionIndex] = updatedTransaction;
-
-            return updatedTransactions;
         });
 
         setShowModal(false);
     };
 
-    const deleteTransaction = (id, date) => {
+    const deleteTransaction = (id) => {
         setTransactions((prevTransactions) => {
-            const updatedTransactions = { ...prevTransactions };
-            updatedTransactions[date] = updatedTransactions[date].filter((transaction) => transaction.id !== id);
-            if (updatedTransactions[date].length === 0) {
-                delete updatedTransactions[date];
-            }
+            const updatedTransactions = prevTransactions.filter(
+                (transaction) => transaction.id !== id
+            );
             return updatedTransactions;
         });
     };
@@ -160,41 +114,54 @@ const TransactionTable = () => {
     };
 
     const renderTransactions = () => {
-        const dates = Object.keys(transactions);
-        const lastDate = dates[dates.length - 1];
+        const filteredTransactions = transactions.filter(
+            (transaction) => {
+                const transactionDate = new Date(transaction.date);
+                return (
+                    transactionDate.getMonth() === currentMonth &&
+                    transactionDate.getFullYear() === currentYear
+                );
+            }
+        );
 
-        return dates.map((date) => (
-            <div key={date}>
-                {transactions[date].map((transaction, index, array) => (
-                    <Transaction
-                        key={transaction.id}
-                        transaction={transaction}
-                        transactionDate={formatDate(date)}
-                        isLast={date === lastDate && index === array.length - 1}
-                        deleteTransaction={() => deleteTransaction(transaction.id, date)}
-                        onEditClick={(transaction) => startEditingTransaction(transaction)}
-                    />
-                ))}
-            </div>
+        if (filteredTransactions.length === 0) {
+            return (
+                <div className="flex flex-col w-full justify-center items-center mb-8">
+                    <NoResultTr className="mt-8" />
+                    <div className="font-medium text-[24px] text-[#696969] w-full flex justify-center items-center mt-8">
+                        No results
+                    </div>
+                </div>
+            );
+        }
+
+        return filteredTransactions.map((transaction) => (
+            <Transaction
+                key={transaction.id}
+                transaction={transaction}
+                transactionDate={formatDate(transaction.date)}
+                onEditClick={(transaction) => startEditingTransaction(transaction)}
+                deleteTransaction={() => deleteTransaction(transaction.id)}
+            />
         ));
     };
+
 
     return (
         <>
             <div className="w-full min-h-[550px] bg-white rounded-[40px] mt-[40px] border-[1px] border-[#AEAEAE] pt-[35px] ">
-                <MonthSelector />
+                <MonthSelector
+                    currentMonth={currentMonth}
+                    currentYear={currentYear}
+                    setCurrentMonth={setCurrentMonth}
+                    setCurrentYear={setCurrentYear}
+                />
                 <div className="w-full h-[60px] bg-[#E3E3E3] bg-opacity-80 flex justify-around items-center">
                     {['Date', 'Category', 'Description', 'Type', 'Amount', 'Action'].map((text, index) => (
                         <div key={index} className="text-[22px] text-[#6A6A6A] font-medium w-1/6 text-center">
                             {text}
                         </div>
                     ))}
-                </div>
-                <div className={`${transactions ? 'hidden' : 'flex'} w-full justify-center items-center mb-8`}>
-                    <NoResultTr />
-                    <div className="font-medium text-[2 4px] text-[#696969] w-full flex justify-center items-center">
-                        No results
-                    </div>
                 </div>
                 {renderTransactions()}
             </div>
