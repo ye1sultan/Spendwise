@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import Title from "../../components/Title";
 import BarChart from "./charts/BarChart";
@@ -10,27 +10,6 @@ import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { FiBarChart, FiPieChart } from "react-icons/fi";
 
 const Report = () => {
-    // let incomes = 123456;
-    // let expenses = [
-    //     {
-    //         name: "Health",
-    //         value: 50980,
-    //         percentage: "50.00%",
-    //         color: "#9CC741",
-    //     },
-    //     {
-    //         name: "Clothing",
-    //         value: 20030,
-    //         percentage: "50.00%",
-    //         color: "#D942A6",
-    //     },
-    //     {
-    //         name: "Games",
-    //         value: 15080,
-    //         percentage: "50.00%",
-    //         color: "#F67730",
-    //     },
-    // ];
     const initialData = {
         "2023-02": {
             expenses: [

@@ -35,7 +35,7 @@ const Header = () => {
                 </div>
             </div>
 
-            <div className={`flex 2xl:hidden flex-col justify-center items-center absolute left-0 top-0 pt-3 bg-white h-screen w-[100%] z-40 ${menu === true ? 'translate-x-0' : 'translate-x-[-100%]'} transition-transform ease-in-out duration-300`}>
+            <div className={`flex 2xl:hidden flex-col justify-center items-center absolute left-0 top-0 pt-3 bg-white h-screen w-[100%] z-40 ${menu === true ? 'translate-x-0' : 'translate-x-[-100%]'} transition-transform ease-in-out duration-500`}>
                 <div className='flex flex-col justify-center items-center w-full'>
                     <div className="flex flex-col justify-between items-center h-[200px]">
                         <button data-id='about' className="text-[24px] font-light" onClick={handleClickScroll}>About Us</button>

@@ -1,7 +1,5 @@
-import { ReactComponent as Current } from "./svgs/Current.svg";
-import { ReactComponent as Incomes } from "./svgs/Incomes.svg";
-import { ReactComponent as Expenses } from "./svgs/Expenses.svg";
-import { ReactComponent as Monthly } from "./svgs/Monthly.svg";
+import { AiOutlineArrowDown, AiOutlineArrowUp, AiOutlineClockCircle } from "react-icons/ai";
+import { BsFillCalendar2CheckFill } from "react-icons/bs";
 
 const Bie = (props) => {
 
@@ -22,10 +20,26 @@ const Bie = (props) => {
                 {
                     (() => {
                         switch (svg) {
-                            case 'current': return <Current />;
-                            case 'incomes': return <Incomes />;
-                            case 'expenses': return <Expenses />;
-                            case 'monthly': return <Monthly />;
+                            case 'current': return (
+                                <div className="rounded-full bg-[#85B0E2] w-[55px] h-[55px] flex justify-center items-center">
+                                    <AiOutlineClockCircle size={40} color="#ffffff" />
+                                </div>
+                            );
+                            case 'incomes': return (
+                                <div className="rounded-full bg-[#1EBF4C] w-[55px] h-[55px] flex justify-center items-center">
+                                    <AiOutlineArrowDown size={40} color="#ffffff" />
+                                </div>
+                            );
+                            case 'expenses': return (
+                                <div className="rounded-full bg-[#C51F1F] w-[55px] h-[55px] flex justify-center items-center">
+                                    <AiOutlineArrowUp size={40} color="#ffffff" />
+                                </div>
+                            );
+                            case 'monthly': return (
+                                <div className="rounded-full bg-[#86B88A] w-[55px] h-[55px] flex justify-center items-center">
+                                    <BsFillCalendar2CheckFill size={30} color="#ffffff" />
+                                </div>
+                            );
                             default: return null;
                         }
                     })()

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from "./components/Header";
 
 import Dashboard from "./folder/Dashboard";
-import Transactions from "./folder/Transactions";
+import Transactions from "./folder/transactions/Transactions";
 import Goals from "./folder/goals/Goals";
 import Report from "./folder/report/Report";
 import Notifications from "./folder/Notifications";
@@ -18,7 +18,6 @@ import { BiLogOut } from "react-icons/bi";
 
 const Application = () => {
     const navigate = useNavigate();
-
     const handleExit = () => {
         navigate('/signin');
     }
