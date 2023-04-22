@@ -34,11 +34,19 @@ const Application = () => {
     const [activeView, setActiveView] = useState('dashboard');
 
     const handeClick = () => {
-        console.log(setActiveView('transactions'));
+        setActiveView('transactions');
+    }
+
+    const handleExpensePieClick = () => {
+        setActiveView('report');
+    }
+
+    const handleGoalClick = () => {
+        setActiveView('goals');
     }
 
     const views = {
-        dashboard: <Dashboard onClick={handeClick} />,
+        dashboard: <Dashboard onClick={handeClick} onExpenseClick={handleExpensePieClick} onGoalClick={handleGoalClick}/>,
         transactions: <Transactions transactions={transactions} setTransactions={setTransactions} />,
         goals: <Goals />,
         report: <Report />,
