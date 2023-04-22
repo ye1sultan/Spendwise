@@ -25,11 +25,21 @@ const Application = () => {
         navigate('/signin');
     }
 
+    const [transactions, setTransactions] = useState([]);
+    const updateTransaction = (transaction) => {
+        setTransactions([...transactions, transaction]);
+        console.log(transactions.length);
+    };
+
     const [activeView, setActiveView] = useState('dashboard');
 
+    const handeClick = () => {
+        console.log(setActiveView('transactions'));
+    }
+
     const views = {
-        dashboard: <Dashboard />,
-        transactions: <Transactions />,
+        dashboard: <Dashboard onClick={handeClick} />,
+        transactions: <Transactions transactions={transactions} setTransactions={setTransactions} />,
         goals: <Goals />,
         report: <Report />,
         notifications: <Notifications />,
@@ -60,7 +70,7 @@ const Application = () => {
 
     return (
         <>
-            <TransactionModal transaction={transaction} transactionModal={transactionModal} setTransactionModal={setTransactionModal}/>
+            <TransactionModal transaction={transaction} transactionModal={transactionModal} setTransactionModal={setTransactionModal} updateTransaction={updateTransaction} />
 
             <div className="flex bg-[#B8C9F5] bg-opacity-20 font-montserrat h-full">
                 <div className="sticky left-0 top-0 bg-white flex flex-col justify-between items-center h-screen py-14 px-[30px] shadow-sm">

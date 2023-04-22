@@ -4,7 +4,7 @@ import Bie from "../components/Bie";
 import BieCharts from "../components/BieCharts";
 import Title from "../components/Title";
 
-const Dashboard = () => {
+const Dashboard = ({ onClick }) => {
 
     const initialBalance = {
         monthlyBalance: '210020',
@@ -16,7 +16,7 @@ const Dashboard = () => {
         {
             name: "Initial Goal",
             deadline: "2023-12-31",
-            amount: 100,
+            amount: 400,
             totalAmount: 1000,
             color: "#BFA2E5",
             icon: "car",
@@ -25,16 +25,22 @@ const Dashboard = () => {
         }
     ]);
 
+    const [expenses, setExpenses] = useState([
+        {
+            
+        }
+    ])
+
     const renderBieCharts = () => {
         const bieChartItems = [
-            { content: "none", title: "Expenses by category" },
+            { content: , title: "Expenses by category" },
             { content: "none", title: "Incomes by category" },
             { content: "none", title: "Monthly balance" },
             { content: goals, title: "Goals" },
         ];
 
         return bieChartItems.map((item, index) => (
-            <BieCharts key={index} content={item.content} title={item.title} />
+            <BieCharts key={index} content={item.content} title={item.title} onClick={onClick} />
         ));
     };
 

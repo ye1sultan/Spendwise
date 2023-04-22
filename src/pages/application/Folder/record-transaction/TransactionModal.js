@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { format, addDays, parseISO } from 'date-fns';
 
 import { AiOutlineCalendar, AiOutlineCar, AiOutlineCreditCard, AiOutlineHeart, AiOutlineHome, AiOutlineShop, AiOutlineShoppingCart, AiOutlineTag } from 'react-icons/ai';
 import { BiBookAlt, BiChevronDown, BiFileBlank } from 'react-icons/bi';
@@ -11,7 +12,7 @@ import { BsCoin } from 'react-icons/bs';
 import { FaPray } from 'react-icons/fa';
 import { TbCoin, TbCurrencyTenge, TbHealthRecognition } from 'react-icons/tb';
 
-const TransactionModal = ({ transaction, transactionModal, setTransactionModal }) => {
+const TransactionModal = ({ transaction, transactionModal, setTransactionModal, updateTransaction }) => {
     const [activeButton, setActiveButton] = useState('');
 
     const [selectedAmount, setSelectedAmount] = useState(0);
@@ -26,8 +27,8 @@ const TransactionModal = ({ transaction, transactionModal, setTransactionModal }
             setSelectedDate(new Date());
             setActiveButton('today');
         } else if (type === 'yesterday') {
-            const yesterday = new Date();
-            yesterday.setDate(yesterday.getDate() - 1);
+            const yesterday = addDays(new Date(), -1);
+
             setSelectedDate(yesterday);
             setActiveButton('yesterday');
         } else {
@@ -80,21 +81,20 @@ const TransactionModal = ({ transaction, transactionModal, setTransactionModal }
 
     const handleSave = () => {
         if (selectedAmount && selectedDate && selectedCategory.name && selectedPaymentMethod) {
-            let transaction = [
+            console.log(selectedDate);
+            let transactionObj = [
                 {
-                    date: selectedDate.toISOString().substr(0, 10),
-                    category: selectedCategory,
+                    date: selectedDate,
+                    category: selectedCategory.name,
                     description: selectedDescription,
                     payMethod: selectedPaymentMethod,
-                    amount: selectedAmount
+                    amount: selectedAmount,
+                    type: transaction
                 }
             ]
+            updateTransaction(transactionObj);
+            setTransactionModal(false);
         }
-        // console.log(selectedAmount);
-        // console.log(selectedDate);
-        // console.log(selectedDescription);
-        // console.log(selectedCategory.name);
-        // console.log(selectedPaymentMethod);
     }
 
     return (
@@ -136,7 +136,7 @@ const TransactionModal = ({ transaction, transactionModal, setTransactionModal }
                     <input
                         type="date"
                         value={selectedDate.toISOString().substr(0, 10)}
-                        onChange={(e) => handleDateChange(new Date(e.target.value))}
+                        onChange={(e) => handleDateChange(parseISO(e.target.value))}
                         className={`cursor-pointer text-black py-[10px] px-[35px] text-[16px] font-medium rounded-[30px] ${activeButton === 'other' ? 'text-white bg-[' + color + ']' : 'bg-[#D9D9D9] text-black'} `}
                     />
                 </div>

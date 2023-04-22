@@ -2,11 +2,7 @@ import Goal from "../folder/goals/Goal.js";
 import NoBieChartContent from "./NoBieChartContent.js";
 import NoGoalsContent from "./NoGoalsContent.js";
 
-const BieCharts = (props) => {
-    let content = props.goals;
-    let title = props.title;
-
-    const recentGoal = content && content.length > 0 ? content[content.length - 1] : null;
+const BieCharts = ({content, title, onClick}) => {
 
     return (
         <div className="flex flex-col mb-[60px]">
@@ -17,16 +13,16 @@ const BieCharts = (props) => {
                 {
                     (() => {
                         if (title !== "Goals") {
-                            if (!recentGoal) {
-                                return <NoBieChartContent />;
+                            if (!content) {
+                                return <NoBieChartContent onClick={onClick} />;
                             } else {
-                                return <NoBieChartContent />;
+                                return <NoBieChartContent onClick={onClick} />;
                             }
                         } else {
-                            if (!recentGoal) {
+                            if (!content) {
                                 return <NoGoalsContent />;
                             } else {
-                                return <Goal goal={recentGoal} />;
+                                return <Goal name={content[0].name} deadline={content[0].deadline} amount={content[0].amount} totalAmount={content[0].totalAmount} color={content[0].color} icon={content[0].icon} />;
                             }
                         }
                     })()

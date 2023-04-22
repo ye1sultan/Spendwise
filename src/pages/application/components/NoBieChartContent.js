@@ -1,4 +1,4 @@
-const NoBieChartContent = () => {
+const NoBieChartContent = ({ onClick }) => {
     return (
         <>
             <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -15,7 +15,7 @@ const NoBieChartContent = () => {
                     Register the expenses made this month using the (+) button to check your charts.
                 </div>
             </div>
-            <button className="text-[24px] text-[#590CC0] uppercase w-full h-[70px] border-t-[1px] border-t-black">
+            <button className="text-[24px] text-[#590CC0] uppercase w-full h-[70px] border-t-[1px] border-t-black" onClick={onClick}>
                 See more
             </button>
         </>

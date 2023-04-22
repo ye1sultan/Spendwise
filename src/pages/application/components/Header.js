@@ -31,9 +31,6 @@ const Header = () => {
                     </div>
                     <div className="flex justify-center items-center text-[16px] font-semibold ml-[20px]">
                         Arailym Zholshieva
-                        <div className='ml-2'>
-                            <BsChevronDown size={20} />
-                        </div>
                     </div>
                 </div>
             </div>

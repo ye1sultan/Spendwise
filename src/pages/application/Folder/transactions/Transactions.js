@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 import Title from "../../components/Title";
 import Bie from "../../components/Bie";
@@ -8,8 +9,9 @@ import Transaction from "./Transaction";
 import TransactionModal from "./TransactionModal";
 
 import { ReactComponent as NoResultTr } from '../../components/svgs/NoResultTr.svg';
+import { useEffect } from "react";
 
-const Transactions = () => {
+const Transactions = ({ transactions, setTransactions }) => {
     const initialBalance = {
         monthlyBalance: '210020',
         incomes: '165000',
@@ -25,12 +27,17 @@ const Transactions = () => {
                 <Bie title="Expenses" amount={initialBalance.expenses} svg="expenses" />
                 <Bie title="Monthly balance" amount={initialBalance.monthlyBalance} svg="monthly" />
             </div>
-            <TransactionTable />
+            <TransactionTable
+                newTransactions={transactions}
+                setNewTransactions={setTransactions}
+            />
         </>
     );
 };
 
-const TransactionTable = () => {
+const TransactionTable = ({ newTransactions, setNewTransactions }) => {
+    console.log(newTransactions);
+
     const [showModal, setShowModal] = useState(false);
 
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
@@ -38,7 +45,6 @@ const TransactionTable = () => {
 
     const [transactions, setTransactions] = useState([
         {
-            id: 1,
             date: "2023-03-15",
             category: "Food",
             description: "Dinner at a restaurant",
@@ -47,7 +53,6 @@ const TransactionTable = () => {
             type: "expense",
         },
         {
-            id: 2,
             date: "2023-03-20",
             category: "Salary",
             description: "Monthly Salary",
@@ -56,7 +61,6 @@ const TransactionTable = () => {
             type: "income",
         },
         {
-            id: 3,
             date: "2023-04-05",
             category: "Groceries",
             description: "Weekly shopping",
@@ -65,7 +69,6 @@ const TransactionTable = () => {
             type: "expense",
         },
         {
-            id: 4,
             date: "2023-04-10",
             category: "Investment",
             description: "Stock purchase",
@@ -75,27 +78,39 @@ const TransactionTable = () => {
         },
     ]);
 
+    useEffect(() => {
+        const mergedTransactions = [
+            ...transactions.map((transaction) => ({ ...transaction, id: uuidv4() })),
+            ...newTransactions.flat().map((transaction) => ({ ...transaction, id: uuidv4() })),
+        ];
+
+        setTransactions(mergedTransactions);
+    }, [newTransactions]);
+
+
     const [editingTransaction, setEditingTransaction] = useState(null);
 
-    const startEditingTransaction = (transaction, date) => {
-        setEditingTransaction({ ...transaction, date });
+    const startEditingTransaction = (transaction) => {
+        setEditingTransaction(transaction);
         setShowModal(true);
     };
 
-
     const updateTransaction = (updatedTransaction) => {
         setTransactions((prevTransactions) => {
-            const updatedTransactions = prevTransactions.filter(
-                (transaction) => transaction.id !== updatedTransaction.id
+            return prevTransactions.map((transaction) =>
+                transaction.id === updatedTransaction.id ? updatedTransaction : transaction
             );
+        });
 
-            return [...updatedTransactions, updatedTransaction].sort(
-                (a, b) => new Date(a.date) - new Date(b.date)
+        setNewTransactions((prevNewTransactions) => {
+            return prevNewTransactions.map((transaction) =>
+                transaction.id === updatedTransaction.id ? updatedTransaction : transaction
             );
         });
 
         setShowModal(false);
     };
+
 
     const deleteTransaction = (id) => {
         setTransactions((prevTransactions) => {
@@ -104,25 +119,45 @@ const TransactionTable = () => {
             );
             return updatedTransactions;
         });
+
+        setNewTransactions((prevNewTransactions) => {
+            const updatedNewTransactions = prevNewTransactions.filter(
+                (transaction) => transaction.id !== id
+            );
+            return updatedNewTransactions;
+        });
     };
 
     const formatDate = (date) => {
+        if (!date) {
+            return "Invalid date";
+        }
+
         const d = new Date(date);
+        if (isNaN(d.getTime())) {
+            console.error(`Invalid date: ${date}`);
+            return "Invalid date";
+        }
+
         const month = ("0" + (d.getMonth() + 1)).slice(-2);
         const day = ("0" + d.getDate()).slice(-2);
         return `${month}/${day}/${d.getFullYear()}`;
     };
 
     const renderTransactions = () => {
-        const filteredTransactions = transactions.filter(
-            (transaction) => {
-                const transactionDate = new Date(transaction.date);
-                return (
-                    transactionDate.getMonth() === currentMonth &&
-                    transactionDate.getFullYear() === currentYear
-                );
-            }
-        );
+        const validTransactions = transactions.map((transaction) => {
+            console.log(transaction);
+            return { ...transaction, date: formatDate(transaction.date) };
+        });
+
+        const filteredTransactions = validTransactions.filter((transaction) => { 
+            const transactionDate = new Date(transaction.date); 
+            return ( 
+                transactionDate.getMonth() === currentMonth && 
+                transactionDate.getFullYear() === currentYear 
+            ); 
+        });
+
 
         if (filteredTransactions.length === 0) {
             return (
@@ -140,12 +175,11 @@ const TransactionTable = () => {
                 key={transaction.id}
                 transaction={transaction}
                 transactionDate={formatDate(transaction.date)}
-                onEditClick={(transaction) => startEditingTransaction(transaction)}
+                onEditClick={() => startEditingTransaction(transaction)}
                 deleteTransaction={() => deleteTransaction(transaction.id)}
             />
         ));
     };
-
 
     return (
         <>

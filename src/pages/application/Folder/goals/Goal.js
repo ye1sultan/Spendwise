@@ -39,7 +39,7 @@ const Goal = ({ name, icon, deadline, totalAmount, amount, color, index, onDelet
     }
 
     const classNames = {
-        goalWrapper: 'w-[530px] h-[315px] bg-white rounded-[40px] border-[1px] border-[#CED4DA] m-[30px] p-[30px] flex flex-col justify-between items-start',
+        goalWrapper: 'max-w- w-[530px] h-[315px] bg-white rounded-[40px] border-[1px] border-[#CED4DA] m-[30px] p-[30px] flex flex-col justify-between items-start',
         iconContainer: 'w-[50px] h-[50px] bg-opacity-50 rounded-full flex justify-center items-center mr-[20px]',
         titleText: 'text-[25px] font-medium text-[#4E4949]',
         dateWrapper: 'w-full flex justify-between items-center',
