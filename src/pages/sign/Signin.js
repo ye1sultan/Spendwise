@@ -8,17 +8,10 @@ const Signin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const [rememberMe, setRememberMe] = useState(false);
-
     const correctEmail = "niyaztaye@gmail.com";
     const correctPassword = "elsik0000";
 
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const savedRememberMe = localStorage.getItem("rememberMe") === "true";
-        setRememberMe(savedRememberMe);
-    }, []);
 
     const handleNavigation = (e) => {
         const route = e.currentTarget.getAttribute('data-route');
@@ -29,15 +22,10 @@ const Signin = () => {
         e.preventDefault();
         if (email === correctEmail && password === correctPassword) {
             console.log("Access granted!");
-            localStorage.setItem("rememberMe", rememberMe);
             navigate("/application");
         } else {
             console.log("Invalid email or password.");
         }
-    };
-
-    const handleRememberMeChange = (e) => {
-        setRememberMe(e.target.checked);
     };
 
     return (
@@ -61,8 +49,8 @@ const Signin = () => {
                 </div>
                 <form onSubmit={handleSubmit} className='flex flex-col'>
                     <div className='flex flex-col justify-center items-center'>
-                        <input className='border-[1px] rounded-[8px] border-[#CED4DA] mb-[24px] focus:outline-0 w-[382px] h-[40px] text-[12px] text-[#ADB5BD] py-[12px] pl-[12px]' onChange={(e) => setEmail(e.target.value)} type='email' placeholder='Email' required />
-                        <input className='border-[1px] rounded-[8px] border-[#CED4DA] mb-[24px] focus:outline-0 w-[382px] h-[40px] text-[12px] text-[#ADB5BD] py-[12px] pl-[12px]' onChange={(e) => setPassword(e.target.value)} type='password' placeholder='Password' required />
+                        <input className='border-[1px] rounded-[8px] border-[#CED4DA] mb-[24px] focus:outline-0 w-[382px] h-[40px] text-[12px] text-[#000000] py-[12px] pl-[12px]' onChange={(e) => setEmail(e.target.value)} type='email' placeholder='Email' required />
+                        <input className='border-[1px] rounded-[8px] border-[#CED4DA] mb-[24px] focus:outline-0 w-[382px] h-[40px] text-[12px] text-[#000000] py-[12px] pl-[12px]' onChange={(e) => setPassword(e.target.value)} type='password' placeholder='Password' required />
                     </div>
                     <button data-route='/forgot-password' className='text-[12px] font-semibold text-[#758697] mb-[24px]' onClick={handleNavigation}>
                         Forgot Password?
@@ -73,8 +61,6 @@ const Signin = () => {
                             type="checkbox"
                             value=""
                             className="w-[18px] h-[18px] mr-[24px]"
-                            checked={rememberMe}
-                            onChange={handleRememberMeChange}
                         />
                         <label htmlFor="checkbox" className="text-[12px]">
                             Remember me

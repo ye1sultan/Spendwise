@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-import Bie from "../components/Bie";
-import BieCharts from "../components/BieCharts";
-import Title from "../components/Title";
+import Bie from "../../components/Bie";
+import BieCharts from "./BieCharts";
+import Title from "../../components/Title";
 
-const Dashboard = ({ onClick, onExpenseClick, onGoalClick }) => {
+const Dashboard = () => {
     const initialBalance = {
         monthlyBalance: '210020',
         incomes: '165000',
@@ -18,24 +18,9 @@ const Dashboard = ({ onClick, onExpenseClick, onGoalClick }) => {
             amount: 400,
             totalAmount: 1000,
             color: "#BFA2E5",
-            icon: "car",
-            isPaused: false,
-            isCompleted: false,
+            icon: "car"
         }
     ]);
-
-    const renderBieCharts = () => {
-        const bieChartItems = [
-            { content: goals, title: "Expenses by category" },
-            { content: "none", title: "Incomes by category" },
-            { content: "none", title: "Monthly balance" },
-            { content: goals, title: "Goals" },
-        ];
-
-        return bieChartItems.map((item, index) => (
-            <BieCharts key={index} content={item.content} title={item.title} onClick={onClick} onExpenseClick={onExpenseClick} onGoalClick={onGoalClick} />
-        ));
-    };
 
     return (
         <>
@@ -47,7 +32,10 @@ const Dashboard = ({ onClick, onExpenseClick, onGoalClick }) => {
                 <Bie title="Monthly balance" amount={initialBalance.monthlyBalance} svg="monthly" />
             </div>
             <div className="flex flex-wrap justify-between pt-[45px] w-full">
-                {renderBieCharts()}
+                <BieCharts title="Expenses by category" content="" />
+                <BieCharts title="Incomes by category" content="" />
+                <BieCharts title="Monthly balance" content="" />
+                <BieCharts title="Goals" content="" />
             </div>
         </>
     );

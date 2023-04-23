@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 import Title from "../../components/Title";
@@ -9,34 +9,16 @@ import Transaction from "./Transaction";
 import TransactionModal from "./TransactionModal";
 
 import { ReactComponent as NoResultTr } from '../../components/svgs/NoResultTr.svg';
-import { useEffect } from "react";
 
-const Transactions = ({ transactions, setTransactions }) => {
+import { BsArrowDownRight, BsArrowUpRight } from 'react-icons/bs';
+import { AiOutlinePlus } from "react-icons/ai";
+
+const Transactions = () => {
     const initialBalance = {
         monthlyBalance: '210020',
         incomes: '165000',
         expenses: '110030'
     };
-
-    return (
-        <>
-            <Title title={'Transaction'} />
-            <div className="flex justify-between items-center flex-wrap w-full">
-                <Bie title="Current balance" amount={initialBalance.incomes - initialBalance.expenses} svg="current" />
-                <Bie title="Incomes" amount={initialBalance.incomes} svg="incomes" />
-                <Bie title="Expenses" amount={initialBalance.expenses} svg="expenses" />
-                <Bie title="Monthly balance" amount={initialBalance.monthlyBalance} svg="monthly" />
-            </div>
-            <TransactionTable
-                newTransactions={transactions}
-                setNewTransactions={setTransactions}
-            />
-        </>
-    );
-};
-
-const TransactionTable = ({ newTransactions, setNewTransactions }) => {
-    console.log(newTransactions);
 
     const [showModal, setShowModal] = useState(false);
 
@@ -80,12 +62,11 @@ const TransactionTable = ({ newTransactions, setNewTransactions }) => {
 
     useEffect(() => {
         const mergedTransactions = [
-            ...transactions.map((transaction) => ({ ...transaction, id: uuidv4() })),
-            ...newTransactions.flat().map((transaction) => ({ ...transaction, id: uuidv4() })),
+            ...transactions.map((transaction) => ({ ...transaction, id: uuidv4() }))
         ];
 
         setTransactions(mergedTransactions);
-    }, [newTransactions]);
+    }, []);
 
 
     const [editingTransaction, setEditingTransaction] = useState(null);
@@ -102,12 +83,6 @@ const TransactionTable = ({ newTransactions, setNewTransactions }) => {
             );
         });
 
-        setNewTransactions((prevNewTransactions) => {
-            return prevNewTransactions.map((transaction) =>
-                transaction.id === updatedTransaction.id ? updatedTransaction : transaction
-            );
-        });
-
         setShowModal(false);
     };
 
@@ -118,13 +93,6 @@ const TransactionTable = ({ newTransactions, setNewTransactions }) => {
                 (transaction) => transaction.id !== id
             );
             return updatedTransactions;
-        });
-
-        setNewTransactions((prevNewTransactions) => {
-            const updatedNewTransactions = prevNewTransactions.filter(
-                (transaction) => transaction.id !== id
-            );
-            return updatedNewTransactions;
         });
     };
 
@@ -146,16 +114,15 @@ const TransactionTable = ({ newTransactions, setNewTransactions }) => {
 
     const renderTransactions = () => {
         const validTransactions = transactions.map((transaction) => {
-            console.log(transaction);
             return { ...transaction, date: formatDate(transaction.date) };
         });
 
-        const filteredTransactions = validTransactions.filter((transaction) => { 
-            const transactionDate = new Date(transaction.date); 
-            return ( 
-                transactionDate.getMonth() === currentMonth && 
-                transactionDate.getFullYear() === currentYear 
-            ); 
+        const filteredTransactions = validTransactions.filter((transaction) => {
+            const transactionDate = new Date(transaction.date);
+            return (
+                transactionDate.getMonth() === currentMonth &&
+                transactionDate.getFullYear() === currentYear
+            );
         });
 
 
@@ -179,10 +146,39 @@ const TransactionTable = ({ newTransactions, setNewTransactions }) => {
                 deleteTransaction={() => deleteTransaction(transaction.id)}
             />
         ));
-    };
+    }
 
     return (
         <>
+            <Title title={'Transaction'} />
+            <div className="flex justify-between items-center flex-wrap w-full mb-[35px]">
+                <Bie title="Current balance" amount={initialBalance.incomes - initialBalance.expenses} svg="current" />
+                <Bie title="Incomes" amount={initialBalance.incomes} svg="incomes" />
+                <Bie title="Expenses" amount={initialBalance.expenses} svg="expenses" />
+                <Bie title="Monthly balance" amount={initialBalance.monthlyBalance} svg="monthly" />
+            </div>
+
+            <div className="self-start dropdown">
+                <label tabIndex={0} className="flex flex-row justify-center items-center h-[45px] w-[140px] cursor-pointer uppercase font-medium text-[16px] bg-[#9F75D6] bg-opacity-90 text-white rounded-[30px]">
+                    <AiOutlinePlus className="mr-[10px]" size={25} />
+                    new
+                </label>
+                <ul tabIndex={0} className="mt-[10px] dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <li>
+                        <button className="font-normal" onClick={''}>
+                            <BsArrowUpRight size={16} color="#2ecc71" />
+                            Income
+                        </button>
+                    </li>
+                    <li>
+                        <button className="font-normal" onClick={''}>
+                            <BsArrowDownRight size={16} color="#e74c3c" />
+                            Expense
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
             <div className="w-full min-h-[550px] bg-white rounded-[40px] mt-[40px] border-[1px] border-[#AEAEAE] pt-[35px] ">
                 <MonthSelector
                     currentMonth={currentMonth}
