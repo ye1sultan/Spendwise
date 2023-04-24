@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { format, addDays, parseISO } from 'date-fns';
+import { addDays, parseISO } from 'date-fns';
+
+import { v4 as uuid } from 'uuid';
 
 import { AiOutlineCalendar, AiOutlineCar, AiOutlineCreditCard, AiOutlineHeart, AiOutlineHome, AiOutlineShop, AiOutlineShoppingCart, AiOutlineTag } from 'react-icons/ai';
 import { BiBookAlt, BiChevronDown, BiFileBlank } from 'react-icons/bi';
@@ -12,7 +14,7 @@ import { BsCoin } from 'react-icons/bs';
 import { FaPray } from 'react-icons/fa';
 import { TbCoin, TbCurrencyTenge, TbHealthRecognition } from 'react-icons/tb';
 
-const TransactionModal = ({ transaction, transactionModal, setTransactionModal, updateTransaction }) => {
+const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => {
     const [activeButton, setActiveButton] = useState('');
 
     const [selectedAmount, setSelectedAmount] = useState(0);
@@ -21,29 +23,8 @@ const TransactionModal = ({ transaction, transactionModal, setTransactionModal, 
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(null);
 
-
-    const handleClick = (type) => {
-        if (type === 'today') {
-            setSelectedDate(new Date());
-            setActiveButton('today');
-        } else if (type === 'yesterday') {
-            const yesterday = addDays(new Date(), -1);
-
-            setSelectedDate(yesterday);
-            setActiveButton('yesterday');
-        } else {
-            setActiveButton('other');
-        }
-    };
-
-    const handleDateChange = (date) => {
-        if (isNaN(date.getTime())) {
-            // If the input value is not a valid date, don't update the state
-            return;
-        }
-        setSelectedDate(date);
-        setActiveButton('other');
-    };
+    const [categoriesDropDown, setCategoriesDropDown] = useState(false);
+    const [paymentDropDown, setPaymentDropDown] = useState(false);
 
     const expenseCategories = [
         { name: "Clothing", icon: <AiOutlineShop size={25} color="#ffffff" />, color: "#D942A6" },
@@ -69,41 +50,142 @@ const TransactionModal = ({ transaction, transactionModal, setTransactionModal, 
         { name: "Other", icon: <BsThreeDots size={25} color="#ffffff" />, color: "#AEAEAE" },
     ];
 
-    let categories;
-    let color;
-    if (transaction === 'income') {
-        categories = incomeCategories;
-        color = '#22A447';
-    } else {
-        categories = expenseCategories;
-        color = '#E81E1E';
+    const paymentMethods = [
+        { name: "Cash", icon: <TbCoin size={25} /> },
+        { name: "Debit Card", icon: <AiOutlineCreditCard size={25} /> },
+    ];
+
+    const handleClick = (type) => {
+        if (type === 'today') {
+            setSelectedDate(new Date());
+            setActiveButton('today');
+        } else if (type === 'yesterday') {
+            const yesterday = addDays(new Date(), -1);
+
+            setSelectedDate(yesterday);
+            setActiveButton('yesterday');
+        } else {
+            setActiveButton('other');
+        }
+    };
+
+    const handleDateChange = (date) => {
+        if (isNaN(date.getTime())) {
+            return;
+        }
+
+        setSelectedDate(date);
+        setActiveButton('other');
+    };
+
+    let categories = transaction === 'income' ? incomeCategories : expenseCategories;
+    let color = transaction === 'income' ? '#22A447' : '#E81E1E';
+
+    const handleCategoryClick = (category) => {
+        setSelectedCategory(category);
+        setCategoriesDropDown(false);
+    }
+
+    const handlePaymentClick = (payment) => {
+        setSelectedPaymentMethod(payment);
+        setPaymentDropDown(false);
+    }
+
+    const getCategory = () => {
+        return (
+            selectedCategory ? (
+                <div className='flex flex-row justify-center items-center w-full h-full'>
+                    <div className="w-[40px] h-[40px] rounded-full flex justify-center items-center mr-4" style={{ backgroundColor: selectedCategory.color }}>
+                        {selectedCategory.icon}
+                    </div>
+                    <div className='text-black'>
+                        {selectedCategory.name}
+                    </div>
+                </div>
+            ) : (
+                <span className="text-[#828282]">Choose Category</span>
+            )
+        );
+    }
+
+    const getCategories = () => {
+        return categories.map((category, index) => (
+            <button
+                key={index}
+                onClick={() => handleCategoryClick(category)}
+                className="w-full flex justify-start items-center text-[24px] font-medium text-black mb-2 hover:bg-[#ecf0f1]">
+                <div className="w-[40px] h-[40px] rounded-full flex justify-center items-center mr-4" style={{ backgroundColor: category.color }}>
+                    {category.icon}
+                </div>
+                <div>
+                    {category.name}
+                </div>
+            </button>
+        ))
+    }
+
+    const getPaymentMethod = () => {
+        return (
+            selectedPaymentMethod ? (
+                <div className='flex flex-row justify-center items-center w-full h-full'>
+                    <div className="w-[40px] h-[40px] rounded-full flex justify-center items-center mr-4">
+                        {selectedPaymentMethod.icon}
+                    </div>
+                    <div className='text-black'>
+                        {selectedPaymentMethod.name}
+                    </div>
+                </div>
+            ) : (
+                <span className="text-[#828282]">Choose Payment Method</span>
+            )
+        );
+    }
+
+    const getPaymentMethods = () => {
+        return paymentMethods.map((method, index) => (
+            <button
+                key={index}
+                onClick={() => handlePaymentClick(method)}
+                className="w-full flex justify-start items-center text-[24px] font-medium text-black mb-2 hover:bg-[#ecf0f1]">
+                <div className="w-[40px] h-[40px] rounded-full flex justify-center items-center mr-4">
+                    {method.icon}
+                </div>
+                <div>
+                    {method.name}
+                </div>
+            </button>
+        ))
     }
 
     const handleSave = () => {
         if (selectedAmount && selectedDate && selectedCategory.name && selectedPaymentMethod) {
-            console.log(selectedDate);
-            let transactionObj = [
-                {
-                    date: selectedDate,
-                    category: selectedCategory.name,
-                    description: selectedDescription,
-                    payMethod: selectedPaymentMethod,
-                    amount: selectedAmount,
-                    type: transaction
-                }
-            ]
-            updateTransaction(transactionObj);
-            setTransactionModal(false);
+            const newTransaction = {
+                date: selectedDate.toISOString().substr(0, 10),
+                category: selectedCategory.name,
+                description: selectedDescription,
+                payMethod: selectedPaymentMethod.name,
+                amount: selectedAmount,
+                type: transaction,
+                id: uuid(),
+            };
+
+            // Add the new transaction to the transactions state
+            addNewTransaction(newTransaction);
+
+            console.log(newTransaction);
+
+            onModalClose(false);
         }
     }
 
+
     return (
-        <div className={`${transactionModal ? 'block' : 'hidden'} font-montserrat max-w-[1100px] fixed top-[5%] left-[50%] translate-x-[-50%] bg-white border-[1px] border-[#73737A] rounded-[40px] shadow-md px-[50px] py-[30px] z-20`}>
+        <div className={"block font-montserrat max-w-[1100px] fixed top-[5%] left-[50%] translate-x-[-50%] bg-white border-[1px] border-[#73737A] rounded-[40px] shadow-md px-[50px] py-[30px] z-20"}>
             <div className="flex justify-between items-center cursor-pointer mb-4">
                 <div className="font-medium text-[32px] text-black">
                     New {transaction === 'income' ? 'Income' : 'Expense'}
                 </div>
-                <IoCloseOutline size={35} onClick={() => setTransactionModal(false)} />
+                <IoCloseOutline size={35} onClick={() => onModalClose(false)} />
             </div>
             <div className="w-full h-[60px] relative mb-4">
                 <TbCurrencyTenge className="absolute top-[50%] translate-y-[-50%] left-4" size={45} />
@@ -151,76 +233,34 @@ const TransactionModal = ({ transaction, transactionModal, setTransactionModal, 
                     onChange={(e) => setSelectedDescription(e.target.value)}
                 />
             </div>
-            <div className="w-full h-[60px] relative mb-4">
+            <div
+                onMouseEnter={() => setCategoriesDropDown(true)}
+                onMouseLeave={() => setCategoriesDropDown(false)}
+                className="w-full h-[60px] relative mb-4">
                 <AiOutlineTag className="absolute top-[50%] translate-y-[-50%] left-4" size={45} />
-                <div className="flex justify-between items-center w-full h-full pl-20 text-[32px] text-[#696969] font-normal border-b-[1px] border-[#696969] dropdown relative">
-                    <label tabIndex={0} className="cursor-pointer">
-                        {selectedCategory ? (
-                            <div className='flex flex-row justify-center items-center w-full h-full'>
-                                <div className="w-[40px] h-[40px] rounded-full flex justify-center items-center mr-4" style={{ backgroundColor: selectedCategory.color }}>
-                                    {selectedCategory.icon}
-                                </div>
-                                <div className='text-black' style={{ color: color }}>
-                                    {selectedCategory.name}
-                                </div>
-                            </div>
-
-                        ) : (
-                            <span className="text-[#828282]">Choose Category</span>
-                        )}
-                    </label>
-                    <BiChevronDown tabIndex={0} className="cursor-pointer" size={40} />
-                    <ul tabIndex={0} className="absolute top-[100%] left-0 dropdown-content w-full max-h-[300px] overflow-auto bg-white py-[20px] px-[40px] border-[1px] border-[#696969] rounded-[50px] shadow z-10">
-                        {
-                            categories.map((category, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => setSelectedCategory(category)}
-                                    className="w-full flex justify-start items-center text-[24px] font-medium text-black mb-2 hover:bg-[#ecf0f1]">
-                                    <div className="w-[40px] h-[40px] rounded-full flex justify-center items-center mr-4" style={{ backgroundColor: category.color }}>
-                                        {category.icon}
-                                    </div>
-                                    <div>
-                                        {category.name}
-                                    </div>
-                                </button>
-                            ))
-                        }
-                    </ul>
+                <div className="flex justify-between items-center w-full h-full pl-20 text-[32px] text-[#696969] font-normal border-b-[1px] border-[#696969] relative">
+                    <div className="cursor-pointer">
+                        {getCategory()}
+                    </div>
+                    <BiChevronDown className="cursor-pointer" size={40} />
+                    <div className={`${categoriesDropDown ? 'flex' : 'hidden'} flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[20px] px-[40px] border-[1px] border-[#696969] rounded-[50px] shadow z-10`}>
+                        {getCategories()}
+                    </div>
                 </div>
             </div>
-            <div className="w-full h-[60px] relative mb-12">
+            <div
+                onMouseEnter={() => setPaymentDropDown(true)}
+                onMouseLeave={() => setPaymentDropDown(false)}
+                className="w-full h-[60px] relative mb-4">
                 <AiOutlineTag className="absolute top-[50%] translate-y-[-50%] left-4" size={45} />
-                <div className="flex justify-between items-center w-full h-full pl-20 text-[32px] text-[#696969] font-normal border-b-[1px] border-[#696969] dropdown relative">
-                    <label tabIndex={0} className="cursor-pointer flex justify-center items-center">
-                        {selectedPaymentMethod ? (
-                            selectedPaymentMethod === "Cash" ? (
-                                <>
-                                    <TbCoin className="mr-6" size={35} color='#000000' />
-                                    <div className='text-[32px] text-black' style={{ color: color }}>Cash</div>
-                                </>
-                            ) : (
-                                <>
-                                    <AiOutlineCreditCard className="mr-6" size={35} color='#000000' />
-                                    <div className='text-[32px] text-black' style={{ color: color }}>Cash</div>
-                                </>
-                            )
-                        ) : (
-                            <span className="text-[#828282]">Payment Method</span>
-                        )}
-                    </label>
-                    <BiChevronDown tabIndex={0} className="cursor-pointer" size={40} />
-                    <ul tabIndex={0} className="dropdown-content w-full bg-white py-[20px] px-[40px] border-[1px] border-[#696969] rounded-[50px] shadow absolute top-[100%] left-0 ">
-                        <button onClick={() => setSelectedPaymentMethod("Cash")} className="w-full flex justify-start items-center text-[24px] font-medium text-black hover:bg-[#ecf0f1]">
-                            <TbCoin className="mr-6" size={28} />
-                            Cash
-                        </button>
-                        <div className="divider text-black text-[18px]">OR</div>
-                        <button onClick={() => setSelectedPaymentMethod("Debit Card")} className="w-full flex justify-start items-center text-[24px] font-medium text-black hover:bg-[#ecf0f1]">
-                            <AiOutlineCreditCard className="mr-6" size={28} />
-                            Debit Card
-                        </button>
-                    </ul>
+                <div className="flex justify-between items-center w-full h-full pl-20 text-[32px] text-[#696969] font-normal border-b-[1px] border-[#696969] relative">
+                    <div className="cursor-pointer">
+                        {getPaymentMethod()}
+                    </div>
+                    <BiChevronDown className="cursor-pointer" size={40} />
+                    <div className={`${paymentDropDown ? 'flex' : 'hidden'} flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[20px] px-[40px] border-[1px] border-[#696969] rounded-[50px] shadow z-10`}>
+                        {getPaymentMethods()}
+                    </div>
                 </div>
             </div>
             <button onClick={handleSave} className='uppercase text-black text-[18px] font-medium py-[10px] px-[40px] bg-[#BFA2E5] rounded-[40px]'>
@@ -230,4 +270,4 @@ const TransactionModal = ({ transaction, transactionModal, setTransactionModal, 
     );
 }
 
-export default TransactionModal;
+export default CreateTransaction;

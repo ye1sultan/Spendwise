@@ -1,13 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { v4 as uuid } from 'uuid';
 
 import Title from "../../components/Title";
-
 import MonthSelector from "./MonthSelector";
 import Transaction from "./Transaction";
 import EditModal from "./EditModal";
-import TransactionModal from "./record-transaction/TransactionModal";
-
+import CreateTransaction from "./CreateTransaction";
 import { ReactComponent as NoResultTr } from '../../components/svgs/NoResultTr.svg';
 
 import { BsArrowDownRight, BsArrowUpRight } from 'react-icons/bs';
@@ -15,6 +13,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 
 const Transactions = () => {
     const [showEditModal, setShowEditModal] = useState(false);
+    const [showCreateModal, setShowCreateModal] = useState(false);
 
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
@@ -88,6 +87,12 @@ const Transactions = () => {
         setShowEditModal(true);
     }
 
+    const addNewTransaction = (newTransaction) => {
+        setTransactionsWithIdState((prevTransactions) => [...prevTransactions, newTransaction]);
+        setShowDropDown(false);
+    };
+
+
     const updateTransaction = (updatedTransaction) => {
         setTransactionsWithIdState((prevTransactions) =>
             prevTransactions.map((transaction) =>
@@ -129,7 +134,23 @@ const Transactions = () => {
         ));
     }
 
-    const [showDropDown, setshowDropDown] = useState(false);
+    const [showDropDown, setShowDropDown] = useState(false);
+    const [trn, setTrn] = useState('expense');
+
+    const handleIncomeClick = (trns) => {
+        setTrn(trns);
+        setShowCreateModal(true);
+    }
+
+    const handleExpenseClick = (trns) => {
+        setTrn(trns);
+        setShowCreateModal(true);
+    }
+
+    const closeCreateModal = (bool) => {
+        setShowCreateModal(bool);
+        setShowDropDown(false);
+    }
 
     return (
         <>
@@ -141,29 +162,42 @@ const Transactions = () => {
                 />
             )}
 
+            {showCreateModal && (
+                <CreateTransaction
+                    transaction={trn}
+                    setShowCreateModal={setShowCreateModal}
+                    updateTransaction={updateTransaction}
+                    addNewTransaction={addNewTransaction}
+                    onModalClose={closeCreateModal}
+                />
+            )}
+
             <Title title={'Transaction'} />
-            <div className="self-start text-[#2c3e50] relative" onMouseEnter={() => setshowDropDown(true)} onMouseLeave={() => setshowDropDown(false)}>
+            <div className="self-start text-[#2c3e50] relative" onClick={() => setShowDropDown(true)}   >
                 <button className="flex flex-row justify-center items-center h-[45px] w-[140px] cursor-pointer uppercase font-medium text-[16px] bg-[#9F75D6] bg-opacity-90 text-white rounded-[30px]">
                     <AiOutlinePlus className="mr-[10px]" size={25} />
                     new
                 </button>
-                <ul className={`${showDropDown ? 'flex flex-col opacity-100' : 'hidden opacity-0'} absolute top-[120%] left-0 bg-[#fff] font-normal text-[24px] py-[15px] px-[40px] rounded-[20px] shadow `}>
-                    <li>
-                        <button className="flex justify-center items-center">
+                <div className={`${showDropDown ? 'flex flex-col opacity-100' : 'hidden opacity-0'} absolute top-[120%] left-0 bg-[#fff] font-normal text-[24px] py-[15px] px-[40px] rounded-[20px] shadow `}>
+                    <div>
+                        <button
+                            onClick={() => handleIncomeClick('income')}
+                            className="flex justify-center items-center">
                             <BsArrowUpRight size={24} color="#2ecc71" />
                             Income
                         </button>
-                    </li>
+                    </div>
                     <hr className="w-full my-[10px] h-[1px] bg-[#000]" />
-                    <li>
-                        <button className="flex justify-center items-center">
+                    <div>
+                        <button
+                            onClick={() => handleExpenseClick('expense')}
+                            className="flex justify-center items-center">
                             <BsArrowDownRight size={24} color="#e74c3c" />
                             Expense
                         </button>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
-
             <div className="w-full min-h-[550px] bg-white rounded-[40px] mt-[40px] border-[1px] border-[#AEAEAE] pt-[35px] ">
                 <MonthSelector
                     currentMonth={currentMonth}
