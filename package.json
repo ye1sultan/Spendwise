@@ -23,7 +23,7 @@
     "react-switch": "^7.0.0",
     "react-wavify": "^1.8.0",
     "typeface-inter": "^3.18.1",
-    "uuid": "^9.0.0",
+    "uuidv4": "^6.2.13",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
