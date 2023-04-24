@@ -1,4 +1,3 @@
-import React from 'react';
 import { AiFillDelete, AiOutlineCar, AiOutlineGift, AiOutlineShoppingCart } from 'react-icons/ai';
 import { IoEarthOutline } from 'react-icons/io5';
 import { BsCheckAll, BsFillPauseFill, BsFillPlayFill } from 'react-icons/bs';
@@ -26,6 +25,9 @@ const Goal = ({ name, icon, deadline, totalAmount, amount, color, index, onDelet
         }
     }
 
+    const iconComponent = getIconComponent(icon);
+
+
     const handleDelete = () => {
         onDelete(index);
     }
@@ -38,60 +40,43 @@ const Goal = ({ name, icon, deadline, totalAmount, amount, color, index, onDelet
         onComplete(index);
     }
 
-    const classNames = {
-        goalWrapper: 'max-w- w-[530px] h-[315px] bg-white rounded-[40px] border-[1px] border-[#CED4DA] m-[30px] p-[30px] flex flex-col justify-between items-start',
-        iconContainer: 'w-[50px] h-[50px] bg-opacity-50 rounded-full flex justify-center items-center mr-[20px]',
-        titleText: 'text-[25px] font-medium text-[#4E4949]',
-        dateWrapper: 'w-full flex justify-between items-center',
-        labelText: 'text-[20px] font-medium text-[#979393]',
-        deadlineText: 'text-[25px] font-medium text-[#4E4949]',
-        progressText: 'text-[36px] font-medium',
-        progressBarContainer: 'w-full h-[20px] bg-[#EEECEC] rounded-[10px]',
-        progressBar: 'h-full rounded-[10px]',
-        progressAmountText: 'text-[16px] font-semibold text-[#696969]',
-        actionButtonsWrapper: 'w-full flex justify-end items-center',
-        deleteButton: 'w-[35px] h-[35px] text-[#474448]',
-        checkButton: 'w-[35px] h-[35px] text-[#474448]',
-    };
-
-    const iconComponent = getIconComponent(icon);
     return (
-        <div className={classNames.goalWrapper}>
+        <div className="w-[530px] h-[315px] bg-white rounded-[40px] border-[1px] border-[#CED4DA] m-[30px] p-[30px] flex flex-col justify-between items-start">
             <div className="flex justify-start items-center w-full">
-                <div className={`${classNames.iconContainer}`} style={{ backgroundColor: color }}>
+                <div className="w-[50px] h-[50px] bg-opacity-50 rounded-full flex justify-center items-center mr-[20px]" style={{ backgroundColor: color }}>
                     {iconComponent}
                 </div>
-                <div className={classNames.titleText}>
+                <div className="text-[25px] font-medium text-[#4E4949]">
                     {name}
                 </div>
             </div>
-            <div className={classNames.dateWrapper}>
+            <div className="w-full flex justify-between items-center">
                 <div>
-                    <div className={classNames.labelText}>
+                    <div className="text-[20px] font-medium text-[#979393]">
                         Till
                     </div>
-                    <div className={classNames.deadlineText}>
+                    <div className="text-[25px] font-medium text-[#4E4949]">
                         {deadline}
                     </div>
                 </div>
-                <div className={classNames.progressText}>
+                <div className="text-[36px] font-medium">
                     {progress + " %"}
                 </div>
             </div>
-            <div className={classNames.progressBarContainer}>
-                <div className={`${classNames.progressBar}`} style={{ width: progress + "%", backgroundColor: color }}></div>
+            <div className="w-full h-[20px] bg-[#EEECEC] rounded-[10px]">
+                <div className="h-full rounded-[10px]" style={{ width: progress + "%", backgroundColor: color }}></div>
             </div>
-            <div className={classNames.progressAmountText}>
+            <div className="text-[16px] font-semibold text-[#696969]">
                 {`₸ ${amount} / ₸ ${totalAmount}`}
             </div>
-            <div className={classNames.actionButtonsWrapper}>
-                <button className={`${classNames.deleteButton} ${status === 'reached' ? 'hidden' : 'block'}`} onClick={handlePause}>
+            <div className="w-full flex justify-end items-center">
+                <button className={`w-[35px] h-[35px] text-[#474448] ${status === 'reached' ? 'hidden' : 'block'}`} onClick={handlePause}>
                     {status === 'paused' ? <BsFillPlayFill size={30} /> : <BsFillPauseFill size={30} />}
                 </button>
-                <button className={classNames.deleteButton} onClick={handleDelete}>
+                <button className="w-[35px] h-[35px] text-[#474448]" onClick={handleDelete}>
                     <AiFillDelete size={30} />
                 </button>
-                <button className={`${classNames.checkButton} ${status === 'reached' ? 'hidden' : 'block'}`} onClick={handleComplete}>
+                <button className={`w-[35px] h-[35px] text-[#474448] ${status === 'reached' ? 'hidden' : 'block'}`} onClick={handleComplete}>
                     <BsCheckAll size={35} />
                 </button>
             </div>

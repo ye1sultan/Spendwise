@@ -24,20 +24,20 @@ const SideBar = () => {
     return (
         <div className="sticky left-0 top-0 bg-white flex flex-col justify-between items-center h-screen py-14 px-[30px] shadow-sm">
             <div className="flex flex-col justify-center items-start">
-                <div className='text-3xl w-[230px] font-semibold z-50 p-2 mb-12'>LOGO</div>
+                <div className='text-3xl text-[#2c3e50] w-[230px] font-semibold z-50 p-2 mb-12'>LOGO</div>
                 {
                     buttons.map((button, index) => (
                         <Link
                             key={index}
                             to={`/application/${button.view}`}
-                            className="flex items-center w-[210px] h-[50px] p-[10px] text-[#381C46CC] text-[15px] font-semibold mb-[15px] bg-[#ffffff]">
+                            className="flex items-center w-[210px] h-[50px] p-[10px] text-[#2c3e50] text-[15px] font-semibold mb-[15px] bg-[#ffffff]">
                             {button.icon}
                             <div className="flex-1">{button.label}</div>
                         </Link>
                     ))
                 }
             </div>
-            <button onClick={handleExit} className="font-semibold text-[15px] text-[#bf3030] flex justify-start items-center w-[200px]">
+            <button onClick={handleExit} className="font-semibold text-[15px] text-[#e74c3c] flex justify-start items-center w-[200px]">
                 <div className="mr-4">
                     <BiLogOut size={30} />
                 </div>

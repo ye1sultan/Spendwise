@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
-import { v4 as uuidv4 } from 'uuid';
-
 import Title from "../../components/Title";
-import Bie from "../../components/Bie";
 
 import MonthSelector from "./MonthSelector";
 import Transaction from "./Transaction";
-import TransactionModal from "./TransactionModal";
+import TransactionModal from "./record-transaction/TransactionModal";
 
 import { ReactComponent as NoResultTr } from '../../components/svgs/NoResultTr.svg';
 
@@ -14,12 +11,6 @@ import { BsArrowDownRight, BsArrowUpRight } from 'react-icons/bs';
 import { AiOutlinePlus } from "react-icons/ai";
 
 const Transactions = () => {
-    const initialBalance = {
-        monthlyBalance: '210020',
-        incomes: '165000',
-        expenses: '110030'
-    };
-
     const [showModal, setShowModal] = useState(false);
 
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
@@ -28,7 +19,7 @@ const Transactions = () => {
     const [transactions, setTransactions] = useState([
         {
             date: "2023-03-15",
-            category: "Food",
+            category: "Restaurant",
             description: "Dinner at a restaurant",
             payMethod: "Credit Card",
             amount: -50,
@@ -44,7 +35,7 @@ const Transactions = () => {
         },
         {
             date: "2023-04-05",
-            category: "Groceries",
+            category: "Supermarket",
             description: "Weekly shopping",
             payMethod: "Debit Card",
             amount: -100,
@@ -60,40 +51,19 @@ const Transactions = () => {
         },
     ]);
 
-    useEffect(() => {
-        const mergedTransactions = [
-            ...transactions.map((transaction) => ({ ...transaction, id: uuidv4() }))
-        ];
-
-        setTransactions(mergedTransactions);
-    }, []);
-
-
     const [editingTransaction, setEditingTransaction] = useState(null);
 
     const startEditingTransaction = (transaction) => {
-        setEditingTransaction(transaction);
-        setShowModal(true);
+
     };
 
     const updateTransaction = (updatedTransaction) => {
-        setTransactions((prevTransactions) => {
-            return prevTransactions.map((transaction) =>
-                transaction.id === updatedTransaction.id ? updatedTransaction : transaction
-            );
-        });
 
-        setShowModal(false);
     };
 
 
     const deleteTransaction = (id) => {
-        setTransactions((prevTransactions) => {
-            const updatedTransactions = prevTransactions.filter(
-                (transaction) => transaction.id !== id
-            );
-            return updatedTransactions;
-        });
+        
     };
 
     const formatDate = (date) => {
@@ -151,12 +121,6 @@ const Transactions = () => {
     return (
         <>
             <Title title={'Transaction'} />
-            <div className="flex justify-between items-center flex-wrap w-full mb-[35px]">
-                <Bie title="Current balance" amount={initialBalance.incomes - initialBalance.expenses} svg="current" />
-                <Bie title="Incomes" amount={initialBalance.incomes} svg="incomes" />
-                <Bie title="Expenses" amount={initialBalance.expenses} svg="expenses" />
-                <Bie title="Monthly balance" amount={initialBalance.monthlyBalance} svg="monthly" />
-            </div>
 
             <div className="self-start dropdown">
                 <label tabIndex={0} className="flex flex-row justify-center items-center h-[45px] w-[140px] cursor-pointer uppercase font-medium text-[16px] bg-[#9F75D6] bg-opacity-90 text-white rounded-[30px]">
@@ -195,13 +159,6 @@ const Transactions = () => {
                 </div>
                 {renderTransactions()}
             </div>
-            {showModal && editingTransaction && (
-                <TransactionModal
-                    transaction={editingTransaction}
-                    onSave={updateTransaction}
-                    onCancel={() => setShowModal(false)}
-                />
-            )}
         </>
     );
 };

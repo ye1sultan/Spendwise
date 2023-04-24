@@ -8,6 +8,9 @@ const Bie = (props) => {
     let svg = props.svg;
 
     const formatNumber = (num) => {
+        if (num === undefined) {
+            return "0";
+        }
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     };
 
@@ -46,7 +49,7 @@ const Bie = (props) => {
                 }
             </div>
             <div className="text-[24px] font-medium">
-                {formatNumber(amount) + " ₸"}
+                {svg === 'expenses' ? "- " + formatNumber(amount) + " ₸" : formatNumber(amount) + " ₸"}
             </div>
         </div>
     );

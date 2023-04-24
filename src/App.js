@@ -27,10 +27,10 @@ function App() {
                 <Route path="signup" element={<Signup />} />
                 <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="restore-password" element={<RestorePassword />} />
-                <Route path="application/*" element={<Application />} />
 
                 <Route path="application/*" element={<Application />} >
-                    <Route index element={<Dashboard />} />
+                    <Route path="" element={<Navigate to="dashboard" />} />
+                    <Route path="*" element={<Navigate to="dashboard" />} />
                     <Route path="dashboard" element={<Dashboard />} />
                     <Route path="transactions" element={<Transactions />} />
                     <Route path="goals" element={<Goals />} />
