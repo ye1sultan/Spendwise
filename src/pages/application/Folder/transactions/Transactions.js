@@ -49,6 +49,22 @@ const Transactions = () => {
             amount: 1500,
             type: "income",
         },
+        {
+            date: "2023-02-02",
+            category: "Gift",
+            description: "Grandpa gave money",
+            payMethod: "Debit Card",
+            amount: 10000,
+            type: "income",
+        },
+        {
+            date: "2023-02-05",
+            category: "Investment",
+            description: "Stock purchase",
+            payMethod: "Bank Transfer",
+            amount: 1500,
+            type: "income",
+        },
     ]);
 
     const [editingTransaction, setEditingTransaction] = useState(null);
@@ -63,7 +79,7 @@ const Transactions = () => {
 
 
     const deleteTransaction = (id) => {
-        
+
     };
 
     const formatDate = (date) => {
@@ -118,25 +134,28 @@ const Transactions = () => {
         ));
     }
 
+    const [showDropDown, setshowDropDown] = useState(false);
+
     return (
         <>
             <Title title={'Transaction'} />
 
-            <div className="self-start dropdown">
-                <label tabIndex={0} className="flex flex-row justify-center items-center h-[45px] w-[140px] cursor-pointer uppercase font-medium text-[16px] bg-[#9F75D6] bg-opacity-90 text-white rounded-[30px]">
+            <div className="self-start text-[#2c3e50] relative" onMouseEnter={() => setshowDropDown(true)} onMouseLeave={() => setshowDropDown(false)}>
+                <button className="flex flex-row justify-center items-center h-[45px] w-[140px] cursor-pointer uppercase font-medium text-[16px] bg-[#9F75D6] bg-opacity-90 text-white rounded-[30px]">
                     <AiOutlinePlus className="mr-[10px]" size={25} />
                     new
-                </label>
-                <ul tabIndex={0} className="mt-[10px] dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                </button>
+                <ul className={`${showDropDown ? 'flex flex-col opacity-100' : 'hidden opacity-0'} absolute top-[120%] left-0 bg-[#fff] font-normal text-[24px] py-[15px] px-[40px] rounded-[20px] shadow `}>
                     <li>
-                        <button className="font-normal" onClick={''}>
-                            <BsArrowUpRight size={16} color="#2ecc71" />
+                        <button className="flex justify-center items-center " onClick={''}>
+                            <BsArrowUpRight size={24} color="#2ecc71" />
                             Income
                         </button>
                     </li>
+                    <hr className="w-full my-[10px] h-[1px] bg-[#000]" />
                     <li>
-                        <button className="font-normal" onClick={''}>
-                            <BsArrowDownRight size={16} color="#e74c3c" />
+                        <button className="flex justify-center items-center" onClick={''}>
+                            <BsArrowDownRight size={24} color="#e74c3c" />
                             Expense
                         </button>
                     </li>

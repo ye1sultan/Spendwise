@@ -32,7 +32,11 @@ function App() {
                     <Route path="" element={<Navigate to="dashboard" />} />
                     <Route path="*" element={<Navigate to="dashboard" />} />
                     <Route path="dashboard" element={<Dashboard />} />
-                    <Route path="transactions" element={<Transactions />} />
+                    <Route path="transactions/*" element={<Transactions />} >
+                        <Route path="" element={<Navigate to=":month-year" />} />
+                        <Route path="*" element={<Navigate to=":month-year" />} />
+                        <Route path=":month-:year" element={<Transactions />} />
+                    </Route>
                     <Route path="goals" element={<Goals />} />
                     <Route path="report" element={<Report />} />
                     <Route path="notifications" element={<Notifications />} />
