@@ -3,32 +3,37 @@ import Title from "../../components/Title";
 
 import { BsChevronDown } from 'react-icons/bs';
 import { AiOutlinePlus } from 'react-icons/ai';
-import GoalCreator from "./GoalCreator";
-import Goal from "./Goal";
 
-const Goals = ({ }) => {
-    const [goalModal, setGoalModal] = useState(false);
-    const [goals, setGoals] = useState([
+import GoalCreator from "./CreateGoal";
+import Goal from "./Goal";
+import EditModal from "./EditModal";
+
+import { v4 as uuid } from 'uuid';
+
+const Goals = () => {
+    const initialGoals = [
         {
             name: "Initial Goal",
             deadline: "2023-12-31",
             amount: 100,
             totalAmount: 1000,
-            color: "#BFA2E5",
+            color: "#F1BF5B",
             icon: "car",
-            isPaused: false,
-            isCompleted: false,
+            desciprtion: '',
+            status: 'active',
         }
-    ]);
+    ];
 
-    const [deleteGoalModal, setDeleteGoalModal] = useState(false);
-    const [completeGoalModal, setCompleteGoalModal] = useState(false);
+    const [goalModal, setGoalModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
 
-    const [goalToDelete, setGoalToDelete] = useState(null);
-    const [goalToComplete, setGoalToComplete] = useState(null);
+    const goalsWithId = initialGoals.map((transaction) => {
+        return { ...transaction, id: uuid() }
+    });
+
+    const [goalsWithIdState, setGoalsWithIdState] = useState(goalsWithId);
 
     const [showDropDown, setShowDropDown] = useState(false);
-
     const [goalFilter, setGoalFilter] = useState('active');
 
     const createGoal = () => {
@@ -36,35 +41,67 @@ const Goals = ({ }) => {
         setGoalModal(true);
     }
 
-    const deleteGoal = (index) => {
-        setGoals(goals.filter((_, i) => i !== index));
-        setDeleteGoalModal(false);
+    const addNewGoal = (newGoal) => {
+        setGoalsWithIdState((prevTransactions) => [...prevTransactions, newGoal]);
+
+        setShowDropDown(false);
+    };
+
+    const updateGoals = (updatedGoals) => {
+        setGoalsWithIdState((prevGoals) =>
+            prevGoals.map((transaction) =>
+                transaction.id === updatedGoals.id ? updatedGoals : prevGoals
+            )
+        );
+
+        setShowEditModal(false);
     }
 
-    const pauseGoal = (index) => {
-        setGoals(goals.map((goal, i) => {
-            if (i === index) {
-                return {
-                    ...goal,
-                    isPaused: !goal.isPaused,
-                };
-            }
-            return goal;
-        }));
-    }
+    const pauseGoal = (id) => {
+        setGoalsWithIdState((prevGoals) =>
+            prevGoals.map((goal) => {
+                if (goal.id === id) {
 
-    const completeGoal = (index) => {
-        setGoals(goals.map((goal, i) => {
-            if (i === index) {
-                return {
-                    ...goal,
-                    isCompleted: !goal.isCompleted,
-                };
-            }
-            return goal;
-        }));
+                    console.log('Pause');
+                    return {
+                        ...goal,
+                        status: goal.status === 'active' ? 'paused' : 'active',
+                    };
 
-        setCompleteGoalModal(false);
+                }
+
+
+                return goal;
+            })
+        );
+
+        console.log(goalsWithIdState);
+    };
+
+    const reachGoal = (id) => {
+        setGoalsWithIdState((prevGoals) =>
+            prevGoals.map((goal) => {
+                if (goal.id === id) {
+                    return {
+                        ...goal,
+                        status: 'reached',
+                    };
+                }
+                return goal;
+            })
+        );
+    };
+
+    const deleteGoals = (id) => {
+        const updatedGoals = goalsWithIdState.filter(goal => goal.id !== id);
+        setGoalsWithIdState(updatedGoals);
+    };
+
+    const [goalOnEdit, setGoalOnEdit] = useState(null);
+
+    const editGoal = (goal) => {
+        setGoalOnEdit(goal);
+        setShowEditModal(true);
     }
 
     const NewGoalButton = ({ onClick }) => {
@@ -97,20 +134,28 @@ const Goals = ({ }) => {
         setShowDropDown(false);
     }
 
-    const filterGoals = (goals) => {
-        return goals.filter(goal => {
-            if (goalFilter === 'active') return !goal.isPaused && !goal.isCompleted;
-            if (goalFilter === 'paused') return goal.isPaused;
-            if (goalFilter === 'reached') return goal.isCompleted;
-            return true;
-        });
-    }
+    const filterGoals = (goals, filter) => {
+        return goals.filter((goal) => goal.status === filter);
+    };
 
-    const filteredGoals = filterGoals(goals);
+    const filteredGoals = filterGoals(goalsWithIdState, goalFilter);
 
     return (
         <div className="w-full h-full flex flex-col items-center">
-            <GoalCreator modal={goalModal} setModal={setGoalModal} goals={goals} setGoals={setGoals} />
+            {showEditModal && setGoalOnEdit && (
+                <EditModal
+                    goal={goalOnEdit}
+                    onSave={updateGoals}
+                    onCancel={() => setShowEditModal(false)}
+                />
+            )}
+
+            {goalModal && (
+                <GoalCreator
+                    onModalClose={setGoalModal}
+                    addNewGoal={addNewGoal} />
+            )}
+
             <Title title={'My Goals'} />
             <div className="relative self-start z-10">
                 <button className="w-[220px] h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[20px] flex justify-between items-center px-5 z-10" onClick={() => setShowDropDown(!showDropDown)}>
@@ -124,29 +169,23 @@ const Goals = ({ }) => {
                 {filteredGoals.map((goal, index) => (
                     <Goal
                         key={index}
-                        index={index}
+                        goal={goal}
+                        id={goal.id}
                         name={goal.name}
                         deadline={goal.deadline}
                         amount={goal.amount}
                         totalAmount={goal.totalAmount}
                         color={goal.color}
                         icon={goal.icon}
-                        isPaused={goal.isPaused}
-                        isCompleted={goal.isCompleted}
-                        onDelete={() => {
-                            setGoalToDelete(index);
-                            setDeleteGoalModal(true);
-                        }}
-                        onPause={() => pauseGoal(index)}
-                        onComplete={() => {
-                            setGoalToComplete(index);
-                            setCompleteGoalModal(true);
-                        }}
                         status={goalFilter}
+                        onDeleteGoal={deleteGoals}
+                        onPauseGoal={pauseGoal}
+                        onReachGoal={reachGoal}
+                        onEditGoal={editGoal}
                     />
                 ))}
             </div>
-            <div className={`z-50 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[850px] h-[400px] rounded-[50px] bg-white px-[65px] py-[40px] ${deleteGoalModal ? 'flex' : 'hidden'} flex-col justify-between items-center border-[1px] border-[#AEAEAE]`}>
+            {/* <div className={`z-50 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[850px] h-[400px] rounded-[50px] bg-white px-[65px] py-[40px] ${deleteGoalModal ? 'flex' : 'hidden'} flex-col justify-between items-center border-[1px] border-[#AEAEAE]`}>
                 <div className="text-[45px] font-medium">
                     Delete goal
                 </div>
@@ -177,7 +216,7 @@ const Goals = ({ }) => {
                         confirm
                     </button>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }

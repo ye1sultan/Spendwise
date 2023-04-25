@@ -36,7 +36,6 @@ const EditModal = ({ transaction, onSave, onCancel }) => {
         { name: "Other", icon: <BsThreeDots size={25} color="#ffffff" />, color: "#AEAEAE" },
     ]
 
-
     const handleCategoryClick = (category) => {
         setEditedTransaction({ ...editedTransaction, category: category.name });
         setCategoryDropDown(false);

@@ -84,8 +84,6 @@ const Transactions = ({ transactionsWithIdState, updateTransaction, deleteTransa
             {showCreateModal && (
                 <CreateTransaction
                     transaction={trn}
-                    setShowCreateModal={setShowCreateModal}
-                    updateTransaction={updateTransaction}
                     addNewTransaction={addNewTransaction}
                     onModalClose={closeCreateModal}
                 />
