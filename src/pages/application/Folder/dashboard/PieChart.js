@@ -75,7 +75,7 @@ const PieChart = ({ transactions }) => {
     const data = {
         datasets: [
             {
-                data: transactions.map((transaction) => transaction.value),
+                data: transactions.map((transaction) => Math.abs(transaction.amount)),
                 backgroundColor: transactions.map((transaction) => findCategoryColor(transaction.category)),
                 borderWidth: 3,
                 borderColor: '#ffffff',
@@ -116,7 +116,7 @@ const PieChart = ({ transactions }) => {
                     },
                     label: (context) => {
                         const index = context.dataIndex;
-                        const value = transactions[index].value;
+                        const value = transactions[index].amount;
                         return `${value.toLocaleString()} ₸`;
                     },
                 },

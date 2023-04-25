@@ -4,31 +4,48 @@ import NoContent from "./NoContent.js";
 import Goal from "./Goal.js";
 import { Link } from "react-router-dom";
 
-const BieCharts = ({ content, title, initialData }) => {
-    const calculateTotalExpensesAndIncomes = (data) => {
-        let totalExpenses = 0;
-        let totalIncomes = 0;
+const BieCharts = ({ title, initialGoal, data }) => {
+    const calculateTotals = (transactions) => {
+        let totalIncome = 0;
+        let totalExpense = 0;
 
-        for (const month in data) {
-            const { expenses, incomes } = data[month];
+        transactions.forEach((transaction) => {
+            if (transaction.type === 'income') {
+                totalIncome += parseInt(transaction.amount);
+            } else if (transaction.type === 'expense') {
+                totalExpense += parseInt(transaction.amount);
+            }
+        });
 
-            totalExpenses += expenses.reduce((sum, expense) => sum + expense.value, 0);
-            totalIncomes += incomes.reduce((sum, income) => sum + income.value, 0);
-        }
-
-        return { totalExpenses, totalIncomes };
+        return {
+            totalIncome,
+            totalExpense,
+        };
     };
 
-    const { totalExpenses, totalIncomes } = calculateTotalExpensesAndIncomes(initialData);
+    const totals = calculateTotals(data);
 
-    const initialGoal = {
-        name: "Initial Goal",
-        deadline: "2023-12-31",
-        amount: 100,
-        totalAmount: 1000,
-        color: "#BFA2E5",
-        icon: "car",
-    }
+    const separateIncomeAndExpense = (transactions) => {
+        let incomeObjects = [];
+        let expenseObjects = [];
+
+        transactions.forEach((transaction) => {
+            if (transaction.type === 'income') {
+                incomeObjects.push(transaction);
+            } else if (transaction.type === 'expense') {
+                expenseObjects.push(transaction);
+            }
+        });
+
+        return {
+            incomeObjects,
+            expenseObjects,
+        };
+    };
+
+    const separatedTransactions = separateIncomeAndExpense(data);
+    console.log('Income Objects:', separatedTransactions.incomeObjects);
+    console.log('Expense Objects:', separatedTransactions.expenseObjects);
 
     return (
         <div className="flex flex-col mb-[60px]">
@@ -36,15 +53,15 @@ const BieCharts = ({ content, title, initialData }) => {
                 {title}
             </div>
             <div
-                className={`flex flex-col justify-between items-center w-[723px] ${content ? (title === 'Goals' ? 'h-[320px]' : 'h-full') : 'h-[328px]'} rounded-[30px] border-[#AEAEAE] border-[1px] bg-white 
-                ${content ? (title === 'Goals' ? '' : 'pt-[20px]') : 'pt-[25px] px-[20px]'}`}>
+                className={`flex flex-col justify-between items-center w-[723px] ${data ? (title === 'Goals' ? 'h-[320px]' : 'h-full') : 'h-[328px]'} rounded-[30px] border-[#AEAEAE] border-[1px] bg-white 
+                ${data ? (title === 'Goals' ? '' : 'pt-[20px]') : 'pt-[25px] px-[20px]'}`}>
                 {
                     (() => {
                         if (title === 'Expenses by category') {
-                            if (content) {
+                            if (data) {
                                 return (
                                     <div className="w-full flex flex-col justify-center items-center">
-                                        <PieChart transactions={initialData['2023-02'].expenses} />
+                                        <PieChart transactions={separatedTransactions.expenseObjects} />
                                         <Link
                                             to='/application/transactions'
                                             className="text-center text-[24px] text-[#590CC0] uppercase mt-[25px] py-[20px] w-full border-t-[1px] border-t-black">
@@ -57,10 +74,10 @@ const BieCharts = ({ content, title, initialData }) => {
                             }
                         }
                         if (title === 'Incomes by category') {
-                            if (content) {
+                            if (data) {
                                 return (
                                     <div className="w-full flex flex-col justify-center items-center">
-                                        <PieChart transactions={initialData['2023-02'].incomes} />
+                                        <PieChart transactions={separatedTransactions.incomeObjects} />
                                         <Link
                                             to='/application/transactions'
                                             className="text-center text-[24px] text-[#590CC0] uppercase mt-[25px] py-[20px] w-full border-t-[1px] border-t-black">
@@ -73,10 +90,10 @@ const BieCharts = ({ content, title, initialData }) => {
                             }
                         }
                         if (title === 'Monthly balance') {
-                            if (content) {
+                            if (data) {
                                 return (
                                     <div className="w-full flex flex-col justify-center items-center">
-                                        <BarChart expense={totalExpenses} income={totalIncomes} />
+                                        <BarChart expense={totals.totalExpense} income={totals.totalIncome} />
                                         <Link
                                             to='/application/transactions'
                                             className="text-center text-[24px] text-[#590CC0] uppercase mt-[25px] py-[20px] w-full border-t-[1px] border-t-black">
@@ -89,7 +106,7 @@ const BieCharts = ({ content, title, initialData }) => {
                             }
                         }
                         if (title === 'Goals') {
-                            if (content) {
+                            if (initialGoal) {
                                 return (
                                     <Goal name={initialGoal.name} icon={initialGoal.icon} deadline={initialGoal.deadline} totalAmount={initialGoal.totalAmount} amount={initialGoal.amount} color={initialGoal.color} />
                                 );

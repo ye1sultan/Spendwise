@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { v4 as uuid } from 'uuid';
 
 import Title from "../../components/Title";
 import MonthSelector from "./MonthSelector";
@@ -11,96 +10,17 @@ import { ReactComponent as NoResultTr } from '../../components/svgs/NoResultTr.s
 import { BsArrowDownRight, BsArrowUpRight } from 'react-icons/bs';
 import { AiOutlinePlus } from "react-icons/ai";
 
-const Transactions = () => {
-    const [showEditModal, setShowEditModal] = useState(false);
+const Transactions = ({ transactionsWithIdState, updateTransaction, deleteTransaction, addNewTransaction, showDropDown, setShowDropDown, showEditModal, setShowEditModal }) => {
     const [showCreateModal, setShowCreateModal] = useState(false);
 
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-
-    const [transactions, setTransactions] = useState([
-        {
-            date: "2023-03-15",
-            category: "Restaurant",
-            description: "Dinner at a restaurant",
-            payMethod: "Cash",
-            amount: -50,
-            type: "expense",
-        },
-        {
-            date: "2023-03-20",
-            category: "Salary",
-            description: "Monthly Salary",
-            payMethod: "Debit Card",
-            amount: 4000,
-            type: "income",
-        },
-        {
-            date: "2023-04-05",
-            category: "Supermarket",
-            description: "Weekly shopping",
-            payMethod: "Cash",
-            amount: -100,
-            type: "expense",
-        },
-        {
-            date: "2023-04-10",
-            category: "Investment",
-            description: "Stock purchase",
-            payMethod: "Debit Card",
-            amount: 1500,
-            type: "income",
-        },
-        {
-            date: "2023-02-02",
-            category: "Gift",
-            description: "Grandpa gave money",
-            payMethod: "Cash",
-            amount: 10000,
-            type: "income",
-        },
-        {
-            date: "2023-02-05",
-            category: "Investment",
-            description: "Stock purchase",
-            payMethod: "Debit Card",
-            amount: 1500,
-            type: "income",
-        },
-    ]);
-
-    const transactionsWithId = transactions.map((transaction) => {
-        return { ...transaction, id: uuid() }
-    });
-
-    const [transactionsWithIdState, setTransactionsWithIdState] = useState(transactionsWithId);
-
-    const deleteTransaction = (id) => {
-        const updatedTransactions = transactionsWithIdState.filter(transaction => transaction.id !== id);
-        setTransactionsWithIdState(updatedTransactions);
-    };
 
     const [transactionOnEdit, setTransactionOnEdit] = useState(null);
 
     const editTransaction = (transaction) => {
         setTransactionOnEdit(transaction);
         setShowEditModal(true);
-    }
-
-    const addNewTransaction = (newTransaction) => {
-        setTransactionsWithIdState((prevTransactions) => [...prevTransactions, newTransaction]);
-        setShowDropDown(false);
-    };
-
-
-    const updateTransaction = (updatedTransaction) => {
-        setTransactionsWithIdState((prevTransactions) =>
-            prevTransactions.map((transaction) =>
-                transaction.id === updatedTransaction.id ? updatedTransaction : transaction
-            )
-        );
-
-        setShowEditModal(false);
     }
 
     const renderTransactions = () => {
@@ -134,7 +54,6 @@ const Transactions = () => {
         ));
     }
 
-    const [showDropDown, setShowDropDown] = useState(false);
     const [trn, setTrn] = useState('expense');
 
     const handleIncomeClick = (trns) => {

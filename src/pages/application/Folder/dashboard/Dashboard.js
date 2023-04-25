@@ -2,67 +2,50 @@ import Bie from "./Bie";
 import BieCharts from "./BieCharts";
 import Title from "../../components/Title";
 
-const Dashboard = () => {
-    const initialData = {
-        "2023-02": {
-            expenses: [
-                {
-                    category: "Restaurant",
-                    value: 5950
-                },
-                {
-                    category: "Supermarket",
-                    value: 23400
-                }
-            ],
-            incomes: [
-                {
-                    category: "Investment",
-                    value: 90980,
-                },
-                {
-                    category: "Salary",
-                    value: 250030,
-                },
-                {
-                    category: "Gift",
-                    value: 25000,
-                }
-            ],
-            monthlyBalance: 210450
-        },
+const Dashboard = ({ transactions }) => {
+    const initialGoal = {
+        name: "Lambo",
+        deadline: "2023-12-31",
+        amount: 2250000,
+        totalAmount: 240000000,
+        color: "#BFA2E5",
+        icon: "car",
+    }
+
+    const calculateTotals = (transactions) => {
+        let totalIncome = 0;
+        let totalExpense = 0;
+
+        transactions.forEach((transaction) => {
+            if (transaction.type === 'income') {
+                totalIncome += parseInt(transaction.amount);
+            } else if (transaction.type === 'expense') {
+                totalExpense += parseInt(transaction.amount);
+            }
+        });
+
+        return {
+            totalIncome,
+            totalExpense,
+        };
     };
 
-    const calculateTotalExpensesAndIncomes = (data) => {
-        let totalExpenses = 0;
-        let totalIncomes = 0;
-
-        for (const month in data) {
-            const { expenses, incomes } = data[month];
-
-            totalExpenses += expenses.reduce((sum, expense) => sum + expense.value, 0);
-            totalIncomes += incomes.reduce((sum, income) => sum + income.value, 0);
-        }
-
-        return { totalExpenses, totalIncomes };
-    };
-
-    const { totalExpenses, totalIncomes } = calculateTotalExpensesAndIncomes(initialData);
+    const totals = calculateTotals(transactions);
 
     return (
         <>
             <Title title={'Dashboard'} />
             <div className="flex justify-between items-center flex-wrap w-full">
-                <Bie title="Current balance" amount={totalIncomes - totalExpenses} svg="current" />
-                <Bie title="Incomes" amount={totalIncomes} svg="incomes" />
-                <Bie title="Expenses" amount={totalExpenses} svg="expenses" />
-                <Bie title="Monthly balance" amount={initialData['2023-02'].monthlyBalance} svg="monthly" />
+                <Bie title="Current balance" amount={totals.totalIncome + totals.totalExpense} svg="current" />
+                <Bie title="Incomes" amount={totals.totalIncome} svg="incomes" />
+                <Bie title="Expenses" amount={totals.totalExpense} svg="expenses" />
+                <Bie title="Monthly balance" amount={totals.totalIncome} svg="monthly" />
             </div>
             <div className="flex flex-wrap justify-between pt-[45px] w-full">
-                <BieCharts title="Expenses by category" content="yes" initialData={initialData} />
-                <BieCharts title="Incomes by category" content="yes" initialData={initialData} />
-                <BieCharts title="Monthly balance" content="yes" initialData={initialData} />
-                <BieCharts title="Goals" content="yes" initialData={initialData} />
+                <BieCharts title="Expenses by category" data={transactions} />
+                <BieCharts title="Incomes by category" data={transactions} />
+                <BieCharts title="Monthly balance" data={transactions} />
+                <BieCharts title="Goals" data={transactions} initialGoal={initialGoal} />
             </div>
         </>
     );

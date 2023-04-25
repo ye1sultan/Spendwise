@@ -157,6 +157,10 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
         ))
     }
 
+    const correctAmount = (number) => {
+        return transaction === 'income' ? Math.abs(number) : -Math.abs(number);
+    }
+
     const handleSave = () => {
         if (selectedAmount && selectedDate && selectedCategory.name && selectedPaymentMethod) {
             const newTransaction = {
@@ -164,16 +168,13 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
                 category: selectedCategory.name,
                 description: selectedDescription,
                 payMethod: selectedPaymentMethod.name,
-                amount: selectedAmount,
+                amount: correctAmount(selectedAmount),
                 type: transaction,
                 id: uuid(),
             };
 
-            // Add the new transaction to the transactions state
             addNewTransaction(newTransaction);
-
             console.log(newTransaction);
-
             onModalClose(false);
         }
     }

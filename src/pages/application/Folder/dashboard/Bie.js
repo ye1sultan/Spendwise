@@ -49,7 +49,7 @@ const Bie = (props) => {
                 }
             </div>
             <div className="text-[24px] font-medium">
-                {svg === 'expenses' ? "- " + formatNumber(amount) + " ₸" : formatNumber(amount) + " ₸"}
+                {formatNumber(amount) + " ₸"}
             </div>
         </div>
     );
