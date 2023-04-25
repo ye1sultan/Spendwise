@@ -13,6 +13,5 @@ module.exports = {
                 montserrat: ['Montserrat', 'sans-serif']
             }
         },
-    },
-    plugins: [require("daisyui")],
+    }
 }

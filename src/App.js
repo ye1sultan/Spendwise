@@ -79,7 +79,7 @@ function App() {
         },
         {
             date: "2023-04-05",
-            category: "Investment",
+            category: "Supermarket",
             description: "Stock purchase",
             payMethod: "Debit Card",
             amount: -1500,
@@ -163,7 +163,7 @@ function App() {
                         <Route path=":month-:year" element={<Transactions />} />
                     </Route>
                     <Route path="goals" element={<Goals />} />
-                    <Route path="report" element={<Report />} />
+                    <Route path="report" element={<Report data={transactionsWithIdState} />} />
                     <Route path="notifications" element={<Notifications />} />
                     <Route path="settings" element={<Settings />} />
                 </Route>

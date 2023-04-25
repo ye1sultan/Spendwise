@@ -17,17 +17,10 @@ const Header = () => {
                     <input className="pl-[60px] pr-[20px] w-[400px] h-[40px] rounded-full text-[16px] text-left" type="text" placeholder="Search a transaction and Documents" />
                     <IoSearchOutline className='absolute top-[50%] left-4 translate-y-[-50%]' size={30} />
                 </div>
-                <div className="indicator ml-[20px]">
-                    <span className='indicator-item bg-red-600 border-0 rounded-full w-[10px] h-[10px] mt-[2px] mr-[5px]'></span>
-                    <BsBell size={35} />
-                </div>
+                <BsBell className='ml-4' size={35} />
                 <div className="flex flex-row ml-[20px]">
-                    <div className="avatar">
-                        <div className='rounded-full w-[45px]'>
-                            <img src='https://picsum.photos/200/200' alt='avatar' />
-                        </div>
-                    </div>
-                    <div className="flex justify-center items-center text-[16px] font-semibold ml-[20px]">
+                    <img className='rounded-full w-[45px]' src='https://picsum.photos/200/200' alt='avatar' />
+                    <div className="flex justify-center items-center text-[20px] font-semibold ml-[20px]">
                         Arailym Zholshieva
                     </div>
                 </div>

@@ -71,7 +71,6 @@ const PieChart = ({ transactions }) => {
         return category ? category.color : "#AEAEAE";
     };
 
-
     const data = {
         datasets: [
             {

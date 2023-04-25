@@ -6,7 +6,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import GoalCreator from "./GoalCreator";
 import Goal from "./Goal";
 
-const Goals = () => {
+const Goals = ({ }) => {
     const [goalModal, setGoalModal] = useState(false);
     const [goals, setGoals] = useState([
         {

@@ -7,61 +7,45 @@ import MonthSelector from "./MonthSelector";
 
 import { ReactComponent as NoResultRp } from "../../components/svgs/NoResultRp.svg";
 import { FiBarChart, FiPieChart } from "react-icons/fi";
+import { BiChevronDown } from "react-icons/bi";
 
-const Report = () => {
-    const initialData = {
-        "2023-02": {
-            expenses: [
-                {
-                    name: "Health",
-                    value: 50980,
-                    percentage: "50.00%",
-                    color: "#9CC741",
-                    icon: 'earth',
-                },
-                {
-                    name: "Clothing",
-                    value: 20030,
-                    percentage: "50.00%",
-                    color: "#D942A6",
-                    icon: 'car',
-                },
-                {
-                    name: "Games",
-                    value: 15080,
-                    percentage: "50.00%",
-                    color: "#F67730",
-                    icon: 'cart',
-                },
-            ],
-            incomes: 123456,
-        },
-        "2023-03": {
-            expenses: [
-                {
-                    name: "Health",
-                    value: 24030,
-                    percentage: "50.00%",
-                    color: "#9CC741",
-                    icon: 'car'
-                },
-                {
-                    name: "Clothing",
-                    value: 24990,
-                    percentage: "50.00%",
-                    color: "#D942A6",
-                    icon: 'cart',
-                },
-                {
-                    name: "Games",
-                    value: 60490,
-                    percentage: "50.00%",
-                    color: "#F67730",
-                    icon: 'earth'
-                },
-            ],
-            incomes: 78910,
-        },
+const Report = ({ data }) => {
+    const [currentTransaction, setCurrentTransaction] = useState('incomes');
+
+    const calculateTotals = (transactions) => {
+        let totalIncome = 0;
+        let totalExpense = 0;
+
+        transactions.forEach((transaction) => {
+            if (transaction.type === 'income') {
+                totalIncome += parseInt(transaction.amount);
+            } else if (transaction.type === 'expense') {
+                totalExpense += parseInt(transaction.amount);
+            }
+        });
+
+        return {
+            totalIncome,
+            totalExpense,
+        };
+    };
+
+    const separateIncomeAndExpense = (transactions) => {
+        let incomeObjects = [];
+        let expenseObjects = [];
+
+        transactions.forEach((transaction) => {
+            if (transaction.type === 'income') {
+                incomeObjects.push(transaction);
+            } else if (transaction.type === 'expense') {
+                expenseObjects.push(transaction);
+            }
+        });
+
+        return {
+            incomeObjects,
+            expenseObjects,
+        };
     };
 
     const currentDate = new Date();
@@ -70,16 +54,45 @@ const Report = () => {
         year: currentDate.getFullYear(),
     });
 
-    const currentData = initialData[`${currentMonth.year}-${currentMonth.month.toString().padStart(2, "0")}`] || { expenses: [], incomes: 0 };
+    const getCurrentMonthTransactions = (transactions, month, year) => {
+        return transactions.filter((transaction) => {
+            const transactionDate = new Date(transaction.date);
+            return (
+                transactionDate.getMonth() === month &&
+                transactionDate.getFullYear() === year
+            );
+        });
+    };
 
-    function getTotalExpense(expenses) {
-        return expenses.reduce((total, expense) => total + expense.value, 0);
-    }
+    const currentMonthTransactions = getCurrentMonthTransactions(
+        data,
+        currentMonth.month,
+        currentMonth.year
+    );
+
+    const totals = calculateTotals(currentMonthTransactions);
+
+    const separatedTransactions = separateIncomeAndExpense(currentMonthTransactions);
+
+    const transactions = currentTransaction === 'expenses' ? separatedTransactions.expenseObjects : separatedTransactions.incomeObjects;
 
     const [switched, setSwitched] = useState(false);
+
     const handleSwitch = () => {
         setSwitched((prevState) => !prevState);
     };
+
+    const [dropDown, setDropDown] = useState(false);
+
+    const handleExpensesClick = () => {
+        setCurrentTransaction('expenses');
+        setDropDown(false);
+    }
+
+    const handleIncomesClick = () => {
+        setCurrentTransaction('incomes');
+        setDropDown(false);
+    }
 
     return (
         <>
@@ -89,22 +102,47 @@ const Report = () => {
                 <FiPieChart className="absolute top-[50%] translate-y-[-50%] left-[20%] z-50" size={35} />
                 <FiBarChart className="absolute top-[50%] translate-y-[-50%] right-[20%] z-50" size={35} />
             </button>
-            <div className="w-full h-full min-h-[550px] max-h-[1000px] bg-white rounded-[40px] mt-[40px] border-[1px] border-[#AEAEAE] pt-[35px] px-[60px] overflow-auto">
+            <div className="w-full h-full min-h-[550px] max-h-[1000px] bg-white rounded-[40px] mt-[40px] border-[1px] border-[#AEAEAE] pt-[35px] px-[60px] overflow-auto relative">
+                <div
+                    className={`absolute ${switched ? 'hidden' : 'flex flex-col'}`}
+                    onMouseEnter={() => setDropDown(true)}
+                    onMouseLeave={() => setDropDown(false)}>
+                    <button className="text-[24px] flex items-center">
+                        <div className="border-b-[1px] border-black capitalize">{currentTransaction}</div>
+                        <BiChevronDown size={30} />
+                    </button>
+                    <div className={`translate-x-[-30px] ${dropDown ? 'flex' : 'hidden'} flex-col text-[24px] bg-white shadow rounded-[20px] px-8 py-2`}>
+                        <button className="mb-2" onClick={handleExpensesClick}>
+                            Expenses
+                        </button>
+                        <button className="" onClick={handleIncomesClick}>
+                            Incomes
+                        </button>
+                    </div>
+                </div>
                 <MonthSelector
                     currentMonth={currentMonth}
                     setCurrentMonth={setCurrentMonth}
                 />
-                <div className={`${currentData.expenses && currentData.expenses.length > 0 ? 'hidden' : 'flex'} flex-col justify-center items-center`}>
+                <div className={`${transactions && transactions.length > 0 ? 'hidden' : 'flex'} flex-col justify-center items-center`}>
                     <NoResultRp />
                     <div className="font-medium text-[24px] text-[#696969] w-full flex justify-center items-center mt-6">
                         No results
                     </div>
                 </div>
-                <div className={`${switched ? 'hidden' : 'flex'} ${currentData.expenses && currentData.expenses.length > 0 ? 'flex' : 'hidden'} justify-between items-center w-full min-h-[300px]`}>
-                    <PieChart expenses={currentData.expenses} />
+                <div className={`${switched ? 'hidden' : 'flex'} ${transactions && transactions.length > 0 ? 'flex' : 'hidden'} justify-between items-center w-full min-h-[300px]`}>
+                    <PieChart transactions={transactions} type={currentTransaction} />
                 </div>
-                <div className={`${switched ? 'flex' : 'hidden'} ${currentData.expenses && currentData.expenses.length > 0 ? 'flex' : 'hidden'} justify-evenly items-center w-full h-full min-h-[300px]`}>
-                    <BarChart expenses={getTotalExpense(currentData.expenses)} incomes={currentData.incomes} />
+                <div className={`${switched ? 'flex' : 'hidden'} ${getCurrentMonthTransactions(
+                    data,
+                    currentMonth.month,
+                    currentMonth.year
+                ) && getCurrentMonthTransactions(
+                    data,
+                    currentMonth.month,
+                    currentMonth.year
+                ).length > 0 ? 'flex' : 'hidden'} justify-evenly items-center w-full h-full min-h-[300px]`}>
+                    <BarChart expenses={totals.totalExpense} incomes={totals.totalIncome} />
                 </div>
             </div>
         </>
