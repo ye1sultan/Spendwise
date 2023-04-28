@@ -8,94 +8,14 @@ import GoalCreator from "./CreateGoal";
 import Goal from "./Goal";
 import EditModal from "./EditModal";
 
-import { v4 as uuid } from 'uuid';
-
-const Goals = () => {
-    const initialGoals = [
-        {
-            name: "Initial Goal",
-            deadline: "2023-12-31",
-            amount: 100,
-            totalAmount: 1000,
-            color: "#F1BF5B",
-            icon: "car",
-            desciprtion: '',
-            status: 'active',
-        }
-    ];
-
+const Goals = ({ addNewGoal, updateGoals, deleteGoals, pauseGoal, reachGoal, goalsWithIdState, showDropDown, setShowDropDown, showEditModal, setShowEditModal }) => {
     const [goalModal, setGoalModal] = useState(false);
-    const [showEditModal, setShowEditModal] = useState(false);
-
-    const goalsWithId = initialGoals.map((transaction) => {
-        return { ...transaction, id: uuid() }
-    });
-
-    const [goalsWithIdState, setGoalsWithIdState] = useState(goalsWithId);
-
-    const [showDropDown, setShowDropDown] = useState(false);
     const [goalFilter, setGoalFilter] = useState('active');
 
     const createGoal = () => {
         setShowDropDown(false);
         setGoalModal(true);
     }
-
-    const addNewGoal = (newGoal) => {
-        setGoalsWithIdState((prevTransactions) => [...prevTransactions, newGoal]);
-
-        setShowDropDown(false);
-    };
-
-    const updateGoals = (updatedGoals) => {
-        setGoalsWithIdState((prevGoals) =>
-            prevGoals.map((transaction) =>
-                transaction.id === updatedGoals.id ? updatedGoals : prevGoals
-            )
-        );
-
-        setShowEditModal(false);
-    }
-
-    const pauseGoal = (id) => {
-        setGoalsWithIdState((prevGoals) =>
-            prevGoals.map((goal) => {
-                if (goal.id === id) {
-
-                    console.log('Pause');
-                    return {
-                        ...goal,
-                        status: goal.status === 'active' ? 'paused' : 'active',
-                    };
-
-                }
-
-
-                return goal;
-            })
-        );
-
-        console.log(goalsWithIdState);
-    };
-
-    const reachGoal = (id) => {
-        setGoalsWithIdState((prevGoals) =>
-            prevGoals.map((goal) => {
-                if (goal.id === id) {
-                    return {
-                        ...goal,
-                        status: 'reached',
-                    };
-                }
-                return goal;
-            })
-        );
-    };
-
-    const deleteGoals = (id) => {
-        const updatedGoals = goalsWithIdState.filter(goal => goal.id !== id);
-        setGoalsWithIdState(updatedGoals);
-    };
 
     const [goalOnEdit, setGoalOnEdit] = useState(null);
 
@@ -115,7 +35,10 @@ const Goals = () => {
 
     const GoalsDropDown = ({ onSelect }) => {
         return (
-            <div className="absolute top-full mt-2 w-[220px] bg-white border-[1px] border-[#CED4DA] rounded-xl shadow-lg">
+            <div
+                onMouseEnter={() => setShowDropDown(showDropDown)}
+                onMouseLeave={() => setShowDropDown(!showDropDown)}
+                className="absolute top-full mt-2 w-[220px] bg-white border-[1px] border-[#CED4DA] rounded-xl shadow-lg overflow-hidden">
                 <button className="w-full px-4 py-2 text-left text-[22px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('active')}>
                     Active Goals
                 </button>
@@ -157,8 +80,11 @@ const Goals = () => {
             )}
 
             <Title title={'My Goals'} />
-            <div className="relative self-start z-10">
-                <button className="w-[220px] h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[20px] flex justify-between items-center px-5 z-10" onClick={() => setShowDropDown(!showDropDown)}>
+            <div
+                onMouseEnter={() => setShowDropDown(!showDropDown)}
+                className="relative self-start z-10">
+                <button className="w-[220px] h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[20px] flex justify-between items-center px-5 z-10"
+                >
                     <BsChevronDown />
                     {goalFilter.charAt(0).toUpperCase() + goalFilter.slice(1)} Goals
                 </button>

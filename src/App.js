@@ -17,8 +17,9 @@ import Notifications from './pages/application/folder/Notifications';
 import Settings from './pages/application/folder/settings/Settings';
 
 function App() {
-    const [showEditModal, setShowEditModal] = useState(false);
-    const [showDropDown, setShowDropDown] = useState(false);
+    // TRANSACTIONS SETTINGS
+    const [showTrnEditModal, setShowTrnEditModal] = useState(false);
+    const [showTrnDropDown, setShowTrnDropDown] = useState(false);
 
     const transactions = [
         {
@@ -96,7 +97,7 @@ function App() {
     const addNewTransaction = (newTransaction) => {
         setTransactionsWithIdState((prevTransactions) => [...prevTransactions, newTransaction]);
 
-        setShowDropDown(false);
+        setShowTrnDropDown(false);
     };
 
 
@@ -107,7 +108,7 @@ function App() {
             )
         );
 
-        setShowEditModal(false);
+        setShowTrnEditModal(false);
     }
 
     const deleteTransaction = (id) => {
@@ -130,6 +131,110 @@ function App() {
     };
 
     const currentMonthTransactions = getCurrentMonthTransactions(transactionsWithIdState);
+
+    // GOALS SETTINGS
+    const initialGoals = [
+        {
+            name: "Initial Goal",
+            deadline: "2023-12-31",
+            amount: 100,
+            totalAmount: 1000,
+            color: "#F1BF5B",
+            icon: "car",
+            desciprtion: '',
+            status: 'active',
+        }
+    ];
+
+    const goalsWithId = initialGoals.map((transaction) => {
+        return { ...transaction, id: uuid() }
+    });
+
+
+    const [goalsWithIdState, setGoalsWithIdState] = useState(goalsWithId);
+    const [showGoalDropDown, setShowGoalDropDown] = useState(false);
+    const [showGoalEditModal, setShowGoalEditModal] = useState(false);
+
+    const addNewGoal = (newGoal) => {
+        setGoalsWithIdState((prevGoals) => [...prevGoals, newGoal]);
+
+        setShowGoalDropDown(false);
+    }
+
+    const updateGoals = (updatedGoal) => {
+        setGoalsWithIdState((prevGoals) =>
+            prevGoals.map((goal) => goal.id === updatedGoal.id ? updatedGoal : goal)
+        );
+
+        setShowGoalEditModal(false);
+    }
+
+    const deleteGoals = (id) => {
+        const updatedGoals = goalsWithIdState.filter(goal => goal.id !== id);
+        setGoalsWithIdState(updatedGoals);
+    };
+
+    const pauseGoal = (id) => {
+        setGoalsWithIdState((prevGoals) =>
+            prevGoals.map((goal) => {
+                if (goal.id === id) {
+                    return {
+                        ...goal,
+                        status: goal.status === 'active' ? 'paused' : 'active',
+                    };
+
+                }
+
+                return goal;
+            })
+        );
+    };
+
+    const reachGoal = (id) => {
+        setGoalsWithIdState((prevGoals) =>
+            prevGoals.map((goal) => {
+                if (goal.id === id) {
+                    return {
+                        ...goal,
+                        status: 'reached',
+                    };
+                }
+                return goal;
+            })
+        );
+    };
+
+
+    // SETTINGS SETTINGS
+
+    const settings = [
+        // myProfile = {
+        //     user: {
+        //         name: 'Niyaztay Yelsultan',
+        //         email: 'niyaztaye@gmail.com',
+        //         pic: 'https://picsum.photos/200/200',
+        //     }
+        // },
+
+    ];
+
+    const myProfile = {
+        user: {
+            name: 'Niyaztay Yelsultan',
+            email: 'niyaztaye@gmail.com',
+            pic: 'https://picsum.photos/200/200',
+        }
+    };
+
+    const preferences = {
+        language: 'English',
+        appearence: 'Light Mode',
+    }
+
+    const security = {
+        email: 'niyaztaye@gmail.com',
+        password: 'elsik0000',
+    }
 
     return (
         <div className="App">
@@ -154,15 +259,30 @@ function App() {
                                 updateTransaction={updateTransaction}
                                 deleteTransaction={deleteTransaction}
                                 addNewTransaction={addNewTransaction}
-                                showDropDown={showDropDown}
-                                setShowDropDown={setShowDropDown}
-                                showEditModal={showEditModal}
-                                setShowEditModal={setShowEditModal} />} >
+                                showDropDown={showTrnDropDown}
+                                setShowDropDown={setShowTrnDropDown}
+                                showEditModal={showTrnEditModal}
+                                setShowEditModal={setShowTrnEditModal} />} >
                         <Route path="" element={<Navigate to=":month-year" />} />
                         <Route path="*" element={<Navigate to=":month-year" />} />
                         <Route path=":month-:year" element={<Transactions />} />
                     </Route>
-                    <Route path="goals" element={<Goals />} />
+                    <Route
+                        path="goals"
+                        element={
+                            <Goals
+                                goalsWithIdState={goalsWithIdState}
+                                updateGoals={updateGoals}
+                                deleteGoals={deleteGoals}
+                                addNewGoal={addNewGoal}
+                                pauseGoal={pauseGoal}
+                                reachGoal={reachGoal}
+                                showDropDown={showGoalDropDown}
+                                setShowDropDown={setShowGoalDropDown}
+                                showEditModal={showGoalEditModal}
+                                setShowEditModal={setShowGoalEditModal}
+                            />
+                        } />
                     <Route path="report" element={<Report data={transactionsWithIdState} />} />
                     <Route path="notifications" element={<Notifications />} />
                     <Route path="settings" element={<Settings />} />

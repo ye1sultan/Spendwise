@@ -7,6 +7,8 @@ const Security = () => {
     const [emailModal, setEmailModal] = useState(false);
     const [passwordModal, setPasswordModal] = useState(false);
 
+    
+
     return (
         <>
             <div className="self-start w-[85%]">

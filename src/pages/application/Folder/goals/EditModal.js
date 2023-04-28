@@ -1,13 +1,12 @@
-import { AiFillDelete, AiOutlineCar, AiOutlineGift, AiOutlineShoppingCart } from 'react-icons/ai';
+import { AiOutlineCar, AiOutlineGift, AiOutlineShoppingCart } from 'react-icons/ai';
 import { IoEarthOutline } from 'react-icons/io5';
-import { BsCheckAll, BsChevronDown, BsFillPauseFill, BsFillPlayFill } from 'react-icons/bs';
-import { MdModeEditOutline } from 'react-icons/md';
+import { BsChevronDown } from 'react-icons/bs';
 
-import { TbCurrencyTenge } from 'react-icons/tb';
-import { AiOutlineCalendar, AiOutlineHeart, AiOutlineTrophy } from 'react-icons/ai';
+
+import { AiOutlineHeart, AiOutlineTrophy } from 'react-icons/ai';
 import { IoBagHandle, IoCheckmarkDone, IoGameControllerOutline, IoLanguage } from 'react-icons/io5';
-import { BsArrowRightShort, BsBookmarks, BsCheck2, BsCheckSquare, BsCoin, BsFileEarmarkText, BsFillAirplaneFill, BsHouse, BsLaptop, BsPiggyBank, BsTruck } from 'react-icons/bs';
-import { BiColorFill, BiDumbbell, BiPlanet, BiWine } from 'react-icons/bi';
+import { BsCoin, BsFillAirplaneFill, BsHouse, BsLaptop, BsPiggyBank, BsTruck } from 'react-icons/bs';
+import { BiDumbbell, BiPlanet, BiWine } from 'react-icons/bi';
 import { FaMicrophone, FaMugHot, FaPray, FaRegHandPeace, FaTools } from 'react-icons/fa';
 import { MdOutlineBrokenImage, MdPedalBike, MdStroller } from 'react-icons/md';
 import { RiBookLine, RiMedal2Fill } from 'react-icons/ri';

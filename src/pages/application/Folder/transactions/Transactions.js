@@ -90,25 +90,30 @@ const Transactions = ({ transactionsWithIdState, updateTransaction, deleteTransa
             )}
 
             <Title title={'Transaction'} />
-            <div className="self-start text-[#2c3e50] relative" onClick={() => setShowDropDown(true)}   >
-                <button className="flex flex-row justify-center items-center h-[45px] w-[140px] cursor-pointer uppercase font-medium text-[16px] bg-[#9F75D6] bg-opacity-90 text-white rounded-[30px]">
+            <div className="self-start text-[#2c3e50] relative">
+                <button
+                    onClick={() => setShowDropDown(true)}
+                    className="flex flex-row justify-center items-center h-[45px] w-[140px] cursor-pointer uppercase font-medium text-[16px] bg-[#9F75D6] bg-opacity-90 text-white rounded-[30px]">
                     <AiOutlinePlus className="mr-[10px]" size={25} />
                     new
                 </button>
-                <div className={`${showDropDown ? 'flex flex-col opacity-100' : 'hidden opacity-0'} absolute top-[120%] left-0 bg-[#fff] font-normal text-[24px] py-[15px] px-[40px] rounded-[20px] shadow `}>
+                <div
+                    onMouseEnter={() => setShowDropDown(true)}
+                    onMouseLeave={() => setShowDropDown(false)}
+                    className={`${showDropDown ? 'flex flex-col opacity-100' : 'hidden opacity-0'} 
+                absolute top-full w-[160px] mt-2 bg-white border-[1px] border-[#CED4DA] rounded-xl shadow-lg overflow-hidden`}>
                     <div>
                         <button
                             onClick={() => handleIncomeClick('income')}
-                            className="flex justify-center items-center">
+                            className="w-full flex justify-between items-center px-4 py-2 text-left text-[22px] font-medium text-black hover:bg-gray-100 focus:outline-none">
                             <BsArrowUpRight size={24} color="#2ecc71" />
                             Income
                         </button>
                     </div>
-                    <hr className="w-full my-[10px] h-[1px] bg-[#000]" />
                     <div>
                         <button
                             onClick={() => handleExpenseClick('expense')}
-                            className="flex justify-center items-center">
+                            className="w-full flex justify-between items-center px-4 py-2 text-left text-[22px] font-medium text-black hover:bg-gray-100 focus:outline-none">
                             <BsArrowDownRight size={24} color="#e74c3c" />
                             Expense
                         </button>

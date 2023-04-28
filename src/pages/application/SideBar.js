@@ -1,4 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import { AiOutlineUnorderedList } from 'react-icons/ai';
 import { BiLogOut } from 'react-icons/bi';
@@ -8,9 +9,13 @@ import { RiMedal2Fill } from 'react-icons/ri';
 
 const SideBar = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const handleExit = () => {
         navigate('/signin');
     }
+
+    const initialActiveButton = location.pathname.split('/')[2] || 'dashboard';
+    const [activeButton, setActiveButton] = useState(initialActiveButton);
 
     const buttons = [
         { view: 'dashboard', label: 'Dashboard', icon: <MdSpaceDashboard className="mr-6" size={35} /> },
@@ -21,6 +26,10 @@ const SideBar = () => {
         { view: 'settings', label: 'Settings', icon: <FiSettings className="mr-7" size={30} /> },
     ];
 
+    const handleButtonClick = (view) => {
+        setActiveButton(view);
+    };
+
     return (
         <div className="sticky left-0 top-0 bg-white flex flex-col justify-between items-center h-screen py-14 px-[30px] shadow-sm">
             <div className="flex flex-col justify-center items-start">
@@ -30,7 +39,8 @@ const SideBar = () => {
                         <Link
                             key={index}
                             to={`/application/${button.view}`}
-                            className="flex items-center w-[210px] h-[50px] p-[10px] text-[#2c3e50] text-[15px] font-semibold mb-[15px] bg-[#ffffff]">
+                            onClick={() => handleButtonClick(button.view)}
+                            className={`flex items-center w-[210px] h-[50px] p-[10px] text-[#2c3e50] text-[15px] font-semibold mb-[15px] ${activeButton === button.view ? 'bg-[#BFA2E5]' : 'bg-transparent'}`}>
                             {button.icon}
                             <div className="flex-1">{button.label}</div>
                         </Link>

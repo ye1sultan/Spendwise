@@ -8,7 +8,7 @@ import Security from "./Security";
 
 const Settings = () => {
   const [selectedTab, setSelectedTab] = useState("profile");
-    
+
   const handleTabClick = (tab) => {
     setSelectedTab(tab);
   };
@@ -38,7 +38,7 @@ const Settings = () => {
       <div className="w-[555px] h-[50px] bg-[#381C46] bg-opacity-10 rounded-[30px] flex justify-center items-center self-start relative mb-[90px]">
         {tabButtons.map((tab, index) => (
           <button
-            key={tab.value}
+            key={index}
             className={`w-[33.33%] h-full rounded-[30px] text-[22px] font-medium`}
             onClick={() => handleTabClick(tab.value)}
           >
@@ -46,8 +46,10 @@ const Settings = () => {
           </button>
         ))}
         <span
-          className={`w-[33.33%] h-full bg-[#9F75D6] bg-opacity-80 rounded-[30px] transition-all ease-in-out duration-300 absolute -z-10 top-0 left-${selectedTab === "profile" ? "0" : selectedTab === "preferences" ? "[33.33%]" : "[66.66%]"}`}
+          style={{ left: selectedTab === "profile" ? "0%" : selectedTab === "preferences" ? "33.33%" : "66.66%" }}
+          className="w-[33.33%] h-full bg-[#9F75D6] bg-opacity-80 rounded-[30px] transition-all ease-in-out duration-300 absolute -z-10 top-0"
         ></span>
+
       </div>
       {renderContent()}
     </>

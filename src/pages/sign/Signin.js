@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import Google from './imgs/Google.png';
 import Apple from './imgs/Apple.png';
@@ -8,8 +9,8 @@ const Signin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const correctEmail = "niyaztaye@gmail.com";
-    const correctPassword = "elsik0000";
+    const [user, setUser] = useState(null);
+    const [token, setToken] = useState('');
 
     const navigate = useNavigate();
 
@@ -18,13 +19,26 @@ const Signin = () => {
         navigate(route);
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (email === correctEmail && password === correctPassword) {
-            console.log("Access granted!");
-            navigate("/application");
-        } else {
-            console.log("Invalid email or password.");
+        try {
+            const response = await axios.post('http://personalfinance.herokuapp.com/api/login', {
+                email: email,
+                password: password,
+            });
+
+            if (response.status === 200) {
+                console.log("Access granted!");
+                setUser(response.data.user);
+                setToken(response.data.token);
+                console.log("User data:", response.data.user);
+                console.log("Token:", response.data.token);
+                navigate("/application");
+            } else {
+                console.log("Invalid email or password.");
+            }
+        } catch (error) {
+            console.error('Error:', error);
         }
     };
 

@@ -1,4 +1,3 @@
-import Expense from '../Transaction';
 import { Chart } from 'chart.js';
 import 'chartjs';
 import { Doughnut } from 'react-chartjs-2';

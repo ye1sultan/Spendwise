@@ -19,7 +19,7 @@ const Header = () => {
                 </div>
                 <BsBell className='ml-4' size={35} />
                 <div className="flex flex-row ml-[20px]">
-                    <img className='rounded-full w-[45px]' src='https://picsum.photos/200/200' alt='avatar' />
+                    <img className='rounded-full w-[45px] h-[45px]' src='https://picsum.photos/200/200' alt='avatar' />
                     <div className="flex justify-center items-center text-[20px] font-semibold ml-[20px]">
                         Arailym Zholshieva
                     </div>
