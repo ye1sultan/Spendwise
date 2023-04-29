@@ -44,8 +44,6 @@ const BieCharts = ({ title, initialGoal, data }) => {
     };
 
     const separatedTransactions = separateIncomeAndExpense(data);
-    console.log('Income Objects:', separatedTransactions.incomeObjects);
-    console.log('Expense Objects:', separatedTransactions.expenseObjects);
 
     return (
         <div className="flex flex-col mb-[60px]">

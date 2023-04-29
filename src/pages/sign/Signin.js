@@ -1,61 +1,15 @@
-import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Google from './imgs/Google.png';
 import Apple from './imgs/Apple.png';
 
-const Signin = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-    const [user, setUser] = useState(null);
-    const [token, setToken] = useState('');
-
+const Signin = ({ handleSubmit, setEmail, setPassword }) => {
     const navigate = useNavigate();
 
     const handleNavigation = (e) => {
         const route = e.currentTarget.getAttribute('data-route');
         navigate(route);
     }
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
-        };
-
-        try {
-            const response = await fetch('http://personalfinance.herokuapp.com/api/login', requestOptions);
-            const contentType = response.headers.get("content-type");
-
-            if (contentType && contentType.includes("application/json")) {
-                const data = await response.json();
-                if (response.ok) {
-                    console.log("Access granted!");
-                    setUser(data.user);
-                    setToken(data.token);
-                    console.log("User data:", data.user);
-                    console.log("Token:", data.token);
-                    navigate("/application");
-                } else {
-                    console.error("Error:", data);
-                    // Display error message to the user
-                }
-            } else {
-                console.error("Error: The API did not return a JSON response");
-                // Display an error message to the user
-            }
-        } catch (error) {
-            console.error("Error:", error);
-            // Display error message to the user
-        }
-    };
 
     return (
         <div className="bg-white h-screen flex justify-center items-center relative font-sans">
@@ -76,7 +30,7 @@ const Signin = () => {
                 <div className='font-semibold text-[12px] text-[#ADB5BD] mb-[32px]'>
                     or
                 </div>
-                <form onSubmit={handleSubmit} className='flex flex-col'>
+                <form onSubmit={(e) => handleSubmit(e)} className='flex flex-col'>
                     <div className='flex flex-col justify-center items-center'>
                         <input className='border-[1px] rounded-[8px] border-[#CED4DA] mb-[24px] focus:outline-0 w-[382px] h-[40px] text-[12px] text-[#000000] py-[12px] pl-[12px]' onChange={(e) => setEmail(e.target.value)} type='email' placeholder='Email' required />
                         <input className='border-[1px] rounded-[8px] border-[#CED4DA] mb-[24px] focus:outline-0 w-[382px] h-[40px] text-[12px] text-[#000000] py-[12px] pl-[12px]' onChange={(e) => setPassword(e.target.value)} type='password' placeholder='Password' required />

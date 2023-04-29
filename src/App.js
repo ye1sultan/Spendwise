@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 
 import Landing from './pages/Landing';
@@ -17,6 +17,55 @@ import Notifications from './pages/application/Folder/Notifications';
 import Settings from './pages/application/Folder/settings/Settings';
 
 function App() {
+
+    //FETCHING DATA
+    const navigate = useNavigate();
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const [user, setUser] = useState(null);
+    const [token, setToken] = useState('');
+
+    const handleSignInSubmit = async (e) => {
+        e.preventDefault();
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        };
+
+        try {
+            const response = await fetch('http://personalfinance.herokuapp.com/api/login', requestOptions);
+            const contentType = response.headers.get("content-type");
+
+            if (contentType && contentType.includes("application/json")) {
+                const data = await response.json();
+                if (response.ok) {
+                    console.log("Access granted!");
+                    setUser(data.user);
+                    setToken(data.token);
+                    console.log("User data:", data.user);
+                    console.log("Token:", data.token);
+                    navigate("/application");
+                } else {
+                    console.error("Error:", data);
+                    // Display error message to the user
+                }
+            } else {
+                console.error("Error: The API did not return a JSON response");
+                // Display an error message to the user
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            // Display error message to the user
+        }
+    };
+
     // TRANSACTIONS SETTINGS
     const [showTrnEditModal, setShowTrnEditModal] = useState(false);
     const [showTrnDropDown, setShowTrnDropDown] = useState(false);
@@ -242,12 +291,26 @@ function App() {
                 <Route path="/" element={<Navigate to="/home" />} />
                 <Route path="*" element={<Navigate to="/home" />} />
                 <Route path="home" element={<Landing />} />
-                <Route path="signin" element={<Signin />} />
+                <Route
+                    path="signin"
+                    element={
+                        <Signin
+                            handleSubmit={handleSignInSubmit}
+                            setEmail={setEmail}
+                            setPassword={setPassword}
+                        />
+                    } />
                 <Route path="signup" element={<Signup />} />
                 <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="restore-password" element={<RestorePassword />} />
 
-                <Route path="application/*" element={<Application />} >
+                <Route
+                    path="application/*"
+                    element={
+                        <Application
+                            name={user.name}
+                        />
+                    } >
                     <Route path="" element={<Navigate to="dashboard" />} />
                     <Route path="*" element={<Navigate to="dashboard" />} />
                     <Route path="dashboard" element={<Dashboard transactions={currentMonthTransactions} />} />
