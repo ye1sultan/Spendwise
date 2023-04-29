@@ -9,12 +9,12 @@ import ForgotPassword from './pages/sign/ForgotPassword';
 import RestorePassword from './pages/sign/RestorePassword';
 import Application from './pages/application/Application';
 
-import Dashboard from './pages/application/folder/dashboard/Dashboard';
-import Transactions from './pages/application/folder/transactions/Transactions';
-import Goals from './pages/application/folder/goals/Goals';
-import Report from './pages/application/folder/report/Report';
-import Notifications from './pages/application/folder/Notifications';
-import Settings from './pages/application/folder/settings/Settings';
+import Dashboard from './pages/application/Folder/dashboard/Dashboard';
+import Transactions from './pages/application/Folder/transactions/Transactions';
+import Goals from './pages/application/Folder/goals/Goals';
+import Report from './pages/application/Folder/report/Report';
+import Notifications from './pages/application/Folder/Notifications';
+import Settings from './pages/application/Folder/settings/Settings';
 
 function App() {
     // TRANSACTIONS SETTINGS

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 import Google from './imgs/Google.png';
 import Apple from './imgs/Apple.png';
@@ -21,24 +20,40 @@ const Signin = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post('http://personalfinance.herokuapp.com/api/login', {
-                email: email,
-                password: password,
-            });
 
-            if (response.status === 200) {
-                console.log("Access granted!");
-                setUser(response.data.user);
-                setToken(response.data.token);
-                console.log("User data:", response.data.user);
-                console.log("Token:", response.data.token);
-                navigate("/application");
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+        };
+
+        try {
+            const response = await fetch('http://personalfinance.herokuapp.com/api/login', requestOptions);
+            const contentType = response.headers.get("content-type");
+
+            if (contentType && contentType.includes("application/json")) {
+                const data = await response.json();
+                if (response.ok) {
+                    console.log("Access granted!");
+                    setUser(data.user);
+                    setToken(data.token);
+                    console.log("User data:", data.user);
+                    console.log("Token:", data.token);
+                    navigate("/application");
+                } else {
+                    console.error("Error:", data);
+                    // Display error message to the user
+                }
             } else {
-                console.log("Invalid email or password.");
+                console.error("Error: The API did not return a JSON response");
+                // Display an error message to the user
             }
         } catch (error) {
-            console.error('Error:', error);
+            console.error("Error:", error);
+            // Display error message to the user
         }
     };
 

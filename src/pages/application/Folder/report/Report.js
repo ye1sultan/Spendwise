@@ -5,7 +5,7 @@ import BarChart from "./charts/BarChart";
 import PieChart from "./charts/PieChart";
 import MonthSelector from "./MonthSelector";
 
-import { ReactComponent as NoResultRp } from "../../components/svgs/NoResultRp.svg";
+import { ReactComponent as NoResultRp } from "../../components/Svgs/NoResultRp.svg";
 import { FiBarChart, FiPieChart } from "react-icons/fi";
 import { BiChevronDown } from "react-icons/bi";
 

@@ -18,9 +18,45 @@ const Signup = () => {
         navigate(route);
     }
 
-    const handleSubmit = () => {
-        console.log("Submitted");
-    }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        if (password !== passwordConfirmation) {
+            alert("Passwords do not match!");
+            return;
+        }
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, email, password, passwordConfirmation }),
+        };
+
+        try {
+            const response = await fetch('http://personalfinance.herokuapp.com/api/register', requestOptions);
+            const contentType = response.headers.get("content-type");
+
+            if (contentType && contentType.includes("application/json")) {
+                const data = await response.json();
+                if (response.ok) {
+                    console.log("Registered successful:", data);
+                    // Perform further actions, like saving the user data and redirecting
+                } else {
+                    console.error("Error:", data);
+                    // Display error message to the user
+                }
+            } else {
+                console.error("Error: The API did not return a JSON response");
+                // Display an error message to the user
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            // Display error message to the user
+        }
+    };
 
     return (
         <div className="bg-white h-screen flex justify-center items-center relative font-sans">
