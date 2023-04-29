@@ -5,7 +5,7 @@ import MonthSelector from "./MonthSelector";
 import Transaction from "./Transaction";
 import EditModal from "./EditModal";
 import CreateTransaction from "./CreateTransaction";
-import { ReactComponent as NoResultTr } from '../../components/Svgs/NoResultTr.svg';
+import { ReactComponent as NoResultTr } from './NoResultTr.svg';
 
 import { BsArrowDownRight, BsArrowUpRight } from 'react-icons/bs';
 import { AiOutlinePlus } from "react-icons/ai";

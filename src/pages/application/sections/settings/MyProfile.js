@@ -13,7 +13,7 @@ const MyProfile = () => {
     const [avatar, setAvatar] = useState(user.avatar);
 
     const [nameChanged, setNameChanged] = useState(false);
-    const [avatarChanged, setAvatarChanged] = useState(false);
+    const [avatarChanged, setAvatarChanged] = useState(false); 
 
     const handleSubmit = () => {
         if (nameChanged || avatarChanged) {

@@ -9,12 +9,12 @@ import ForgotPassword from './pages/sign/ForgotPassword';
 import RestorePassword from './pages/sign/RestorePassword';
 import Application from './pages/application/Application';
 
-import Dashboard from './pages/application/Folder/dashboard/Dashboard';
-import Transactions from './pages/application/Folder/transactions/Transactions';
-import Goals from './pages/application/Folder/goals/Goals';
-import Report from './pages/application/Folder/report/Report';
-import Notifications from './pages/application/Folder/Notifications';
-import Settings from './pages/application/Folder/settings/Settings';
+import Dashboard from './pages/application/sections/dashboard/Dashboard';
+import Transactions from './pages/application/sections/transactions/Transactions';
+import Goals from './pages/application/sections/goals/Goals';
+import Report from './pages/application/sections/report/Report';
+import Notifications from './pages/application/sections/Notifications';
+import Settings from './pages/application/sections/settings/Settings';
 
 function App() {
 
@@ -308,7 +308,7 @@ function App() {
                     path="application/*"
                     element={
                         <Application
-                            name={user.name}
+                            name={user}
                         />
                     } >
                     <Route path="" element={<Navigate to="dashboard" />} />
