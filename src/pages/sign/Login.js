@@ -2,14 +2,43 @@ import { useNavigate } from 'react-router-dom';
 
 import Google from './imgs/Google.png';
 import Apple from './imgs/Apple.png';
+import { useState } from 'react';
 
-const Signin = ({ handleSubmit, setEmail, setPassword }) => {
+import useFetchData from '../../hooks/useFetchData';
+import { login } from '../../services/api';
+
+const Login = ({ setUserData }) => {
     const navigate = useNavigate();
 
     const handleNavigation = (e) => {
         const route = e.currentTarget.getAttribute('data-route');
         navigate(route);
     }
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const [user, setUser] = useState(null);
+    const [token, setToken] = useState('');
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const { user, token } = await login(email, password);
+            setUser(user);
+            setUserData(user);
+            setToken(token);
+            console.log("User data:", user);
+            console.log("Token:", token);
+            localStorage.setItem('userData', JSON.stringify(user));
+            localStorage.setItem('authToken', token); // Store the token in local storage
+
+            navigate("/application");
+        } catch (error) {
+            console.error("Error:", error);
+            // Display error message to the user
+        }
+    };
 
     return (
         <div className="bg-white h-screen flex justify-center items-center relative font-sans">
@@ -50,7 +79,7 @@ const Signin = ({ handleSubmit, setEmail, setPassword }) => {
                         </label>
                     </div>
                     <button className='bg-[#343A40] text-white font-semibold text-[12px] w-[382px] h-[40px] rounded-[8px] mb-[32px]' type='submit'>
-                        Sign in
+                        Log in
                     </button>
                 </form>
                 <div className='flex flex-row justif-center items-center'>
@@ -66,4 +95,4 @@ const Signin = ({ handleSubmit, setEmail, setPassword }) => {
     );
 }
 
-export default Signin;
+export default Login;

@@ -11,6 +11,7 @@ const SideBar = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const handleExit = () => {
+        localStorage.removeItem('authToken');
         navigate('/signin');
     }
 

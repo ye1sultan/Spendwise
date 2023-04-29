@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import Google from './imgs/Google.png';
 import Apple from './imgs/Apple.png';
 
+import useFetchData from '../../hooks/useFetchData';
+import { register } from '../../services/api';
+
+
 const Signup = () => {
 
     const [name, setName] = useState('');
@@ -20,38 +24,16 @@ const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         if (password !== passwordConfirmation) {
-            alert("Passwords do not match!");
+            console.log("Passwords do not match!");
             return;
         }
 
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ name, email, password, passwordConfirmation }),
-        };
-
         try {
-            const response = await fetch('http://personalfinance.herokuapp.com/api/register', requestOptions);
-            const contentType = response.headers.get("content-type");
-
-            if (contentType && contentType.includes("application/json")) {
-                const data = await response.json();
-                if (response.ok) {
-                    console.log("Registered successful:", data);
-                    // Perform further actions, like saving the user data and redirecting
-                } else {
-                    console.error("Error:", data);
-                    // Display error message to the user
-                }
-            } else {
-                console.error("Error: The API did not return a JSON response");
-                // Display an error message to the user
-            }
+            const data = await register(name, email, password, passwordConfirmation);
+            console.log("Registered successful:", data);
+            // Perform further actions, like saving the user data and redirecting
         } catch (error) {
             console.error("Error:", error);
             // Display error message to the user
@@ -94,7 +76,7 @@ const Signup = () => {
                     <div className='font-semibold text-[12px] mr-2'>
                         Already have an account?
                     </div>
-                    <button data-route='/signin' className='font-bold text-[14px]' onClick={handleNavigation}>
+                    <button data-route='/login' className='font-bold text-[14px]' onClick={handleNavigation}>
                         Sign In here!.
                     </button>
                 </div>

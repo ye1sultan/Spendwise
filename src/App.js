@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 
 import Landing from './pages/Landing';
-import Signin from './pages/sign/Signin';
+import Login from './pages/sign/Login';
 import Signup from './pages/sign/Signup';
 import ForgotPassword from './pages/sign/ForgotPassword';
 import RestorePassword from './pages/sign/RestorePassword';
@@ -17,54 +17,15 @@ import Notifications from './pages/application/sections/Notifications';
 import Settings from './pages/application/sections/settings/Settings';
 
 function App() {
+    //USERDATA
+    const [userData, setUserData] = useState(null);
 
-    //FETCHING DATA
-    const navigate = useNavigate();
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-    const [user, setUser] = useState(null);
-    const [token, setToken] = useState('');
-
-    const handleSignInSubmit = async (e) => {
-        e.preventDefault();
-
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
-        };
-
-        try {
-            const response = await fetch('http://personalfinance.herokuapp.com/api/login', requestOptions);
-            const contentType = response.headers.get("content-type");
-
-            if (contentType && contentType.includes("application/json")) {
-                const data = await response.json();
-                if (response.ok) {
-                    console.log("Access granted!");
-                    setUser(data.user);
-                    setToken(data.token);
-                    console.log("User data:", data.user);
-                    console.log("Token:", data.token);
-                    navigate("/application");
-                } else {
-                    console.error("Error:", data);
-                    // Display error message to the user
-                }
-            } else {
-                console.error("Error: The API did not return a JSON response");
-                // Display an error message to the user
-            }
-        } catch (error) {
-            console.error("Error:", error);
-            // Display error message to the user
+    useEffect(() => {
+        const storedUserData = localStorage.getItem('userData');
+        if (storedUserData) {
+            setUserData(JSON.parse(storedUserData));
         }
-    };
+    }, []);
 
     // TRANSACTIONS SETTINGS
     const [showTrnEditModal, setShowTrnEditModal] = useState(false);
@@ -291,15 +252,7 @@ function App() {
                 <Route path="/" element={<Navigate to="/home" />} />
                 <Route path="*" element={<Navigate to="/home" />} />
                 <Route path="home" element={<Landing />} />
-                <Route
-                    path="signin"
-                    element={
-                        <Signin
-                            handleSubmit={handleSignInSubmit}
-                            setEmail={setEmail}
-                            setPassword={setPassword}
-                        />
-                    } />
+                <Route path="login" element={<Login setUserData={setUserData} />} />
                 <Route path="signup" element={<Signup />} />
                 <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="restore-password" element={<RestorePassword />} />
@@ -308,7 +261,7 @@ function App() {
                     path="application/*"
                     element={
                         <Application
-                            name={user}
+                            userData={userData}
                         />
                     } >
                     <Route path="" element={<Navigate to="dashboard" />} />
@@ -317,15 +270,7 @@ function App() {
                     <Route
                         path="transactions/*"
                         element={
-                            <Transactions
-                                transactionsWithIdState={transactionsWithIdState}
-                                updateTransaction={updateTransaction}
-                                deleteTransaction={deleteTransaction}
-                                addNewTransaction={addNewTransaction}
-                                showDropDown={showTrnDropDown}
-                                setShowDropDown={setShowTrnDropDown}
-                                showEditModal={showTrnEditModal}
-                                setShowEditModal={setShowTrnEditModal} />} >
+                            <Transactions />} >
                         <Route path="" element={<Navigate to=":month-year" />} />
                         <Route path="*" element={<Navigate to=":month-year" />} />
                         <Route path=":month-:year" element={<Transactions />} />

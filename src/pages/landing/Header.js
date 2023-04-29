@@ -29,7 +29,7 @@ const Header = () => {
                     <button data-id='support' className="text-[24px] font-light mr-[50px]" onClick={handleClickScroll}>Support</button>
                 </div>
                 <div className="flex flex-row border-l-[1px] border-black pl-8 gap-6">
-                    <Button route='/signin' text='Sign In' width='2xl:w-[110px]' height='2xl:h-[48px]' size='text-[24px]' color='text-black' bold='font-light' font='font-inter' display='hidden 2xl:block' />
+                    <Button route='/login' text='Log In' width='2xl:w-[110px]' height='2xl:h-[48px]' size='text-[24px]' color='text-black' bold='font-light' font='font-inter' display='hidden 2xl:block' />
                     <Button route='/signup' text='Sign Up' width='2xl:w-[110px]' height='2xl:h-[48px]' bg='bg-[#EFCA47CC]' rounded='rounded-[8px]' size='2xl:text-[24px]' color='text-black' bold='font-light' font='font-inter' display='hidden 2xl:block' />
                 </div>
             </div>
@@ -43,7 +43,7 @@ const Header = () => {
                         <button data-id='support' className="text-[24px] font-light" onClick={handleClickScroll}>Support</button>
                     </div>
                     <div className="flex flex-col pt-6 justify-center items-center w-full gap-2">
-                        <Button route='/application' text='Sign In' width='w-[110px]' height='h-[48px]' size='text-[24px]' color='text-black' bold='font-light' font='font-inter' display='block' />
+                        <Button route='/login' text='Sign In' width='w-[110px]' height='h-[48px]' size='text-[24px]' color='text-black' bold='font-light' font='font-inter' display='block' />
                         <Button route='/signup' text='Sign Up' width='w-[110px]' height='h-[48px]' bg='bg-[#EFCA47CC]' rounded='rounded-[8px]' size='text-[24px]' color='text-black' bold='font-light' font='font-inter' display='block' />
                     </div>
                 </div>
