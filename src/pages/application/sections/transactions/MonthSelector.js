@@ -45,15 +45,23 @@ const MonthSelector = ({ currentMonth, currentYear, setCurrentMonth, setCurrentY
     };
 
     return (
-        <div className="flex justify-center items-center w-full mb-[40px]">
-            <button className='px-6' onClick={handlePreviousMonth}>
-                <BsChevronLeft size={25} color="#9F75D6" />
+        <div className="flex justify-center items-center w-full mb-[20px] 2xl:mb-[40px]">
+            <button className='2xl:px-6' onClick={handlePreviousMonth}>
+                <BsChevronLeft
+                    size={
+                        window.innerWidth < 1536 ? 20 : 25
+                    }
+                    color="#9F75D6" />
             </button>
-            <div className="mx-[35px] h-[55px] rounded-[30px] border-[2px] border-[#9F75D6] text-[24px] font-medium text-[#9F75D6] flex justify-center items-center px-6">
+            <div className="mx-[20px] 2xl:mx-[35px] h-[30px] 2xl:h-[55px] rounded-[20px] 2xl:rounded-[30px] border-[2px] border-[#9F75D6] text-[16px] 2xl:text-[24px] font-medium text-[#9F75D6] flex justify-center items-center px-6">
                 <span className="font-bold mr-2">{monthNames[currentMonth]}</span>{currentYear}
             </div>
-            <button className='px-6' onClick={handleNextMonth}>
-                <BsChevronRight size={25} color="#9F75D6" />
+            <button className='2xl:px-6' onClick={handleNextMonth}>
+                <BsChevronRight
+                    size={
+                        window.innerWidth < 1536 ? 20 : 25
+                    }
+                    color="#9F75D6" />
             </button>
         </div>
     );
