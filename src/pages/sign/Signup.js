@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Google from './imgs/Google.png';
 import Apple from './imgs/Apple.png';
 
-import useFetchData from '../../hooks/useFetchData';
+// import useFetchData from '../../hooks/useFetchData';
 import { register } from '../../services/api';
 
 

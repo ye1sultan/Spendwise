@@ -32,13 +32,13 @@ const Goal = ({ name, icon, deadline, totalAmount, amount, color }) => {
     return (
         <>
             <div
-                className="overflow-hidden w-full h-full bg-white rounded-[40px] p-[30px] flex flex-col justify-between items-start">
+                className="overflow-hidden w-full h-full bg-white rounded-[40px] py-[10px] px-[15px] 2xl:p-[30px] flex flex-col justify-between items-start">
                 <div className="flex justify-between items-center w-full">
                     <div className='flex justify-center items-center' >
-                        <div className="w-[50px] h-[50px] bg-opacity-50 rounded-full flex justify-center items-center mr-[20px]" style={{ backgroundColor: color }}>
+                        <div className="w-[30px] h-[30px] 2xl:w-[50px] 2xl:h-[50px] bg-opacity-50 rounded-full flex justify-center items-center mr-[20px]" style={{ backgroundColor: color }}>
                             {iconComponent}
                         </div>
-                        <div className="text-[25px] font-medium text-[#4E4949]">
+                        <div className="text-[16px] 2xl:text-[24px] font-medium text-[#4E4949]">
                             {name}
                         </div>
 
@@ -49,21 +49,21 @@ const Goal = ({ name, icon, deadline, totalAmount, amount, color }) => {
                 </div>
                 <div className="w-full flex justify-between items-center">
                     <div>
-                        <div className="text-[20px] font-medium text-[#979393]">
+                        <div className="2xl:text-[20px] font-medium text-[#979393]">
                             Till
                         </div>
-                        <div className="text-[25px] font-medium text-[#4E4949]">
+                        <div className="2xl:text-[25px] font-medium text-[#4E4949]">
                             {deadline}
                         </div>
                     </div>
-                    <div className="text-[36px] font-medium">
+                    <div className="text-[18px] 2xl:text-[36px] font-medium">
                         {progress + " %"}
                     </div>
                 </div>
-                <div className="w-full h-[20px] bg-[#EEECEC] rounded-[10px]">
+                <div className="w-full h-[12px] 2xl:h-[20px] bg-[#EEECEC] rounded-[10px]">
                     <div className="h-full rounded-[10px]" style={{ width: progress + "%", backgroundColor: color }}></div>
                 </div>
-                <div className="text-[16px] font-semibold text-[#696969]">
+                <div className="text-[10px] 2xl:text-[16px] font-semibold text-[#696969]">
                     {`₸ ${amount} / ₸ ${totalAmount}`}
                 </div>
             </div>

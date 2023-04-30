@@ -46,13 +46,13 @@ const BieCharts = ({ title, initialGoal, data }) => {
     const separatedTransactions = separateIncomeAndExpense(data);
 
     return (
-        <div className="flex flex-col mb-[60px]">
-            <div className="text-[32px] text-[#696969] font-medium">
+        <div className="flex flex-col 2xl:mb-[60px]">
+            <div className="text-[16px] 2xl:text-[32px] text-[#696969] font-medium">
                 {title}
             </div>
             <div
-                className={`flex flex-col justify-between items-center w-[723px] ${data ? (title === 'Goals' ? 'h-[320px]' : 'h-full') : 'h-[328px]'} rounded-[30px] border-[#AEAEAE] border-[1px] bg-white 
-                ${data ? (title === 'Goals' ? '' : 'pt-[20px]') : 'pt-[25px] px-[20px]'}`}>
+                className={`flex flex-col justify-between items-center w-[285px] 2xl:w-[723px] ${data ? (title === 'Goals' ? '2xl:h-[320px]' : '2xl:h-full') : 'h-[328px]'} rounded-[15px] 2xl:rounded-[30px] border-[#AEAEAE] border-[1px] bg-white 
+                ${data ? (title === 'Goals' ? '' : '2xl:pt-[20px]') : '2xl:pt-[25px] 2xl:px-[20px]'}`}>
                 {
                     (() => {
                         if (title === 'Expenses by category') {
@@ -62,7 +62,7 @@ const BieCharts = ({ title, initialGoal, data }) => {
                                         <PieChart transactions={separatedTransactions.expenseObjects} />
                                         <Link
                                             to='/application/transactions'
-                                            className="text-center text-[24px] text-[#590CC0] uppercase mt-[25px] py-[20px] w-full border-t-[1px] border-t-black">
+                                            className="text-center 2xl:text-[24px] text-[#590CC0] uppercase mt-[25px] p-[10px] 2xl:py-[20px] w-full border-t-[1px] border-t-black">
                                             See more
                                         </Link>
                                     </div>
@@ -78,7 +78,7 @@ const BieCharts = ({ title, initialGoal, data }) => {
                                         <PieChart transactions={separatedTransactions.incomeObjects} />
                                         <Link
                                             to='/application/transactions'
-                                            className="text-center text-[24px] text-[#590CC0] uppercase mt-[25px] py-[20px] w-full border-t-[1px] border-t-black">
+                                            className="text-center 2xl:text-[24px] text-[#590CC0] uppercase mt-[25px] py-[10px] 2xl:py-[20px] w-full border-t-[1px] border-t-black">
                                             See more
                                         </Link>
                                     </div>
@@ -94,7 +94,7 @@ const BieCharts = ({ title, initialGoal, data }) => {
                                         <BarChart expense={totals.totalExpense} income={totals.totalIncome} />
                                         <Link
                                             to='/application/transactions'
-                                            className="text-center text-[24px] text-[#590CC0] uppercase mt-[25px] py-[20px] w-full border-t-[1px] border-t-black">
+                                            className="text-center 2xl:text-[24px] text-[#590CC0] uppercase mt-[25px] py-[10px] 2xl:py-[20px] w-full border-t-[1px] border-t-black">
                                             See more
                                         </Link>
                                     </div>

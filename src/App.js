@@ -96,6 +96,22 @@ function App() {
             amount: -1500,
             type: "expense",
         },
+        {
+            date: "2023-05-05",
+            category: "Investment",
+            description: "Stock purchase",
+            payMethod: "Debit Card",
+            amount: 15000,
+            type: "income",
+        },
+        {
+            date: "2023-05-05",
+            category: "Supermarket",
+            description: "Stock purchase",
+            payMethod: "Debit Card",
+            amount: -1500,
+            type: "expense",
+        },
     ];
 
     const transactionsWithId = transactions.map((transaction) => {
@@ -217,34 +233,34 @@ function App() {
 
     // SETTINGS SETTINGS
 
-    const settings = [
-        // myProfile = {
-        //     user: {
-        //         name: 'Niyaztay Yelsultan',
-        //         email: 'niyaztaye@gmail.com',
-        //         pic: 'https://picsum.photos/200/200',
-        //     }
-        // },
+    // const settings = [
+    //     // myProfile = {
+    //     //     user: {
+    //     //         name: 'Niyaztay Yelsultan',
+    //     //         email: 'niyaztaye@gmail.com',
+    //     //         pic: 'https://picsum.photos/200/200',
+    //     //     }
+    //     // },
 
-    ];
+    // ];
 
-    const myProfile = {
-        user: {
-            name: 'Niyaztay Yelsultan',
-            email: 'niyaztaye@gmail.com',
-            pic: 'https://picsum.photos/200/200',
-        }
-    };
+    // const myProfile = {
+    //     user: {
+    //         name: 'Niyaztay Yelsultan',
+    //         email: 'niyaztaye@gmail.com',
+    //         pic: 'https://picsum.photos/200/200',
+    //     }
+    // };
 
-    const preferences = {
-        language: 'English',
-        appearence: 'Light Mode',
-    }
+    // const preferences = {
+    //     language: 'English',
+    //     appearence: 'Light Mode',
+    // }
 
-    const security = {
-        email: 'niyaztaye@gmail.com',
-        password: 'elsik0000',
-    }
+    // const security = {
+    //     email: 'niyaztaye@gmail.com',
+    //     password: 'elsik0000',
+    // }
 
     return (
         <div className="App">
@@ -270,7 +286,15 @@ function App() {
                     <Route
                         path="transactions/*"
                         element={
-                            <Transactions />} >
+                            <Transactions
+                                transactionsWithIdState={transactionsWithIdState}
+                                updateTransaction={updateTransaction}
+                                deleteTransaction={deleteTransaction}
+                                addNewTransaction={addNewTransaction}
+                                showDropDown={showTrnDropDown}
+                                setShowDropDown={setShowTrnDropDown}
+                                showEditModal={showTrnEditModal}
+                                setShowEditModal={setShowTrnEditModal} />} >
                         <Route path="" element={<Navigate to=":month-year" />} />
                         <Route path="*" element={<Navigate to=":month-year" />} />
                         <Route path=":month-:year" element={<Transactions />} />

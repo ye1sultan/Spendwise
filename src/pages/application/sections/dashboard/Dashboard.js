@@ -6,7 +6,7 @@ const Dashboard = ({ transactions }) => {
     const initialGoal = {
         name: "Lambo",
         deadline: "2023-12-31",
-        amount: 2250000,
+        amount: 22500000,
         totalAmount: 240000000,
         color: "#BFA2E5",
         icon: "car",

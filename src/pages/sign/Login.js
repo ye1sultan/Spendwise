@@ -4,7 +4,7 @@ import Google from './imgs/Google.png';
 import Apple from './imgs/Apple.png';
 import { useState } from 'react';
 
-import useFetchData from '../../hooks/useFetchData';
+// import useFetchData from '../../hooks/useFetchData';
 import { login } from '../../services/api';
 
 const Login = ({ setUserData }) => {
@@ -20,7 +20,8 @@ const Login = ({ setUserData }) => {
 
     const [user, setUser] = useState(null);
     const [token, setToken] = useState('');
-
+    const [rememberMe, setRememberMe] = useState(false);
+    console.log(user, token);
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -30,8 +31,10 @@ const Login = ({ setUserData }) => {
             setToken(token);
             console.log("User data:", user);
             console.log("Token:", token);
-            localStorage.setItem('userData', JSON.stringify(user));
-            localStorage.setItem('authToken', token); // Store the token in local storage
+
+            const storage = rememberMe ? localStorage : sessionStorage;
+            storage.setItem('userData', JSON.stringify(user));
+            storage.setItem('authToken', token);
 
             navigate("/application");
         } catch (error) {
@@ -73,6 +76,7 @@ const Login = ({ setUserData }) => {
                             type="checkbox"
                             value=""
                             className="w-[18px] h-[18px] mr-[24px]"
+                            onChange={(e) => setRememberMe(e.target.checked)}
                         />
                         <label htmlFor="checkbox" className="text-[12px]">
                             Remember me
