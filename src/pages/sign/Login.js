@@ -4,7 +4,6 @@ import Google from './imgs/Google.png';
 import Apple from './imgs/Apple.png';
 import { useState } from 'react';
 
-// import useFetchData from '../../hooks/useFetchData';
 import { login } from '../../services/api';
 
 const Login = ({ setUserData }) => {
@@ -21,9 +20,10 @@ const Login = ({ setUserData }) => {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
-    console.log(user, token);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(user, token);
         try {
             const { user, token } = await login(email, password);
             setUser(user);

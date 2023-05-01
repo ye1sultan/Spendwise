@@ -14,7 +14,7 @@ import { TbHealthRecognition } from 'react-icons/tb';
 import { useState } from 'react';
 
 const Transaction = ({ transaction, transactionDate, isLast, deleteTransaction, editTransaction }) => {
-    const { category, description, payMethod, amount, type } = transaction;
+    const { category, description, payment_method, amount, type } = transaction;
     const [iconWidth, setIconWidth] = useState(window.innerWidth < 1536 ? 15 : 25);
 
     const categories = [
@@ -78,7 +78,7 @@ const Transaction = ({ transaction, transactionDate, isLast, deleteTransaction, 
                     </div>
                 </div>
                 <div className="text-[22px] text-[#443A3A] font-medium w-1/6 text-center">{description}</div>
-                <div className="text-[22px] text-[#443A3A] font-medium w-1/6 text-center">{payMethod}</div>
+                <div className="text-[22px] text-[#443A3A] font-medium w-1/6 text-center">{payment_method}</div>
                 <div className={`text-[22px] font-medium w-1/6 text-center ${type === "income" ? "text-green-500" : "text-red-500"}`}>{amount} ₸</div>
                 <div className="flex space-x-4 w-1/6 justify-center">
                     <button onClick={() => editTransaction(transaction)}>

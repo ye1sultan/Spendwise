@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getAllTransactions, addTransaction, deleteTransaction as deleteTransactionAPI } from '../../../../services/api';
+import ContentLoader from 'react-content-loader';
 
 import Title from "../../components/Title";
 import MonthSelector from "./MonthSelector";
@@ -10,7 +12,60 @@ import { ReactComponent as NoResultTr } from './NoResultTr.svg';
 import { BsArrowDownRight, BsArrowUpRight } from 'react-icons/bs';
 import { AiOutlinePlus } from "react-icons/ai";
 
-const Transactions = ({ transactionsWithIdState, updateTransaction, deleteTransaction, addNewTransaction, showDropDown, setShowDropDown, showEditModal, setShowEditModal }) => {
+const Transactions = ({ setTransactionsForOtherComponents }) => {
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [showDropDown, setShowDropDown] = useState(false);
+    const [transactions, setTransactions] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchTransactions = async () => {
+            try {
+                const data = await getAllTransactions();
+                setTransactions(data);
+                setTransactionsForOtherComponents(data)
+                setIsLoading(false);
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        };
+
+        fetchTransactions();
+    }, []);
+
+    const addNewTransaction = async (newTransaction) => {
+        try {
+            const addedTransaction = await addTransaction(newTransaction);
+            setTransactions((prevTransactions) => [
+                ...prevTransactions, addedTransaction
+            ]);
+        } catch (error) {
+            console.error('Error adding transaction:', error);
+        }
+
+        setShowDropDown(false);
+    };
+
+    const updateTransaction = (updatedTransaction) => {
+        setTransactions((prevTransactions) =>
+            prevTransactions.map((transaction) =>
+                transaction.id === updatedTransaction.id ? updatedTransaction : transaction
+            )
+        );
+
+        setShowEditModal(false);
+    }
+
+    const deleteTransaction = async (id) => {
+        try {
+            await deleteTransactionAPI(id);
+            const updatedTransactions = transactions.filter(transaction => transaction.id !== id);
+            setTransactions(updatedTransactions);
+        } catch (error) {
+            console.error('Error deleting transaction:', error);
+        }
+    };
+
     const [iconWidth, setIconWidth] = useState(window.innerWidth < 1536 ? 15 : 25);
 
     const [showCreateModal, setShowCreateModal] = useState(false);
@@ -26,7 +81,26 @@ const Transactions = ({ transactionsWithIdState, updateTransaction, deleteTransa
     }
 
     const renderTransactions = () => {
-        const filteredTransactions = transactionsWithIdState.filter((transaction) => {
+        if (isLoading) {
+            return (
+                <ContentLoader
+                    speed={2}
+                    width={1500}
+                    height={160}
+                    viewBox="0 0 1500 160"
+                    backgroundColor="#f3f3f3"
+                    foregroundColor="#ecebeb">
+                    <rect x="20" y="20" rx="10" ry="10" width="200" height="40" />
+                    <rect x="280" y="20" rx="10" ry="10" width="200" height="40" />
+                    <rect x="540" y="20" rx="10" ry="10" width="200" height="40" />
+                    <rect x="790" y="20" rx="10" ry="10" width="200" height="40" />
+                    <rect x="1040" y="20" rx="10" ry="10" width="200" height="40" />
+                    <rect x="1290" y="20" rx="10" ry="10" width="200" height="40" />
+                </ContentLoader>
+            );
+        }
+
+        const filteredTransactions = transactions.filter((transaction) => {
             const transactionDate = new Date(transaction.date);
             return (
                 transactionDate.getMonth() === currentMonth &&

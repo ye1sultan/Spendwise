@@ -1,8 +1,11 @@
 import Bie from "./Bie";
 import BieCharts from "./BieCharts";
 import Title from "../../components/Title";
+import { useEffect } from "react";
+import { getAllTransactions } from "../../../../services/api";
+import { useState } from "react";
 
-const Dashboard = ({ transactions }) => {
+const Dashboard = () => {
     const initialGoal = {
         name: "Lambo",
         deadline: "2023-12-31",
@@ -30,22 +33,22 @@ const Dashboard = ({ transactions }) => {
         };
     };
 
-    const totals = calculateTotals(transactions);
+    // const totals = calculateTotals(currentMonthTransactions);
 
     return (
         <>
             <Title title={'Dashboard'} />
             <div className="flex justify-between items-center flex-wrap w-full">
-                <Bie title="Current balance" amount={totals.totalIncome + totals.totalExpense} svg="current" />
-                <Bie title="Incomes" amount={totals.totalIncome} svg="incomes" />
-                <Bie title="Expenses" amount={totals.totalExpense} svg="expenses" />
-                <Bie title="Monthly balance" amount={totals.totalIncome} svg="monthly" />
+                <Bie title="Current balance" amount={0} svg="current" />
+                <Bie title="Incomes" amount={0} svg="incomes" />
+                <Bie title="Expenses" amount={0} svg="expenses" />
+                <Bie title="Monthly balance" amount={0} svg="monthly" />
             </div>
             <div className="flex flex-wrap justify-between pt-[45px] w-full">
-                <BieCharts title="Expenses by category" data={transactions} />
-                <BieCharts title="Incomes by category" data={transactions} />
-                <BieCharts title="Monthly balance" data={transactions} />
-                <BieCharts title="Goals" data={transactions} initialGoal={initialGoal} />
+                <BieCharts title="Expenses by category" />
+                <BieCharts title="Incomes by category" />
+                <BieCharts title="Monthly balance" />
+                <BieCharts title="Goals" initialGoal={initialGoal} />
             </div>
         </>
     );

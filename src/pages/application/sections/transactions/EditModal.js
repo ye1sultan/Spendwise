@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { updateTransaction } from "../../../../services/api";
 
 import { AiOutlineCar, AiOutlineCreditCard, AiOutlineHeart, AiOutlineHome, AiOutlineShop, AiOutlineShoppingCart } from 'react-icons/ai';
 import { BiBookAlt } from 'react-icons/bi';
@@ -45,7 +46,7 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
 
 
     const handlePaymentMethodClick = (paymentMethod) => {
-        setEditedTransaction({ ...editedTransaction, payMethod: paymentMethod.name });
+        setEditedTransaction({ ...editedTransaction, payment_method: paymentMethod.name });
         setPaymentDropDown(false);
     }
 
@@ -121,8 +122,13 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
         setEditedTransaction({ ...editedTransaction, [name]: value });
     };
 
-    const handleSave = () => {
-        onSave(editedTransaction);
+    const handleSave = async () => {
+        try {
+            const updatedTransaction = await updateTransaction(editedTransaction.id, editedTransaction);
+            onSave(updatedTransaction);
+        } catch (error) {
+            console.error("Error updating transaction:", error);
+        }
     };
 
     const handleDeleteTransaction = () => {
@@ -174,7 +180,7 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
                     className="block mt-4 relative">
                     <span className="text-[18px] font-medium">Payment Method</span>
                     <div className="px-4 flex justify-start items-center w-full h-[50px] border-b-[1px] border-[#000000] text-[18px] cursor-pointer">
-                        {getPaymentMethod(editedTransaction.payMethod)}
+                        {getPaymentMethod(editedTransaction.payment_method)}
                         <BsChevronDown size={20} />
                     </div>
                     <div
@@ -248,7 +254,7 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
                     className="block mt-2 relative">
                     <span className="text-[16px] font-medium">Payment Method</span>
                     <div className="px-2 flex justify-start items-center w-full h-[50px] border-b-[1px] border-[#000000] text-[16px] cursor-pointer">
-                        {getPaymentMethod(editedTransaction.payMethod)}
+                        {getPaymentMethod(editedTransaction.payment_method)}
                         <BsChevronDown size={20} />
                     </div>
                     <div

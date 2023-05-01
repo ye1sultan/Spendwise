@@ -43,6 +43,10 @@ export const register = async (name, email, password, passwordConfirmation) => {
 // api.js
 export const authenticatedFetch = (url, options = {}) => {
     const token = localStorage.getItem('authToken');
+    if (!token) {
+        throw new Error('Authentication token not found');
+    }
+
     const headers = {
         ...options.headers,
         Authorization: `Bearer ${token}`,
@@ -53,3 +57,61 @@ export const authenticatedFetch = (url, options = {}) => {
         headers,
     });
 };
+
+export const getAllTransactions = async () => {
+    const response = await authenticatedFetch(`${API_URL}/transactions`);
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch transactions');
+    }
+
+    const data = await response.json();
+    return data;
+};
+
+export const addTransaction = async (transaction) => {
+    console.log('Transaction to add:', transaction);
+    const response = await authenticatedFetch(`${API_URL}/transactions`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(transaction),
+    });
+
+    if (!response.ok) {
+        throw new Error('Error adding transaction');
+    }
+
+    const data = await response.json();
+    return data;
+};
+
+export const deleteTransaction = async (id) => {
+    const response = await authenticatedFetch(`${API_URL}/transactions/${id}`, {
+        method: 'DELETE',
+    });
+
+    if (!response.ok) {
+        throw new Error('Error deleting transaction');
+    }
+
+    const data = await response.json();
+    return data;
+};
+
+export const updateTransaction = async (id, updatedTransaction) => {
+    const response = await fetch(`${API_URL}/transactions/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedTransaction),
+    });
+
+    if (!response.ok) {
+        throw new Error(`Error updating transaction with ID ${id}: ${response.statusText}`);
+    }
+
+    return await response.json();
+};  

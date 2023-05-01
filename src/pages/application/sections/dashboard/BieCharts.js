@@ -3,8 +3,44 @@ import BarChart from "./BarChart.js";
 import NoContent from "./NoContent.js";
 import Goal from "./Goal.js";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import { getAllTransactions } from "../../../../services/api.js";
 
-const BieCharts = ({ title, initialGoal, data }) => {
+const BieCharts = ({ title, initialGoal }) => {
+    const [transactions, setTransactions] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchTransactions = async () => {
+            try {
+                const data = await getAllTransactions();
+                setTransactions(data);
+                setIsLoading(false);
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        };
+
+        fetchTransactions();
+    }, []);
+
+    const getCurrentMonthTransactions = (transactions) => {
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();
+
+        return transactions.filter((transaction) => {
+            const transactionDate = new Date(transaction.date);
+            return (
+                transactionDate.getMonth() === currentMonth &&
+                transactionDate.getFullYear() === currentYear
+            );
+        });
+    };
+
+    const data = getCurrentMonthTransactions(transactions);
+
     const calculateTotals = (transactions) => {
         let totalIncome = 0;
         let totalExpense = 0;
@@ -56,7 +92,23 @@ const BieCharts = ({ title, initialGoal, data }) => {
                 {
                     (() => {
                         if (title === 'Expenses by category') {
-                            if (data) {
+                            // if (totals.totalExpense !== 0) {
+                            //     return (
+                            //         <div className="w-full flex flex-col justify-center items-center">
+                            //             <PieChart transactions={separatedTransactions.expenseObjects} />
+                            //             <Link
+                            //                 to='/application/transactions'
+                            //                 className="text-center 2xl:text-[24px] text-[#590CC0] uppercase mt-[25px] p-[10px] 2xl:py-[20px] w-full border-t-[1px] border-t-black">
+                            //                 See more
+                            //             </Link>
+                            //         </div>
+                            //     );
+                            // } else {
+                            //     return <NoContent is={'expense'} />;
+                            // }
+                            if (isLoading) {
+                                return <div>Loading...</div>;
+                            } else {
                                 return (
                                     <div className="w-full flex flex-col justify-center items-center">
                                         <PieChart transactions={separatedTransactions.expenseObjects} />
@@ -67,12 +119,10 @@ const BieCharts = ({ title, initialGoal, data }) => {
                                         </Link>
                                     </div>
                                 );
-                            } else {
-                                return <NoContent is={'expense'} />;
                             }
                         }
                         if (title === 'Incomes by category') {
-                            if (data) {
+                            if (totals.totalIncome !== 0) {
                                 return (
                                     <div className="w-full flex flex-col justify-center items-center">
                                         <PieChart transactions={separatedTransactions.incomeObjects} />
@@ -88,7 +138,7 @@ const BieCharts = ({ title, initialGoal, data }) => {
                             }
                         }
                         if (title === 'Monthly balance') {
-                            if (data) {
+                            if (!(totals.totalExpense === 0 && totals.totalExpense === 0)) {
                                 return (
                                     <div className="w-full flex flex-col justify-center items-center">
                                         <BarChart expense={totals.totalExpense} income={totals.totalIncome} />

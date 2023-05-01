@@ -165,15 +165,17 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
     }
 
     const handleSave = () => {
-        if (selectedAmount && selectedDate && selectedCategory.name && selectedPaymentMethod) {
+        if (selectedAmount && selectedDate && selectedCategory && selectedCategory.name && selectedPaymentMethod) {
+            let accId = JSON.parse(localStorage.getItem('userData')).id;
             const newTransaction = {
-                date: selectedDate.toISOString().substr(0, 10),
+                account_id: 1,
+                user_id: 1,
                 category: selectedCategory.name,
-                description: selectedDescription,
-                payMethod: selectedPaymentMethod.name,
                 amount: correctAmount(selectedAmount),
-                type: transaction,
-                id: uuid(),
+                date: selectedDate.toISOString().substr(0, 10),
+                transaction_type: transaction,
+                description: selectedDescription,
+                payment_method: selectedPaymentMethod.name,
             };
 
             addNewTransaction(newTransaction);
@@ -181,7 +183,6 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
             onModalClose(false);
         }
     }
-
 
     return (
         <div className={"block font-montserrat min-w-[300px] 2xl:min-w-0 max-w-[350px] 2xl:max-w-[1100px] fixed top-[5%] left-[50%] translate-x-[-50%] bg-white border-[1px] border-[#73737A] rounded-[20px] 2xl:rounded-[40px] shadow-md px-[5px] py-[10px] 2xl:px-[50px] 2xl:py-[30px] z-20"}>

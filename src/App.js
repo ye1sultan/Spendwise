@@ -27,137 +27,6 @@ function App() {
         }
     }, []);
 
-    // TRANSACTIONS SETTINGS
-    const [showTrnEditModal, setShowTrnEditModal] = useState(false);
-    const [showTrnDropDown, setShowTrnDropDown] = useState(false);
-
-    const transactions = [
-        {
-            date: "2023-03-15",
-            category: "Restaurant",
-            description: "Dinner at a restaurant",
-            payMethod: "Cash",
-            amount: -50,
-            type: "expense",
-        },
-        {
-            date: "2023-03-20",
-            category: "Salary",
-            description: "Monthly Salary",
-            payMethod: "Debit Card",
-            amount: 4000,
-            type: "income",
-        },
-        {
-            date: "2023-04-05",
-            category: "Supermarket",
-            description: "Weekly shopping",
-            payMethod: "Cash",
-            amount: -100,
-            type: "expense",
-        },
-        {
-            date: "2023-04-10",
-            category: "Investment",
-            description: "Stock purchase",
-            payMethod: "Debit Card",
-            amount: 1500,
-            type: "income",
-        },
-        {
-            date: "2023-02-02",
-            category: "Gift",
-            description: "Grandpa gave money",
-            payMethod: "Cash",
-            amount: 10000,
-            type: "income",
-        },
-        {
-            date: "2023-02-05",
-            category: "Investment",
-            description: "Stock purchase",
-            payMethod: "Debit Card",
-            amount: 1500,
-            type: "income",
-        },
-        {
-            date: "2023-04-05",
-            category: "Investment",
-            description: "Stock purchase",
-            payMethod: "Debit Card",
-            amount: 15000,
-            type: "income",
-        },
-        {
-            date: "2023-04-05",
-            category: "Supermarket",
-            description: "Stock purchase",
-            payMethod: "Debit Card",
-            amount: -1500,
-            type: "expense",
-        },
-        {
-            date: "2023-05-05",
-            category: "Investment",
-            description: "Stock purchase",
-            payMethod: "Debit Card",
-            amount: 15000,
-            type: "income",
-        },
-        {
-            date: "2023-05-05",
-            category: "Supermarket",
-            description: "Stock purchase",
-            payMethod: "Debit Card",
-            amount: -1500,
-            type: "expense",
-        },
-    ];
-
-    const transactionsWithId = transactions.map((transaction) => {
-        return { ...transaction, id: uuid() }
-    });
-
-    const [transactionsWithIdState, setTransactionsWithIdState] = useState(transactionsWithId);
-
-    const addNewTransaction = (newTransaction) => {
-        setTransactionsWithIdState((prevTransactions) => [...prevTransactions, newTransaction]);
-
-        setShowTrnDropDown(false);
-    };
-
-
-    const updateTransaction = (updatedTransaction) => {
-        setTransactionsWithIdState((prevTransactions) =>
-            prevTransactions.map((transaction) =>
-                transaction.id === updatedTransaction.id ? updatedTransaction : transaction
-            )
-        );
-
-        setShowTrnEditModal(false);
-    }
-
-    const deleteTransaction = (id) => {
-        const updatedTransactions = transactionsWithIdState.filter(transaction => transaction.id !== id);
-        setTransactionsWithIdState(updatedTransactions);
-    };
-
-    const getCurrentMonthTransactions = (transactions) => {
-        const currentDate = new Date();
-        const currentMonth = currentDate.getMonth();
-        const currentYear = currentDate.getFullYear();
-
-        return transactions.filter((transaction) => {
-            const transactionDate = new Date(transaction.date);
-            return (
-                transactionDate.getMonth() === currentMonth &&
-                transactionDate.getFullYear() === currentYear
-            );
-        });
-    };
-
-    const currentMonthTransactions = getCurrentMonthTransactions(transactionsWithIdState);
-
     // GOALS SETTINGS
     const initialGoals = [
         {
@@ -282,19 +151,13 @@ function App() {
                     } >
                     <Route path="" element={<Navigate to="dashboard" />} />
                     <Route path="*" element={<Navigate to="dashboard" />} />
-                    <Route path="dashboard" element={<Dashboard transactions={currentMonthTransactions} />} />
+                    <Route path="dashboard" element={<Dashboard />} />
                     <Route
                         path="transactions/*"
                         element={
-                            <Transactions
-                                transactionsWithIdState={transactionsWithIdState}
-                                updateTransaction={updateTransaction}
-                                deleteTransaction={deleteTransaction}
-                                addNewTransaction={addNewTransaction}
-                                showDropDown={showTrnDropDown}
-                                setShowDropDown={setShowTrnDropDown}
-                                showEditModal={showTrnEditModal}
-                                setShowEditModal={setShowTrnEditModal} />} >
+                            <Transactions />
+                        }
+                    >
                         <Route path="" element={<Navigate to=":month-year" />} />
                         <Route path="*" element={<Navigate to=":month-year" />} />
                         <Route path=":month-:year" element={<Transactions />} />
@@ -315,7 +178,7 @@ function App() {
                                 setShowEditModal={setShowGoalEditModal}
                             />
                         } />
-                    <Route path="report" element={<Report data={transactionsWithIdState} />} />
+                    <Route path="report" element={<Report />} />
                     <Route path="notifications" element={<Notifications />} />
                     <Route path="settings" element={<Settings />} />
                 </Route>
