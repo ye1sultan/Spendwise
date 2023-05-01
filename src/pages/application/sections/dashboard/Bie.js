@@ -59,7 +59,7 @@ const Bie = (props) => {
                                         <BsFillCalendar2CheckFill size={15} color="#ffffff" />
                                     </div>
                                     <div className="hidden 2xl:block">
-                                        <BsFillCalendar2CheckFill size={40} color="#ffffff" />
+                                        <BsFillCalendar2CheckFill size={35} color="#ffffff" />
                                     </div>
                                 </div>
                             );

@@ -45,7 +45,7 @@ const MonthSelector = ({ currentMonth, currentYear, setCurrentMonth, setCurrentY
     };
 
     return (
-        <div className="flex justify-center items-center w-full mb-[20px] 2xl:mb-[40px]">
+        <div className="flex justify-center items-center w-full mb-[15px] 2xl:mb-[40px]">
             <button className='2xl:px-6' onClick={handlePreviousMonth}>
                 <BsChevronLeft
                     size={

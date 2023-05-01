@@ -52,7 +52,7 @@ const BieCharts = ({ title, initialGoal, data }) => {
             </div>
             <div
                 className={`flex flex-col justify-between items-center w-[285px] 2xl:w-[723px] ${data ? (title === 'Goals' ? '2xl:h-[320px]' : '2xl:h-full') : 'h-[328px]'} rounded-[15px] 2xl:rounded-[30px] border-[#AEAEAE] border-[1px] bg-white 
-                ${data ? (title === 'Goals' ? '' : '2xl:pt-[20px]') : '2xl:pt-[25px] 2xl:px-[20px]'}`}>
+                ${data ? (title === 'Goals' ? '' : '2xl:pt-[20px]') : '2xl:pt-[25px] 2xl:px-[20px]'} mb-8 2xl:mb-0`}>
                 {
                     (() => {
                         if (title === 'Expenses by category') {
