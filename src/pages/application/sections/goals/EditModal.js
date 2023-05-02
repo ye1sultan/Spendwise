@@ -1,8 +1,8 @@
+import { updateGoal } from "../../../../services/api";
+
 import { AiOutlineCar, AiOutlineGift, AiOutlineShoppingCart } from 'react-icons/ai';
 import { IoEarthOutline } from 'react-icons/io5';
 import { BsChevronDown } from 'react-icons/bs';
-
-
 import { AiOutlineHeart, AiOutlineTrophy } from 'react-icons/ai';
 import { IoBagHandle, IoCheckmarkDone, IoGameControllerOutline, IoLanguage } from 'react-icons/io5';
 import { BsCoin, BsFillAirplaneFill, BsHouse, BsLaptop, BsPiggyBank, BsTruck } from 'react-icons/bs';
@@ -82,13 +82,9 @@ const EditModal = ({ goal, onSave, onCancel }) => {
     const getIcon = (name) => {
         const icon = allIcons.find((icon) => icon.name === name);
 
-        if (!icon) {
-            return null;
-        }
-
         return (
             <div className="flex justify-start items-center pr-2">
-                {icon.icon}
+                {icon ? icon.icon : <AiOutlineCar size={35} />}
             </div>
         );
     };
@@ -107,12 +103,10 @@ const EditModal = ({ goal, onSave, onCancel }) => {
     const getColor = (name) => {
         const color = allColors.find((color) => color.name === name);
 
-        if (!color) {
-            return null;
-        }
-
         return (
-            <div className="flex justify-start items-center mr-2 w-[40px] h-[40px] rounded-full cursor-pointer" style={{ backgroundColor: color.name }}></div>
+            <div
+                className="flex justify-start items-center mr-2 w-[40px] h-[40px] rounded-full cursor-pointer"
+                style={{ backgroundColor: color ? color.name : goal.color }}></div>
         );
     };
 
@@ -133,9 +127,23 @@ const EditModal = ({ goal, onSave, onCancel }) => {
         setEditedGoal({ ...editedGoal, [name]: value });
     };
 
-    const handleSave = () => {
-        onSave(editedGoal);
+    const handleSave = async () => {
+        try {
+            const updatedGoal = await updateGoal(goal.id, removeKeys(editedGoal, ['created_at', 'updated_at', 'id']));
+            onSave(updatedGoal);
+        } catch (error) {
+            console.error("Error updating goals:", error);
+        }
     };
+
+    const removeKeys = (obj, keysToRemove) => {
+        const newObj = { ...obj };
+        keysToRemove.forEach((key) => {
+            delete newObj[key];
+        });
+
+        return newObj;
+    }
 
     return (
         <div className="fixed top-[10%] left-[50%] translate-x-[-50%] bg-white border-[1px] border-[#AEAEAE] w-[600px] p-4 rounded-[40px] shadow-md">
@@ -166,7 +174,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                     className="px-4 block w-full h-[50px] border-b-[1px] border-[#000000] text-[18px]"
                     type="number"
                     name="amount"
-                    value={editedGoal.amount}
+                    value={parseInt(editedGoal.initial_target_amount)}
                     onChange={handleChange}
                 />
             </div>
@@ -176,7 +184,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                     className="px-4 block w-full h-[50px] border-b-[1px] border-[#000000] text-[18px]"
                     type="number"
                     name="totalAmount"
-                    value={editedGoal.totalAmount}
+                    value={parseInt(editedGoal.target_amount)}
                     onChange={handleChange}
                 />
             </div>

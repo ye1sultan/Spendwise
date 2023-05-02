@@ -32,9 +32,9 @@ const Login = ({ setUserData }) => {
             console.log("User data:", user);
             console.log("Token:", token);
 
-            const storage = rememberMe ? localStorage : sessionStorage;
-            storage.setItem('userData', JSON.stringify(user));
-            storage.setItem('authToken', token);
+            localStorage.setItem('userData', JSON.stringify(user));
+            localStorage.setItem('authToken', token);
+            localStorage.setItem('userPwd', password);
 
             navigate("/application");
         } catch (error) {

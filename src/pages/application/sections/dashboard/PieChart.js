@@ -44,7 +44,7 @@ const centerTextPlugin = {
 
 Chart.register(centerTextPlugin);
 
-const PieChart = ({ transactions }) => {
+const PieChart = ({ transactions = [] }) => {
     const [chartSize, setChartSize] = useState(window.innerWidth < 1536 ? 250 : 350);
     const [borderRadius, setBorderRadius] = useState(window.innerWidth < 1536 ? 6 : 10);
 

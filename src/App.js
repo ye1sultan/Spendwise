@@ -27,109 +27,8 @@ function App() {
         }
     }, []);
 
-    // GOALS SETTINGS
-    const initialGoals = [
-        {
-            name: "Initial Goal",
-            deadline: "2023-12-31",
-            amount: 100,
-            totalAmount: 1000,
-            color: "#F1BF5B",
-            icon: "car",
-            desciprtion: '',
-            status: 'active',
-        }
-    ];
-
-    const goalsWithId = initialGoals.map((transaction) => {
-        return { ...transaction, id: uuid() }
-    });
-
-
-    const [goalsWithIdState, setGoalsWithIdState] = useState(goalsWithId);
-    const [showGoalDropDown, setShowGoalDropDown] = useState(false);
-    const [showGoalEditModal, setShowGoalEditModal] = useState(false);
-
-    const addNewGoal = (newGoal) => {
-        setGoalsWithIdState((prevGoals) => [...prevGoals, newGoal]);
-
-        setShowGoalDropDown(false);
-    }
-
-    const updateGoals = (updatedGoal) => {
-        setGoalsWithIdState((prevGoals) =>
-            prevGoals.map((goal) => goal.id === updatedGoal.id ? updatedGoal : goal)
-        );
-
-        setShowGoalEditModal(false);
-    }
-
-    const deleteGoals = (id) => {
-        const updatedGoals = goalsWithIdState.filter(goal => goal.id !== id);
-        setGoalsWithIdState(updatedGoals);
-    };
-
-    const pauseGoal = (id) => {
-        setGoalsWithIdState((prevGoals) =>
-            prevGoals.map((goal) => {
-                if (goal.id === id) {
-                    return {
-                        ...goal,
-                        status: goal.status === 'active' ? 'paused' : 'active',
-                    };
-
-                }
-
-                return goal;
-            })
-        );
-    };
-
-    const reachGoal = (id) => {
-        setGoalsWithIdState((prevGoals) =>
-            prevGoals.map((goal) => {
-                if (goal.id === id) {
-                    return {
-                        ...goal,
-                        status: 'reached',
-                    };
-                }
-                return goal;
-            })
-        );
-    };
-
-
-    // SETTINGS SETTINGS
-
-    // const settings = [
-    //     // myProfile = {
-    //     //     user: {
-    //     //         name: 'Niyaztay Yelsultan',
-    //     //         email: 'niyaztaye@gmail.com',
-    //     //         pic: 'https://picsum.photos/200/200',
-    //     //     }
-    //     // },
-
-    // ];
-
-    // const myProfile = {
-    //     user: {
-    //         name: 'Niyaztay Yelsultan',
-    //         email: 'niyaztaye@gmail.com',
-    //         pic: 'https://picsum.photos/200/200',
-    //     }
-    // };
-
-    // const preferences = {
-    //     language: 'English',
-    //     appearence: 'Light Mode',
-    // }
-
-    // const security = {
-    //     email: 'niyaztaye@gmail.com',
-    //     password: 'elsik0000',
-    // }
+    const [transactions, setTransactions] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     return (
         <div className="App">
@@ -151,11 +50,22 @@ function App() {
                     } >
                     <Route path="" element={<Navigate to="dashboard" />} />
                     <Route path="*" element={<Navigate to="dashboard" />} />
-                    <Route path="dashboard" element={<Dashboard />} />
+                    <Route
+                        path="dashboard"
+                        element={
+                            <Dashboard
+                                transactions={transactions}
+                                isLoading={isLoading}
+                            />
+                        }
+                    />
                     <Route
                         path="transactions/*"
                         element={
-                            <Transactions />
+                            <Transactions
+                                setData={setTransactions}
+                                setIsLoading={setIsLoading}
+                            />
                         }
                     >
                         <Route path="" element={<Navigate to=":month-year" />} />
@@ -165,22 +75,18 @@ function App() {
                     <Route
                         path="goals"
                         element={
-                            <Goals
-                                goalsWithIdState={goalsWithIdState}
-                                updateGoals={updateGoals}
-                                deleteGoals={deleteGoals}
-                                addNewGoal={addNewGoal}
-                                pauseGoal={pauseGoal}
-                                reachGoal={reachGoal}
-                                showDropDown={showGoalDropDown}
-                                setShowDropDown={setShowGoalDropDown}
-                                showEditModal={showGoalEditModal}
-                                setShowEditModal={setShowGoalEditModal}
-                            />
+                            <Goals />
                         } />
                     <Route path="report" element={<Report />} />
                     <Route path="notifications" element={<Notifications />} />
-                    <Route path="settings" element={<Settings />} />
+                    <Route
+                        path="settings"
+                        element={
+                            <Settings
+                                data={userData}
+                            />
+                        }
+                    />
                 </Route>
 
             </Routes>

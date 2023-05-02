@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getAllGoals, addNewGoal as addNewGoalAPI, deleteGoal } from '../../../../services/api';
+
 import Title from "../../components/Title";
 
 import { BsChevronDown } from 'react-icons/bs';
@@ -7,8 +9,100 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import GoalCreator from "./CreateGoal";
 import Goal from "./Goal";
 import EditModal from "./EditModal";
+import ContentLoader from "react-content-loader";
 
-const Goals = ({ addNewGoal, updateGoals, deleteGoals, pauseGoal, reachGoal, goalsWithIdState, showDropDown, setShowDropDown, showEditModal, setShowEditModal }) => {
+const Goals = () => {
+    // GOALS SETTINGS
+    // const initialGoals = [
+    //     {
+    //         name: "Initial Goal",
+    //         deadline: "2023-12-31",
+    //         amount: 100,
+    //         totalAmount: 1000,
+    //         color: "#F1BF5B",
+    //         icon: "car",
+    //         desciprtion: '',
+    //         status: 'active',
+    //     }
+    // ];
+
+    const [showDropDown, setShowDropDown] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [goals, setGoals] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await getAllGoals();
+                setGoals(data);
+                setIsLoading(false);
+                console.log(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const addNewGoal = async (goal) => {
+        try {
+            const newGoal = await addNewGoalAPI(goal);
+            setGoals((prevGoals) => [...prevGoals, newGoal]);
+            setShowDropDown(false);
+        } catch (error) {
+            console.error('Error adding new goal:', error);
+        }
+    };
+
+    const updateGoals = (updatedGoal) => {
+        setGoals((prevGoals) =>
+            prevGoals.map((goal) => goal.id === updatedGoal.id ? updatedGoal : goal)
+        );
+
+        setShowEditModal(false);
+    }
+
+    const deleteGoals = async (id) => {
+        try {
+            await deleteGoal(id);
+            setGoals((prevGoals) => prevGoals.filter((goal) => goal.id !== id));
+        } catch (error) {
+            console.error('Error deleting goal:', error);
+        }
+    };
+
+    const pauseGoal = (id) => {
+        // setGoalsWithIdState((prevGoals) =>
+        //     prevGoals.map((goal) => {
+        //         if (goal.id === id) {
+        //             return {
+        //                 ...goal,
+        //                 status: goal.status === 'active' ? 'paused' : 'active',
+        //             };
+
+        //         }
+
+        //         return goal;
+        //     })
+        // );
+    };
+
+    const reachGoal = (id) => {
+        // setGoalsWithIdState((prevGoals) =>
+        //     prevGoals.map((goal) => {
+        //         if (goal.id === id) {
+        //             return {
+        //                 ...goal,
+        //                 status: 'reached',
+        //             };
+        //         }
+        //         return goal;
+        //     })
+        // );
+    };
+
     const [goalModal, setGoalModal] = useState(false);
     const [goalFilter, setGoalFilter] = useState('active');
 
@@ -61,7 +155,7 @@ const Goals = ({ addNewGoal, updateGoals, deleteGoals, pauseGoal, reachGoal, goa
         return goals.filter((goal) => goal.status === filter);
     };
 
-    const filteredGoals = filterGoals(goalsWithIdState, goalFilter);
+    const filteredGoals = filterGoals(goals);
 
     return (
         <div className="w-full h-full flex flex-col items-center">
@@ -92,24 +186,44 @@ const Goals = ({ addNewGoal, updateGoals, deleteGoals, pauseGoal, reachGoal, goa
             </div>
             <div className="self-start flex flex-wrap">
                 <NewGoalButton onClick={createGoal} />
-                {filteredGoals.map((goal, index) => (
-                    <Goal
-                        key={index}
-                        goal={goal}
-                        id={goal.id}
-                        name={goal.name}
-                        deadline={goal.deadline}
-                        amount={goal.amount}
-                        totalAmount={goal.totalAmount}
-                        color={goal.color}
-                        icon={goal.icon}
-                        status={goalFilter}
-                        onDeleteGoal={deleteGoals}
-                        onPauseGoal={pauseGoal}
-                        onReachGoal={reachGoal}
-                        onEditGoal={editGoal}
-                    />
-                ))}
+                {isLoading ? (
+                    <div className="w-[530px] h-[315px] bg-white rounded-[40px] border-[1px] border-[#CED4DA] m-[30px] p-[30px]">
+                        <ContentLoader
+                            speed={2}
+                            width={530}
+                            height={315}
+                            viewBox="0 0 530 315"
+                            backgroundColor="#f3f3f3"
+                            foregroundColor="#ecebeb">
+                            <circle cx="30" cy="30" r="30" />
+                            <rect x="80" y="15" rx="8" ry="8" width="200" height="35" />
+                            <rect x="10" y="80" rx="8" ry="8" width="100" height="20" />
+                            <rect x="10" y="110" rx="8" ry="8" width="150" height="35" />
+                            <rect x="340" y="110" rx="8" ry="8" width="120" height="35" />
+                            <rect x="10" y="170" rx="8" ry="8" width="450" height="20" />
+                            <rect x="10" y="200" rx="8" ry="8" width="150" height="15" />
+                        </ContentLoader>
+                    </div>
+                ) : (
+                    goals.map((goal, index) => (
+                        <Goal
+                            key={index}
+                            goal={goal}
+                            id={goal.id}
+                            name={goal.name}
+                            deadline={goal.deadline}
+                            target_amount={goal.target_amount}
+                            initial_target_amount={goal.initial_target_amount}
+                            color={goal.color}
+                            icon={goal.icon}
+                            status={goal.status}
+                            onDeleteGoal={deleteGoals}
+                            onPauseGoal={pauseGoal}
+                            onReachGoal={reachGoal}
+                            onEditGoal={editGoal}
+                        />
+                    ))
+                )}
             </div>
             {/* <div className={`z-50 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[850px] h-[400px] rounded-[50px] bg-white px-[65px] py-[40px] ${deleteGoalModal ? 'flex' : 'hidden'} flex-col justify-between items-center border-[1px] border-[#AEAEAE]`}>
                 <div className="text-[45px] font-medium">

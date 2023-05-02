@@ -12,6 +12,13 @@ const SideBar = () => {
     const location = useLocation();
     const handleExit = () => {
         localStorage.removeItem('authToken');
+        localStorage.removeItem('userData');
+        localStorage.removeItem('userPwd');
+
+        sessionStorage.removeItem('authToken');
+        sessionStorage.removeItem('userData');
+        sessionStorage.removeItem('userPwd');
+
         navigate('/signin');
     }
 

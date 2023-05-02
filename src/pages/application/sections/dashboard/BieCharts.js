@@ -10,12 +10,17 @@ import { getAllTransactions } from "../../../../services/api.js";
 const BieCharts = ({ title, initialGoal }) => {
     const [transactions, setTransactions] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [totals, setTotals] = useState({});
+    const [separatedTransactions, setSeparatedTransactions] = useState({});
 
     useEffect(() => {
         const fetchTransactions = async () => {
             try {
                 const data = await getAllTransactions();
-                setTransactions(data);
+                setTransactions(getCurrentMonthTransactions(data));
+                setTotals(calculateTotals(transactions));
+                setSeparatedTransactions(separateIncomeAndExpense(transactions));
+                console.log(transactions);
                 setIsLoading(false);
             } catch (error) {
                 console.error("Error:", error);
@@ -39,8 +44,6 @@ const BieCharts = ({ title, initialGoal }) => {
         });
     };
 
-    const data = getCurrentMonthTransactions(transactions);
-
     const calculateTotals = (transactions) => {
         let totalIncome = 0;
         let totalExpense = 0;
@@ -58,8 +61,6 @@ const BieCharts = ({ title, initialGoal }) => {
             totalExpense,
         };
     };
-
-    const totals = calculateTotals(data);
 
     const separateIncomeAndExpense = (transactions) => {
         let incomeObjects = [];
@@ -79,64 +80,69 @@ const BieCharts = ({ title, initialGoal }) => {
         };
     };
 
-    const separatedTransactions = separateIncomeAndExpense(data);
-
     return (
         <div className="flex flex-col 2xl:mb-[60px]">
             <div className="text-[16px] 2xl:text-[32px] text-[#696969] font-medium">
                 {title}
             </div>
             <div
-                className={`flex flex-col justify-between items-center w-[285px] 2xl:w-[723px] ${data ? (title === 'Goals' ? '2xl:h-[320px]' : '2xl:h-full') : 'h-[328px]'} rounded-[15px] 2xl:rounded-[30px] border-[#AEAEAE] border-[1px] bg-white 
-                ${data ? (title === 'Goals' ? '' : '2xl:pt-[20px]') : '2xl:pt-[25px] 2xl:px-[20px]'} mb-8 2xl:mb-0`}>
+                className={`flex flex-col justify-between items-center w-[285px] 2xl:w-[723px] ${transactions ? (title === 'Goals' ? '2xl:h-[320px]' : '2xl:h-full') : 'h-[328px]'} rounded-[15px] 2xl:rounded-[30px] border-[#AEAEAE] border-[1px] bg-white 
+                ${transactions ? (title === 'Goals' ? '' : '2xl:pt-[20px]') : '2xl:pt-[25px] 2xl:px-[20px]'} mb-8 2xl:mb-0`}>
                 {
                     (() => {
                         if (title === 'Expenses by category') {
-                            // if (totals.totalExpense !== 0) {
-                            //     return (
-                            //         <div className="w-full flex flex-col justify-center items-center">
-                            //             <PieChart transactions={separatedTransactions.expenseObjects} />
-                            //             <Link
-                            //                 to='/application/transactions'
-                            //                 className="text-center 2xl:text-[24px] text-[#590CC0] uppercase mt-[25px] p-[10px] 2xl:py-[20px] w-full border-t-[1px] border-t-black">
-                            //                 See more
-                            //             </Link>
-                            //         </div>
-                            //     );
-                            // } else {
-                            //     return <NoContent is={'expense'} />;
-                            // }
                             if (isLoading) {
-                                return <div>Loading...</div>;
-                            } else {
+                                console.log(transactions);
                                 return (
-                                    <div className="w-full flex flex-col justify-center items-center">
-                                        <PieChart transactions={separatedTransactions.expenseObjects} />
-                                        <Link
-                                            to='/application/transactions'
-                                            className="text-center 2xl:text-[24px] text-[#590CC0] uppercase mt-[25px] p-[10px] 2xl:py-[20px] w-full border-t-[1px] border-t-black">
-                                            See more
-                                        </Link>
+                                    <div>
+                                        <h2>Loading...</h2>
                                     </div>
                                 );
+                            } else {
+                                if (!separatedTransactions.expenseObjects || separatedTransactions.expenseObjects.length === 0) {
+
+                                    return <NoContent is={'expense'} />;
+                                } else {
+                                    return (
+                                        <div className="w-full flex flex-col justify-center items-center">
+                                            <PieChart transactions={separatedTransactions.expenseObjects} />
+                                            <Link
+                                                to='/application/transactions'
+                                                className="text-center 2xl:text-[24px] text-[#590CC0] uppercase mt-[25px] p-[10px] 2xl:py-[20px] w-full border-t-[1px] border-t-black">
+                                                See more
+                                            </Link>
+                                        </div>
+                                    );
+                                }
                             }
                         }
+
                         if (title === 'Incomes by category') {
-                            if (totals.totalIncome !== 0) {
+                            if (isLoading) {
                                 return (
-                                    <div className="w-full flex flex-col justify-center items-center">
-                                        <PieChart transactions={separatedTransactions.incomeObjects} />
-                                        <Link
-                                            to='/application/transactions'
-                                            className="text-center 2xl:text-[24px] text-[#590CC0] uppercase mt-[25px] py-[10px] 2xl:py-[20px] w-full border-t-[1px] border-t-black">
-                                            See more
-                                        </Link>
+                                    <div>
+                                        <h2>Loading...</h2>
                                     </div>
                                 );
                             } else {
-                                return <NoContent is={'income'} />;
+                                if (!separatedTransactions.incomeObjects || separatedTransactions.incomeObjects.length === 0) {
+
+                                    return <NoContent is={'income'} />;
+                                } else {
+                                    return (
+                                        <div className="w-full flex flex-col justify-center items-center">
+                                            <PieChart transactions={separatedTransactions.incomeObjects} />
+                                            <Link
+                                                to='/application/transactions'
+                                                className="text-center 2xl:text-[24px] text-[#590CC0] uppercase mt-[25px] p-[10px] 2xl:py-[20px] w-full border-t-[1px] border-t-black">
+                                                See more
+                                            </Link>
+                                        </div>
+                                    );
+                                }
                             }
                         }
+
                         if (title === 'Monthly balance') {
                             if (!(totals.totalExpense === 0 && totals.totalExpense === 0)) {
                                 return (

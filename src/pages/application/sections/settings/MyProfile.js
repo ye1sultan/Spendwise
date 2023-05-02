@@ -1,42 +1,45 @@
 import { useState } from "react";
 import { BiPencil } from "react-icons/bi";
+import { updateUser } from "../../../../services/api";
 
-const MyProfile = () => {
-    const [user, setUser] = useState({
-        name: 'Niyaztay Yelsultan',
-        email: 'niyaztaye@gmail.com',
-        avatar: "https://picsum.photos/200/200",
-    });
+const MyProfile = ({ data }) => {
+    const [editedName, setEditedName] = useState(data.name ?? '');
+    const [editedAvatar, setEditedAvatar] = useState(data.avatar ?? '');
+    const [buttonColor, setButtonColor] = useState("#AEAEAE");
 
-    const [name, setName] = useState(user.name);
-    const [email, setEmail] = useState(user.email);
-    const [avatar, setAvatar] = useState(user.avatar);
+    const handleClick = async () => {
+        let obj = {
+            name: editedName,
+            email: data.email,
+            password: localStorage.getItem("userPwd"),
+            avatar: editedAvatar,
+        };
 
-    const [nameChanged, setNameChanged] = useState(false);
-    const [avatarChanged, setAvatarChanged] = useState(false); 
+        try {
+            const updatedUser = await updateUser(data.id, obj);
+            setEditedName(updatedUser.name);
+            setEditedAvatar(updatedUser.avatar);
 
-    const handleSubmit = () => {
-        if (nameChanged || avatarChanged) {
-            setUser({ ...user, name, avatar });
-            setNameChanged(false);
-            setAvatarChanged(false);
+            setButtonColor("#AEAEAE");
+        } catch (error) {
+            console.error("Error updating transaction:", error);
         }
-    }
-
-    const handleNameChange = (e) => {
-        setName(e.target.value);
-        setNameChanged(e.target.value !== user.name);
-    }
+    };
 
     const handleAvatarChange = (e) => {
         if (e.target.files && e.target.files[0]) {
             const reader = new FileReader();
-            reader.onload = (event) => {
-                setAvatar(event.target.result);
-                setAvatarChanged(true);
+            reader.onload = (e) => {
+                setEditedAvatar(e.target.result);
+                setButtonColor("#9F75D6");
             };
             reader.readAsDataURL(e.target.files[0]);
         }
+    };
+
+    const handleNameChange = (e) => {
+        setEditedName(e.target.value);
+        setButtonColor("#9F75D6");
     }
 
     return (
@@ -52,26 +55,28 @@ const MyProfile = () => {
                             className="w-[490px] h-[50px] border-b-[1px] border-[#000] mb-[35px] text-[24px] font-medium"
                             type="text"
                             placeholder="Your name"
-                            value={name}
-                            onChange={handleNameChange}
+                            value={editedName}
+                            onChange={(e) => handleNameChange(e)}
                             required />
                         <label className="text-[24px] font-medium mb-[10px]">Email</label>
                         <input
                             className="w-[490px] h-[50px] border-b-[1px] border-[#000] mb-[35px] text-[24px] text-[#a0a0a0] font-medium cursor-not-allowed"
                             type="email"
                             placeholder="Your email"
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
+                            value={data.email}
                             readOnly />
                         <input
-                            onClick={() => handleSubmit()}
-                            className={`w-[340px] h-[50px] rounded-[30px] ${(nameChanged || avatarChanged) ? "bg-[#9F75D6] text-[#fff] cursor-pointer" : "bg-[#D9D9D9] bg-opacity-30 cursor-not-allowed"} mt-[70px] cursor-pointer text-[16px] font-medium uppercase`}
-                            type="submit"
-                            value="Update your information" />
+                            onClick={() => handleClick()}
+                            className={`w-[340px] h-[50px] rounded-[30px]
+                             ${buttonColor === "#9F75D6" ? "bg-[#9F75D6] cursor-pointer text-white" : "bg-[#aeaeae] text-black bg-opacity-30 cursor-not-allowed"}
+                             mt-[70px] text-[16px] font-medium uppercase`}
+                            type="button"
+                            value="Update your information"
+                        />
                     </div>
                     <div className="w-full h-full flex justify-center items-center">
                         <div className="w-[200px] h-[200px] relative">
-                            <img className="w-[200px] h-[200px] rounded-[100%]" src={avatar} alt="avatar" />
+                            <img className="w-[200px] h-[200px] rounded-[100%]" src={editedAvatar} alt="avatar" />
                             <label htmlFor="avatarInput" className="cursor-pointer">
                                 <div className="w-[60px] h-[60px] rounded-full bg-[#9F75D6] absolute right-0 bottom-0 flex justify-center items-center">
                                     <BiPencil size={35} />

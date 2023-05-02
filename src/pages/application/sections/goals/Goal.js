@@ -3,24 +3,23 @@ import { IoEarthOutline } from 'react-icons/io5';
 import { BsCheckAll, BsFillPauseFill, BsFillPlayFill } from 'react-icons/bs';
 import { MdModeEditOutline } from 'react-icons/md';
 
-import { TbCurrencyTenge } from 'react-icons/tb';
-import { AiOutlineCalendar, AiOutlineHeart, AiOutlineTrophy } from 'react-icons/ai';
+import { AiOutlineHeart, AiOutlineTrophy } from 'react-icons/ai';
 import { IoBagHandle, IoCheckmarkDone, IoGameControllerOutline, IoLanguage } from 'react-icons/io5';
-import { BsArrowRightShort, BsBookmarks, BsCheck2, BsCheckSquare, BsCoin, BsFileEarmarkText, BsFillAirplaneFill, BsHouse, BsLaptop, BsPiggyBank, BsTruck } from 'react-icons/bs';
-import { BiColorFill, BiDumbbell, BiPlanet, BiWine } from 'react-icons/bi';
+import { BsCoin, BsFillAirplaneFill, BsHouse, BsLaptop, BsPiggyBank, BsTruck } from 'react-icons/bs';
+import { BiDumbbell, BiPlanet, BiWine } from 'react-icons/bi';
 import { FaMicrophone, FaMugHot, FaPray, FaRegHandPeace, FaTools } from 'react-icons/fa';
 import { MdOutlineBrokenImage, MdPedalBike, MdStroller } from 'react-icons/md';
 import { RiBookLine, RiMedal2Fill } from 'react-icons/ri';
 
-const Goal = ({ goal, name, icon, deadline, totalAmount, amount, color, id, status, onPauseGoal, onDeleteGoal, onReachGoal, onEditGoal }) => {
-    let fixedAmount = status === 'reached' ? totalAmount : amount;
+const Goal = ({ goal, name, icon, deadline, target_amount, initial_target_amount, color, id, status, onPauseGoal, onDeleteGoal, onReachGoal, onEditGoal }) => {
+    let fixedAmount = status === 'reached' ? target_amount : initial_target_amount;
 
-    const getPercent = (amount, totalAmount) => {
-        let res = parseFloat(((amount / totalAmount) * 100).toFixed(2));
-        return (res);
+    const getPercent = (initial_target_amount, target_amount) => {
+        let res = parseFloat(((initial_target_amount / target_amount) * 100).toFixed(2));
+        return res;
     }
 
-    let progress = getPercent(fixedAmount, totalAmount);
+    let progress = getPercent(fixedAmount, target_amount);
 
     const allIcons = [
         { name: 'earth', icon: <IoEarthOutline size={35} /> },
@@ -57,8 +56,11 @@ const Goal = ({ goal, name, icon, deadline, totalAmount, amount, color, id, stat
     const getIconComponent = (iconPrompt) => {
         const foundIcon = allIcons.find((iconObj) => iconObj.name === iconPrompt);
 
-        return foundIcon.icon;
-    }
+        // Define your default icon component here
+        const DefaultIconComponent = <AiOutlineCar size={35} />; // Replace "DefaultIcon" with your desired default icon component
+
+        return foundIcon ? foundIcon.icon : DefaultIconComponent;
+    };
 
     const iconComponent = getIconComponent(icon);
 
@@ -89,7 +91,7 @@ const Goal = ({ goal, name, icon, deadline, totalAmount, amount, color, id, stat
                 <div className="h-full rounded-[10px]" style={{ width: progress + "%", backgroundColor: color }}></div>
             </div>
             <div className="text-[16px] font-semibold text-[#696969]">
-                {`₸ ${fixedAmount} / ₸ ${totalAmount}`}
+                {`₸ ${parseInt(fixedAmount)} / ₸ ${parseInt(target_amount)}`}
             </div>
             <div className="w-full flex justify-end items-center">
                 <button className={`w-[35px] h-[35px] text-[#474448] ${status === 'reached' ? 'hidden' : 'block'}`} onClick={() => onPauseGoal(id)}>

@@ -51,14 +51,14 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
     }
 
     const getCategory = (name) => {
-        const category = transaction.type === 'income' ? incomeCategories.find((category) => category.name === name) : expenseCategories.find((category) => category.name === name);
+        const category = transaction.transaction_type === 'income' ? incomeCategories.find((category) => category.name === name) : expenseCategories.find((category) => category.name === name);
 
         return (
             <div className="flex justify-start items-center pr-2">
-                <div className="w-[25px] h-[25px] 2xl:w-[40px] 2xl:h-[40px] rounded-full flex justify-center items-center mr-2 2xl:mr-4" style={{ backgroundColor: category.color }}>
-                    {category.icon}
+                <div className="w-[25px] h-[25px] 2xl:w-[40px] 2xl:h-[40px] rounded-full flex justify-center items-center mr-2 2xl:mr-4" style={{ backgroundColor: category?.color }}>
+                    {category?.icon}
                 </div>
-                {category.name}
+                {category?.name}
             </div>
         );
     };
@@ -66,24 +66,24 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
     const [categoryDropDown, setCategoryDropDown] = useState(null);
 
     const getAllCategories = () => {
-        const ctg = transaction.type === 'income' ? incomeCategories : expenseCategories;
+        const ctg = transaction.transaction_type === 'income' ? incomeCategories : expenseCategories;
 
         return ctg.map((category, index) => (
             <button
                 key={index}
                 onClick={() => handleCategoryClick(category)}
                 className="flex justify-start items-center py-2">
-                <div className="w-[25px] h-[25px] 2xl:w-[40px] 2xl:h-[40px] rounded-full flex justify-center items-center mr-2 2xl:mr-4" style={{ backgroundColor: category.color }}>
-                    {category.icon}
+                <div className="w-[25px] h-[25px] 2xl:w-[40px] 2xl:h-[40px] rounded-full flex justify-center items-center mr-2 2xl:mr-4" style={{ backgroundColor: category?.color }}>
+                    {category?.icon}
                 </div>
-                {category.name}
+                {category?.name}
             </button>
         ));
     }
 
     const paymentMethods = [
         { name: "Cash", icon: <TbCoin size={iconWidth} /> },
-        { name: "Debit Card", icon: <AiOutlineCreditCard size={iconWidth} /> },
+        { name: "Credit Card", icon: <AiOutlineCreditCard size={iconWidth} /> },
     ];
 
     const getPaymentMethod = (name) => {
@@ -92,9 +92,9 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
         return (
             <div className="flex justify-start items-center pr-2">
                 <div className="2xl:w-[40px] 2xl:h-[40px] rounded-full flex justify-center items-center mr-2 2xl:mr-4">
-                    {paymentMethod.icon}
+                    {paymentMethod?.icon}
                 </div>
-                {paymentMethod.name}
+                {paymentMethod?.name}
             </div>
         );
     };
@@ -108,9 +108,9 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
                 onClick={() => handlePaymentMethodClick(paymentMethod)}
                 className="flex justify-start items-center py-2">
                 <div className="2xl:w-[40px] 2xl:h-[40px] rounded-full flex justify-center items-center mr-2 2xl:mr-4" >
-                    {paymentMethod.icon}
+                    {paymentMethod?.icon}
                 </div>
-                {paymentMethod.name}
+                {paymentMethod?.name}
             </button>
         ));
     }
@@ -124,12 +124,21 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
 
     const handleSave = async () => {
         try {
-            const updatedTransaction = await updateTransaction(editedTransaction.id, editedTransaction);
+            const updatedTransaction = await updateTransaction(editedTransaction.id, removeKeys(editedTransaction, ['created_at', 'updated_at', 'id']));
             onSave(updatedTransaction);
         } catch (error) {
             console.error("Error updating transaction:", error);
         }
     };
+
+    const removeKeys = (obj, keysToRemove) => {
+        const newObj = { ...obj };
+        keysToRemove.forEach((key) => {
+            delete newObj[key];
+        });
+
+        return newObj;
+    }
 
     const handleDeleteTransaction = () => {
         onDelete(transaction.id);

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { v4 as uuid } from 'uuid';
 
 import { TbCurrencyTenge } from 'react-icons/tb';
 import { AiOutlineClose, AiOutlineCar, AiOutlineGift, AiOutlineShoppingCart, AiOutlineCalendar, AiOutlineHeart, AiOutlineTrophy } from 'react-icons/ai';
@@ -182,15 +181,15 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
             let status = selectedAmount === selectedTotalAmount ? 'reached' : 'active';
 
             let newGoal = {
+                user_id: JSON.parse(localStorage.getItem('userData')).id,
                 name: selectedName,
                 deadline: formatDate(selectedDeadline),
-                amount: selectedAmount,
-                totalAmount: selectedTotalAmount,
+                initial_target_amount: selectedAmount,
+                target_amount: selectedTotalAmount,
                 color: selectedColor,
                 icon: selectedIcon,
                 description: selectedDescription,
                 status: status,
-                id: uuid()
             };
 
             addNewGoal(newGoal);

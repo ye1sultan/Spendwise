@@ -12,19 +12,20 @@ import { ReactComponent as NoResultTr } from './NoResultTr.svg';
 import { BsArrowDownRight, BsArrowUpRight } from 'react-icons/bs';
 import { AiOutlinePlus } from "react-icons/ai";
 
-const Transactions = ({ setTransactionsForOtherComponents }) => {
+const Transactions = ({ setData, setIsLoading }) => {
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDropDown, setShowDropDown] = useState(false);
     const [transactions, setTransactions] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isTLoading, setIsTLoading] = useState(true);
 
     useEffect(() => {
         const fetchTransactions = async () => {
             try {
                 const data = await getAllTransactions();
                 setTransactions(data);
-                setTransactionsForOtherComponents(data)
+                setIsTLoading(false);
                 setIsLoading(false);
+                setData(data);
             } catch (error) {
                 console.error("Error:", error);
             }
@@ -81,7 +82,7 @@ const Transactions = ({ setTransactionsForOtherComponents }) => {
     }
 
     const renderTransactions = () => {
-        if (isLoading) {
+        if (isTLoading) {
             return (
                 <ContentLoader
                     speed={2}

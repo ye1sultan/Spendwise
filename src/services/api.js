@@ -96,12 +96,18 @@ export const deleteTransaction = async (id) => {
         throw new Error('Error deleting transaction');
     }
 
-    const data = await response.json();
-    return data;
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.includes('application/json')) {
+        const data = await response.json();
+        return data;
+    } else {
+        // If there's no JSON content in the response, return an empty object
+        return {};
+    }
 };
 
 export const updateTransaction = async (id, updatedTransaction) => {
-    const response = await fetch(`${API_URL}/transactions/${id}`, {
+    const response = await authenticatedFetch(`${API_URL}/transactions/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -114,4 +120,83 @@ export const updateTransaction = async (id, updatedTransaction) => {
     }
 
     return await response.json();
-};  
+};
+
+export const updateUser = async (id, updatedUser) => {
+    const response = await authenticatedFetch(`${API_URL}/users/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedUser),
+    });
+
+    if (!response.ok) {
+        throw new Error(`Error updating user with ID ${id}: ${response.statusText}`);
+    }
+
+    return await response.json();
+};
+
+export const getAllGoals = async () => {
+    const response = await authenticatedFetch(`${API_URL}/goals`);
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch goals');
+    }
+
+    const data = await response.json();
+    return data;
+};
+
+export const addNewGoal = async (newGoal) => {
+    const response = await authenticatedFetch(`${API_URL}/goals`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newGoal),
+    });
+
+    if (!response.ok) {
+        throw new Error('Error adding new goal');
+    }
+
+    const data = await response.json();
+    return data;
+};
+
+export const deleteGoal = async (id) => {
+    const response = await authenticatedFetch(`${API_URL}/goals/${id}`, {
+        method: 'DELETE',
+    });
+
+    if (!response.ok) {
+        throw new Error('Error deleting goal');
+    }
+
+    const contentType = response.headers.get('content-type');
+    if (contentType && contentType.includes('application/json')) {
+        const data = await response.json();
+        return data;
+    } else {
+        // If there's no JSON content in the response, return an empty object
+        return {};
+    }
+};
+
+export const updateGoal = async (id, updatedGoal) => {
+    const response = await authenticatedFetch(`${API_URL}/goals/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedGoal),
+    });
+
+    if (!response.ok) {
+        throw new Error(`Error updating goals with ID ${id}: ${response.statusText}`);
+    }
+
+    return await response.json();
+};
