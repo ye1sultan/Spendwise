@@ -1,7 +1,10 @@
-import { useState } from 'react';
-import { AiOutlineCar, AiOutlineGift, AiOutlineShoppingCart } from 'react-icons/ai';
-import { BsArrowRightShort } from 'react-icons/bs';
-import { IoEarthOutline } from 'react-icons/io5';
+import { AiOutlineCar, AiOutlineGift, AiOutlineShoppingCart, AiOutlineHeart, AiOutlineTrophy } from 'react-icons/ai';
+import { IoEarthOutline, IoBagHandle, IoCheckmarkDone, IoGameControllerOutline, IoLanguage } from 'react-icons/io5';
+import { BsArrowRightShort, BsCoin, BsFillAirplaneFill, BsHouse, BsLaptop, BsPiggyBank, BsTruck } from 'react-icons/bs';
+import { BiDumbbell, BiPlanet, BiWine } from 'react-icons/bi';
+import { FaMicrophone, FaMugHot, FaPray, FaRegHandPeace, FaTools } from 'react-icons/fa';
+import { MdOutlineBrokenImage, MdPedalBike, MdStroller } from 'react-icons/md';
+import { RiBookLine, RiMedal2Fill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 
 const Goal = ({ name, icon, deadline, totalAmount, amount, color }) => {
@@ -12,20 +15,44 @@ const Goal = ({ name, icon, deadline, totalAmount, amount, color }) => {
 
     let progress = getPercent(amount, totalAmount);
 
-    const getIconComponent = (iconName) => {
-        switch (iconName) {
-            case "car":
-                return <AiOutlineCar size={30} />;
-            case "earth":
-                return <IoEarthOutline size={30} />;
-            case "cart":
-                return <AiOutlineShoppingCart size={30} />;
-            case "gift":
-                return <AiOutlineGift size={30} />;
-            default:
-                return null;
-        }
-    }
+    const allIcons = [
+        { name: 'earth', icon: <IoEarthOutline size={35} /> },
+        { name: 'cart', icon: <AiOutlineShoppingCart size={35} /> },
+        { name: 'coin', icon: <BsCoin size={35} /> },
+        { name: 'gift', icon: <AiOutlineGift size={35} /> },
+        { name: 'rest', icon: <FaPray size={35} /> },
+        { name: 'pic', icon: <MdOutlineBrokenImage size={35} /> },
+        { name: 'bag', icon: <IoBagHandle size={35} /> },
+        { name: 'set', icon: <FaTools size={35} /> },
+        { name: 'car', icon: <AiOutlineCar size={35} /> },
+        { name: 'tea', icon: <FaMugHot size={35} /> },
+        { name: 'plane', icon: <BsFillAirplaneFill size={35} /> },
+        { name: 'saturn', icon: <BiPlanet size={35} /> },
+        { name: 'laptop', icon: <BsLaptop size={35} /> },
+        { name: 'micro', icon: <FaMicrophone size={35} /> },
+        { name: 'buggy', icon: <MdStroller size={35} /> },
+        { name: 'medal', icon: <RiMedal2Fill size={35} /> },
+        { name: 'bike', icon: <MdPedalBike size={35} /> },
+        { name: 'contr', icon: <IoGameControllerOutline size={35} /> },
+        { name: 'wine', icon: <BiWine size={35} /> },
+        { name: 'heart', icon: <AiOutlineHeart size={35} /> },
+        { name: 'truck', icon: <BsTruck size={35} /> },
+        { name: 'book', icon: <RiBookLine size={35} /> },
+        { name: 'home', icon: <BsHouse size={35} /> },
+        { name: 'champ', icon: <AiOutlineTrophy size={35} /> },
+        { name: 'weight', icon: <BiDumbbell size={35} /> },
+        { name: 'pig', icon: <BsPiggyBank size={35} /> },
+        { name: 'lang', icon: <IoLanguage size={35} /> },
+        { name: 'peace', icon: <FaRegHandPeace size={35} /> },
+        { name: 'done', icon: <IoCheckmarkDone size={35} /> },
+    ];
+
+    const getIconComponent = (iconPrompt) => {
+        const foundIcon = allIcons.find((iconObj) => iconObj.name === iconPrompt);
+        const DefaultIconComponent = <AiOutlineCar size={35} />;
+
+        return foundIcon ? foundIcon.icon : DefaultIconComponent;
+    };
 
     const iconComponent = getIconComponent(icon);
 

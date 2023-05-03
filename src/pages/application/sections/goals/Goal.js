@@ -55,9 +55,7 @@ const Goal = ({ goal, name, icon, deadline, target_amount, initial_target_amount
 
     const getIconComponent = (iconPrompt) => {
         const foundIcon = allIcons.find((iconObj) => iconObj.name === iconPrompt);
-
-        // Define your default icon component here
-        const DefaultIconComponent = <AiOutlineCar size={35} />; // Replace "DefaultIcon" with your desired default icon component
+        const DefaultIconComponent = <AiOutlineCar size={35} />;
 
         return foundIcon ? foundIcon.icon : DefaultIconComponent;
     };
