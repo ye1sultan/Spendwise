@@ -82,17 +82,12 @@ const BieCharts = ({ title }) => {
         };
     };
 
-    return (
-        <div className="flex flex-col 2xl:mb-[60px]">
-            <div className="text-[16px] 2xl:text-[32px] text-[#696969] font-medium">
-                {title}
-            </div>
-            <div
-                className={`flex flex-col justify-between items-center w-[285px] 2xl:w-[723px] ${transactions ? (title === 'Goals' ? '2xl:h-[320px]' : '2xl:h-full') : 'h-[328px]'} rounded-[15px] 2xl:rounded-[30px] border-[#AEAEAE] border-[1px] bg-white 
-                ${transactions ? (title === 'Goals' ? '' : '2xl:pt-[20px]') : '2xl:pt-[25px] 2xl:px-[20px]'} mb-8 2xl:mb-0`}>
-                {
-                    (() => {
-                        if (title === 'Expenses by category') {
+    const getBieChart = () => {
+        if (title === 'Expenses by category') {
+            return (
+                <div className="flex flex-col justify-between items-center w-[285px] 2xl:w-[723px] rounded-[15px] 2xl:rounded-[30px] border-[#AEAEAE] border-[1px] bg-white mb-8 2xl:mb-0">
+                    {
+                        (() => {
                             if (isLoading) {
                                 return (
                                     <div>
@@ -113,9 +108,17 @@ const BieCharts = ({ title }) => {
                                     </div>
                                 );
                             }
-                        }
+                        })()
+                    }
+                </div>
+            );
+        }
 
-                        if (title === 'Incomes by category') {
+        if (title === 'Incomes by category') {
+            return (
+                <div className="flex flex-col justify-between items-center w-[285px] 2xl:w-[723px] rounded-[15px] 2xl:rounded-[30px] border-[#AEAEAE] border-[1px] bg-white mb-8 2xl:mb-0">
+                    {
+                        (() => {
                             if (isLoading) {
                                 return (
                                     <div>
@@ -136,9 +139,16 @@ const BieCharts = ({ title }) => {
                                     </div>
                                 );
                             }
-                        }
-
-                        if (title === 'Monthly balance') {
+                        })()
+                    }
+                </div>
+            );
+        }
+        if (title === 'Monthly balance') {
+            return (
+                <div className="flex flex-col justify-between items-center w-[285px] 2xl:w-[723px] rounded-[15px] 2xl:rounded-[30px] border-[#AEAEAE] border-[1px] bg-white mb-8 2xl:mb-0">
+                    {
+                        (() => {
                             if (isLoading) {
                                 return (
                                     <div>
@@ -150,7 +160,9 @@ const BieCharts = ({ title }) => {
                             } else {
                                 return (
                                     <div className="w-full flex flex-col justify-center items-center">
-                                        <BarChart expense={calculateTotals(transactions).totalExpense} income={calculateTotals(transactions).totalIncome} />
+                                        <BarChart
+                                            expense={calculateTotals(transactions).totalExpense}
+                                            income={calculateTotals(transactions).totalIncome} />
                                         <Link
                                             to='/application/transactions'
                                             className="text-center 2xl:text-[24px] text-[#590CC0] uppercase mt-[25px] py-[10px] 2xl:py-[20px] w-full border-t-[1px] border-t-black">
@@ -159,8 +171,17 @@ const BieCharts = ({ title }) => {
                                     </div>
                                 );
                             }
-                        }
-                        if (title === 'Goals') {
+                        })()
+                    }
+                </div>
+            );
+        }
+
+        if (title === 'Goals') {
+            return (
+                <div className="flex flex-col justify-between items-center h-[65%] w-[285px] 2xl:w-[723px] rounded-[15px] 2xl:rounded-[30px] border-[#AEAEAE] border-[1px] bg-white mb-8 2xl:mb-0">
+                    {
+                        (() => {
                             if (isGLoading) {
                                 return (
                                     <div>
@@ -174,10 +195,19 @@ const BieCharts = ({ title }) => {
                                     <Goal name={goals.name} icon={goals.icon} deadline={goals.deadline} totalAmount={goals.target_amount} amount={goals.initial_target_amount} color={goals.color} />
                                 );
                             }
-                        }
-                    })()
-                }
+                        })()
+                    }
+                </div>
+            );
+        }
+    }
+
+    return (
+        <div className="flex flex-col 2xl:mb-[60px]">
+            <div className="text-[16px] 2xl:text-[32px] text-[#696969] font-medium">
+                {title}
             </div>
+            {getBieChart()}
         </div>
     );
 }
