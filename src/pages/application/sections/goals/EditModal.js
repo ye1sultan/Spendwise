@@ -124,12 +124,26 @@ const EditModal = ({ goal, onSave, onCancel }) => {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setEditedGoal({ ...editedGoal, [name]: value });
+        let updatedGoal = { ...editedGoal, [name]: value };
+
+        if (name === "initial_target_amount" || name === "target_amount") {
+            if (parseInt(updatedGoal.initial_target_amount) >= parseInt(updatedGoal.target_amount)) {
+                updatedGoal = { ...updatedGoal, status: "reached" };
+            } else {
+                updatedGoal = { ...updatedGoal, status: updatedGoal.status };
+            }
+        }
+
+        setEditedGoal(updatedGoal);
     };
 
     const handleSave = async () => {
         try {
-            const updatedGoal = await updateGoal(goal.id, removeKeys(editedGoal, ['created_at', 'updated_at', 'id']));
+            const updatedGoalData = removeKeys(editedGoal, ['created_at', 'updated_at', 'id']);
+            if (parseInt(updatedGoalData.initial_target_amount) >= parseInt(updatedGoalData.target_amount)) {
+                updatedGoalData.status = 'reached';
+            }
+            const updatedGoal = await updateGoal(goal.id, updatedGoalData);
             onSave(updatedGoal);
         } catch (error) {
             console.error("Error updating goals:", error);
@@ -144,6 +158,14 @@ const EditModal = ({ goal, onSave, onCancel }) => {
 
         return newObj;
     }
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
 
     return (
         <div className="fixed top-[10%] left-[50%] translate-x-[-50%] bg-white border-[1px] border-[#AEAEAE] w-[600px] p-4 rounded-[40px] shadow-md">
@@ -163,8 +185,8 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                 <input
                     className="px-4 block w-full h-[50px] border-b-[1px] border-[#000000] text-[18px]"
                     type="date"
-                    name="date"
-                    value={editedGoal.deadline}
+                    name="deadline"
+                    value={formatDate(editedGoal.deadline)}
                     onChange={handleChange}
                 />
             </div>
@@ -173,7 +195,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                 <input
                     className="px-4 block w-full h-[50px] border-b-[1px] border-[#000000] text-[18px]"
                     type="number"
-                    name="amount"
+                    name="initial_target_amount"
                     value={parseInt(editedGoal.initial_target_amount)}
                     onChange={handleChange}
                 />
@@ -183,7 +205,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                 <input
                     className="px-4 block w-full h-[50px] border-b-[1px] border-[#000000] text-[18px]"
                     type="number"
-                    name="totalAmount"
+                    name="target_amount"
                     value={parseInt(editedGoal.target_amount)}
                     onChange={handleChange}
                 />

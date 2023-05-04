@@ -188,7 +188,7 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
                 target_amount: selectedTotalAmount,
                 color: selectedColor,
                 icon: selectedIcon,
-                description: selectedDescription,
+                description: selectedDescription ? selectedDescription : '.',
                 status: status,
             };
 

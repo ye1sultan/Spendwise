@@ -2,7 +2,6 @@ import { AiFillDelete, AiOutlineCar, AiOutlineGift, AiOutlineShoppingCart } from
 import { IoEarthOutline } from 'react-icons/io5';
 import { BsCheckAll, BsFillPauseFill, BsFillPlayFill } from 'react-icons/bs';
 import { MdModeEditOutline } from 'react-icons/md';
-
 import { AiOutlineHeart, AiOutlineTrophy } from 'react-icons/ai';
 import { IoBagHandle, IoCheckmarkDone, IoGameControllerOutline, IoLanguage } from 'react-icons/io5';
 import { BsCoin, BsFillAirplaneFill, BsHouse, BsLaptop, BsPiggyBank, BsTruck } from 'react-icons/bs';

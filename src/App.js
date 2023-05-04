@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { v4 as uuid } from 'uuid';
 
 import Landing from './pages/Landing';
 import Login from './pages/sign/Login';

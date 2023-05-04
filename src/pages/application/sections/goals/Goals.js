@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getAllGoals, addNewGoal as addNewGoalAPI, deleteGoal } from '../../../../services/api';
+import { getAllGoals, addNewGoal as addNewGoalAPI, deleteGoal, updateGoal } from '../../../../services/api';
 
 import Title from "../../components/Title";
 
@@ -12,20 +12,6 @@ import EditModal from "./EditModal";
 import ContentLoader from "react-content-loader";
 
 const Goals = () => {
-    // GOALS SETTINGS
-    // const initialGoals = [
-    //     {
-    //         name: "Initial Goal",
-    //         deadline: "2023-12-31",
-    //         amount: 100,
-    //         totalAmount: 1000,
-    //         color: "#F1BF5B",
-    //         icon: "car",
-    //         desciprtion: '',
-    //         status: 'active',
-    //     }
-    // ];
-
     const [showDropDown, setShowDropDown] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [goals, setGoals] = useState([]);
@@ -73,35 +59,50 @@ const Goals = () => {
         }
     };
 
-    const pauseGoal = (id) => {
-        // setGoalsWithIdState((prevGoals) =>
-        //     prevGoals.map((goal) => {
-        //         if (goal.id === id) {
-        //             return {
-        //                 ...goal,
-        //                 status: goal.status === 'active' ? 'paused' : 'active',
-        //             };
+    const pauseGoal = async (id) => {
+        const goalToPause = goals.find((goal) => goal.id === id);
 
-        //         }
+        if (goalToPause) {
+            const updatedGoal = {
+                ...goalToPause,
+                status: goalToPause.status === 'active' ? 'paused' : 'active',
+            };
 
-        //         return goal;
-        //     })
-        // );
+            try {
+                const updatedData = await updateGoal(id, removeKeys(updatedGoal, ['created_at', 'id', 'progress', 'updated_at', 'user_id']));
+                updateGoals(updatedData);
+            } catch (error) {
+                console.error('Error updating goal status:', error);
+            }
+        }
     };
 
-    const reachGoal = (id) => {
-        // setGoalsWithIdState((prevGoals) =>
-        //     prevGoals.map((goal) => {
-        //         if (goal.id === id) {
-        //             return {
-        //                 ...goal,
-        //                 status: 'reached',
-        //             };
-        //         }
-        //         return goal;
-        //     })
-        // );
+    const reachGoal = async (id) => {
+        const goalToReach = goals.find((goal) => goal.id === id);
+
+        if (goalToReach) {
+            const updatedGoal = {
+                ...goalToReach,
+                status: 'reached',
+            };
+
+            try {
+                const updatedData = await updateGoal(id, removeKeys(updatedGoal, ['created_at', 'id', 'progress', 'updated_at', 'user_id']));
+                updateGoals(updatedData);
+            } catch (error) {
+                console.error('Error updating goal status:', error);
+            }
+        }
     };
+
+    const removeKeys = (obj, keysToRemove) => {
+        const newObj = { ...obj };
+        keysToRemove.forEach((key) => {
+            delete newObj[key];
+        });
+
+        return newObj;
+    }
 
     const [goalModal, setGoalModal] = useState(false);
     const [goalFilter, setGoalFilter] = useState('active');
@@ -155,7 +156,7 @@ const Goals = () => {
         return goals.filter((goal) => goal.status === filter);
     };
 
-    const filteredGoals = filterGoals(goals);
+    const filteredGoals = filterGoals(goals, goalFilter);
 
     return (
         <div className="w-full h-full flex flex-col items-center">
@@ -205,7 +206,7 @@ const Goals = () => {
                         </ContentLoader>
                     </div>
                 ) : (
-                    goals.map((goal, index) => (
+                    filteredGoals.map((goal, index) => (
                         <Goal
                             key={index}
                             goal={goal}
