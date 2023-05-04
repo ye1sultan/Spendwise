@@ -16,8 +16,8 @@ const Transaction = ({ name, value, icon, color, percentage, type }) => {
                     </div>
                 </div>
                 <div className="flex flex-col justify-center items-end">
-                    <div className="font-medium text-[22px]" style={{ color: type === 'incomes' ? '#34C05C' : '#EA1A1A' }}>
-                        {type === 'expenses' ? '- ' + value : value}
+                    <div className="font-medium text-[22px]" style={{ color: type === 'income' ? '#34C05C' : '#EA1A1A' }}>
+                        {type === 'expense' ? '- ' + value : value}
                     </div>
                     <div className="text-[20px] text-[#443A3A]">
                         {percentage}

@@ -15,14 +15,14 @@ import { FaPray } from 'react-icons/fa';
 import { TbHealthRecognition } from 'react-icons/tb';
 import Transaction from '../Transaction';
 
-const getTotalExpense = (data) => {
+const getTotal = (data) => {
     return data.datasets[0].data.reduce((acc, val) => acc + val, 0);
 };
 
 const centerTextPlugin = {
     id: "centerText",
     afterDraw: (chart) => {
-        const totalExpense = getTotalExpense(chart.data);
+        const total = getTotal(chart.data);
         const ctx = chart.ctx;
         const centerX = (chart.chartArea.left + chart.chartArea.right) / 2;
         const centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
@@ -33,7 +33,7 @@ const centerTextPlugin = {
         ctx.textBaseline = "middle";
 
         const text2 = "Total";
-        const text1 = `${totalExpense.toLocaleString()} ₸`;
+        const text1 = `${total.toLocaleString()} ₸`;
         const lineHeight = 28;
         const totalHeight = lineHeight * 2;
 
@@ -130,20 +130,20 @@ const PieChart = ({ transactions, type }) => {
         }
     };
 
-    const getExpenses = () => {
-        return transactions.map((expense, index) => {
-            const category = categories.find((category) => category.name === expense.category);
-            const percentage = Math.abs((expense.amount / getTotalExpense(data) * 100).toFixed(2));
+    const getTransactions = () => {
+        return transactions.map((transaction, index) => {
+            const category = categories.find((category) => category.name === transaction.category);
+            const percentage = Math.abs((transaction.amount / getTotal(data) * 100).toFixed(2));
 
             return (
                 <Transaction
                     key={index}
                     name={category.name}
-                    value={Math.abs(expense.amount).toLocaleString()}
+                    value={Math.abs(transaction.amount).toLocaleString()}
                     icon={category.icon}
                     color={category.color}
                     percentage={`${percentage}%`}
-                    type={type}
+                    type={transaction.transaction_type}
                 />
             );
         });
@@ -162,11 +162,11 @@ const PieChart = ({ transactions, type }) => {
                 </div>
             </div>
             <div className="w-[50%]">
-                <div className="text-[32px] font-medium mb-6">
-                    Expenses by category
+                <div className="text-[32px] font-medium mb-6 capitalize">
+                    {type} by category
                 </div>
                 <div className="">
-                    {getExpenses()}
+                    {getTransactions()}
                 </div>
             </div>
         </>

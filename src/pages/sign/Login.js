@@ -10,6 +10,8 @@ const Login = ({ setUserData }) => {
     const navigate = useNavigate();
 
     const handleNavigation = (e) => {
+        e.preventDefault();
+
         const route = e.currentTarget.getAttribute('data-route');
         navigate(route);
     }
@@ -46,7 +48,6 @@ const Login = ({ setUserData }) => {
     return (
         <div className="bg-white h-screen flex justify-center items-center relative font-sans">
             <div className="h-[31%] w-full bg-gradient-to-r from-purple-300 via-purple-300 to-pink-100 absolute top-0 z-0"></div>
-
             <div className="w-[474px] h-[576px] bg-white rounded-[24px] flex flex-col justify-start items-center z-10 shadow-lg">
                 <div className="mt-[32px] text-[#344767] font-semibold mb-[32px] text-[12px]">
                     Continue with
@@ -82,12 +83,10 @@ const Login = ({ setUserData }) => {
                             Remember me
                         </label>
                     </div>
-                    <button className='bg-[#343A40] text-white font-semibold text-[12px] w-[382px] h-[40px] rounded-[8px] mb-[32px]' type='submit'>
-                        Log in
-                    </button>
+                    <input className='bg-[#343A40] text-white font-semibold text-[12px] w-[382px] h-[40px] rounded-[8px] mb-[32px]' type='submit' value='Log In' />
                 </form>
                 <div className='flex flex-row justif-center items-center'>
-                    <div className='font-semibold text-[12px] mr-2'>
+                    <div className='font-semibold text-[14px] mr-2'>
                         Don`t have an account yet?
                     </div>
                     <button data-route='/signup' className='font-bold text-[14px]' onClick={handleNavigation}>

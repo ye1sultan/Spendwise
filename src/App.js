@@ -47,8 +47,22 @@ function App() {
                             userData={userData}
                         />
                     } >
-                    <Route path="" element={<Navigate to="dashboard" />} />
-                    <Route path="*" element={<Navigate to="dashboard" />} />
+                    <Route
+                        path=""
+                        element={
+                            <Navigate
+                                to="dashboard"
+                            />
+                        }
+                    />
+                    <Route
+                        path="*"
+                        element={
+                            <Navigate
+                                to="dashboard"
+                            />
+                        }
+                    />
                     <Route
                         path="dashboard"
                         element={
@@ -65,19 +79,48 @@ function App() {
                                 setData={setTransactions}
                                 setIsLoading={setIsLoading}
                             />
-                        }
-                    >
-                        <Route path="" element={<Navigate to=":month-year" />} />
-                        <Route path="*" element={<Navigate to=":month-year" />} />
-                        <Route path=":month-:year" element={<Transactions />} />
+                        }>
+                        <Route
+                            path=""
+                            element={
+                                <Navigate
+                                    to=":month-year"
+                                />
+                            }
+                        />
+                        <Route
+                            path="*"
+                            element={
+                                <Navigate
+                                    to=":month-year"
+                                />
+                            }
+                        />
+                        <Route
+                            path=":month-:year"
+                            element={
+                                <Transactions />
+                            }
+                        />
                     </Route>
                     <Route
                         path="goals"
                         element={
                             <Goals />
-                        } />
-                    <Route path="report" element={<Report />} />
-                    <Route path="notifications" element={<Notifications />} />
+                        }
+                    />
+                    <Route
+                        path="report"
+                        element={
+                            <Report />
+                        }
+                    />
+                    <Route
+                        path="notifications"
+                        element={
+                            <Notifications />
+                        }
+                    />
                     <Route
                         path="settings"
                         element={
@@ -87,7 +130,6 @@ function App() {
                         }
                     />
                 </Route>
-
             </Routes>
         </div>
     );

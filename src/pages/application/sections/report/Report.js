@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Title from "../../components/Title";
 import BarChart from "./charts/BarChart";
@@ -8,18 +8,36 @@ import MonthSelector from "./MonthSelector";
 import { ReactComponent as NoResultRp } from "./NoResultRp.svg";
 import { FiBarChart, FiPieChart } from "react-icons/fi";
 import { BiChevronDown } from "react-icons/bi";
+import { getAllTransactions } from "../../../../services/api";
 
-const Report = ({ data }) => {
-    const [currentTransaction, setCurrentTransaction] = useState('incomes');
+const Report = () => {
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    const [currentTransaction, setCurrentTransaction] = useState('both');
+
+    useEffect(() => {
+        const fetchTransactions = async () => {
+            try {
+                const data = await getAllTransactions();
+                setData(data);
+                setIsLoading(false);
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        };
+
+        fetchTransactions();
+    }, []);
 
     const calculateTotals = (transactions) => {
         let totalIncome = 0;
         let totalExpense = 0;
 
         transactions.forEach((transaction) => {
-            if (transaction.type === 'income') {
+            if (transaction.transaction_type === 'income') {
                 totalIncome += parseInt(transaction.amount);
-            } else if (transaction.type === 'expense') {
+            } else if (transaction.transaction_type === 'expense') {
                 totalExpense += parseInt(transaction.amount);
             }
         });
@@ -27,6 +45,7 @@ const Report = ({ data }) => {
         return {
             totalIncome,
             totalExpense,
+            totalBalance: totalIncome - totalExpense
         };
     };
 
@@ -35,9 +54,9 @@ const Report = ({ data }) => {
         let expenseObjects = [];
 
         transactions.forEach((transaction) => {
-            if (transaction.type === 'income') {
+            if (transaction.transaction_type === 'income') {
                 incomeObjects.push(transaction);
-            } else if (transaction.type === 'expense') {
+            } else if (transaction.transaction_type === 'expense') {
                 expenseObjects.push(transaction);
             }
         });
@@ -64,34 +83,140 @@ const Report = ({ data }) => {
         });
     };
 
-    const currentMonthTransactions = getCurrentMonthTransactions(
-        data,
-        currentMonth.month,
-        currentMonth.year
-    );
-
-    const totals = calculateTotals(currentMonthTransactions);
-
-    const separatedTransactions = separateIncomeAndExpense(currentMonthTransactions);
-
-    const transactions = currentTransaction === 'expenses' ? separatedTransactions.expenseObjects : separatedTransactions.incomeObjects;
-
     const [switched, setSwitched] = useState(false);
-
     const handleSwitch = () => {
         setSwitched((prevState) => !prevState);
     };
 
     const [dropDown, setDropDown] = useState(false);
-
-    const handleExpensesClick = () => {
-        setCurrentTransaction('expenses');
+    const handleDropDownClick = (name) => {
+        setCurrentTransaction(name);
         setDropDown(false);
     }
 
-    const handleIncomesClick = () => {
-        setCurrentTransaction('incomes');
-        setDropDown(false);
+    const renderData = () => {
+        if (currentTransaction === 'both') {
+            return (
+                <>
+                    {
+                        (() => {
+                            if (isLoading) {
+                                return (
+                                    <div>
+                                        <h2>Loading...</h2>
+                                    </div>
+                                );
+                            } else if (!getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year) || getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year).length === 0) {
+                                return (
+                                    <div className={`flex flex-col justify-center items-center`}>
+                                        <NoResultRp />
+                                        <div className="font-medium text-[24px] text-[#696969] w-full flex justify-center items-center mt-6">
+                                            No results
+                                        </div>
+                                    </div>
+                                );
+                            } else {
+                                if (!switched) {
+                                    return (
+                                        <div className="flex justify-between items-center w-full min-h-[300px]">
+                                            <PieChart transactions={getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)} type={currentTransaction} />
+                                        </div>
+                                    );
+                                } else {
+                                    return (
+                                        <div className="flex justify-evenly items-center w-full h-full min-h-[300px]">
+                                            <BarChart expenses={calculateTotals(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).totalExpense} incomes={calculateTotals(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).totalIncome} balance={calculateTotals(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).totalBalance} />
+                                        </div>
+                                    );
+                                }
+                            }
+                        })()
+                    }
+                </>
+            );
+        }
+
+        if (currentTransaction === 'incomes') {
+            return (
+                <>
+                    {
+                        (() => {
+                            if (isLoading) {
+                                return (
+                                    <div>
+                                        <h2>Loading...</h2>
+                                    </div>
+                                );
+                            } else if (!separateIncomeAndExpense(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).incomeObjects || separateIncomeAndExpense(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).incomeObjects.length === 0) {
+                                return (
+                                    <div className={`flex flex-col justify-center items-center`}>
+                                        <NoResultRp />
+                                        <div className="font-medium text-[24px] text-[#696969] w-full flex justify-center items-center mt-6">
+                                            No results
+                                        </div>
+                                    </div>
+                                );
+                            } else {
+                                if (!switched) {
+                                    return (
+                                        <div className="flex justify-between items-center w-full min-h-[300px]">
+                                            <PieChart transactions={separateIncomeAndExpense(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).incomeObjects} type={'incomes'} />
+                                        </div>
+                                    );
+                                } else {
+                                    return (
+                                        <div className="flex justify-evenly items-center w-full h-full min-h-[300px]">
+                                            <BarChart expenses={calculateTotals(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).totalExpense} incomes={calculateTotals(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).totalIncome} />
+                                        </div>
+                                    );
+                                }
+                            }
+                        })()
+                    }
+                </>
+            );
+        }
+
+        if (currentTransaction === 'expenses') {
+            return (
+                <>
+                    {
+                        (() => {
+                            if (isLoading) {
+                                return (
+                                    <div>
+                                        <h2>Loading...</h2>
+                                    </div>
+                                );
+                            } else if (!separateIncomeAndExpense(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).expenseObjects || separateIncomeAndExpense(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).expenseObjects.length === 0) {
+                                return (
+                                    <div className={`flex flex-col justify-center items-center`}>
+                                        <NoResultRp />
+                                        <div className="font-medium text-[24px] text-[#696969] w-full flex justify-center items-center mt-6">
+                                            No results
+                                        </div>
+                                    </div>
+                                );
+                            } else {
+                                if (!switched) {
+                                    return (
+                                        <div className="flex justify-between items-center w-full min-h-[300px]">
+                                            <PieChart transactions={separateIncomeAndExpense(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).expenseObjects} type={'expenses'} />
+                                        </div>
+                                    );
+                                } else {
+                                    return (
+                                        <div className="flex justify-evenly items-center w-full h-full min-h-[300px]">
+                                            <BarChart expenses={calculateTotals(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).totalExpense} incomes={calculateTotals(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).totalIncome} />
+                                        </div>
+                                    );
+                                }
+                            }
+                        })()
+                    }
+                </>
+            );
+        }
     }
 
     return (
@@ -112,10 +237,13 @@ const Report = ({ data }) => {
                         <BiChevronDown size={30} />
                     </button>
                     <div className={`translate-x-[-30px] ${dropDown ? 'flex' : 'hidden'} flex-col text-[24px] bg-white shadow rounded-[20px] px-8 py-2`}>
-                        <button className="mb-2" onClick={handleExpensesClick}>
+                        <button className="mb-2" onClick={() => handleDropDownClick('both')}>
+                            Both
+                        </button>
+                        <button className="mb-2" onClick={() => handleDropDownClick('expenses')}>
                             Expenses
                         </button>
-                        <button className="" onClick={handleIncomesClick}>
+                        <button className="" onClick={() => handleDropDownClick('incomes')}>
                             Incomes
                         </button>
                     </div>
@@ -124,26 +252,7 @@ const Report = ({ data }) => {
                     currentMonth={currentMonth}
                     setCurrentMonth={setCurrentMonth}
                 />
-                <div className={`${transactions && transactions.length > 0 ? 'hidden' : 'flex'} flex-col justify-center items-center`}>
-                    <NoResultRp />
-                    <div className="font-medium text-[24px] text-[#696969] w-full flex justify-center items-center mt-6">
-                        No results
-                    </div>
-                </div>
-                <div className={`${switched ? 'hidden' : 'flex'} ${transactions && transactions.length > 0 ? 'flex' : 'hidden'} justify-between items-center w-full min-h-[300px]`}>
-                    <PieChart transactions={transactions} type={currentTransaction} />
-                </div>
-                <div className={`${switched ? 'flex' : 'hidden'} ${getCurrentMonthTransactions(
-                    data,
-                    currentMonth.month,
-                    currentMonth.year
-                ) && getCurrentMonthTransactions(
-                    data,
-                    currentMonth.month,
-                    currentMonth.year
-                ).length > 0 ? 'flex' : 'hidden'} justify-evenly items-center w-full h-full min-h-[300px]`}>
-                    <BarChart expenses={totals.totalExpense} incomes={totals.totalIncome} />
-                </div>
+                {renderData()}
             </div>
         </>
     );

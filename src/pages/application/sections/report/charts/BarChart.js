@@ -1,6 +1,4 @@
 const BarChart = ({ expenses, incomes }) => {
-
-
     const total = Math.abs(expenses) + incomes;
     const incomePercentage = ((incomes / total) * 100).toFixed(2) + "%";
     const expensePercentage = ((Math.abs(expenses) / total) * 100).toFixed(2) + "%";
