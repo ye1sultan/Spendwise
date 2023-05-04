@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-    outline: none;
-}
+/* * {
+    outline: 1px dashed red;
+} */
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

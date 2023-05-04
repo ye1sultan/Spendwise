@@ -1,6 +1,7 @@
 import { BsFlag } from "react-icons/bs";
 import { FiPieChart } from "react-icons/fi"
 import { MdSignalCellularAlt } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const NoContent = ({ is }) => {
     const getNoContent = () => {
@@ -21,9 +22,11 @@ const NoContent = ({ is }) => {
                             Register the expenses made this month using the (+) button in transactions to check your charts.
                         </div>
                     </div>
-                    <button className="text-[10px] 2xl:text-[24px] text-[#590CC0] uppercase w-full h-[30px] 2xl:h-[70px] border-t-[1px] border-t-black">
+                    <Link
+                        to="/application/report"
+                        className="flex justify-center items-center text-[10px] 2xl:text-[24px] text-[#590CC0] uppercase w-full h-[30px] 2xl:h-[70px] border-t-[1px] border-t-black">
                         see more
-                    </button>
+                    </Link>
                 </>
             );
         }
@@ -45,9 +48,11 @@ const NoContent = ({ is }) => {
                             Register the incomes made this month using the (+) button in transactions to check your charts.
                         </div>
                     </div>
-                    <button className="text-[10px] 2xl:text-[24px] text-[#590CC0] uppercase w-full h-[30px] 2xl:h-[70px] border-t-[1px] border-t-black">
+                    <Link
+                        to="/application/report"
+                        className="flex justify-center items-center text-[10px] 2xl:text-[24px] text-[#590CC0] uppercase w-full h-[30px] 2xl:h-[70px] border-t-[1px] border-t-black">
                         see more
-                    </button>
+                    </Link>
                 </>
             );
         }
@@ -69,9 +74,11 @@ const NoContent = ({ is }) => {
                             What about start registering the expenses and incomes made this month?
                         </div>
                     </div>
-                    <button className="text-[10px] 2xl:text-[24px] text-[#590CC0] uppercase w-full h-[30px] 2xl:h-[70px] border-t-[1px] border-t-black">
+                    <Link
+                        to="/application/report"
+                        className="flex justify-center items-center text-[10px] 2xl:text-[24px] text-[#590CC0] uppercase w-full h-[30px] 2xl:h-[70px] border-t-[1px] border-t-black">
                         see more
-                    </button>
+                    </Link>
                 </>
             );
         }
@@ -93,9 +100,11 @@ const NoContent = ({ is }) => {
                             Improve your finances now!
                         </div>
                     </div>
-                    <button className="uppercase 2xl:w-[269px] 2xl:h-[52px] bg-[#9F75D6] bg-opacity-90 2xl:rounded-[30px] text-white text-[10px] 2xl:text-[20px] 2xl:mb-[30px]">
+                    <Link
+                        to="/application/goals"
+                        className="flex justify-center items-center uppercase 2xl:w-[269px] 2xl:h-[52px] bg-[#9F75D6] bg-opacity-90 2xl:rounded-[30px] text-white text-[10px] 2xl:text-[20px] mb-[20px]">
                         see more
-                    </button>
+                    </Link>
                 </>
             );
         }

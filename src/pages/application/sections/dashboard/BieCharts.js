@@ -11,7 +11,7 @@ const BieCharts = ({ title }) => {
     const [transactions, setTransactions] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const [goals, setGoals] = useState([]);
+    const [goal, setGoal] = useState([]);
     const [isGLoading, setIsGLoading] = useState(true);
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const BieCharts = ({ title }) => {
                 setIsLoading(false);
 
                 const goalData = await getAllGoals();
-                setGoals(goalData[goalData.length - 1]);
+                setGoal(goalData[goalData.length - 1]);
                 setIsGLoading(false);
             } catch (error) {
                 console.error("Error:", error);
@@ -179,7 +179,7 @@ const BieCharts = ({ title }) => {
 
         if (title === 'Goals') {
             return (
-                <div className="flex flex-col justify-between items-center h-[65%] w-[285px] 2xl:w-[723px] rounded-[15px] 2xl:rounded-[30px] border-[#AEAEAE] border-[1px] bg-white mb-8 2xl:mb-0">
+                <div className="flex flex-col justify-center items-center min-h-[270px] w-[285px] 2xl:w-[723px] rounded-[15px] 2xl:rounded-[30px] border-[#AEAEAE] border-[1px] bg-white mb-8">
                     {
                         (() => {
                             if (isGLoading) {
@@ -188,11 +188,11 @@ const BieCharts = ({ title }) => {
                                         <h2>Loading...</h2>
                                     </div>
                                 );
-                            } else if (!goals || goals.length === 0) {
+                            } else if (!goal) {
                                 return <NoContent is={'goal'} />;
                             } else {
                                 return (
-                                    <Goal name={goals.name} icon={goals.icon} deadline={goals.deadline} totalAmount={goals.target_amount} amount={goals.initial_target_amount} color={goals.color} />
+                                    <Goal name={goal.name} icon={goal.icon} deadline={goal.deadline} totalAmount={goal.target_amount} amount={goal.initial_target_amount} color={goal.color} />
                                 );
                             }
                         })()

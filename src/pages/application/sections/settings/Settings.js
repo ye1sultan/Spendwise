@@ -7,8 +7,6 @@ import Preferences from "./Preferences";
 import Security from "./Security";
 
 const Settings = ({ data }) => {
-  console.log(data);
-
   const [selectedTab, setSelectedTab] = useState("profile");
 
   const handleTabClick = (tab) => {

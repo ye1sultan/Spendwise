@@ -1,15 +1,25 @@
 import Title from "../components/Title";
 import Switch from "react-switch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Notifications = () => {
-
     const [notifValue, setNotifValue] = useState(false);
-    const [datesValue, setDatesValue] = useState(false);
+
     const [newsValue, setNewsValue] = useState(false);
     const [goalValue, setGoalValue] = useState(false);
     const [debtValue, setDebtValue] = useState(false);
 
+    useEffect(() => {
+        if (notifValue) {
+            setNewsValue(true);
+            setGoalValue(true);
+            setDebtValue(true);
+        } else {
+            setNewsValue(false);
+            setGoalValue(false);
+            setDebtValue(false);
+        }
+    }, [notifValue]);
 
     return (
         <>
@@ -42,29 +52,6 @@ const Notifications = () => {
                 <div className="w-full flex justify-between items-center flex-wrap">
                     <div className="py-[50px]">
                         <div className="text-[36px] font-medium">
-                            Due dates
-                        </div>
-                        <div className="w-[630px] flex justify-between items-center mb-6">
-                            <div className="text-[30px] font-medium text-[#696969]">
-                                Due date reminders help you remember deadlines.
-                            </div>
-                            <Switch
-                                onChange={setDatesValue}
-                                checked={datesValue}
-                                checkedIcon={false}
-                                uncheckedIcon={false}
-                                offColor="#ccc"
-                                onColor="#BFA2E5"
-                                offHandleColor="#dacce2"
-                                onHandleColor="#5C2F73"
-                                handleDiameter={40}
-                                height={27}
-                                width={74}
-                            />
-                        </div>
-                    </div>
-                    <div className="py-[50px]">
-                        <div className="text-[36px] font-medium">
                             News
                         </div>
                         <div className="w-[630px] flex justify-between items-center mb-6">
@@ -74,6 +61,7 @@ const Notifications = () => {
                             <Switch
                                 onChange={setNewsValue}
                                 checked={newsValue}
+                                disabled={!notifValue}
                                 checkedIcon={false}
                                 uncheckedIcon={false}
                                 offColor="#ccc"
@@ -97,6 +85,7 @@ const Notifications = () => {
                             <Switch
                                 onChange={setGoalValue}
                                 checked={goalValue}
+                                disabled={!notifValue}
                                 checkedIcon={false}
                                 uncheckedIcon={false}
                                 offColor="#ccc"
@@ -120,6 +109,7 @@ const Notifications = () => {
                             <Switch
                                 onChange={setDebtValue}
                                 checked={debtValue}
+                                disabled={!notifValue}
                                 checkedIcon={false}
                                 uncheckedIcon={false}
                                 offColor="#ccc"
@@ -132,7 +122,6 @@ const Notifications = () => {
                             />
                         </div>
                     </div>
-
                 </div>
             </div>
         </>

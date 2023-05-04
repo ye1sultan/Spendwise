@@ -14,6 +14,7 @@ import Goals from './pages/application/sections/goals/Goals';
 import Report from './pages/application/sections/report/Report';
 import Notifications from './pages/application/sections/Notifications';
 import Settings from './pages/application/sections/settings/Settings';
+import TermOfUse from './pages/sign/TermOfUse';
 
 function App() {
     //USERDATA
@@ -37,6 +38,7 @@ function App() {
                 <Route path="home" element={<Landing />} />
                 <Route path="login" element={<Login setUserData={setUserData} />} />
                 <Route path="signup" element={<Signup />} />
+                <Route path="term-of-use" element={<TermOfUse />} />
                 <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="restore-password" element={<RestorePassword />} />
 

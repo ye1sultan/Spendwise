@@ -12,11 +12,12 @@ export const login = async (email, password) => {
 
     const response = await fetch(`${API_URL}/login`, requestOptions);
 
+    const data = await response.json();
+
     if (!response.ok) {
-        throw new Error('Failed to log in');
+        throw new Error(data.message);
     }
 
-    const data = await response.json();
     return data;
 };
 
@@ -30,13 +31,14 @@ export const register = async (name, email, password, passwordConfirmation) => {
         body: JSON.stringify({ name, email, password, passwordConfirmation }),
     };
 
-    const response = await fetch('http://personalfinance.herokuapp.com/api/register', requestOptions);
-
-    if (!response.ok) {
-        throw new Error('Failed to register');
-    }
+    const response = await fetch(`${API_URL}/register`, requestOptions);
 
     const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message);
+    }
+
     return data;
 };
 

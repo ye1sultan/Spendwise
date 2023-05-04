@@ -19,10 +19,10 @@ const Header = () => {
     }
 
     return (
-        <div id='header' className='flex justify-center 2xl:justify-between items-center w-full 2xl:max-w-[1690px] 2xl:mx-auto h-16 2xl:h-40 px-4 bg-white 2xl:bg-transparent relative z-50'>
-            <div className='text-3xl w-full font-semibold z-50'>LOGO</div>
-            <div className='hidden 2xl:flex flex-row justify-between items-center w-full'>
-                <div className="flex flex-row justify-between ml-[-100px]">
+        <div id='header' className='flex justify-between items-center w-full 2xl:max-w-[1690px] 2xl:mx-auto h-16 2xl:h-40 px-4 bg-white 2xl:bg-transparent relative z-50'>
+            <div className='text-3xl font-semibold z-50'>LOGO</div>
+            <div className='hidden 2xl:flex flex-row justify-between items-center'>
+                <div className="flex flex-row justify-between">
                     <button data-id='about' className="text-[24px] font-light mr-[50px]" onClick={handleClickScroll}>About Us</button>
                     <button data-id='tracking' className="text-[24px] font-light mr-[50px]" onClick={handleClickScroll}>Tracking</button>
                     <button data-id='report' className="text-[24px] font-light mr-[50px]" onClick={handleClickScroll}>Report</button>
