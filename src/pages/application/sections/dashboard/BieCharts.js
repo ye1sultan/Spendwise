@@ -14,16 +14,26 @@ const BieCharts = ({ title }) => {
     const [goal, setGoal] = useState([]);
     const [isGLoading, setIsGLoading] = useState(true);
 
+    const [separatedTransactions, setSeparatedTransactions] = useState({ incomeObjects: [], expenseObjects: [] });
+    const [totals, setTotals] = useState({ totalIncome: 0, totalExpense: 0 });
+
     useEffect(() => {
         const fetchTransactions = async () => {
             try {
                 const data = await getAllTransactions();
-                setTransactions(getCurrentMonthTransactions(data));
+                const currentMonthTransactions = getCurrentMonthTransactions(data);
+                setTransactions(currentMonthTransactions);
                 setIsLoading(false);
 
                 const goalData = await getAllGoals();
                 setGoal(goalData[goalData.length - 1]);
                 setIsGLoading(false);
+
+                const separated = separateIncomeAndExpense(currentMonthTransactions);
+                setSeparatedTransactions(separated);
+
+                const calculatedTotals = calculateTotals(currentMonthTransactions);
+                setTotals(calculatedTotals);
             } catch (error) {
                 console.error("Error:", error);
             }

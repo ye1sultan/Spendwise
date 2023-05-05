@@ -166,10 +166,8 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
 
     const handleSave = () => {
         if (selectedAmount && selectedDate && selectedCategory && selectedCategory.name && selectedPaymentMethod) {
-            let accId = JSON.parse(localStorage.getItem('userData')).id;
             const newTransaction = {
                 account_id: 1,
-                user_id: 1,
                 category: selectedCategory.name,
                 amount: correctAmount(selectedAmount),
                 date: selectedDate.toISOString().substr(0, 10),

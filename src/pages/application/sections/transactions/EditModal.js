@@ -83,7 +83,7 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
 
     const paymentMethods = [
         { name: "Cash", icon: <TbCoin size={iconWidth} /> },
-        { name: "Credit Card", icon: <AiOutlineCreditCard size={iconWidth} /> },
+        { name: "Debit Card", icon: <AiOutlineCreditCard size={iconWidth} /> },
     ];
 
     const getPaymentMethod = (name) => {

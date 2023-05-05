@@ -45,14 +45,6 @@ const MyProfile = ({ data }) => {
         setButtonColor("#9F75D6");
     }
 
-    const getAvatar = () => {
-        if (!data) {
-            return <div>Loading...</div>; // or any other loading state or message
-        }
-
-
-    }
-
     return (
         <div className="self-start w-[970px] bg-white rounded-[30px] border-[1px] border-[#AEAEAE] px-[45px] py-[25px] flex justify-center items-center">
             <div className="w-full">
