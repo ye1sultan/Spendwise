@@ -44,7 +44,7 @@ export const register = async (name, email, password, passwordConfirmation) => {
 
 // api.js
 export const authenticatedFetch = (url, options = {}) => {
-    const token = localStorage.getItem('authToken');
+    const token = sessionStorage.getItem('authToken');
     if (!token) {
         throw new Error('Authentication token not found');
     }

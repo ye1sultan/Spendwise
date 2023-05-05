@@ -17,26 +17,13 @@ import Settings from './pages/application/sections/settings/Settings';
 import TermOfUse from './pages/sign/TermOfUse';
 
 function App() {
-    //USERDATA
-    const [userData, setUserData] = useState(null);
-
-    useEffect(() => {
-        const storedUserData = localStorage.getItem('userData');
-        if (storedUserData) {
-            setUserData(JSON.parse(storedUserData));
-        }
-    }, []);
-
-    const [transactions, setTransactions] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
     return (
         <div className="App">
             <Routes>
                 <Route path="/" element={<Navigate to="/home" />} />
                 <Route path="*" element={<Navigate to="/home" />} />
                 <Route path="home" element={<Landing />} />
-                <Route path="login" element={<Login setUserData={setUserData} />} />
+                <Route path="login" element={<Login />} />
                 <Route path="signup" element={<Signup />} />
                 <Route path="term-of-use" element={<TermOfUse />} />
                 <Route path="forgot-password" element={<ForgotPassword />} />
@@ -45,10 +32,8 @@ function App() {
                 <Route
                     path="application/*"
                     element={
-                        <Application
-                            userData={userData}
-                        />
-                    } >
+                        <Application />
+                    }>
                     <Route
                         path=""
                         element={
@@ -68,19 +53,13 @@ function App() {
                     <Route
                         path="dashboard"
                         element={
-                            <Dashboard
-                                transactions={transactions}
-                                isLoading={isLoading}
-                            />
+                            <Dashboard />
                         }
                     />
                     <Route
                         path="transactions/*"
                         element={
-                            <Transactions
-                                setData={setTransactions}
-                                setIsLoading={setIsLoading}
-                            />
+                            <Transactions />
                         }>
                         <Route
                             path=""
@@ -126,9 +105,7 @@ function App() {
                     <Route
                         path="settings"
                         element={
-                            <Settings
-                                data={userData}
-                            />
+                            <Settings />
                         }
                     />
                 </Route>

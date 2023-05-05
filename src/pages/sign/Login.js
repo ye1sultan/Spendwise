@@ -4,7 +4,7 @@ import GoogleLogin from './GoogleLogin';
 import { useEffect, useState } from 'react';
 import { login } from '../../services/api';
 
-const Login = ({ setUserData }) => {
+const Login = () => {
     const navigate = useNavigate();
 
     const handleNavigation = (e) => {
@@ -17,21 +17,15 @@ const Login = ({ setUserData }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const [user, setUser] = useState(null);
-    const [token, setToken] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(user, token);
         try {
             const { user, token } = await login(email, password);
-            setUser(user);
-            setUserData(user);
-            setToken(token);
-
-            localStorage.setItem('userData', JSON.stringify(user));
-            localStorage.setItem('authToken', token);
+            console.log(user);
+            sessionStorage.setItem('userData', JSON.stringify(user));
+            sessionStorage.setItem('authToken', token);
 
             if (rememberMe) {
                 localStorage.setItem('rememberedEmail', email);

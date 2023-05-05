@@ -1,7 +1,10 @@
 import { BsBell } from 'react-icons/bs';
 import { IoSearchOutline } from 'react-icons/io5';
 
-const Header = ({ userData }) => {
+const Header = () => {
+    const name = JSON.parse(sessionStorage.getItem('userData')).name;
+    const avt = false;
+
     return (
         <div className="w-full flex flex-row justify-between items-start text-[#2c3e50]">
             <div className="flex flex-col">
@@ -22,9 +25,11 @@ const Header = ({ userData }) => {
                 </div>
                 <BsBell className='ml-4 hidden 2xl:block' size={35} />
                 <div className="flex flex-row ml-[20px]">
-                    <img className='rounded-full w-[30px] h-[30px] 2xl:w-[45px] 2xl:h-[45px]' src={userData?.avatar || 'https://picsum.photos/200/200'} alt='avatar' />
+                    {avt ? <img className='rounded-full w-[30px] h-[30px] 2xl:w-[45px] 2xl:h-[45px]' src={''} alt='avatar' /> : <div className='rounded-full bg-blue-200 flex justify-center items-center w-[30px] h-[30px] 2xl:w-[45px] 2xl:h-[45px] text-[25px] font-medium'>
+                        {name.charAt(0) || ''}
+                    </div>}
                     <div className="hidden 2xl:flex justify-center items-center text-[20px] font-semibold ml-[20px]">
-                        {userData?.name || 'Not registered'}
+                        {name || 'Not registered'}
                     </div>
                 </div>
             </div>

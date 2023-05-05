@@ -6,7 +6,8 @@ import MyProfile from "./MyProfile";
 import Preferences from "./Preferences";
 import Security from "./Security";
 
-const Settings = ({ data }) => {
+const Settings = () => {
+  const data = JSON.parse(sessionStorage.getItem('userData'));
   const [selectedTab, setSelectedTab] = useState("profile");
 
   const handleTabClick = (tab) => {

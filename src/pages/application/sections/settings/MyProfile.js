@@ -3,9 +3,12 @@ import { BiPencil } from "react-icons/bi";
 import { updateUser } from "../../../../services/api";
 
 const MyProfile = ({ data }) => {
+
     const [editedName, setEditedName] = useState(data.name ?? '');
     const [editedAvatar, setEditedAvatar] = useState(data.avatar ?? '');
     const [buttonColor, setButtonColor] = useState("#AEAEAE");
+
+    const avt = false;
 
     const handleClick = async () => {
         let obj = {
@@ -42,6 +45,14 @@ const MyProfile = ({ data }) => {
         setButtonColor("#9F75D6");
     }
 
+    const getAvatar = () => {
+        if (!data) {
+            return <div>Loading...</div>; // or any other loading state or message
+        }
+
+
+    }
+
     return (
         <div className="self-start w-[970px] bg-white rounded-[30px] border-[1px] border-[#AEAEAE] px-[45px] py-[25px] flex justify-center items-center">
             <div className="w-full">
@@ -76,7 +87,15 @@ const MyProfile = ({ data }) => {
                     </div>
                     <div className="w-full h-full flex justify-center items-center">
                         <div className="w-[200px] h-[200px] relative">
-                            <img className="w-[200px] h-[200px] rounded-[100%]" src={editedAvatar} alt="avatar" />
+                            {
+                                avt
+                                    ?
+                                    <img className="w-[200px] h-[200px] rounded-full" src={editedAvatar} alt="avatar" />
+                                    :
+                                    <div className='rounded-full bg-blue-200 flex justify-center items-center w-[30px] h-[30px] 2xl:w-full 2xl:h-full text-[64px] font-medium'>
+                                        {(editedName.charAt(0)) || ''}
+                                    </div>
+                            }
                             <label htmlFor="avatarInput" className="cursor-pointer">
                                 <div className="w-[60px] h-[60px] rounded-full bg-[#9F75D6] absolute right-0 bottom-0 flex justify-center items-center">
                                     <BiPencil size={35} />

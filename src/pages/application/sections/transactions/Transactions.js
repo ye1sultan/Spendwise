@@ -12,7 +12,7 @@ import { ReactComponent as NoResultTr } from './NoResultTr.svg';
 import { BsArrowDownRight, BsArrowUpRight } from 'react-icons/bs';
 import { AiOutlinePlus } from "react-icons/ai";
 
-const Transactions = ({ setData, setIsLoading }) => {
+const Transactions = () => {
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDropDown, setShowDropDown] = useState(false);
     const [transactions, setTransactions] = useState([]);
@@ -24,8 +24,6 @@ const Transactions = ({ setData, setIsLoading }) => {
                 const data = await getAllTransactions();
                 setTransactions(data);
                 setIsTLoading(false);
-                setIsLoading(false);
-                setData(data);
             } catch (error) {
                 console.error("Error:", error);
             }
