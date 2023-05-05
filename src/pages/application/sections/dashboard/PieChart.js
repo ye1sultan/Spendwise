@@ -127,7 +127,7 @@ const PieChart = ({ transactions = [] }) => {
                 callbacks: {
                     title: (context) => {
                         const index = context[0].dataIndex;
-                        return transactions[index].category;
+                        return transactions[index].description;
                     },
                     label: (context) => {
                         const index = context.dataIndex;

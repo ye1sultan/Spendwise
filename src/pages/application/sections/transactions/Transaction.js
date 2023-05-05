@@ -67,9 +67,11 @@ const Transaction = ({ transaction, transactionDate, isLast, deleteTransaction, 
         setMobileMore(true);
     }
 
+
+
     return (
         <>
-            <div className={`w-full hidden 2xl:flex justify-around items-center ${isLast ? '' : 'border-b'}  border-[#AEAEAE] border-opacity-50 py-4`}>
+            <div className={`max-w-[1500px] w-full hidden 2xl:flex justify-around items-center ${isLast ? '' : 'border-b'}  border-[#AEAEAE] border-opacity-50 py-4`}>
                 <div className="text-[22px] text-[#443A3A] font-medium w-1/6 text-center">{transactionDate}</div>
                 <div className="text-[22px] text-[#443A3A] font-medium w-1/6 text-center">
                     <div className='flex flex-row justify-center items-center'>
@@ -77,7 +79,7 @@ const Transaction = ({ transaction, transactionDate, isLast, deleteTransaction, 
                         {category}
                     </div>
                 </div>
-                <div className="text-[22px] text-[#443A3A] font-medium w-1/6 text-center">{description}</div>
+                <div className="text-[22px] text-[#443A3A] font-medium w-1/6 text-center truncate overflow-hidden">{description}</div>
                 <div className="text-[22px] text-[#443A3A] font-medium w-1/6 text-center">{payment_method}</div>
                 <div className={`text-[22px] font-medium w-1/6 text-center ${transaction_type === "income" ? "text-green-500" : "text-red-500"}`}>{amount} ₸</div>
                 <div className="flex space-x-4 w-1/6 justify-center">

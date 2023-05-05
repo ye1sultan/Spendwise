@@ -8,6 +8,7 @@ import { BiColorFill, BiDumbbell, BiPlanet, BiWine } from 'react-icons/bi';
 import { FaMicrophone, FaMugHot, FaPray, FaRegHandPeace, FaTools } from 'react-icons/fa';
 import { MdOutlineBrokenImage, MdPedalBike, MdStroller } from 'react-icons/md';
 import { RiBookLine, RiMedal2Fill } from 'react-icons/ri';
+import { format } from 'date-fns';
 
 const CreateGoal = ({ onModalClose, addNewGoal }) => {
     const allIcons = [
@@ -177,11 +178,11 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
     }
 
     const saveGoal = () => {
-        if (selectedName && selectedAmount && selectedTotalAmount && (selectedAmount <= selectedTotalAmount)) {
+        if (selectedName && selectedAmount && selectedTotalAmount && (selectedAmount < selectedTotalAmount)) {
+            console.log('Here 2!');
             let status = selectedAmount === selectedTotalAmount ? 'reached' : 'active';
 
             let newGoal = {
-                user_id: JSON.parse(localStorage.getItem('userData')).id,
                 name: selectedName,
                 deadline: formatDate(selectedDeadline),
                 initial_target_amount: selectedAmount,
@@ -221,7 +222,7 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
                 </div>
             </div>
             <div className="relative w-full h-[50px] mb-[10px]">
-                <input className={inputStyle} type="date" placeholder="Deadline" onChange={e => setSelectedDeadline(e.target.value)} />
+                <input className={inputStyle} type="date" min={format(new Date(), 'yyyy-MM-dd')} placeholder="Deadline" onChange={e => setSelectedDeadline(e.target.value)} />
                 <div className="absolute top-[50%] translate-y-[-50%] left-0">
                     <AiOutlineCalendar size={30} color="#696969" />
                 </div>

@@ -11,9 +11,10 @@ import { AiOutlineGift, AiOutlineStar } from 'react-icons/ai';
 import { BsCoin } from 'react-icons/bs';
 import { FaPray } from 'react-icons/fa';
 import { TbCoin, TbHealthRecognition } from 'react-icons/tb';
+import { format } from "date-fns";
 
 const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
-    const [iconWidth, setIconWidth] = useState(window.innerWidth < 1536 ? 15 : 25);
+    const iconWidth = window.innerWidth < 1536 ? 15 : 25;
 
     const expenseCategories = [
         { name: "Clothing", icon: <AiOutlineShop size={iconWidth} color="#ffffff" />, color: "#D942A6" },
@@ -156,6 +157,7 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
                         type="date"
                         name="date"
                         value={editedTransaction.date}
+                        max={format(new Date(), 'yyyy-MM-dd')}
                         onChange={handleChange}
                     />
                 </div>

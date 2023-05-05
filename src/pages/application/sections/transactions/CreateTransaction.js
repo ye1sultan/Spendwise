@@ -1,8 +1,5 @@
 import { useState } from 'react';
-import { addDays, parseISO } from 'date-fns';
-
-import { v4 as uuid } from 'uuid';
-
+import { addDays, format, parseISO } from 'date-fns';
 import { AiOutlineCalendar, AiOutlineCar, AiOutlineCreditCard, AiOutlineHeart, AiOutlineHome, AiOutlineShop, AiOutlineShoppingCart, AiOutlineTag } from 'react-icons/ai';
 import { BiBookAlt, BiChevronDown, BiFileBlank } from 'react-icons/bi';
 import { BsAirplaneEngines, BsLaptop, BsThreeDots } from 'react-icons/bs';
@@ -15,8 +12,8 @@ import { FaPray } from 'react-icons/fa';
 import { TbCoin, TbCurrencyTenge, TbHealthRecognition } from 'react-icons/tb';
 
 const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => {
-    const [iconWidth, setIconWidth] = useState(window.innerWidth < 1536 ? 15 : 25);
-    const [iconMWidth, setIconMWidth] = useState(window.innerWidth < 1536 ? 25 : 45);
+    const iconWidth = window.innerWidth < 1536 ? 15 : 25;
+    const iconMWidth = window.innerWidth < 1536 ? 25 : 45;
 
     const [activeButton, setActiveButton] = useState('');
 
@@ -219,7 +216,8 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
                     </button>
                     <input
                         type="date"
-                        value={selectedDate.toISOString().substr(0, 10)}
+                        value={format(selectedDate, 'yyyy-MM-dd')}
+                        max={format(new Date(), 'yyyy-MM-dd')}
                         onChange={(e) => handleDateChange(parseISO(e.target.value))}
                         className={`cursor-pointer text-black py-[5px] px-[15px] 2xl:py-[10px] 2xl:px-[35px] text-[12px] 2xl:text-[16px] font-medium rounded-[30px] ${activeButton === 'other' ? 'text-white bg-[' + color + ']' : 'bg-[#D9D9D9] text-black'} `}
                     />
@@ -260,7 +258,7 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
                         {getPaymentMethod()}
                     </div>
                     <BiChevronDown className="cursor-pointer" size={iconMWidth} />
-                    <div className={`${paymentDropDown ? 'flex' : 'hidden'} flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[10px] 2xl:py-[20px] border-[1px] border-[#696969] rounded-[20px] 2xl:rounded-[50px] shadow z-10`}>
+                    <div className={`${paymentDropDown ? 'flex' : 'hidden'} flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[10px] 2xl:py-[20px] px-[40px] border-[1px] border-[#696969] rounded-[20px] 2xl:rounded-[30px] shadow z-10`}>
                         {getPaymentMethods()}
                     </div>
                 </div>

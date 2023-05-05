@@ -22,7 +22,8 @@ const Transactions = () => {
         const fetchTransactions = async () => {
             try {
                 const data = await getAllTransactions();
-                setTransactions(data);
+                const sortedData = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+                setTransactions(sortedData);
                 setIsTLoading(false);
             } catch (error) {
                 console.error("Error:", error);

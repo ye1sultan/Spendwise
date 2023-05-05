@@ -80,15 +80,15 @@ const Login = () => {
                         <input
                             id="checkbox"
                             type="checkbox"
-                            value=""
-                            className="w-[18px] h-[18px] mr-[24px]"
+                            value="true"
+                            className="w-[18px] h-[18px] mr-[24px] cursor-pointer"
                             onChange={(e) => setRememberMe(e.target.checked)}
                         />
-                        <label htmlFor="checkbox" className="text-[12px]">
+                        <label htmlFor="checkbox" className="text-[12px] cursor-pointer">
                             Remember me
                         </label>
                     </div>
-                    <input className='bg-[#343A40] text-white font-semibold text-[12px] w-full h-[40px] rounded-[8px] mb-[32px]' type='submit' value='Log In' />
+                    <input className='bg-[#343A40] text-white font-semibold text-[12px] w-full h-[40px] rounded-[8px] mb-[32px] cursor-pointer' type='submit' value='Log In' />
                 </form>
                 <div className='flex flex-row justif-center items-center'>
                     <div className='font-semibold text-[14px] mr-2'>

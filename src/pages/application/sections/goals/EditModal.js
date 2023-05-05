@@ -11,6 +11,7 @@ import { FaMicrophone, FaMugHot, FaPray, FaRegHandPeace, FaTools } from 'react-i
 import { MdOutlineBrokenImage, MdPedalBike, MdStroller } from 'react-icons/md';
 import { RiBookLine, RiMedal2Fill } from 'react-icons/ri';
 import { useState } from 'react';
+import { format } from "date-fns";
 
 const EditModal = ({ goal, onSave, onCancel }) => {
     const allIcons = [
@@ -186,6 +187,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                     className="px-4 block w-full h-[50px] border-b-[1px] border-[#000000] text-[18px]"
                     type="date"
                     name="deadline"
+                    min={format(new Date(), 'yyyy-MM-dd')}
                     value={formatDate(editedGoal.deadline)}
                     onChange={handleChange}
                 />
