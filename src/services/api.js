@@ -202,3 +202,14 @@ export const updateGoal = async (id, updatedGoal) => {
 
     return await response.json();
 };
+
+export const getMontlyBalance = async () => {
+    const response = await authenticatedFetch(`${API_URL}/monthly-balances`);
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch monthly balances');
+    }
+
+    const data = await response.json();
+    return data;
+};

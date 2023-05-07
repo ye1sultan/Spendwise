@@ -174,7 +174,6 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
             };
 
             addNewTransaction(newTransaction);
-            console.log(newTransaction);
             onModalClose(false);
         }
     }

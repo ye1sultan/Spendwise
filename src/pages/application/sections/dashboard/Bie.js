@@ -1,41 +1,7 @@
-import { useState } from "react";
 import { AiOutlineArrowDown, AiOutlineArrowUp, AiOutlineClockCircle } from "react-icons/ai";
 import { BsFillCalendar2CheckFill } from "react-icons/bs";
-import { getAllTransactions } from "../../../../services/api";
-import { useEffect } from "react";
 
-const Bie = ({ title, svg }) => {
-    const [transactions, setTransactions] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchTransactions = async () => {
-            try {
-                const data = await getAllTransactions();
-                setTransactions(getCurrentMonthTransactions(data));
-                setIsLoading(false);
-            } catch (error) {
-                console.error("Error:", error);
-            }
-        };
-
-        fetchTransactions();
-    }, []);
-
-    const getCurrentMonthTransactions = (transactions) => {
-        const currentDate = new Date();
-        const currentMonth = currentDate.getMonth();
-        const currentYear = currentDate.getFullYear();
-
-        return transactions.filter((transaction) => {
-            const transactionDate = new Date(transaction.date);
-            return (
-                transactionDate.getMonth() === currentMonth &&
-                transactionDate.getFullYear() === currentYear
-            );
-        });
-    };
-
+const Bie = ({ title, svg, transactions, isLoading }) => {
     const calculateTotals = (transactions) => {
         let totalIncome = 0;
         let totalExpense = 0;
@@ -163,7 +129,7 @@ const Bie = ({ title, svg }) => {
                             </div>
                         </div>
                         <div className="text-[16px] 2xl:text-[24px] font-medium">
-                            {formatNumber(210000) + " ₸"}
+                            {formatNumber(calculateTotals(transactions).totalIncome) + " ₸"}
                         </div>
                     </>
                 );
