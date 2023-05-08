@@ -1,17 +1,18 @@
 import { updateGoal } from "../../../../services/api";
 
-import { AiOutlineCar, AiOutlineGift, AiOutlineShoppingCart } from 'react-icons/ai';
-import { IoEarthOutline } from 'react-icons/io5';
-import { BsChevronDown } from 'react-icons/bs';
+import { AiOutlineCalendar, AiOutlineCar, AiOutlineGift, AiOutlineShoppingCart } from 'react-icons/ai';
+import { IoCloseOutline, IoEarthOutline } from 'react-icons/io5';
+import { BsCheckSquare, BsChevronDown } from 'react-icons/bs';
 import { AiOutlineHeart, AiOutlineTrophy } from 'react-icons/ai';
 import { IoBagHandle, IoCheckmarkDone, IoGameControllerOutline, IoLanguage } from 'react-icons/io5';
 import { BsCoin, BsFillAirplaneFill, BsHouse, BsLaptop, BsPiggyBank, BsTruck } from 'react-icons/bs';
-import { BiDumbbell, BiPlanet, BiWine } from 'react-icons/bi';
+import { BiColorFill, BiDumbbell, BiPlanet, BiWine } from 'react-icons/bi';
 import { FaMicrophone, FaMugHot, FaPray, FaRegHandPeace, FaTools } from 'react-icons/fa';
 import { MdOutlineBrokenImage, MdPedalBike, MdStroller } from 'react-icons/md';
 import { RiBookLine, RiMedal2Fill } from 'react-icons/ri';
 import { useState } from 'react';
 import { format } from "date-fns";
+import { TbCurrencyTenge, TbIcons } from "react-icons/tb";
 
 const EditModal = ({ goal, onSave, onCancel }) => {
     const allIcons = [
@@ -58,7 +59,6 @@ const EditModal = ({ goal, onSave, onCancel }) => {
         { name: '#F1BF5B' },
         { name: '#EC4E4E' },
         { name: '#A3D1FB' },
-        { name: '#D6B3F2' },
         { name: '#F67730' },
         { name: '#ACACB1' },
         { name: '#9B5BDB' },
@@ -95,7 +95,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
             <button
                 key={index}
                 onClick={() => handleIconClick(icon)}
-                className="p-2">
+                className="p-2 hover:bg-[#ecf0f1]">
                 {icon.icon}
             </button>
         ));
@@ -116,7 +116,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
         return allColors.map((color, index) => (
             <button
                 key={index}
-                className='m-2 w-[35px] h-[35px] rounded-full cursor-pointer'
+                className='m-2 w-[35px] h-[35px] rounded-full cursor-pointer hover:translate-x-[5%] hover:translate-y-[-5%]'
                 onClick={() => handleColorClick(color)}
                 style={{ backgroundColor: color.name }}>
             </button>
@@ -168,88 +168,96 @@ const EditModal = ({ goal, onSave, onCancel }) => {
         return `${year}-${month}-${day}`;
     };
 
+    let inputStyle = 'w-full h-full text-[24px] font-normal pl-[40px] border-b-[1px] border-[#696969]';
+
     return (
-        <div className="fixed top-[10%] left-[50%] translate-x-[-50%] bg-white border-[1px] border-[#AEAEAE] w-[600px] p-4 rounded-[40px] shadow-md">
-            <h3 className="text-[26px] text-[#000000] font-semibold mb-4">Edit Goal</h3>
-            <div className="block">
-                <span className="text-[18px] font-medium">Name</span>
+        <div className="fixed top-[5%] left-[50%] translate-x-[-50%] z-20 bg-white py-[20px] px-[30px] flex flex-col justify-center shadow-md rounded-[40px]">
+            <div className='w-full flex justify-between items-center mb-[10px]'>
+                <div className="text-[32px] font-medium">
+                    Edit Goal
+                </div>
+                <IoCloseOutline className='cursor-pointer' size={35} onClick={onCancel} />
+            </div>
+            <div className="relative w-full h-[50px] mb-[10px]">
                 <input
-                    className="px-4 block w-full h-[50px] border-b-[1px] border-[#000000] text-[18px]"
+                    className={inputStyle}
                     type="text"
                     name="name"
                     value={editedGoal.name}
                     onChange={handleChange}
                 />
+                <div className="absolute top-[50%] translate-y-[-50%] left-0">
+                    <BsCheckSquare size={30} color="#696969" />
+                </div>
             </div>
-            <div className="block mt-4">
-                <span className="text-[18px] font-medium">Deadline</span>
+            <div className="relative w-full h-[50px] mb-[10px]">
                 <input
-                    className="px-4 block w-full h-[50px] border-b-[1px] border-[#000000] text-[18px]"
+                    className={inputStyle}
+                    type="number"
+                    name="initial_target_amount"
+                    value={parseInt(editedGoal.initial_target_amount)}
+                    onChange={handleChange}
+                />
+                <div className="absolute top-[50%] translate-y-[-50%] left-0">
+                    <TbCurrencyTenge size={30} color="#696969" />
+                </div>
+            </div>
+            <div className="relative w-full h-[50px] mb-[10px]">
+                <input
+                    className={inputStyle}
                     type="date"
                     name="deadline"
                     min={format(new Date(), 'yyyy-MM-dd')}
                     value={formatDate(editedGoal.deadline)}
                     onChange={handleChange}
                 />
+                <div className="absolute top-[50%] translate-y-[-50%] left-0">
+                    <AiOutlineCalendar size={30} color="#696969" />
+                </div>
             </div>
-            <div className="block mt-4">
-                <span className="text-[18px] font-medium">Amount</span>
+            <div className="relative w-full h-[50px] mb-[10px]">
                 <input
-                    className="px-4 block w-full h-[50px] border-b-[1px] border-[#000000] text-[18px]"
-                    type="number"
-                    name="initial_target_amount"
-                    value={parseInt(editedGoal.initial_target_amount)}
-                    onChange={handleChange}
-                />
-            </div>
-            <div className="block mt-4">
-                <span className="text-[18px] font-medium">Total Amount</span>
-                <input
-                    className="px-4 block w-full h-[50px] border-b-[1px] border-[#000000] text-[18px]"
+                    className={inputStyle}
                     type="number"
                     name="target_amount"
                     value={parseInt(editedGoal.target_amount)}
                     onChange={handleChange}
                 />
-            </div>
-            <div className='w-full flex justify-between items-center'>
-                <div
-                    onMouseEnter={() => setIconDropDown(true)}
-                    onMouseLeave={() => setIconDropDown(false)}
-                    className="block mt-4 relative w-[49%]">
-                    <span className="text-[18px] font-medium">Icons</span>
-                    <div className="px-4 flex justify-start items-center w-full h-[50px] border-b-[1px] border-[#000000] text-[18px] cursor-pointer">
-                        {getIcon(editedGoal.icon)}
-                        <BsChevronDown size={20} />
-                    </div>
-                    <div
-                        className={`z-20 absolute top-[100%] left-0 max-h-[300px] overflow-auto ${iconDropDown ? 'flex' : 'hidden'} flex-wrap bg-white py-4 pl-2 pr-10 shadow rounded-[20px]`}>
-                        {getAllIcons()}
-                    </div>
-                </div>
-                <div
-                    onMouseEnter={() => setColorDropDown(true)}
-                    onMouseLeave={() => setColorDropDown(false)}
-                    className="block mt-4 relative w-[49%]">
-                    <span className="text-[18px] font-medium">Colors</span>
-                    <div className="px-4 flex justify-start items-center w-full h-[50px] border-b-[1px] border-[#000000] text-[18px] cursor-pointer">
-                        {getColor(editedGoal.color)}
-                        <BsChevronDown size={20} />
-                    </div>
-                    <div
-                        className={`z-20 absolute top-[100%] left-0 max-h-[300px] overflow-auto ${colorDropDown ? 'flex' : 'hidden'} flex-wrap bg-white py-4 pl-2 pr-10 shadow rounded-[20px]`}>
-                        {getAllColors()}
-                    </div>
+                <div className="absolute top-[50%] translate-y-[-50%] left-0">
+                    <TbCurrencyTenge size={30} color="#696969" />
                 </div>
             </div>
-            <div className="mt-4 flex justify-end">
-                <button className="uppercase px-4 py-2 bg-[#BFA2E5]  text-[#000000] rounded-[15px] text-[18px] mr-4" onClick={handleSave}>
-                    Save
-                </button>
-                <button className="uppercase px-4 py-2 bg-[#E3E3E3] text-[#000000] rounded-[15px] text-[18px]" onClick={onCancel}>
-                    Cancel
-                </button>
+            <div
+                onMouseEnter={() => setIconDropDown(true)}
+                onMouseLeave={() => setIconDropDown(false)}
+                className="relative w-full flex justify-start items-center h-[50px] border-b-[1px] border-[#696969] mb-[10px]">
+                <TbIcons size={30} color="#696969" />
+                <div className="flex justify-start items-center w-full h-[50px] text-[18px] cursor-pointer pl-[20px]">
+                    {getIcon(editedGoal.icon)}
+                    <BsChevronDown size={20} />
+                </div>
+                <div
+                    className={`z-20 absolute top-[100%] left-0 max-h-[300px] overflow-auto ${iconDropDown ? 'flex' : 'hidden'} flex-wrap bg-white py-4 pl-2 pr-10 shadow rounded-[25px] border-[1px] border-black`}>
+                    {getAllIcons()}
+                </div>
             </div>
+            <div
+                onMouseEnter={() => setColorDropDown(true)}
+                onMouseLeave={() => setColorDropDown(false)}
+                className="relative w-full flex justify-start items-center h-[50px] mb-[30px]">
+                <BiColorFill size={30} color="#696969" />
+                <div className="flex justify-start items-center w-full h-[50px] text-[18px] cursor-pointer pl-[20px]">
+                    {getColor(editedGoal.color)}
+                    <BsChevronDown size={20} />
+                </div>
+                <div
+                    className={`z-20 absolute top-[100%] left-0 max-h-[300px] overflow-auto ${colorDropDown ? 'flex' : 'hidden'} flex-wrap bg-white py-4 pl-2 pr-10 shadow rounded-[25px] border-[1px] border-black`}>
+                    {getAllColors()}
+                </div>
+            </div>
+            <button className="uppercase text-black text-[14px] 2xl:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]" onClick={handleSave}>
+                Save
+            </button>
         </div>
     );
 }

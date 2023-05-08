@@ -4,12 +4,13 @@ import { getAllGoals, addNewGoal as addNewGoalAPI, deleteGoal, updateGoal } from
 import Title from "../../components/Title";
 
 import { BsChevronDown } from 'react-icons/bs';
-import { AiOutlinePlus } from 'react-icons/ai';
+import { AiOutlineCheckCircle, AiOutlineClockCircle, AiOutlinePlus } from 'react-icons/ai';
 
 import GoalCreator from "./CreateGoal";
 import Goal from "./Goal";
 import EditModal from "./EditModal";
 import ContentLoader from "react-content-loader";
+import { MdMotionPhotosPaused } from "react-icons/md";
 
 const Goals = () => {
     const [showDropDown, setShowDropDown] = useState(false);
@@ -133,15 +134,15 @@ const Goals = () => {
             <div
                 onMouseEnter={() => setShowDropDown(showDropDown)}
                 onMouseLeave={() => setShowDropDown(!showDropDown)}
-                className="absolute top-full mt-2 w-[220px] bg-white border-[1px] border-[#CED4DA] rounded-xl shadow-lg overflow-hidden">
-                <button className="w-full px-4 py-2 text-left text-[22px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('active')}>
-                    Active Goals
+                className="absolute top-full mt-2 bg-white rounded-xl shadow-md overflow-hidden">
+                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[22px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('active')}>
+                    <AiOutlineClockCircle size={28} className="mr-2" /> Active Goals
                 </button>
-                <button className="w-full px-4 py-2 text-left text-[22px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('paused')}>
-                    Paused Goals
+                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[22px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('paused')}>
+                    <MdMotionPhotosPaused size={28} className="mr-2" /> Paused Goals
                 </button>
-                <button className="w-full px-4 py-2 text-left text-[22px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('reached')}>
-                    Reached Goals
+                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[22px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('reached')}>
+                    <AiOutlineCheckCircle size={28} className="mr-2" /> Reached Goals
                 </button>
             </div>
         );
@@ -175,12 +176,12 @@ const Goals = () => {
             )}
 
             <Title title={'My Goals'} />
-            <div
-                onMouseEnter={() => setShowDropDown(!showDropDown)}
-                className="relative self-start z-10">
-                <button className="w-[220px] h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[20px] flex justify-between items-center px-5 z-10"
+            <div className="relative self-start z-10 w-full">
+                <button
+                    onMouseEnter={() => setShowDropDown(!showDropDown)}
+                    className="h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[20px] flex justify-between items-center px-5 z-10"
                 >
-                    <BsChevronDown />
+                    <BsChevronDown className="mr-2" />
                     {goalFilter.charAt(0).toUpperCase() + goalFilter.slice(1)} Goals
                 </button>
                 {showDropDown && <GoalsDropDown onSelect={handleFilterSelect} />}

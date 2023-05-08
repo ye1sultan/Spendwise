@@ -67,11 +67,9 @@ const Transaction = ({ transaction, transactionDate, isLast, deleteTransaction, 
         setMobileMore(true);
     }
 
-
-
     return (
         <>
-            <div className={`max-w-[1500px] w-full hidden 2xl:flex justify-around items-center ${isLast ? '' : 'border-b'}  border-[#AEAEAE] border-opacity-50 py-4`}>
+            <div className={`w-full hidden 2xl:flex items-center ${isLast ? '' : 'border-b'}  border-[#AEAEAE] border-opacity-50 py-4`}>
                 <div className="text-[22px] text-[#443A3A] font-medium w-1/6 text-center">{transactionDate}</div>
                 <div className="text-[22px] text-[#443A3A] font-medium w-1/6 text-center">
                     <div className='flex flex-row justify-center items-center'>
@@ -92,7 +90,7 @@ const Transaction = ({ transaction, transactionDate, isLast, deleteTransaction, 
                 </div>
             </div>
 
-            <div className={`w-full 2xl:hidden flex justify-between items-center ${isLast ? '' : 'border-b'} border-[#AEAEAE] border-opacity-50 py-2 px-2`}>
+            {/* <div className={`w-full 2xl:hidden flex justify-between items-center ${isLast ? '' : 'border-b'} border-[#AEAEAE] border-opacity-50 py-2 px-2`}>
                 <div className="text-[12px] text-[#443A3A] font-medium text-center">
                     {formatDateMobile(transactionDate)}
                 </div>
@@ -108,7 +106,7 @@ const Transaction = ({ transaction, transactionDate, isLast, deleteTransaction, 
                 <button className="flex justify-center" onClick={() => editTransaction(transaction)}>
                     <BiChevronRight size={25} />
                 </button>
-            </div>
+            </div> */}
         </>
     );
 };

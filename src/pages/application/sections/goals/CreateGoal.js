@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { TbCurrencyTenge } from 'react-icons/tb';
+import { TbCurrencyTenge, TbIcons } from 'react-icons/tb';
 import { AiOutlineClose, AiOutlineCar, AiOutlineGift, AiOutlineShoppingCart, AiOutlineCalendar, AiOutlineHeart, AiOutlineTrophy } from 'react-icons/ai';
 import { IoBagHandle, IoCheckmarkDone, IoCloseOutline, IoEarthOutline, IoGameControllerOutline, IoLanguage } from 'react-icons/io5';
 import { BsArrowRightShort, BsBookmarks, BsCheck2, BsCheckSquare, BsCoin, BsFileEarmarkText, BsFillAirplaneFill, BsHouse, BsLaptop, BsPiggyBank, BsTruck } from 'react-icons/bs';
@@ -55,7 +55,6 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
         { name: '#F1BF5B' },
         { name: '#EC4E4E' },
         { name: '#A3D1FB' },
-        { name: '#D6B3F2' },
         { name: '#F67730' },
         { name: '#ACACB1' },
         { name: '#9B5BDB' },
@@ -145,7 +144,7 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
         return allColors.map((color, index) => (
             <div
                 key={index}
-                className='m-2 w-[50px] h-[50px] rounded-full cursor-pointer'
+                className='m-2 w-[40px] h-[40px] rounded-full cursor-pointer'
                 onClick={() => handleColorClick(color.name)}
                 style={{ backgroundColor: color.name }}>
             </div>
@@ -161,8 +160,6 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
         setSelectedColor(name);
         setColorsDropDown(false);
     }
-
-    let inputStyle = 'w-full h-full text-[24px] font-normal pl-[40px] border-b-[1px] border-[#696969]';
 
     const [iconsDropDown, setIconsDropDown] = useState(false);
     const [colorsDropDown, setColorsDropDown] = useState(false);
@@ -198,8 +195,10 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
         }
     }
 
+    let inputStyle = 'w-full h-full text-[24px] font-normal pl-[40px] border-b-[1px] border-[#696969]';
+
     return (
-        <div className="fixed top-[5%] left-[50%] translate-x-[-50%] z-20 bg-white py-[20px] px-[30px] flex flex-col justify-center border-[1px] border-[#73737A] shadow-md rounded-[40px]">
+        <div className="fixed top-[5%] left-[50%] translate-x-[-50%] z-20 bg-white py-[20px] px-[30px] flex flex-col justify-center shadow-md rounded-[40px]">
             <div className='w-full flex justify-between items-center mb-[10px]'>
                 <div className="text-[32px] font-medium">
                     New Goal
@@ -218,7 +217,7 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
                     <TbCurrencyTenge size={30} color="#696969" />
                 </div>
             </div>
-            <div className="relative w-full h-[50px] mb-[10px]">    
+            <div className="relative w-full h-[50px] mb-[10px]">
                 <input className={inputStyle} type="date" min={format(new Date(), 'yyyy-MM-dd')} placeholder="Deadline" onChange={e => setSelectedDeadline(e.target.value)} />
                 <div className="absolute top-[50%] translate-y-[-50%] left-0">
                     <AiOutlineCalendar size={30} color="#696969" />
@@ -230,9 +229,9 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
                     <TbCurrencyTenge size={30} color="#696969" />
                 </div>
             </div>
-            <div className='flex flex-col justify-center items-start'>
+            <div className='flex flex-col justify-center items-start mb-[10px]'>
                 <div className='flex justify-center items-center mb-[10px]'>
-                    <BsBookmarks size={30} color="#696969" />
+                    <TbIcons size={30} color="#696969" />
                     <div className='pl-4 text-[24px] font-normal'>
                         Icon
                     </div>
@@ -254,7 +253,7 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
                     )}
                 </div>
             </div>
-            <div className='flex flex-col justify-center items-start mb-[10px]'>
+            <div className='flex flex-col justify-center items-start mb-[30px]'>
                 <div className='flex justify-center items-center mb-[10px]'>
                     <BiColorFill size={30} color="#696969" />
                     <div className='pl-4 text-[24px] font-normal'>
@@ -278,12 +277,12 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
                     )}
                 </div>
             </div>
-            <div className="relative h-[50px] mb-[30px]">
+            {/* <div className="relative h-[50px] mb-[30px]">
                 <input className="w-full h-full text-[24px] font-normal text-[#696969] pl-[40px] border-b-[1px] border-[#696969]" type="text" placeholder="Description" onChange={e => setSelectedDescription(e.target.value)} />
                 <div className="absolute top-[50%] translate-y-[-50%] left-0">
                     <BsFileEarmarkText size={30} color="#696969" />
                 </div>
-            </div>
+            </div> */}
             <button className='uppercase text-black text-[14px] 2xl:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]' onClick={() => saveGoal()}>
                 save
             </button>

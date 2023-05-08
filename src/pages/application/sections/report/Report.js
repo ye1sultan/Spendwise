@@ -14,7 +14,7 @@ const Report = () => {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const [currentTransaction, setCurrentTransaction] = useState('both');
+    const [currentTransaction, setCurrentTransaction] = useState('transactions');
 
     useEffect(() => {
         const fetchTransactions = async () => {
@@ -95,7 +95,7 @@ const Report = () => {
     }
 
     const renderData = () => {
-        if (currentTransaction === 'both') {
+        if (currentTransaction === 'transactions') {
             return (
                 <>
                     {
@@ -227,7 +227,7 @@ const Report = () => {
                 <FiPieChart className="absolute top-[50%] translate-y-[-50%] left-[20%] z-50" size={35} />
                 <FiBarChart className="absolute top-[50%] translate-y-[-50%] right-[20%] z-50" size={35} />
             </button>
-            <div className="w-full h-full min-h-[550px] max-h-[1000px] bg-white rounded-[40px] mt-[40px] border-[1px] border-[#AEAEAE] pt-[35px] px-[60px] overflow-auto relative">
+            <div className="w-full h-full max-h-[1000px] bg-white rounded-[40px] mt-[30px] py-[30px] px-[60px] overflow-auto relative">
                 <div
                     className={`absolute ${switched ? 'hidden' : 'flex flex-col'}`}
                     onMouseEnter={() => setDropDown(true)}
@@ -236,14 +236,14 @@ const Report = () => {
                         <div className="border-b-[1px] border-black capitalize">{currentTransaction}</div>
                         <BiChevronDown size={30} />
                     </button>
-                    <div className={`translate-x-[-30px] ${dropDown ? 'flex' : 'hidden'} flex-col text-[24px] bg-white shadow rounded-[20px] px-8 py-2`}>
-                        <button className="mb-2" onClick={() => handleDropDownClick('both')}>
-                            Both
+                    <div className={`${dropDown ? 'flex' : 'hidden'} w-full flex-col justify-start items-center text-[24px] bg-white shadow-md rounded-[20px] py-2`}>
+                        <button className="w-full mb-2 hover:bg-gray-100 px-4" onClick={() => handleDropDownClick('transactions')}>
+                            Transactions
                         </button>
-                        <button className="mb-2" onClick={() => handleDropDownClick('expenses')}>
+                        <button className="w-full mb-2 hover:bg-gray-100 px-4" onClick={() => handleDropDownClick('expenses')}>
                             Expenses
                         </button>
-                        <button className="" onClick={() => handleDropDownClick('incomes')}>
+                        <button className="w-full hover:bg-gray-100 px-4" onClick={() => handleDropDownClick('incomes')}>
                             Incomes
                         </button>
                     </div>

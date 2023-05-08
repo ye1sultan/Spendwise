@@ -111,7 +111,7 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
             <button
                 key={index}
                 onClick={() => handleCategoryClick(category)}
-                className="w-full flex justify-start items-center mb-2 hover:bg-[#ecf0f1]">
+                className="w-full flex justify-start items-center mb-2 hover:bg-[#ecf0f1] pl-[30px]">
                 <div className="w-[25px] h-[25px] 2xl:w-[40px] 2xl:h-[40px] rounded-full flex justify-center items-center mr-2 2xl:mr-4" style={{ backgroundColor: category.color }}>
                     {category.icon}
                 </div>
@@ -142,7 +142,7 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
             <button
                 key={index}
                 onClick={() => handlePaymentClick(method)}
-                className="w-full flex justify-start items-center 2xl:text-[24px] mb-2 hover:bg-[#ecf0f1]">
+                className="w-full flex justify-start items-center 2xl:text-[24px] mb-2 hover:bg-[#ecf0f1] pl-[30px]">
                 <div className="w-[25px] h-[25px] 2xl:w-[40px] 2xl:h-[40px] rounded-full flex justify-center items-center mr-2 2xl:mr-4">
                     {method.icon}
                 </div>
@@ -180,7 +180,7 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
         <div className="fixed top-[5%] left-[50%] translate-x-[-50%] z-20 bg-white py-[20px] px-[30px] flex flex-col justify-center shadow-md rounded-[40px]">
             <div className="w-full flex justify-between items-center mb-[10px]">
                 <div className="text-[32px] font-medium">
-                    New {transaction === 'income' ? 'Income' : 'Expense'}
+                    New <span style={{ color: color }}>{transaction === 'income' ? 'Income' : 'Expense'}</span>
                 </div>
                 <IoCloseOutline className='cursor-pointer' size={35} onClick={() => onModalClose(false)} />
             </div>
@@ -229,7 +229,7 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
                         {getCategory()}
                     </div>
                     <BiChevronDown className={`cursor-pointer ${categoriesDropDown ? 'rotate-180' : 'rotate-0'}`} size={iconMWidth} />
-                    <div className={`${categoriesDropDown ? 'flex' : 'hidden'} flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[10px] px-[40px] border-[1px] border-black rounded-[20px] 2xl:rounded-[25px] shadow z-10`}>
+                    <div className={`${categoriesDropDown ? 'flex' : 'hidden'} flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[10px] border-[1px] border-black rounded-[20px] 2xl:rounded-[25px] shadow z-10`}>
                         {getCategories()}
                     </div>
                 </div>
@@ -246,7 +246,7 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
                         {getPaymentMethod()}
                     </div>
                     <BiChevronDown className={`cursor-pointer ${paymentDropDown ? 'rotate-180' : 'rotate-0'}`} size={iconMWidth} />
-                    <div className={`${paymentDropDown ? 'flex' : 'hidden'} flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[10px] px-[40px] border-[1px] border-black rounded-[20px] 2xl:rounded-[25px] shadow z-10`}>
+                    <div className={`${paymentDropDown ? 'flex' : 'hidden'} flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[10px] border-[1px] border-black rounded-[20px] 2xl:rounded-[25px] shadow z-10`}>
                         {getPaymentMethods()}
                     </div>
                 </div>

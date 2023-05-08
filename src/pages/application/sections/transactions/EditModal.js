@@ -56,8 +56,8 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
         const category = transaction.transaction_type === 'income' ? incomeCategories.find((category) => category.name === name) : expenseCategories.find((category) => category.name === name);
 
         return (
-            <div className="flex justify-start items-center pr-2">
-                <div className="w-[25px] h-[25px] 2xl:w-[30px] 2xl:h-[30px] rounded-full flex justify-center items-center mr-2 2xl:mr-4" style={{ backgroundColor: category?.color }}>
+            <div className="flex flex-row justify-center items-center w-full h-full">
+                <div className="w-[25px] h-[25px] 2xl:w-[35px] 2xl:h-[35px] rounded-full flex justify-center items-center mr-2 2xl:mr-4" style={{ backgroundColor: category?.color }}>
                     {category?.icon}
                 </div>
                 {category?.name}
@@ -74,7 +74,7 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
             <button
                 key={index}
                 onClick={() => handleCategoryClick(category)}
-                className="flex justify-start items-center py-2">
+                className="w-full flex justify-start items-center mb-2 hover:bg-[#ecf0f1] pl-[30px]">
                 <div className="w-[25px] h-[25px] 2xl:w-[40px] 2xl:h-[40px] rounded-full flex justify-center items-center mr-2 2xl:mr-4" style={{ backgroundColor: category?.color }}>
                     {category?.icon}
                 </div>
@@ -92,7 +92,7 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
         const paymentMethod = paymentMethods.find((paymentMethod) => paymentMethod.name === name);
 
         return (
-            <div className="flex justify-start items-center pr-2">
+            <div className="flex flex-row justify-center items-center w-full h-full">
                 <div className="w-[25px] h-[25px] 2xl:w-[35px] 2xl:h-[35px] rounded-full flex justify-center items-center mr-2 2xl:mr-4">
                     {paymentMethod?.icon}
                 </div>
@@ -108,8 +108,8 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
             <button
                 key={index}
                 onClick={() => handlePaymentMethodClick(paymentMethod)}
-                className="flex justify-start items-center py-2">
-                <div className="2xl:w-[40px] 2xl:h-[40px] rounded-full flex justify-center items-center mr-2 2xl:mr-4" >
+                className="w-full flex justify-start items-center 2xl:text-[24px] mb-2 hover:bg-[#ecf0f1] pl-[30px]">
+                <div className="w-[25px] h-[25px] 2xl:w-[40px] 2xl:h-[40px] rounded-full flex justify-center items-center mr-2 2xl:mr-4" >
                     {paymentMethod?.icon}
                 </div>
                 {paymentMethod?.name}
@@ -207,7 +207,7 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
                             {getCategory(editedTransaction.category)}
                         </div>
                         <BsChevronDown size={20} />
-                        <div className={`${categoryDropDown ? 'flex' : 'hidden'} flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[10px] 2xl:py-[20px] px-[40px] border-[1px] border-[#696969] rounded-[20px] 2xl:rounded-[50px] shadow z-10`}>
+                        <div className={`${categoryDropDown ? 'flex' : 'hidden'} flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[10px] border-[1px] border-black rounded-[20px] 2xl:rounded-[25px] shadow z-10`}>
                             {getAllCategories()}
                         </div>
                     </div>
@@ -224,7 +224,7 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
                             {getPaymentMethod(editedTransaction.payment_method)}
                         </div>
                         <BsChevronDown size={20} />
-                        <div className={`${paymentDropDown ? 'flex' : 'hidden'} flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[10px] 2xl:py-[20px] px-[40px] border-[1px] border-[#696969] rounded-[20px] 2xl:rounded-[50px] shadow z-10`}>
+                        <div className={`${paymentDropDown ? 'flex' : 'hidden'} flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[10px] border-[1px] border-black rounded-[20px] 2xl:rounded-[25px] shadow z-10`}>
                             {getAllPaymentMethods()}
                         </div>
                     </div>
