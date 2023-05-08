@@ -1,4 +1,28 @@
 @tailwind base;
+
+
+/* Firefox */
+/* * {
+    scrollbar-width: thin;
+    scrollbar-color: black;
+} */
+
+/* Chrome, Edge, and Safari */
+/* *::-webkit-scrollbar {
+    width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+    background: white;
+    border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 14px;
+    border: 3px solid black;
+} */
+
 @tailwind components;
 @tailwind utilities;
 
@@ -16,3 +40,9 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+
+/* 
+main text: black
+subtext : #6A6A6A
+border and bg: #BFA2E5
+*/

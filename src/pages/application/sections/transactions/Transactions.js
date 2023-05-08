@@ -66,7 +66,7 @@ const Transactions = () => {
         }
     };
 
-    const [iconWidth, setIconWidth] = useState(window.innerWidth < 1536 ? 15 : 25);
+    const iconWidth = window.innerWidth < 1536 ? 15 : 20;
 
     const [showCreateModal, setShowCreateModal] = useState(false);
 
@@ -168,10 +168,10 @@ const Transactions = () => {
             )}
 
             <Title title={'Transaction'} />
-            <div className="self-start text-[#2c3e50] relative">
+            <div className="self-start relative">
                 <button
                     onClick={() => setShowDropDown(true)}
-                    className="flex flex-row justify-center items-center 2xl:h-[45px] 2xl:w-[140px] cursor-pointer uppercase font-medium text-[14px] 2xl:text-[16px] bg-[#9F75D6] bg-opacity-90 text-white rounded-[30px] p-1 2xl:p-0">
+                    className="flex flex-row justify-center items-center 2xl:h-[45px] 2xl:w-[140px] cursor-pointer uppercase font-medium text-[14px] 2xl:text-[16px] bg-[#BFA2E5] text-black rounded-[30px] p-1 2xl:p-0">
                     <AiOutlinePlus className="mr-1 2xl:mr-[10px]" size={iconWidth} />
                     new
                 </button>
@@ -179,7 +179,7 @@ const Transactions = () => {
                     onMouseEnter={() => setShowDropDown(true)}
                     onMouseLeave={() => setShowDropDown(false)}
                     className={`${showDropDown ? 'flex flex-col opacity-100' : 'hidden opacity-0'} 
-                absolute top-full 2xl:w-[160px] 2xl:mt-2 bg-white border-[1px] border-[#CED4DA] rounded-xl shadow-lg overflow-hidden`}>
+                absolute top-full 2xl:w-[160px] 2xl:mt-2 bg-white rounded-xl shadow-lg overflow-hidden`}>
                     <div>
                         <button
                             onClick={() => handleIncomeClick('income')}
@@ -198,32 +198,16 @@ const Transactions = () => {
                     </div>
                 </div>
             </div>
-            <div className="hidden 2xl:block w-full min-h-[550px] bg-white rounded-[40px] mt-[40px] border-[1px] border-[#AEAEAE] py-[20px] pt-[35px]">
+            <div className="hidden 2xl:block w-full min-h-[550px] bg-white rounded-[40px] mt-[40px] py-[20px] pt-[35px]">
                 <MonthSelector
                     currentMonth={currentMonth}
                     currentYear={currentYear}
                     setCurrentMonth={setCurrentMonth}
                     setCurrentYear={setCurrentYear}
                 />
-                <div className="w-full h-[60px] bg-[#E3E3E3] bg-opacity-80 flex justify-around items-center">
+                <div className="w-full h-[60px]  bg-[#BFA2E5] bg-opacity-90 flex justify-around items-center">
                     {['Date', 'Category', 'Description', 'Type', 'Amount', 'Action'].map((text, index) => (
-                        <div key={index} className="text-[22px] text-[#6A6A6A] font-medium w-1/6 text-center">
-                            {text}
-                        </div>
-                    ))}
-                </div>
-                {renderTransactions()}
-            </div>
-            <div className="block 2xl:hidden w-full min-h-[150px] bg-white rounded-[20px] mt-[40px] border-[1px] border-[#AEAEAE] py-[15px]">
-                <MonthSelector
-                    currentMonth={currentMonth}
-                    currentYear={currentYear}
-                    setCurrentMonth={setCurrentMonth}
-                    setCurrentYear={setCurrentYear}
-                />
-                <div className="w-full h-[40px] bg-[#E3E3E3] bg-opacity-80 flex justify-between items-center px-2">
-                    {['Date', 'Category', 'Amount', 'More'].map((text, index) => (
-                        <div key={index} className="text-[14px] text-[#6A6A6A] font-medium  text-center">
+                        <div key={index} className="text-[22px] text-[#000] font-medium w-1/6 text-center">
                             {text}
                         </div>
                     ))}

@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { TbCurrencyTenge } from 'react-icons/tb';
 import { AiOutlineClose, AiOutlineCar, AiOutlineGift, AiOutlineShoppingCart, AiOutlineCalendar, AiOutlineHeart, AiOutlineTrophy } from 'react-icons/ai';
-import { IoBagHandle, IoCheckmarkDone, IoEarthOutline, IoGameControllerOutline, IoLanguage } from 'react-icons/io5';
+import { IoBagHandle, IoCheckmarkDone, IoCloseOutline, IoEarthOutline, IoGameControllerOutline, IoLanguage } from 'react-icons/io5';
 import { BsArrowRightShort, BsBookmarks, BsCheck2, BsCheckSquare, BsCoin, BsFileEarmarkText, BsFillAirplaneFill, BsHouse, BsLaptop, BsPiggyBank, BsTruck } from 'react-icons/bs';
 import { BiColorFill, BiDumbbell, BiPlanet, BiWine } from 'react-icons/bi';
 import { FaMicrophone, FaMugHot, FaPray, FaRegHandPeace, FaTools } from 'react-icons/fa';
@@ -199,15 +199,12 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
     }
 
     return (
-        <div className="fixed top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] z-20 bg-white min-w-[500px] py-[20px] px-[30px] flex flex-col justify-center border-[1px] border-[#73737A] shadow-md rounded-[40px]">
+        <div className="fixed top-[5%] left-[50%] translate-x-[-50%] z-20 bg-white py-[20px] px-[30px] flex flex-col justify-center border-[1px] border-[#73737A] shadow-md rounded-[40px]">
             <div className='w-full flex justify-between items-center mb-[10px]'>
                 <div className="text-[32px] font-medium">
                     New Goal
                 </div>
-                <button
-                    onClick={() => onModalClose(false)}>
-                    <AiOutlineClose size={30} />
-                </button>
+                <IoCloseOutline className='cursor-pointer' size={35} onClick={() => onModalClose(false)} />
             </div>
             <div className="relative w-full h-[50px] mb-[10px]">
                 <input className={inputStyle} type="text" placeholder="Goal name" onChange={e => setSelectedName(e.target.value)} />
@@ -221,7 +218,7 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
                     <TbCurrencyTenge size={30} color="#696969" />
                 </div>
             </div>
-            <div className="relative w-full h-[50px] mb-[10px]">
+            <div className="relative w-full h-[50px] mb-[10px]">    
                 <input className={inputStyle} type="date" min={format(new Date(), 'yyyy-MM-dd')} placeholder="Deadline" onChange={e => setSelectedDeadline(e.target.value)} />
                 <div className="absolute top-[50%] translate-y-[-50%] left-0">
                     <AiOutlineCalendar size={30} color="#696969" />
@@ -281,13 +278,13 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
                     )}
                 </div>
             </div>
-            <div className="relative h-[50px] mb-[10px]">
+            <div className="relative h-[50px] mb-[30px]">
                 <input className="w-full h-full text-[24px] font-normal text-[#696969] pl-[40px] border-b-[1px] border-[#696969]" type="text" placeholder="Description" onChange={e => setSelectedDescription(e.target.value)} />
                 <div className="absolute top-[50%] translate-y-[-50%] left-0">
                     <BsFileEarmarkText size={30} color="#696969" />
                 </div>
             </div>
-            <button className='bg-[#BFA2E5] rounded-[40px] text-[24px] font-medium uppercase self-end px-4 py-1' onClick={() => saveGoal()}>
+            <button className='uppercase text-black text-[14px] 2xl:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]' onClick={() => saveGoal()}>
                 save
             </button>
         </div>

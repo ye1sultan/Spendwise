@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { updateTransaction } from "../../../../services/api";
 
-import { AiOutlineCar, AiOutlineCreditCard, AiOutlineHeart, AiOutlineHome, AiOutlineShop, AiOutlineShoppingCart } from 'react-icons/ai';
-import { BiBookAlt } from 'react-icons/bi';
+import { AiOutlineCar, AiOutlineCreditCard, AiOutlineHeart, AiOutlineHome, AiOutlineShop, AiOutlineShoppingCart, AiOutlineCalendar, AiOutlineTag } from 'react-icons/ai';
+import { BiBookAlt, BiFileBlank } from 'react-icons/bi';
 import { BsAirplaneEngines, BsChevronDown, BsLaptop, BsThreeDots } from 'react-icons/bs';
 import { MdOutlineMiscellaneousServices } from 'react-icons/md';
 import { RiRestaurant2Line } from 'react-icons/ri';
@@ -10,11 +10,12 @@ import { IoCloseOutline, IoWalletSharp } from 'react-icons/io5';
 import { AiOutlineGift, AiOutlineStar } from 'react-icons/ai';
 import { BsCoin } from 'react-icons/bs';
 import { FaPray } from 'react-icons/fa';
-import { TbCoin, TbHealthRecognition } from 'react-icons/tb';
+import { TbCoin, TbHealthRecognition, TbCurrencyTenge } from 'react-icons/tb';
 import { format } from "date-fns";
 
 const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
     const iconWidth = window.innerWidth < 1536 ? 15 : 25;
+    const iconMWidth = window.innerWidth < 1536 ? 25 : 30;
 
     const expenseCategories = [
         { name: "Clothing", icon: <AiOutlineShop size={iconWidth} color="#ffffff" />, color: "#D942A6" },
@@ -56,7 +57,7 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
 
         return (
             <div className="flex justify-start items-center pr-2">
-                <div className="w-[25px] h-[25px] 2xl:w-[40px] 2xl:h-[40px] rounded-full flex justify-center items-center mr-2 2xl:mr-4" style={{ backgroundColor: category?.color }}>
+                <div className="w-[25px] h-[25px] 2xl:w-[30px] 2xl:h-[30px] rounded-full flex justify-center items-center mr-2 2xl:mr-4" style={{ backgroundColor: category?.color }}>
                     {category?.icon}
                 </div>
                 {category?.name}
@@ -92,7 +93,7 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
 
         return (
             <div className="flex justify-start items-center pr-2">
-                <div className="2xl:w-[40px] 2xl:h-[40px] rounded-full flex justify-center items-center mr-2 2xl:mr-4">
+                <div className="w-[25px] h-[25px] 2xl:w-[35px] 2xl:h-[35px] rounded-full flex justify-center items-center mr-2 2xl:mr-4">
                     {paymentMethod?.icon}
                 </div>
                 {paymentMethod?.name}
@@ -146,14 +147,35 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
         onCancel();
     }
 
+    let inputStyle = 'w-full h-full text-[24px] font-normal pl-[40px] border-b-[1px] border-[#696969]';
+
     return (
         <>
-            <div className="hidden 2xl:block fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white border-[1px] border-[#AEAEAE] w-[600px] p-4 rounded-[40px] shadow-md">
-                <h3 className="text-[26px] text-[#000000] font-semibold mb-4">Edit Transaction</h3>
-                <div className="block">
-                    <span className="text-[18px] font-medium">Date</span>
+            <div className="fixed top-[5%] left-[50%] translate-x-[-50%] z-20 bg-white py-[20px] px-[30px] flex flex-col justify-center shadow-md rounded-[40px]">
+                <div className="w-full flex justify-between items-center mb-[10px]">
+                    <div className="text-[32px] font-medium">
+                        Edit {transaction.transaction_type === 'income' ? 'Income' : 'Expense'}
+                    </div>
+                    <IoCloseOutline className='cursor-pointer' size={35} onClick={() => onCancel()} />
+                </div>
+                <div className="relative w-full h-[50px] mb-[10px]">
+                    <div className='absolute top-[50%] translate-y-[-50%] left-0'>
+                        <TbCurrencyTenge size={iconMWidth} />
+                    </div>
                     <input
-                        className="px-4 block w-full h-[50px] border-b-[1px] border-[#000000] text-[18px]"
+                        className={inputStyle}
+                        type="number"
+                        name="amount"
+                        value={editedTransaction.amount}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className="relative w-full h-[50px] mb-[10px]">
+                    <div className='absolute top-[50%] translate-y-[-50%] left-0'>
+                        <AiOutlineCalendar size={iconMWidth} />
+                    </div>
+                    <input
+                        className={inputStyle}
                         type="date"
                         name="date"
                         value={editedTransaction.date}
@@ -161,24 +183,12 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
                         onChange={handleChange}
                     />
                 </div>
-                <div
-                    onMouseEnter={() => setCategoryDropDown(true)}
-                    onMouseLeave={() => setCategoryDropDown(false)}
-                    className="block mt-4 relative">
-                    <span className="text-[18px] font-medium">Category</span>
-                    <div className="px-4 flex justify-start items-center w-full h-[50px] border-b-[1px] border-[#000000] text-[18px] cursor-pointer">
-                        {getCategory(editedTransaction.category)}
-                        <BsChevronDown size={20} />
+                <div className="relative w-full h-[50px] mb-[10px]">
+                    <div className='absolute top-[50%] translate-y-[-50%] left-0'>
+                        <BiFileBlank size={iconMWidth} />
                     </div>
-                    <div
-                        className={`z-20 absolute top-[100%] left-0 max-h-[300px] overflow-auto ${categoryDropDown ? 'flex' : 'hidden'} flex-col bg-white py-4 pl-2 pr-10 shadow rounded-[20px]`}>
-                        {getAllCategories()}
-                    </div>
-                </div>
-                <div className="block mt-4">
-                    <span className="text-[18px] font-medium">Description</span>
                     <input
-                        className="px-4 block w-full h-[50px] border-b-[1px] border-[#000000] text-[18px]"
+                        className={inputStyle}
                         type="text"
                         name="description"
                         value={editedTransaction.description}
@@ -186,116 +196,43 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
                     />
                 </div>
                 <div
+                    onMouseEnter={() => setCategoryDropDown(true)}
+                    onMouseLeave={() => setCategoryDropDown(false)}
+                    className="relative w-full h-[50px] mb-[10px]">
+                    <div className='absolute top-[50%] translate-y-[-50%] left-0'>
+                        <AiOutlineTag size={iconMWidth} />
+                    </div>
+                    <div className={`${inputStyle} flex justify-between items-center relative`}>
+                        <div className="cursor-pointer">
+                            {getCategory(editedTransaction.category)}
+                        </div>
+                        <BsChevronDown size={20} />
+                        <div className={`${categoryDropDown ? 'flex' : 'hidden'} flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[10px] 2xl:py-[20px] px-[40px] border-[1px] border-[#696969] rounded-[20px] 2xl:rounded-[50px] shadow z-10`}>
+                            {getAllCategories()}
+                        </div>
+                    </div>
+                </div>
+                <div
                     onMouseEnter={() => setPaymentDropDown(true)}
                     onMouseLeave={() => setPaymentDropDown(false)}
-                    className="block mt-4 relative">
-                    <span className="text-[18px] font-medium">Payment Method</span>
-                    <div className="px-4 flex justify-start items-center w-full h-[50px] border-b-[1px] border-[#000000] text-[18px] cursor-pointer">
-                        {getPaymentMethod(editedTransaction.payment_method)}
+                    className="relative w-full h-[50px] mb-[30px]">
+                    <div className='absolute top-[50%] translate-y-[-50%] left-0'>
+                        <AiOutlineTag size={iconMWidth} />
+                    </div>
+                    <div className={`${inputStyle} flex justify-between items-center relative`}>
+                        <div className="cursor-pointer">
+                            {getPaymentMethod(editedTransaction.payment_method)}
+                        </div>
                         <BsChevronDown size={20} />
+                        <div className={`${paymentDropDown ? 'flex' : 'hidden'} flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[10px] 2xl:py-[20px] px-[40px] border-[1px] border-[#696969] rounded-[20px] 2xl:rounded-[50px] shadow z-10`}>
+                            {getAllPaymentMethods()}
+                        </div>
                     </div>
-                    <div
-                        className={`absolute top-[100%] left-0 max-h-[300px] overflow-auto ${paymentDropDown ? 'flex' : 'hidden'} flex-col bg-white py-4 pl-2 pr-10 shadow rounded-[20px]`}>
-                        {getAllPaymentMethods()}
-                    </div>
                 </div>
-                <div className="block mt-4">
-                    <span className="text-[18px] font-medium">Amount</span>
-                    <input
-                        className="px-4 block w-full h-[50px] border-b-[1px] border-[#000000] text-[18px]"
-                        type="number"
-                        name="amount"
-                        value={editedTransaction.amount}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="mt-4 flex justify-end">
-                    <button className="uppercase px-4 py-2 bg-[#BFA2E5]  text-[#000000] rounded-[15px] text-[18px] mr-4" onClick={handleSave}>
-                        Save
-                    </button>
-                    <button className="uppercase px-4 py-2 bg-[#E3E3E3] text-[#000000] rounded-[15px] text-[18px]" onClick={onCancel}>
-                        Cancel
-                    </button>
-                </div>
+                <button onClick={handleSave} className='uppercase text-black text-[14px] 2xl:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]'>
+                    Save
+                </button>
             </div>
-
-            <div className="block 2xl:hidden fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white border-[1px] border-[#AEAEAE] w-[300px] p-2 rounded-[20px] shadow-md z-40">
-                <IoCloseOutline
-                    className="absolute top-2 right-2"
-                    size={25}
-                    onClick={onCancel}
-                />
-                <div className="block w-full">
-                    <span className="text-[16px] font-medium">Date</span>
-                    <input
-                        className="rounded-none block w-full border-b-[1px] border-[#000000] text-[16px]"
-                        type="date"
-                        name="date"
-                        value={editedTransaction.date}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div
-                    onMouseEnter={() => setCategoryDropDown(true)}
-                    onMouseLeave={() => setCategoryDropDown(false)}
-                    className="block mt-2 relative">
-                    <span className="text-[16px] font-medium">Category</span>
-                    <div className="px-2 flex justify-start items-center w-full h-[50px] border-b-[1px] border-[#000000] text-[16px] cursor-pointer">
-                        {getCategory(editedTransaction.category)}
-                        <BsChevronDown size={20} />
-                    </div>
-                    <div
-                        className={`z-20 absolute top-[100%] left-0 max-h-[300px] overflow-auto ${categoryDropDown ? 'flex' : 'hidden'} flex-col bg-white py-4 pl-2 pr-10 shadow rounded-[20px]`}>
-                        {getAllCategories()}
-                    </div>
-                </div>
-                <div className="block mt-2">
-                    <span className="text-[16px] font-medium">Description</span>
-                    <input
-                        className="rounded-none px-2 block w-full h-[50px] border-b-[1px] border-[#000000] text-[16px]"
-                        type="text"
-                        name="description"
-                        value={editedTransaction.description}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div
-                    onMouseEnter={() => setPaymentDropDown(true)}
-                    onMouseLeave={() => setPaymentDropDown(false)}
-                    className="block mt-2 relative">
-                    <span className="text-[16px] font-medium">Payment Method</span>
-                    <div className="px-2 flex justify-start items-center w-full h-[50px] border-b-[1px] border-[#000000] text-[16px] cursor-pointer">
-                        {getPaymentMethod(editedTransaction.payment_method)}
-                        <BsChevronDown size={20} />
-                    </div>
-                    <div
-                        className={`absolute top-[100%] left-0 max-h-[300px] overflow-auto ${paymentDropDown ? 'flex' : 'hidden'} flex-col bg-white py-4 pl-2 pr-10 shadow rounded-[20px]`}>
-                        {getAllPaymentMethods()}
-                    </div>
-                </div>
-                <div className="block mt-2">
-                    <span className="text-[16px] font-medium">Amount</span>
-                    <input
-                        className="rounded-none px-2 2xl:px-4 block w-full h-[50px] border-b-[1px] border-[#000000] text-[16px]"
-                        type="number"
-                        name="amount"
-                        value={editedTransaction.amount}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="mt-4 flex justify-end">
-                    <button
-                        className="uppercase px-4 py-2 bg-[#BFA2E5]  text-[#000000] rounded-[15px] text-[14px] mr-4"
-                        onClick={handleSave}>
-                        Save
-                    </button>
-                    <button
-                        className="uppercase px-4 py-2 text-red-500 rounded-[15px] text-[14px]"
-                        onClick={handleDeleteTransaction}>
-                        Delete
-                    </button>
-                </div>
-            </div >
         </>
     );
 };
