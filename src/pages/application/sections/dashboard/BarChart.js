@@ -24,16 +24,16 @@ const BarChart = ({ expense, income }) => {
             <div className="text-[16px] 2xl:text-[24px] flex flex-col justify-center items-center h-full w-[50%]">
                 <div className="flex flex-row justify-between items-center w-full mb-4">
                     <div>Incomes</div>
-                    <div className="text-[#34C05C] font-semibold">{income}</div>
+                    <div className="text-[#34C05C] font-semibold">{income + " ₸"}</div>
                 </div>
                 <div className="flex flex-row justify-between items-center w-full mb-2">
                     <div>Expenses</div>
-                    <div className="text-[#EA1A1A] font-semibold">{expense}</div>
+                    <div className="text-[#EA1A1A] font-semibold">{expense + " ₸"}</div>
                 </div>
                 <hr className="w-full h-[2px] bg-[#000000] mb-2" />
                 <div className="flex flex-row justify-between items-center w-full">
                     <div>Balance</div>
-                    <div className="font-semibold">{income + expense}</div>
+                    <div className="font-semibold">{income + expense + " ₸"}</div>
                 </div>
             </div>
         </div>

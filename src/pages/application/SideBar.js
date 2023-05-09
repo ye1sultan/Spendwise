@@ -14,7 +14,7 @@ const SideBar = () => {
         sessionStorage.removeItem('authToken');
         sessionStorage.removeItem('userData');
 
-        navigate('/signin');
+        navigate('/login');
     }
 
     const initialActiveButton = location.pathname.split('/')[2] || 'dashboard';

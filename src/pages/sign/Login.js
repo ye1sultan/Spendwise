@@ -3,6 +3,7 @@ import GoogleLogin from './GoogleLogin';
 
 import { useEffect, useState } from 'react';
 import { login } from '../../services/api';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -47,6 +48,7 @@ const Login = () => {
         }
     }, []);
 
+    const [transparentPassword, setTransparentPassword] = useState(false);
 
     return (
         <div className="bg-white h-screen flex justify-center items-center relative font-sans w-full">
@@ -71,7 +73,22 @@ const Login = () => {
                             placeholder="Email"
                             required
                         />
-                        <input className='border-[1px] rounded-[8px] border-[#CED4DA] mb-[24px] focus:outline-0 w-full h-[40px] text-[12px] text-[#000000] py-[12px] pl-[12px]' onChange={(e) => setPassword(e.target.value)} type='password' placeholder='Password' required />
+                        <div className='w-full relative'>
+                            <input
+                                onChange={(e) => setPassword(e.target.value)}
+                                className='border-[1px] rounded-[8px] border-[#CED4DA] mb-[24px] focus:outline-0 w-full h-[40px] text-[12px] text-[#000000] py-[12px] pl-[12px]'
+                                type={transparentPassword ? 'text' : 'password'}
+                                placeholder='Password'
+                                required />
+                            <button
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setTransparentPassword(!transparentPassword);
+                                }}
+                                className='absolute top-0 right-2 translate-y-[50%]'>
+                                {transparentPassword ? <FiEye size={20} /> : <FiEyeOff size={20} />}
+                            </button>
+                        </div>
                     </div>
                     <button data-route='/forgot-password' className='text-[12px] font-semibold text-[#758697] mb-[24px] underline' onClick={handleNavigation}>
                         Forgot Password?
