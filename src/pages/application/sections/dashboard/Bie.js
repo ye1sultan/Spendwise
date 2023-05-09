@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { AiOutlineArrowDown, AiOutlineArrowUp, AiOutlineClockCircle } from "react-icons/ai";
 import { BsFillCalendar2CheckFill } from "react-icons/bs";
+import { TbCurrencyTenge } from "react-icons/tb";
 
-const Bie = ({ title, svg, transactions, isLoading }) => {
+import { createMonthlyBalance } from "../../../../services/api";
+
+const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
     const calculateTotals = (transactions) => {
         let totalIncome = 0;
         let totalExpense = 0;
@@ -26,6 +30,45 @@ const Bie = ({ title, svg, transactions, isLoading }) => {
         }
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     };
+
+    const [showBalanceModal, setShowBalanceModal] = useState(false);
+    const [selectedAmount, setSelectedAmount] = useState(0);
+
+    const saveBalance = async () => {
+        const correctedAmount = correctNumber(selectedAmount);
+
+        // Get today's date in "YYYY-MM-DD" format
+        const today = new Date();
+        const date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+
+        try {
+            await createMonthlyBalance(date, correctedAmount); // You may replace these parameters as per your API requirements
+            console.log('Monthly balance saved successfully');
+            setShowBalanceModal(false);
+        } catch (err) {
+            console.error('Failed to save monthly balance', err);
+        }
+    }
+
+    function correctNumber(num) {
+        // First, check if num is a number.
+        if (isNaN(num)) {
+            console.error('Input is not a number');
+            return;
+        }
+
+        // Convert the number to a positive one if it's negative.
+        num = Math.abs(num);
+
+        // If the number is zero or starts with zero and has more digits, return 0.
+        if (num === 0 || num < 1) {
+            return 0;
+        }
+
+        // Return the corrected number.
+        return num;
+    }
+
 
     const getBie = () => {
         if (svg === 'current') {
@@ -128,16 +171,44 @@ const Bie = ({ title, svg, transactions, isLoading }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="text-[16px] 2xl:text-[24px] font-medium">
-                            {formatNumber(calculateTotals(transactions).totalIncome) + " ₸"}
+                        <div className="text-[16px] 2xl:text-[24px] font-medium flex justify-start items-center">
+                            {formatNumber(Math.floor(monthlyBalance.balance)) + " ₸"}
+                            {monthlyBalance.length > 0 && (
+                                <button
+                                    onClick={() => setShowBalanceModal(true)}
+                                    className="ml-4 uppercase text-black text-[16px] font-medium py-[10px] px-[40px] bg-[#BFA2E5] rounded-[40px] hover:bg-[#a97fdf]">
+                                    set
+                                </button>
+                            )}
                         </div>
+                        {showBalanceModal && (
+                            <div className="fixed top-[5%] left-[50%] translate-x-[-50%] z-20 p-4 rounded-[30px] bg-white flex flex-col justify-center shadow-md ">
+                                <div className="text-[16px] 2xl:text-[24px] font-medium mb-[10px]">
+                                    Set monthly balance
+                                </div>
+                                <div className="relative w-full h-[50px] mb-[20px]">
+                                    <input
+                                        onChange={(e) => setSelectedAmount(e.target.value)}
+                                        className="w-full h-full text-[24px] font-normal pl-[40px] border-b-[1px] border-[#696969]"
+                                        type="number"
+                                        placeholder="Set balance" />
+                                    <div className="absolute top-[50%] translate-y-[-50%] left-0">
+                                        <TbCurrencyTenge size={30} color="#696969" />
+                                    </div>
+                                </div>
+                                <button
+                                    onClick={saveBalance}
+                                    className='uppercase text-black text-[16px] font-medium py-[10px] px-[40px] bg-[#BFA2E5] rounded-[40px]'>
+                                    save
+                                </button>
+                            </div >
+                        )}
                     </>
                 );
             }
         }
 
     }
-
 
     return (
         <div className="flex flex-col justify-between items-start w-[135px] 2xl:w-[297px] h-[70px] 2xl:h-[138px] rounded-[15px] 2xl:rounded-[30px] bg-white border-[1px] border-[#AEAEAE] relative p-[7px] 2xl:p-[25px] mb-[20px] 2xl:mb-0">

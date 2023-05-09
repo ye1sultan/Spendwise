@@ -213,3 +213,23 @@ export const getMontlyBalance = async () => {
     const data = await response.json();
     return data;
 };
+
+export const createMonthlyBalance = async (date, balance) => {
+    const response = await authenticatedFetch(`${API_URL}/monthly-balances`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            date,
+            balance,
+        }),
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to create monthly balance');
+    }
+
+    const data = await response.json();
+    return data;
+};

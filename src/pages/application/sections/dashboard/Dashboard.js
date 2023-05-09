@@ -2,18 +2,23 @@ import Bie from "./Bie";
 import BieCharts from "./BieCharts";
 import Title from "../../components/Title";
 import { useEffect, useState } from "react";
-import { getAllGoals, getAllTransactions } from "../../../../services/api";
+import { getAllGoals, getAllTransactions, getMontlyBalance } from "../../../../services/api";
 
 const Dashboard = () => {
     const [transactions, setTransactions] = useState([]);
+    const [monthlyBalance, setMonthlyBalance] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchTransactions = async () => {
             try {
                 const data = await getAllTransactions();
-
                 setTransactions(getCurrentMonthTransactions(data));
+
+                const monthly_balance = await getMontlyBalance();
+                setMonthlyBalance(monthly_balance[monthly_balance.length - 1]);
+
+                console.log(monthly_balance[monthly_balance.length - 1]);
                 setIsLoading(false);
             } catch (error) {
                 console.error("Error:", error);
@@ -112,7 +117,7 @@ const Dashboard = () => {
                 <Bie title="Current balance" svg="current" transactions={transactions} isLoading={isLoading} />
                 <Bie title="Incomes" svg="incomes" transactions={transactions} isLoading={isLoading} />
                 <Bie title="Expenses" svg="expenses" transactions={transactions} isLoading={isLoading} />
-                <Bie title="Monthly balance" svg="monthly" transactions={transactions} isLoading={isLoading} />
+                <Bie title="Monthly balance" svg="monthly" transactions={transactions} isLoading={isLoading} monthlyBalance={monthlyBalance} />
             </div>
             <div className="flex flex-wrap justify-between pt-[45px] w-full">
                 <BieCharts title="Expenses by category" isLoading={isTLoading} isGLoading={isGLoading} goal={goal} separatedTransactions={separatedTransactions} totals={totals} />
