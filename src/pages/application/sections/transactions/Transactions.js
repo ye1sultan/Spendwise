@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getAllTransactions, addTransaction, deleteTransaction as deleteTransactionAPI } from '../../../../services/api';
+import { getAllTransactions, addTransaction, deleteTransaction as deleteTransactionAPI, updateMonthlyBalance, getMontlyBalance } from '../../../../services/api';
 import ContentLoader from 'react-content-loader';
 
 import Title from "../../components/Title";
@@ -39,6 +39,21 @@ const Transactions = () => {
             setTransactions((prevTransactions) => [
                 ...prevTransactions, addedTransaction
             ]);
+
+            const monthly_balance = await getMontlyBalance();
+            const balanceId = monthly_balance[monthly_balance.length - 1].id;
+            const currentBalance = monthly_balance[monthly_balance.length - 1].balance;
+
+            if (monthly_balance && addedTransaction.transaction_type === 'expense') {
+                const date = new Date();
+                const year = date.getFullYear();
+                const month = ("0" + (date.getMonth() + 1)).slice(-2); // Add 1 because months are 0-indexed
+                const day = ("0" + date.getDate()).slice(-2);
+                const formattedDate = `${year}-${month}-${day}`;
+
+                updateMonthlyBalance(formattedDate, currentBalance - Math.abs(addedTransaction.amount), balanceId);
+                console.log("Balance updated!");
+            }
         } catch (error) {
             console.error('Error adding transaction:', error);
         }

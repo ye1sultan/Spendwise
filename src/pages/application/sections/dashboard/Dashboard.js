@@ -17,8 +17,6 @@ const Dashboard = () => {
 
                 const monthly_balance = await getMontlyBalance();
                 setMonthlyBalance(monthly_balance[monthly_balance.length - 1]);
-
-                console.log(monthly_balance[monthly_balance.length - 1]);
                 setIsLoading(false);
             } catch (error) {
                 console.error("Error:", error);

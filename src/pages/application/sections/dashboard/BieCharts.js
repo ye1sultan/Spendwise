@@ -25,7 +25,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
                                         <PieChart transactions={separatedTransactions.expenseObjects} />
                                         <Link
                                             to='/application/transactions'
-                                            className="text-center 2xl:text-[24px] text-[#590CC0] uppercase mt-[25px] p-[10px] 2xl:py-[20px] w-full border-t-[1px] border-t-black">
+                                            className="text-center 2xl:text-[24px] text-[#590CC0] uppercase mt-[25px] p-[10px] 2xl:py-[20px] w-full border-t-[1px] border-t-[#AEAEAE]">
                                             See more
                                         </Link>
                                     </div>
@@ -56,7 +56,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
                                         <PieChart transactions={separatedTransactions.incomeObjects} />
                                         <Link
                                             to='/application/transactions'
-                                            className="text-center 2xl:text-[24px] text-[#590CC0] uppercase mt-[25px] p-[10px] 2xl:py-[20px] w-full border-t-[1px] border-t-black">
+                                            className="text-center 2xl:text-[24px] text-[#590CC0] uppercase mt-[25px] p-[10px] 2xl:py-[20px] w-full border-t-[1px] border-t-[#AEAEAE]">
                                             See more
                                         </Link>
                                     </div>
@@ -88,7 +88,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
                                             income={totals.totalIncome} />
                                         <Link
                                             to='/application/transactions'
-                                            className="text-center 2xl:text-[24px] text-[#590CC0] uppercase mt-[25px] py-[10px] 2xl:py-[20px] w-full border-t-[1px] border-t-black">
+                                            className="text-center 2xl:text-[24px] text-[#590CC0] uppercase mt-[25px] py-[10px] 2xl:py-[20px] w-full border-t-[1px] border-t-[#AEAEAE]">
                                             See more
                                         </Link>
                                     </div>

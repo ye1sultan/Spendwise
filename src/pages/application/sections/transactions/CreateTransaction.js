@@ -165,7 +165,7 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
                 amount: correctAmount(selectedAmount),
                 date: selectedDate.toISOString().substr(0, 10),
                 transaction_type: transaction,
-                description: selectedDescription,
+                description: selectedDescription ? selectedDescription : '...',
                 payment_method: selectedPaymentMethod.name,
             };
 

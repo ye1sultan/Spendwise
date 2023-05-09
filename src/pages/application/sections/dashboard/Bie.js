@@ -173,9 +173,9 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
                         </div>
                         <div className="text-[16px] 2xl:text-[24px] font-medium flex justify-start items-center">
                             {formatNumber(Math.floor(monthlyBalance.balance)) + " ₸"}
-                            {monthlyBalance.length > 0 && (
+                            {!monthlyBalance && (
                                 <button
-                                    onClick={() => setShowBalanceModal(true)}
+                                    onClick={() => { setShowBalanceModal(true) }}
                                     className="ml-4 uppercase text-black text-[16px] font-medium py-[10px] px-[40px] bg-[#BFA2E5] rounded-[40px] hover:bg-[#a97fdf]">
                                     set
                                 </button>
