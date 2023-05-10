@@ -111,7 +111,7 @@ const Dashboard = () => {
     return (
         <>
             <Title title={'Dashboard'} />
-            <div className="flex justify-between items-center flex-wrap w-full mt-4 sm:mt-6 md:mt-8 lg:mt-12 xl:mt-[50px]">
+            <div className="flex justify-between items-center flex-wrap w-full gap-x-12 gap-y-6">
                 <Bie title="Current balance" svg="current" transactions={transactions} isLoading={isLoading} />
                 <Bie title="Incomes" svg="incomes" transactions={transactions} isLoading={isLoading} />
                 <Bie title="Expenses" svg="expenses" transactions={transactions} isLoading={isLoading} />
