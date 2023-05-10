@@ -111,18 +111,18 @@ const Dashboard = () => {
     return (
         <>
             <Title title={'Dashboard'} />
-            <div className="flex justify-between items-center flex-wrap w-full gap-x-12 gap-y-6">
+            <div className="flex justify-between items-center flex-wrap w-full gap-x-12 gap-y-6 lg:mb-[40px] mb-[20px]">
                 <Bie title="Current balance" svg="current" transactions={transactions} isLoading={isLoading} />
                 <Bie title="Incomes" svg="incomes" transactions={transactions} isLoading={isLoading} />
                 <Bie title="Expenses" svg="expenses" transactions={transactions} isLoading={isLoading} />
                 <Bie title="Monthly balance" svg="monthly" transactions={transactions} isLoading={isLoading} monthlyBalance={monthlyBalance} />
             </div>
-            {/* <div className="flex flex-wrap justify-between pt-[45px] w-full">
+            <div className="flex justify-between items-center flex-wrap w-full gap-x-12 gap-y-6">
                 <BieCharts title="Expenses by category" isLoading={isTLoading} isGLoading={isGLoading} goal={goal} separatedTransactions={separatedTransactions} totals={totals} />
                 <BieCharts title="Incomes by category" isLoading={isTLoading} isGLoading={isGLoading} goal={goal} separatedTransactions={separatedTransactions} totals={totals} />
                 <BieCharts title="Monthly balance" isLoading={isTLoading} isGLoading={isGLoading} goal={goal} separatedTransactions={separatedTransactions} totals={totals} />
                 <BieCharts title="Goals" isLoading={isTLoading} isGLoading={isGLoading} goal={goal} separatedTransactions={separatedTransactions} totals={totals} />
-            </div> */}
+            </div>
         </>
     );
 }

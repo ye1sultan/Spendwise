@@ -13,7 +13,6 @@ import { AiOutlineGift, AiOutlineStar } from 'react-icons/ai';
 import { BsCoin } from 'react-icons/bs';
 import { FaPray } from 'react-icons/fa';
 import { TbHealthRecognition } from 'react-icons/tb';
-import { useEffect, useState } from 'react';
 
 const getTotalExpense = (data) => {
     return data.datasets[0].data.reduce((acc, val) => acc + val, 0);
@@ -27,7 +26,7 @@ const centerTextPlugin = {
         const centerX = (chart.chartArea.left + chart.chartArea.right) / 2;
         const centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
 
-        ctx.font = window.innerWidth < 1536 ? "16px Montserrat" : "24px Montserrat";
+        ctx.font = "24px Montserrat";
         ctx.fillStyle = "#000000";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
@@ -45,21 +44,6 @@ const centerTextPlugin = {
 Chart.register(centerTextPlugin);
 
 const PieChart = ({ transactions = [] }) => {
-    const [chartSize, setChartSize] = useState(window.innerWidth < 1536 ? 250 : 350);
-    const [borderRadius, setBorderRadius] = useState(window.innerWidth < 1536 ? 6 : 10);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setChartSize(window.innerWidth < 1536 ? 200 : 350);
-            setBorderRadius(window.innerWidth < 1536 ? 8 : 8);
-        };
-
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
     const categories = [
         { name: "Clothing", icon: <AiOutlineShop size={25} color="#ffffff" />, color: "#D942A6" },
         { name: "Health", icon: <TbHealthRecognition size={25} color="#ffffff" />, color: "#19AD50" },
@@ -139,7 +123,7 @@ const PieChart = ({ transactions = [] }) => {
         },
         elements: {
             arc: {
-                borderRadius: borderRadius, // Set the border radius to make the segments rounder
+                borderRadius: 10, // Set the border radius to make the segments rounder
             },
         },
         legend: {
@@ -148,14 +132,14 @@ const PieChart = ({ transactions = [] }) => {
     };
 
     return (
-        <div className='2xl:max-w-[350px] 2xl:max-h-[350px] flex justify-center items-center'>
+        <div className='max-w-[350px] max-h-[350px] flex justify-center items-center'>
             <Doughnut
                 data={data}
                 options={options}
                 style={
                     {
-                        width: `${chartSize}px`,
-                        height: `${chartSize}px`,
+                        width: `350px`,
+                        height: `350px`,
                     }
                 }
             />
