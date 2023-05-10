@@ -3,7 +3,7 @@ const Header = () => {
     const avt = false;
 
     return (
-        <div className="w-full flex flex-row justify-between items-start">
+        <div className="w-full flex flex-row justify-between items-start mb-[20px]">
             <div className="flex flex-col">
                 <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] mb-[5px]">
                     The Complete Wallet
