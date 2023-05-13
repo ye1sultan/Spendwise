@@ -8,7 +8,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
     const getBieChart = () => {
         if (title === 'Expenses by category') {
             return (
-                <div className="flex flex-col justify-between items-center w-full rounded-[30px] border-[#AEAEAE] border-[1px] bg-white">
+                <div className="flex flex-col justify-between items-center w-full rounded-[10px] sm:rounded-[15px] md:rounded-[20px] lg:rounded-[30px] border-[#AEAEAE] border-[1px] bg-white">
                     {
                         (() => {
                             if (isLoading) {
@@ -17,7 +17,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
                                         <h2>Loading...</h2>
                                     </div>
                                 );
-                            } else if (separatedTransactions.expenseObjects || separatedTransactions.expenseObjects.length === 0) {
+                            } else if (!separatedTransactions.expenseObjects || separatedTransactions.expenseObjects.length === 0) {
                                 return <NoContent is={'expense'} />;
                             } else {
                                 return (
@@ -25,7 +25,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
                                         <PieChart transactions={separatedTransactions.expenseObjects} />
                                         <Link
                                             to='/application/transactions'
-                                            className="text-center text-[24px] text-[#590CC0] uppercase mt-[25px] py-[20px] w-full border-t-[1px] border-t-[#AEAEAE]">
+                                            className="flex justify-center items-center lg:text-2xl md:text-xl sm:text-lg text-base text-purple-700 uppercase w-full lg:h-16 md:h-14 sm:h-12 h-10 border-t border-[#AEAEAE] mt-[20px]">
                                             See more
                                         </Link>
                                     </div>
@@ -39,7 +39,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
 
         if (title === 'Incomes by category') {
             return (
-                <div className="flex flex-col justify-between items-center w-full rounded-[30px] border-[#AEAEAE] border-[1px] bg-white">
+                <div className="flex flex-col justify-between items-center w-full rounded-[10px] sm:rounded-[15px] md:rounded-[20px] lg:rounded-[30px] border-[#AEAEAE] border-[1px] bg-white">
                     {
                         (() => {
                             if (isLoading) {
@@ -48,7 +48,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
                                         <h2>Loading...</h2>
                                     </div>
                                 );
-                            } else if (separatedTransactions.incomeObjects || separatedTransactions.incomeObjects.length === 0) {
+                            } else if (!separatedTransactions.incomeObjects || separatedTransactions.incomeObjects.length === 0) {
                                 return <NoContent is={'income'} />;
                             } else {
                                 return (
@@ -56,7 +56,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
                                         <PieChart transactions={separatedTransactions.incomeObjects} />
                                         <Link
                                             to='/application/transactions'
-                                            className="text-center text-[24px] text-[#590CC0] uppercase mt-[25px] py-[20px] w-full border-t-[1px] border-t-[#AEAEAE]">
+                                            className="flex justify-center items-center lg:text-2xl md:text-xl sm:text-lg text-base text-purple-700 uppercase w-full lg:h-16 md:h-14 sm:h-12 h-10 border-t border-[#AEAEAE] mt-[20px]">
                                             See more
                                         </Link>
                                     </div>
@@ -70,7 +70,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
 
         if (title === 'Monthly balance') {
             return (
-                <div className="flex flex-col justify-between items-center w-full rounded-[30px] border-[#AEAEAE] border-[1px] bg-white">
+                <div className="flex flex-col justify-between items-center w-full rounded-[10px] sm:rounded-[15px] md:rounded-[20px] lg:rounded-[30px] border-[#AEAEAE] border-[1px] bg-white">
                     {
                         (() => {
                             if (isLoading) {
@@ -79,7 +79,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
                                         <h2>Loading...</h2>
                                     </div>
                                 );
-                            } else if (!(totals.totalExpense === 0 && totals.totalExpense === 0)) {
+                            } else if (totals.totalExpense === 0 && totals.totalExpense === 0) {
                                 return <NoContent is={'month'} />;
                             } else {
                                 return (
@@ -89,7 +89,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
                                             income={totals.totalIncome} />
                                         <Link
                                             to='/application/transactions'
-                                            className="text-center text-[24px] text-[#590CC0] uppercase py-[20px] w-full border-t-[1px] border-t-[#AEAEAE]">
+                                            className="flex justify-center items-center lg:text-2xl md:text-xl sm:text-lg text-base text-purple-700 uppercase w-full lg:h-16 md:h-14 sm:h-12 h-10 border-t border-[#AEAEAE] mt-[20px]">
                                             See more
                                         </Link>
                                     </div>
@@ -103,7 +103,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
 
         if (title === 'Goals') {
             return (
-                <div className="flex flex-col justify-center items-center h-[270px] w-full rounded-[30px] border-[#AEAEAE] border-[1px] bg-white mb-8">
+                <div className="flex flex-col justify-center items-center h-[270px] w-full rounded-[10px] sm:rounded-[15px] md:rounded-[20px] lg:rounded-[30px] border-[#AEAEAE] border-[1px] bg-white mb-8">
                     {
                         (() => {
                             if (isGLoading) {

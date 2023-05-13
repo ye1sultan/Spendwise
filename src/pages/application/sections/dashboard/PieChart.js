@@ -26,7 +26,8 @@ const centerTextPlugin = {
         const centerX = (chart.chartArea.left + chart.chartArea.right) / 2;
         const centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
 
-        ctx.font = "24px Montserrat";
+        const fontSize = (chart.chartArea.height / 200).toFixed(2);
+        ctx.font = fontSize + "em Montserrat";
         ctx.fillStyle = "#000000";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
@@ -84,6 +85,8 @@ const PieChart = ({ transactions = [] }) => {
 
 
     const options = {
+        responsive: true,
+        maintainAspectRatio: false,
         cutout: '70%',
         plugins: {
             centerText: centerTextPlugin,
@@ -132,7 +135,7 @@ const PieChart = ({ transactions = [] }) => {
     };
 
     return (
-        <div className='max-w-[350px] max-h-[350px] flex justify-center items-center'>
+        <div className='lg:max-w-[350px] lg:max-h-[350px] md:max-w-[300px] md:max-h-[300px] sm:max-w-[250px] sm:max-h-[250px] max-w-[200px] max-h-[200px] w-full h-full flex justify-center items-center'>
             <Doughnut
                 data={data}
                 options={options}
