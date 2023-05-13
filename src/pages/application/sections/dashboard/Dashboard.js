@@ -117,7 +117,7 @@ const Dashboard = () => {
                 <Bie title="Expenses" svg="expenses" transactions={transactions} isLoading={isLoading} />
                 <Bie title="Monthly balance" svg="monthly" transactions={transactions} isLoading={isLoading} monthlyBalance={monthlyBalance} />
             </div>
-            <div className="flex justify-between items-center flex-wrap w-full gap-x-12 gap-y-6">
+            <div className="flex justify-between items-start flex-wrap w-full gap-x-6 gap-y-12">
                 <BieCharts title="Expenses by category" isLoading={isTLoading} isGLoading={isGLoading} goal={goal} separatedTransactions={separatedTransactions} totals={totals} />
                 <BieCharts title="Incomes by category" isLoading={isTLoading} isGLoading={isGLoading} goal={goal} separatedTransactions={separatedTransactions} totals={totals} />
                 <BieCharts title="Monthly balance" isLoading={isTLoading} isGLoading={isGLoading} goal={goal} separatedTransactions={separatedTransactions} totals={totals} />

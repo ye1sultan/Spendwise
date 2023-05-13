@@ -214,7 +214,7 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
     }
 
     return (
-        <div className="flex flex-col justify-between items-start flex-grow flex-shrink flex-basis-[160px] 
+        <div className="flex flex-col justify-between items-start flex-grow flex-shrink flex-basis-[140px] 
             w-[140px] h-[70px] rounded-[10px] p-[10px]
             sm:w-[180px] sm:h-[85px] sm:rounded-[15px] sm:p-[15px]
             md:w-[220px] md:h-[105px] md:rounded-[20px] md:p-[20px]

@@ -86,7 +86,7 @@ const Login = () => {
                                     setTransparentPassword(!transparentPassword);
                                 }}
                                 className='absolute top-0 right-2 translate-y-[50%]'>
-                                {transparentPassword ? <FiEye size={20} /> : <FiEyeOff size={20} />}
+                                {transparentPassword ? <FiEye size={18} /> : <FiEyeOff size={18} />}
                             </button>
                         </div>
                     </div>
