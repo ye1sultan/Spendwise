@@ -24,8 +24,13 @@ const Notifications = () => {
     return (
         <>
             <Title title={'Notifications'} />
-            <div className="w-full bg-white rounded-[40px] px-[55px] py-[45px]">
-                <div className="w-full">
+            <div className="w-full h-full bg-white rounded-[40px] px-[55px] py-[45px] relative overflow-hidden">
+                <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full h-full bg-[rgba(174, 174, 174, 0.6)] backdrop-filter backdrop-blur-sm">
+                </div>
+                <div className="w-full h-full flex justify-center items-center text-[36px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+                    In Progress...
+                </div>
+                <div className="w-full pointer-events-none">
                     <div className="text-[36px] font-medium text-[#696969]">
                         Email
                     </div>
