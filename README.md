@@ -1,4 +1,4 @@
-# Diploma Project 🤡
+# Diploma Project
 
 Spendwise is a comprehensive personal finance management app designed to help users take control of their spending habits and achieve financial stability. With Spendwise, users can easily create an account or log in to start tracking their expenses and income.
 
