@@ -2,7 +2,8 @@ import { useState } from "react";
 import { BiPencil } from "react-icons/bi";
 import { updateUser } from "../../../../services/api";
 
-const MyProfile = ({ data }) => {
+const MyProfile = () => {
+    const data = JSON.parse(sessionStorage.getItem('userData'));
 
     const [editedName, setEditedName] = useState(data.name ?? '');
     const [editedAvatar, setEditedAvatar] = useState(data.avatar ?? '');
@@ -14,8 +15,8 @@ const MyProfile = ({ data }) => {
         let obj = {
             name: editedName,
             email: data.email,
-            password: localStorage.getItem("userPwd"),
-            avatar: editedAvatar,
+            password: sessionStorage.getItem("pwd"),
+            avatar: data.avatar,
         };
 
         try {
@@ -23,9 +24,12 @@ const MyProfile = ({ data }) => {
             setEditedName(updatedUser.name);
             setEditedAvatar(updatedUser.avatar);
 
+            let updatedData = { ...data, name: updatedUser.name };
+            sessionStorage.setItem('userData', JSON.stringify(updatedData));
+
             setButtonColor("#AEAEAE");
         } catch (error) {
-            console.error("Error updating transaction:", error);
+            console.error("Error updating user:", error);
         }
     };
 
@@ -46,7 +50,7 @@ const MyProfile = ({ data }) => {
     }
 
     return (
-        <div className="self-start w-[970px] bg-white rounded-[30px] border-[1px] border-[#AEAEAE] px-[45px] py-[25px] flex justify-center items-center">
+        <div className="self-start w-[970px] bg-white rounded-[30px] border-[1px] border-[#6c4242] px-[45px] py-[25px] flex justify-center items-center">
             <div className="w-full">
                 <div className="text-[40px] font-medium mb-8">
                     Account Details

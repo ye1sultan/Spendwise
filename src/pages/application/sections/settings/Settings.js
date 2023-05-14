@@ -7,7 +7,6 @@ import Preferences from "./Preferences";
 import Security from "./Security";
 
 const Settings = () => {
-  const data = JSON.parse(sessionStorage.getItem('userData'));
   const [selectedTab, setSelectedTab] = useState("profile");
 
   const handleTabClick = (tab) => {
@@ -23,7 +22,7 @@ const Settings = () => {
   const renderContent = () => {
     switch (selectedTab) {
       case "profile":
-        return <MyProfile data={data} />;
+        return <MyProfile />;
       case "preferences":
         return <Preferences />;
       case "security":

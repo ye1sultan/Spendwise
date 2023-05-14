@@ -13,6 +13,7 @@ const SideBar = () => {
     const handleExit = () => {
         sessionStorage.removeItem('authToken');
         sessionStorage.removeItem('userData');
+        sessionStorage.removeItem('pwd');
 
         navigate('/login');
     }

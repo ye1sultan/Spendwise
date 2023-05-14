@@ -27,6 +27,7 @@ const Login = () => {
             console.log(user);
             sessionStorage.setItem('userData', JSON.stringify(user));
             sessionStorage.setItem('authToken', token);
+            sessionStorage.setItem('pwd', password);
 
             if (rememberMe) {
                 localStorage.setItem('rememberedEmail', email);
