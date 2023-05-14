@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import { AiOutlineUnorderedList } from 'react-icons/ai';
@@ -19,6 +19,11 @@ const SideBar = () => {
 
     const initialActiveButton = location.pathname.split('/')[2] || 'dashboard';
     const [activeButton, setActiveButton] = useState(initialActiveButton);
+
+    useEffect(() => {
+        const currentView = location.pathname.split('/')[2] || 'dashboard';
+        setActiveButton(currentView);
+    }, [location.pathname]);
 
     const buttons = [
         { view: 'dashboard', label: 'Dashboard', icon: <MdSpaceDashboard className="2xl:mr-6" size={35} /> },
