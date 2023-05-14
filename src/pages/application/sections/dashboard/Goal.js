@@ -6,6 +6,7 @@ import { FaMicrophone, FaMugHot, FaPray, FaRegHandPeace, FaTools } from 'react-i
 import { MdOutlineBrokenImage, MdPedalBike, MdStroller } from 'react-icons/md';
 import { RiBookLine, RiMedal2Fill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const Goal = ({ name, icon, deadline, totalAmount, amount, color }) => {
     const getPercent = (amount, totalAmount) => {
@@ -15,41 +16,66 @@ const Goal = ({ name, icon, deadline, totalAmount, amount, color }) => {
 
     let progress = getPercent(amount, totalAmount);
 
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [iconSize, setIconSize] = useState(35);
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowWidth(window.innerWidth);
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (windowWidth >= 1024) {
+            setIconSize(35);
+        } else if (windowWidth >= 768) {
+            setIconSize(30);
+        } else {
+            setIconSize(25);
+        }
+    }, [windowWidth]);
+
     const allIcons = [
-        { name: 'earth', icon: <IoEarthOutline size={35} /> },
-        { name: 'cart', icon: <AiOutlineShoppingCart size={35} /> },
-        { name: 'coin', icon: <BsCoin size={35} /> },
-        { name: 'gift', icon: <AiOutlineGift size={35} /> },
-        { name: 'rest', icon: <FaPray size={35} /> },
-        { name: 'pic', icon: <MdOutlineBrokenImage size={35} /> },
-        { name: 'bag', icon: <IoBagHandle size={35} /> },
-        { name: 'set', icon: <FaTools size={35} /> },
-        { name: 'car', icon: <AiOutlineCar size={35} /> },
-        { name: 'tea', icon: <FaMugHot size={35} /> },
-        { name: 'plane', icon: <BsFillAirplaneFill size={35} /> },
-        { name: 'saturn', icon: <BiPlanet size={35} /> },
-        { name: 'laptop', icon: <BsLaptop size={35} /> },
-        { name: 'micro', icon: <FaMicrophone size={35} /> },
-        { name: 'buggy', icon: <MdStroller size={35} /> },
-        { name: 'medal', icon: <RiMedal2Fill size={35} /> },
-        { name: 'bike', icon: <MdPedalBike size={35} /> },
-        { name: 'contr', icon: <IoGameControllerOutline size={35} /> },
-        { name: 'wine', icon: <BiWine size={35} /> },
-        { name: 'heart', icon: <AiOutlineHeart size={35} /> },
-        { name: 'truck', icon: <BsTruck size={35} /> },
-        { name: 'book', icon: <RiBookLine size={35} /> },
-        { name: 'home', icon: <BsHouse size={35} /> },
-        { name: 'champ', icon: <AiOutlineTrophy size={35} /> },
-        { name: 'weight', icon: <BiDumbbell size={35} /> },
-        { name: 'pig', icon: <BsPiggyBank size={35} /> },
-        { name: 'lang', icon: <IoLanguage size={35} /> },
-        { name: 'peace', icon: <FaRegHandPeace size={35} /> },
-        { name: 'done', icon: <IoCheckmarkDone size={35} /> },
+        { name: 'earth', icon: <IoEarthOutline size={iconSize} /> },
+        { name: 'cart', icon: <AiOutlineShoppingCart size={iconSize} /> },
+        { name: 'coin', icon: <BsCoin size={iconSize} /> },
+        { name: 'gift', icon: <AiOutlineGift size={iconSize} /> },
+        { name: 'rest', icon: <FaPray size={iconSize} /> },
+        { name: 'pic', icon: <MdOutlineBrokenImage size={iconSize} /> },
+        { name: 'bag', icon: <IoBagHandle size={iconSize} /> },
+        { name: 'set', icon: <FaTools size={iconSize} /> },
+        { name: 'car', icon: <AiOutlineCar size={iconSize} /> },
+        { name: 'tea', icon: <FaMugHot size={iconSize} /> },
+        { name: 'plane', icon: <BsFillAirplaneFill size={iconSize} /> },
+        { name: 'saturn', icon: <BiPlanet size={iconSize} /> },
+        { name: 'laptop', icon: <BsLaptop size={iconSize} /> },
+        { name: 'micro', icon: <FaMicrophone size={iconSize} /> },
+        { name: 'buggy', icon: <MdStroller size={iconSize} /> },
+        { name: 'medal', icon: <RiMedal2Fill size={iconSize} /> },
+        { name: 'bike', icon: <MdPedalBike size={iconSize} /> },
+        { name: 'contr', icon: <IoGameControllerOutline size={iconSize} /> },
+        { name: 'wine', icon: <BiWine size={iconSize} /> },
+        { name: 'heart', icon: <AiOutlineHeart size={iconSize} /> },
+        { name: 'truck', icon: <BsTruck size={iconSize} /> },
+        { name: 'book', icon: <RiBookLine size={iconSize} /> },
+        { name: 'home', icon: <BsHouse size={iconSize} /> },
+        { name: 'champ', icon: <AiOutlineTrophy size={iconSize} /> },
+        { name: 'weight', icon: <BiDumbbell size={iconSize} /> },
+        { name: 'pig', icon: <BsPiggyBank size={iconSize} /> },
+        { name: 'lang', icon: <IoLanguage size={iconSize} /> },
+        { name: 'peace', icon: <FaRegHandPeace size={iconSize} /> },
+        { name: 'done', icon: <IoCheckmarkDone size={iconSize} /> },
     ];
 
     const getIconComponent = (iconPrompt) => {
         const foundIcon = allIcons.find((iconObj) => iconObj.name === iconPrompt);
-        const DefaultIconComponent = <AiOutlineCar size={35} />;
+        const DefaultIconComponent = <AiOutlineCar size={iconSize} />;
 
         return foundIcon ? foundIcon.icon : DefaultIconComponent;
     };
@@ -57,44 +83,40 @@ const Goal = ({ name, icon, deadline, totalAmount, amount, color }) => {
     const iconComponent = getIconComponent(icon);
 
     return (
-        <>
-            <div
-                className="overflow-hidden w-full h-full bg-white rounded-[40px] py-[10px] px-[15px] 2xl:p-[30px] flex flex-col justify-between items-start">
-                <div className="flex justify-between items-center w-full">
-                    <div className='flex justify-center items-center' >
-                        <div className="w-[30px] h-[30px] 2xl:w-[50px] 2xl:h-[50px] bg-opacity-50 rounded-full flex justify-center items-center mr-[20px]" style={{ backgroundColor: color }}>
-                            {iconComponent}
-                        </div>
-                        <div className="text-[16px] 2xl:text-[24px] font-medium text-[#4E4949]">
-                            {name}
-                        </div>
-
+        <div className="overflow-hidden w-full h-full lg:p-[30px] p-[15px] flex flex-col justify-between items-start">
+            <div className="flex justify-between items-center w-full">
+                <div className='flex justify-center items-center' >
+                    <div className="w-[35px] h-[35px] sm:w-[40px] sm:h-[40px] lg:w-[50px] lg:h-[50px] bg-opacity-50 rounded-full flex justify-center items-center mr-[20px]" style={{ backgroundColor: color }}>
+                        {iconComponent}
                     </div>
-                    <Link to='/application/goals' className='cursor-pointer'>
-                        <BsArrowRightShort size={45} />
-                    </Link>
-                </div>
-                <div className="w-full flex justify-between items-center">
-                    <div>
-                        <div className="2xl:text-[20px] font-medium text-[#979393]">
-                            Till
-                        </div>
-                        <div className="2xl:text-[25px] font-medium text-[#4E4949]">
-                            {deadline}
-                        </div>
-                    </div>
-                    <div className="text-[18px] 2xl:text-[36px] font-medium">
-                        {progress + " %"}
+                    <div className="text-base sm:text-xl lg:text-2xl font-medium">
+                        {name}
                     </div>
                 </div>
-                <div className="w-full h-[12px] 2xl:h-[20px] bg-[#EEECEC] rounded-[10px]">
-                    <div className="h-full rounded-[10px]" style={{ width: progress + "%", backgroundColor: color }}></div>
+                <Link to='/application/goals' className='cursor-pointer'>
+                    <BsArrowRightShort size={iconSize + 5} />
+                </Link>
+            </div>
+            <div className="w-full flex justify-between items-center">
+                <div>
+                    <div className="text-sm sm:text-lg lg:text-xl font-medium text-[#6A6A6A]">
+                        Till
+                    </div>
+                    <div className="text-base sm:text-xl lg:text-2xl font-medium">
+                        {deadline}
+                    </div>
                 </div>
-                <div className="text-[10px] 2xl:text-[16px] font-semibold text-[#696969]">
-                    {`₸ ${amount} / ₸ ${totalAmount}`}
+                <div className="text-lg sm:text-2xl lg:text-3xl font-medium">
+                    {progress + " %"}
                 </div>
             </div>
-        </>
+            <div className="w-full md:h-[20px] h-[10px] bg-[#EEECEC] rounded-[10px]">
+                <div className="h-full rounded-[10px]" style={{ width: progress + "%", backgroundColor: color }}></div>
+            </div>
+            <div className="text-sm sm:text-base lg:text-lg font-semibold text-[#6A6A6A]">
+                {`₸ ${amount} / ₸ ${totalAmount}`}
+            </div>
+        </div>
     );
 }
 

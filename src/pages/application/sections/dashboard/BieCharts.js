@@ -103,7 +103,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
 
         if (title === 'Goals') {
             return (
-                <div className="flex flex-col justify-center items-center h-[270px] w-full rounded-[10px] sm:rounded-[15px] md:rounded-[20px] lg:rounded-[30px] border-[#AEAEAE] border-[1px] bg-white mb-8">
+                <div className="flex flex-col justify-center items-center h-[170px] md:h-[220px] lg:h-[270px] w-full rounded-[10px] sm:rounded-[15px] md:rounded-[20px] lg:rounded-[30px] border-[#AEAEAE] border-[1px] bg-white mb-8">
                     {
                         (() => {
                             if (isGLoading) {
@@ -112,7 +112,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
                                         <h2>Loading...</h2>
                                     </div>
                                 );
-                            } else if (goal) {
+                            } else if (!goal) {
                                 return <NoContent is={'goal'} />;
                             } else {
                                 return (

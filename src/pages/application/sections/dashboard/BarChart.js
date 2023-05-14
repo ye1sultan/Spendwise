@@ -5,15 +5,15 @@ const BarChart = ({ expense, income }) => {
 
     return (
         <div className="w-full h-full flex justify-between items-center">
-            <div className="w-1/2 h-[300px]  flex flex-row justify-center items-center">
+            <div className="w-1/2 lg:h-[300px] md:h-[250px] h-[200px] flex flex-row justify-center items-center">
                 <div
-                    className="w-[4vw] lg:w-[40px] bg-[#22A447] rounded-[1vw] lg:rounded-[10px] mr-[4vw] lg:mr-6"
+                    className="w-[6vw] lg:w-[40px] bg-[#22A447] rounded-[1vw] lg:rounded-[10px] mr-[4vw] lg:mr-6"
                     style={{
                         height: `${incomePercentage}%`,
                     }}
                 ></div>
                 <div
-                    className="w-[4vw] lg:w-[40px] bg-[#E81E1E] rounded-[1vw] lg:rounded-[10px]"
+                    className="w-[6vw] lg:w-[40px] bg-[#E81E1E] rounded-[1vw] lg:rounded-[10px]"
                     style={{
                         height: `${expensePercentage}%`,
                     }}
