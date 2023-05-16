@@ -53,13 +53,16 @@ const Transaction = ({ transaction, transactionDate, isLast, deleteTransaction, 
         return null;
     };
 
-    const formatDateMobile = (dateString) => {
-        const dateObj = new Date(dateString);
-        const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-        const day = String(dateObj.getDate()).padStart(2, '0');
+    function formatDate(dateString) {
+        // Create a new Date object from the input string
+        var date = new Date(dateString);
 
-        return `${month}-${day}`;
-    };
+        // Define options for toLocaleDateString
+        var options = { day: 'numeric', month: 'long' };
+
+        // Return the formatted date
+        return date.toLocaleDateString('en-GB', options);
+    }
 
     const [mobileMore, setMobileMore] = useState(false);
 
@@ -70,7 +73,7 @@ const Transaction = ({ transaction, transactionDate, isLast, deleteTransaction, 
     return (
         <>
             <div className={`w-full hidden 2xl:flex items-center ${isLast ? '' : 'border-b'}  border-[#AEAEAE] border-opacity-50 py-4`}>
-                <div className="text-[22px] text-[#443A3A] font-medium w-1/6 text-center">{transactionDate}</div>
+                <div className="text-[22px] text-[#443A3A] font-medium w-1/6 text-center">{formatDate(transactionDate)}</div>
                 <div className="text-[22px] text-[#443A3A] font-medium w-1/6 text-center">
                     <div className='flex flex-row justify-center items-center'>
                         {getCategory()}

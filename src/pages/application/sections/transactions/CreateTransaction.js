@@ -163,7 +163,7 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
                 account_id: 1,
                 category: selectedCategory.name,
                 amount: correctAmount(selectedAmount),
-                date: selectedDate.toISOString().substr(0, 10),
+                date: format(selectedDate, 'yyyy-MM-dd'),
                 transaction_type: transaction,
                 description: selectedDescription ? selectedDescription : '...',
                 payment_method: selectedPaymentMethod.name,

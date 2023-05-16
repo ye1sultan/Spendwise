@@ -16,6 +16,8 @@ import Notifications from './pages/application/sections/Notifications';
 import Settings from './pages/application/sections/settings/Settings';
 import TermOfUse from './pages/sign/TermOfUse';
 
+import ProtectedWrapper from './ProtectedRoute';
+
 function App() {
     return (
         <div className="App">
@@ -32,7 +34,9 @@ function App() {
                 <Route
                     path="application/*"
                     element={
-                        <Application />
+                        <ProtectedWrapper>
+                            <Application />
+                        </ProtectedWrapper>
                     }>
                     <Route
                         path=""

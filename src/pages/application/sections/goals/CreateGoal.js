@@ -8,7 +8,7 @@ import { BiColorFill, BiDumbbell, BiPlanet, BiWine } from 'react-icons/bi';
 import { FaMicrophone, FaMugHot, FaPray, FaRegHandPeace, FaTools } from 'react-icons/fa';
 import { MdOutlineBrokenImage, MdPedalBike, MdStroller } from 'react-icons/md';
 import { RiBookLine, RiMedal2Fill } from 'react-icons/ri';
-import { format } from 'date-fns';
+import { format, setDate } from 'date-fns';
 
 const CreateGoal = ({ onModalClose, addNewGoal }) => {
     const allIcons = [
@@ -174,28 +174,56 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
         setColorsDropDown(false);
     }
 
+    const [nameInput, setNameInput] = useState("#696969");
+    const [amountInput, setAmountInput] = useState("#696969");
+    const [dateInput, setDateInput] = useState("#696969");
+    const [totalInput, setTotalInput] = useState("#696969");
+
     const saveGoal = () => {
-        if (selectedName && selectedAmount && selectedTotalAmount && (selectedAmount < selectedTotalAmount)) {
-            console.log('Here 2!');
+        if (selectedName && formatDate(selectedDeadline) && selectedTotalAmount && (selectedAmount < selectedTotalAmount) && selectedColor && selectedIcon) {
             let status = selectedAmount === selectedTotalAmount ? 'reached' : 'active';
 
             let newGoal = {
                 name: selectedName,
                 deadline: formatDate(selectedDeadline),
-                initial_target_amount: selectedAmount,
+                initial_target_amount: selectedAmount ? selectedAmount : 0,
                 target_amount: selectedTotalAmount,
                 color: selectedColor,
                 icon: selectedIcon,
-                description: selectedDescription ? selectedDescription : '.',
+                description: '...',
                 status: status,
             };
 
             addNewGoal(newGoal);
             onModalClose(false);
+        } else {
+            if (!selectedAmount || !selectedDeadline || !selectedName || !selectedTotalAmount) {
+                if (!selectedName) {
+                    setNameInput("#EA1A1A")
+                    setTimeout(() => setNameInput("#696969"), 2000);
+                }
+                if (!selectedAmount) {
+                    setAmountInput("#EA1A1A")
+                    setTimeout(() => setAmountInput("#696969"), 2000);
+                }
+                if (!selectedDeadline) {
+                    setDateInput("#EA1A1A")
+                    setTimeout(() => setDateInput("#696969"), 2000);
+                }
+                if (!selectedTotalAmount) {
+                    setTotalInput("#EA1A1A")
+                    setTimeout(() => setTotalInput("#696969"), 2000);
+                }
+            } else if (selectedTotalAmount <= selectedAmount) {
+                setTotalInput("#EA1A1A")
+                setTimeout(() => setTotalInput("#696969"), 2000);
+                setAmountInput("#EA1A1A")
+                setTimeout(() => setAmountInput("#696969"), 2000);
+            }
         }
     }
 
-    let inputStyle = 'w-full h-full text-[24px] font-normal pl-[40px] border-b-[1px] border-[#696969]';
+    let inputStyle = "w-full h-full text-[24px] font-normal pl-[40px]";
 
     return (
         <div className="fixed top-[5%] left-[50%] translate-x-[-50%] z-20 bg-white py-[20px] px-[30px] flex flex-col justify-center shadow-md rounded-[40px]">
@@ -206,27 +234,27 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
                 <IoCloseOutline className='cursor-pointer' size={35} onClick={() => onModalClose(false)} />
             </div>
             <div className="relative w-full h-[50px] mb-[10px]">
-                <input className={inputStyle} type="text" placeholder="Goal name" onChange={e => setSelectedName(e.target.value)} />
+                <input className={inputStyle} type="text" placeholder="Goal name" onChange={e => setSelectedName(e.target.value)} style={{ borderBottom: `1px solid ${nameInput}` }} />
                 <div className="absolute top-[50%] translate-y-[-50%] left-0">
                     <BsCheckSquare size={30} color="#696969" />
                 </div>
             </div>
             <div className="relative w-full h-[50px] mb-[10px]">
-                <input className={inputStyle} type="number" placeholder="Your current balance" onChange={e => setSelectedAmount(e.target.value)} />
+                <input className={inputStyle} type="number" placeholder="Your current balance" onChange={e => setSelectedAmount(e.target.value)} style={{ borderBottom: `1px solid ${amountInput}` }} />
                 <div className="absolute top-[50%] translate-y-[-50%] left-0">
                     <TbCurrencyTenge size={30} color="#696969" />
                 </div>
             </div>
             <div className="relative w-full h-[50px] mb-[10px]">
-                <input className={inputStyle} type="date" min={format(new Date(), 'yyyy-MM-dd')} placeholder="Deadline" onChange={e => setSelectedDeadline(e.target.value)} />
+                <input className={inputStyle} type="number" placeholder="Goal value" onChange={e => setSelectedTotalAmount(e.target.value)} style={{ borderBottom: `1px solid ${totalInput}` }} />
+                <div className="absolute top-[50%] translate-y-[-50%] left-0">
+                    <TbCurrencyTenge size={30} color="#696969" />
+                </div>
+            </div>
+            <div className="relative w-full h-[50px] mb-[10px]">
+                <input className={inputStyle} type="date" min={format(new Date(), 'yyyy-MM-dd')} placeholder="Deadline" onChange={e => setSelectedDeadline(e.target.value)} style={{ borderBottom: `1px solid ${dateInput}` }} />
                 <div className="absolute top-[50%] translate-y-[-50%] left-0">
                     <AiOutlineCalendar size={30} color="#696969" />
-                </div>
-            </div>
-            <div className="relative w-full h-[50px] mb-[10px]">
-                <input className={inputStyle} type="number" placeholder="Goal value" onChange={e => setSelectedTotalAmount(e.target.value)} />
-                <div className="absolute top-[50%] translate-y-[-50%] left-0">
-                    <TbCurrencyTenge size={30} color="#696969" />
                 </div>
             </div>
             <div className='flex flex-col justify-center items-start mb-[10px]'>

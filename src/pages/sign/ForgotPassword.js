@@ -47,7 +47,7 @@ const ForgotPassword = () => {
                     <div className='font-semibold text-[12px] mr-2'>
                         Back to
                     </div>
-                    <button data-route='/signin' className='font-bold text-[14px]' onClick={handleNavigation}>
+                    <button data-route='/login' className='font-bold text-[14px]' onClick={handleNavigation}>
                         Sign In.
                     </button>
                 </div>

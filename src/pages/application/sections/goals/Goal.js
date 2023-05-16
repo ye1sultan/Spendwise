@@ -20,6 +20,17 @@ const Goal = ({ goal, name, icon, deadline, target_amount, initial_target_amount
 
     let progress = getPercent(fixedAmount, target_amount);
 
+    function formatDate(dateString) {
+        // Create a new Date object from the input string
+        var date = new Date(dateString);
+
+        // Define options for toLocaleDateString
+        var options = { day: 'numeric', month: 'long' };
+
+        // Return the formatted date
+        return date.toLocaleDateString('en-GB', options);
+    }
+
     const allIcons = [
         { name: 'earth', icon: <IoEarthOutline size={35} /> },
         { name: 'cart', icon: <AiOutlineShoppingCart size={35} /> },
@@ -62,7 +73,7 @@ const Goal = ({ goal, name, icon, deadline, target_amount, initial_target_amount
     const iconComponent = getIconComponent(icon);
 
     return (
-        <div className="w-[530px] h-[315px] bg-white rounded-[40px] border-[1px] border-[#CED4DA] m-[30px] p-[30px] flex flex-col justify-between items-start">
+        <div className="w-[500px] h-[315px] bg-white rounded-[40px] border-[1px] border-[#CED4DA] p-[30px] flex flex-col justify-between items-start">
             <div className="flex justify-start items-center w-full">
                 <div className="w-[50px] h-[50px] rounded-full flex justify-center items-center mr-[20px]" style={{ backgroundColor: color }}>
                     {iconComponent}
@@ -77,7 +88,7 @@ const Goal = ({ goal, name, icon, deadline, target_amount, initial_target_amount
                         Till
                     </div>
                     <div className="text-[25px] font-medium text-[#4E4949]">
-                        {deadline}
+                        {formatDate(deadline)}
                     </div>
                 </div>
                 <div className="text-[36px] font-medium">

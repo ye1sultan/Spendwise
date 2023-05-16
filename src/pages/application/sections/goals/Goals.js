@@ -122,7 +122,7 @@ const Goals = () => {
 
     const NewGoalButton = ({ onClick }) => {
         return (
-            <div className="w-[530px] h-[315px] bg-white rounded-[40px] border-[1px] border-[#CED4DA] self-start flex flex-col justify-center items-center m-[30px] cursor-pointer" onClick={onClick}>
+            <div className="w-[500px] h-[315px] bg-white rounded-[40px] border-[1px] border-[#CED4DA] self-start flex flex-col justify-center items-center cursor-pointer" onClick={onClick}>
                 <AiOutlinePlus size={40} />
                 <div className="text-[40px] font-medium">New goal</div>
             </div>
@@ -176,7 +176,7 @@ const Goals = () => {
             )}
 
             <Title title={'My Goals'} />
-            <div className="relative self-start z-10 w-full">
+            <div className="relative self-start z-10 w-full mb-[30px]">
                 <button
                     onMouseEnter={() => setShowDropDown(!showDropDown)}
                     className="h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[20px] flex justify-between items-center px-5 z-10"
@@ -186,15 +186,15 @@ const Goals = () => {
                 </button>
                 {showDropDown && <GoalsDropDown onSelect={handleFilterSelect} />}
             </div>
-            <div className="self-start flex flex-wrap">
+            <div className="self-start flex flex-wrap gap-6">
                 <NewGoalButton onClick={createGoal} />
                 {isLoading ? (
-                    <div className="w-[530px] h-[315px] bg-white rounded-[40px] border-[1px] border-[#CED4DA] m-[30px] p-[30px]">
+                    <div className="w-[500px] h-[315px] bg-white rounded-[40px] border-[1px] border-[#CED4DA] p-[30px]">
                         <ContentLoader
                             speed={2}
-                            width={530}
+                            width={500}
                             height={315}
-                            viewBox="0 0 530 315"
+                            viewBox="0 0 500 315"
                             backgroundColor="#f3f3f3"
                             foregroundColor="#ecebeb">
                             <circle cx="30" cy="30" r="30" />

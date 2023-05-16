@@ -175,7 +175,7 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
                             size={iconSize}
                             color="#86B88A" />
                         <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium flex justify-start items-center">
-                            {formatNumber(Math.floor(monthlyBalance.balance)) + " ₸"}
+                            {formatNumber(Math.floor(monthlyBalance?.balance ? monthlyBalance?.balance : "0")) + " ₸"}
                             {!monthlyBalance && (
                                 <button
                                     onClick={() => { setShowBalanceModal(true) }}

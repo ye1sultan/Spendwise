@@ -1,4 +1,4 @@
-const API_URL = 'http://personalfinance.herokuapp.com/api';
+const API_URL = 'https://personalfinance.herokuapp.com/api';
 
 export const login = async (email, password) => {
     const requestOptions = {
