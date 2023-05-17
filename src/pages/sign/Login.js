@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import GoogleLogin from './GoogleLogin';
 
 import { useEffect, useState } from 'react';
 import { login } from '../../services/api';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { AiFillGoogleCircle } from 'react-icons/ai';
+import { BsDot } from 'react-icons/bs';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -59,12 +60,12 @@ const Login = () => {
                     Continue with
                 </div>
                 <div className="flex flex-row justify-center items-center w-full mb-[20px]">
-                    <GoogleLogin />
+                    <AiFillGoogleCircle size={45} color='#4285F4' />
                 </div>
                 <div className='font-semibold text-[12px] text-[#ADB5BD] mb-[20px]'>
                     or
                 </div>
-                <form onSubmit={(e) => handleSubmit(e)} className='flex flex-col w-full'>
+                <form onSubmit={(e) => handleSubmit(e)} className='flex flex-col w-full mb-[24px]'>
                     <div className='flex flex-col justify-center items-center w-full'>
                         <input
                             className="border-[1px] rounded-[8px] border-[#CED4DA] mb-[24px] focus:outline-0 w-full h-[40px] text-[12px] text-[#000000] py-[12px] pl-[12px]"
@@ -91,9 +92,6 @@ const Login = () => {
                             </button>
                         </div>
                     </div>
-                    <button data-route='/forgot-password' className='text-[12px] font-semibold text-[#758697] mb-[24px] underline' onClick={handleNavigation}>
-                        Forgot Password?
-                    </button>
                     <div className="mb-[24px] text-black font-semibold flex flex-row justify-start items-center w-full">
                         <input
                             id="checkbox"
@@ -106,14 +104,15 @@ const Login = () => {
                             Remember me
                         </label>
                     </div>
-                    <input className='bg-[#343A40] text-white font-semibold text-[12px] w-full h-[40px] rounded-[8px] mb-[32px] cursor-pointer' type='submit' value='Log In' />
+                    <input className='bg-[#343A40] text-white font-semibold text-[12px] w-full h-[40px] rounded-[8px] cursor-pointer' type='submit' value='Log In' />
                 </form>
-                <div className='flex flex-row justif-center items-center'>
-                    <div className='font-semibold text-[14px] mr-2'>
-                        Don`t have an account yet?
-                    </div>
-                    <button data-route='/signup' className='font-bold text-[14px] underline' onClick={handleNavigation}>
-                        Sign Up here!
+                <div className='flex flex-row justify-center items-center'>
+                    <button data-route='/signup' className='font-semibold text-[14px] underline text-black' onClick={handleNavigation}>
+                        Sign up!
+                    </button>
+                    <BsDot size={30} />
+                    <button data-route='/forgot-password' className='font-semibold text-[14px] underline' onClick={handleNavigation}>
+                        Forgot Password?
                     </button>
                 </div>
             </div>

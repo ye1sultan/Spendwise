@@ -5,7 +5,7 @@ const BarChart = ({ expense, income }) => {
 
     return (
         <div className="w-full h-full flex justify-between items-center">
-            <div className="w-1/2 lg:h-[300px] md:h-[250px] h-[200px] flex flex-row justify-center items-center">
+            <div className="w-[40%] sm:w-[50%] lg:h-[300px] md:h-[250px] h-[200px] flex flex-row justify-center items-center">
                 <div
                     className="w-[6vw] lg:w-[40px] bg-[#22A447] rounded-[1vw] lg:rounded-[10px] mr-[4vw] lg:mr-6"
                     style={{
@@ -19,7 +19,7 @@ const BarChart = ({ expense, income }) => {
                     }}
                 ></div>
             </div>
-            <div className="text-md sm:text-xl md:text-2xl flex flex-col justify-center items-center h-full w-1/2 pr-4">
+            <div className="w-[60%] sm:w-[50%] text-md sm:text-xl md:text-2xl flex flex-col justify-center items-center h-full pr-4">
                 <div className="flex flex-row justify-between items-center w-full mb-4">
                     <div>Incomes</div>
                     <div className="text-[#34C05C] font-semibold">{income + " ₸"}</div>

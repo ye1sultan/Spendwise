@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { register } from '../../services/api';
-import GoogleLogin from './GoogleLogin';
+import { AiFillGoogleCircle } from 'react-icons/ai';
 
 const Signup = () => {
     const [name, setName] = useState('');
@@ -123,12 +123,12 @@ const Signup = () => {
                     Continue with
                 </div>
                 <div className="flex flex-row justify-center items-center w-full mb-[20px]">
-                    <GoogleLogin />
+                    <AiFillGoogleCircle size={45} color='#4285F4' />
                 </div>
                 <div className='font-semibold text-[12px] text-[#ADB5BD] mb-[20px]'>
                     or
                 </div>
-                <form onSubmit={handleSubmit} className='flex flex-col w-full'>
+                <form onSubmit={handleSubmit} className='flex flex-col w-full mb-[20px]'>
                     <div className='flex flex-col justify-center items-center w-full'>
                         <input onChange={(e) => { setName(e.target.value); setNameEdited(true); validateName(e.target.value); }} className={`border-[1px] rounded-[8px] border-[#CED4DA] w-full h-[40px] text-[12px] py-[12px] pl-[12px] ${submitted && nameText ? 'mb-[12px]' : 'mb-[24px]'}`} type='text' placeholder='Name' />
                         {nameText && <div className='text-[12px] text-red-600 mb-[12px]'>Please enter valid name.</div>}
@@ -141,16 +141,15 @@ const Signup = () => {
 
                         <input onChange={(e) => { setPasswordConfirmation(e.target.value); checkPasswordsMatch(password, e.target.value); }} className={`border-[1px] rounded-[8px] border-[#CED4DA] w-full h-[40px] text-[12px] py-[12px] pl-[12px] ${submitted && !passwordsMatch ? 'mb-[12px]' : 'mb-[24px]'}`} type='password' placeholder='Confirm Password' />
                         {submitted && !passwordsMatch && <div className='text-[12px] text-red-600 mb-[12px]'>Passwords do not match.</div>}
-
                     </div>
                     <div className='mb-[24px] font-semibold flex flex-col justify-start items-start w-full'>
-                        <div className='flex flex-row justify-start items-center w-full mb-2'>
+                        <div className='flex flex-row justify-start items-center w-full'>
                             <input id='checkbox' type='checkbox' value='' className='w-[18px] h-[18px] mr-[24px]' onChange={handleCheckboxChange} />
                             <label htmlFor='checkbox' className='text-[12px]'>I agree to the <Link to="/term-of-use" className='underline cursor'>Terms of Use</Link></label>
                         </div>
                         {termsText && <div className='text-[12px] text-red-600'>Please accept terms of use</div>}
                     </div>
-                    <input className='cursor-pointer bg-[#343A40] text-white font-semibold text-[14px] w-full h-[40px] rounded-[8px] mb-[32px]' value='Create Account' type='submit' />
+                    <input className='cursor-pointer bg-[#343A40] text-white font-semibold text-[14px] w-full h-[40px] rounded-[8px]' value='Create Account' type='submit' />
                 </form>
                 <div className='flex flex-row justif-center items-center'>
                     <div className='font-semibold text-[14px] mr-2'>

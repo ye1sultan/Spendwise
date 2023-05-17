@@ -120,14 +120,52 @@ const Goals = () => {
         setShowEditModal(true);
     }
 
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [iconSize, setIconSize] = useState(25);
+    const [plusSize, setPlusSize] = useState(40);
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowWidth(window.innerWidth);
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (windowWidth >= 1024) {
+            setIconSize(25);
+            setPlusSize(40);
+        } else if (windowWidth >= 768) {
+            setPlusSize(35);
+        } else if (windowWidth >= 640) {
+            setPlusSize(30);
+        } else {
+            setIconSize(20);
+            setPlusSize(30);
+        }
+    }, [windowWidth]);
+
     const NewGoalButton = ({ onClick }) => {
         return (
-            <div className="w-[500px] h-[315px] bg-white rounded-[40px] border-[1px] border-[#CED4DA] self-start flex flex-col justify-center items-center cursor-pointer" onClick={onClick}>
-                <AiOutlinePlus size={40} />
-                <div className="text-[40px] font-medium">New goal</div>
+            <div
+                className="
+                    w-[300px] md:w-[400px] lg:w-[500px] xl:w-[500px] 
+                    h-[200px] md:h-[250px] lg:h-[315px] xl:h-[315px] 
+                    min-w-[220px] min-h-[150px] 
+                    bg-white 
+                    rounded-[15px] md:rounded-[20px] lg:rounded-[30px] 
+                    flex flex-col justify-center items-center cursor-pointer shadow-md" onClick={onClick}>
+                <AiOutlinePlus size={plusSize} />
+                <div className="text-2xl lg:text-3xl xl:text-[40px] font-medium">New goal</div>
             </div>
         );
     }
+
 
     const GoalsDropDown = ({ onSelect }) => {
         return (
@@ -135,14 +173,14 @@ const Goals = () => {
                 onMouseEnter={() => setShowDropDown(showDropDown)}
                 onMouseLeave={() => setShowDropDown(!showDropDown)}
                 className="absolute top-full mt-2 bg-white rounded-xl shadow-md overflow-hidden">
-                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[22px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('active')}>
-                    <AiOutlineClockCircle size={28} className="mr-2" /> Active Goals
+                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[16px] lg:text-[20px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('active')}>
+                    <AiOutlineClockCircle size={iconSize} className="mr-2" /> Active Goals
                 </button>
-                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[22px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('paused')}>
-                    <MdMotionPhotosPaused size={28} className="mr-2" /> Paused Goals
+                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[16px] lg:text-[20px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('paused')}>
+                    <MdMotionPhotosPaused size={iconSize} className="mr-2" /> Paused Goals
                 </button>
-                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[22px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('reached')}>
-                    <AiOutlineCheckCircle size={28} className="mr-2" /> Reached Goals
+                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[16px] lg:text-[20px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('reached')}>
+                    <AiOutlineCheckCircle size={iconSize} className="mr-2" /> Reached Goals
                 </button>
             </div>
         );
@@ -179,32 +217,23 @@ const Goals = () => {
             <div className="relative self-start z-10 w-full mb-[30px]">
                 <button
                     onMouseEnter={() => setShowDropDown(!showDropDown)}
-                    className="h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[20px] flex justify-between items-center px-5 z-10"
+                    className="h-[35px] md:h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[16px] lg:text-[20px] flex justify-between items-center px-5 z-10"
                 >
                     <BsChevronDown className="mr-2" />
                     {goalFilter.charAt(0).toUpperCase() + goalFilter.slice(1)} Goals
                 </button>
                 {showDropDown && <GoalsDropDown onSelect={handleFilterSelect} />}
             </div>
-            <div className="self-start flex flex-wrap gap-6">
+            <div className="self-start flex fleg-grow flex-wrap gap-6 w-full h-full">
                 <NewGoalButton onClick={createGoal} />
                 {isLoading ? (
-                    <div className="w-[500px] h-[315px] bg-white rounded-[40px] border-[1px] border-[#CED4DA] p-[30px]">
-                        <ContentLoader
-                            speed={2}
-                            width={500}
-                            height={315}
-                            viewBox="0 0 500 315"
-                            backgroundColor="#f3f3f3"
-                            foregroundColor="#ecebeb">
-                            <circle cx="30" cy="30" r="30" />
-                            <rect x="80" y="15" rx="8" ry="8" width="200" height="35" />
-                            <rect x="10" y="80" rx="8" ry="8" width="100" height="20" />
-                            <rect x="10" y="110" rx="8" ry="8" width="150" height="35" />
-                            <rect x="340" y="110" rx="8" ry="8" width="120" height="35" />
-                            <rect x="10" y="170" rx="8" ry="8" width="450" height="20" />
-                            <rect x="10" y="200" rx="8" ry="8" width="150" height="15" />
-                        </ContentLoader>
+                    <div className="
+                        w-[300px] md:w-[400px] lg:w-[500px] xl:w-[500px] 
+                        h-[200px] md:h-[250px] lg:h-[315px] xl:h-[315px] 
+                        min-w-[220px] min-h-[150px]
+                        bg-white
+                        rounded-[15px] md:rounded-[20px] lg:rounded-[30px] p-[30px]">
+                        Loading...
                     </div>
                 ) : (
                     filteredGoals.map((goal, index) => (
