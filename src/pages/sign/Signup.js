@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { register } from '../../services/api';
 import { AiFillGoogleCircle } from 'react-icons/ai';
+import { BsDot } from 'react-icons/bs';
 
 const Signup = () => {
     const [name, setName] = useState('');
@@ -144,19 +145,20 @@ const Signup = () => {
                     </div>
                     <div className='mb-[24px] font-semibold flex flex-col justify-start items-start w-full'>
                         <div className='flex flex-row justify-start items-center w-full'>
-                            <input id='checkbox' type='checkbox' value='' className='w-[18px] h-[18px] mr-[24px]' onChange={handleCheckboxChange} />
-                            <label htmlFor='checkbox' className='text-[12px]'>I agree to the <Link to="/term-of-use" className='underline cursor'>Terms of Use</Link></label>
+                            <input id='checkbox' type='checkbox' value='' className='w-[18px] h-[18px] mr-[16px]' onChange={handleCheckboxChange} />
+                            <label htmlFor='checkbox' className='text-[12px]'>I agree to the Terms of Use </label>
                         </div>
                         {termsText && <div className='text-[12px] text-red-600'>Please accept terms of use</div>}
                     </div>
-                    <input className='cursor-pointer bg-[#343A40] text-white font-semibold text-[14px] w-full h-[40px] rounded-[8px]' value='Create Account' type='submit' />
+                    <input className='cursor-pointer bg-[#343A40] text-white font-semibold text-[14px] w-full h-[40px] rounded-[8px]' value='Sign Up' type='submit' />
                 </form>
-                <div className='flex flex-row justif-center items-center'>
-                    <div className='font-semibold text-[14px] mr-2'>
-                        Already have an account?
-                    </div>
-                    <button data-route='/login' className='font-bold text-[14px] underline' onClick={handleNavigation}>
-                        Log In here!
+                <div className='flex flex-row justify-center items-center'>
+                    <button data-route='/login' className='font-semibold text-[14px] underline text-black' onClick={handleNavigation}>
+                        Log In!
+                    </button>
+                    <BsDot size={30} />
+                    <button data-route='/terms-of-use' className='font-semibold text-[14px] underline' onClick={handleNavigation}>
+                        Terms of Use
                     </button>
                 </div>
             </div>

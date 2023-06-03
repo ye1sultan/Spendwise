@@ -27,7 +27,7 @@ function App() {
                 <Route path="home" element={<Landing />} />
                 <Route path="login" element={<Login />} />
                 <Route path="signup" element={<Signup />} />
-                <Route path="term-of-use" element={<TermOfUse />} />
+                <Route path="terms-of-use" element={<TermOfUse />} />
                 <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="restore-password" element={<RestorePassword />} />
 

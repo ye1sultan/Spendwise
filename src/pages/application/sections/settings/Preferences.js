@@ -25,7 +25,7 @@ const Preferences = () => {
     }
 
     return (
-        <div className="self-start w-[80%] h-[485px] bg-white rounded-[30px] border-[1px] border-[#AEAEAE] py-[65px] px-[55px]">
+        <div className="self-start w-[80%] h-[485px] bg-white rounded-[30px] py-[65px] px-[55px]">
             <form className="flex flex-col h-full w-full justify-center items-center" onSubmit={handleSubmit}>
                 <div className="w-full h-full flex justify-between items-start">
                     <div className="relative flex flex-col justify-center items-start w-[475px]">

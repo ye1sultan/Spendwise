@@ -82,14 +82,14 @@ const Login = () => {
                                 type={transparentPassword ? 'text' : 'password'}
                                 placeholder='Password'
                                 required />
-                            <button
+                            {/* <button
                                 onClick={(e) => {
                                     e.preventDefault();
                                     setTransparentPassword(!transparentPassword);
                                 }}
                                 className='absolute top-0 right-2 translate-y-[50%]'>
                                 {transparentPassword ? <FiEye size={18} /> : <FiEyeOff size={18} />}
-                            </button>
+                            </button> */}
                         </div>
                     </div>
                     <div className="mb-[24px] text-black font-semibold flex flex-row justify-start items-center w-full">

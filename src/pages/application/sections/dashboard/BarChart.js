@@ -4,7 +4,7 @@ const BarChart = ({ expense, income }) => {
     const expensePercentage = (Math.abs(expense) / total) * 100;
 
     return (
-        <div className="w-full h-full flex justify-between items-center">
+        <div className="w-full h-full flex justify-between items-center pt-4">
             <div className="w-[40%] sm:w-[50%] lg:h-[300px] md:h-[250px] h-[200px] flex flex-row justify-center items-center">
                 <div
                     className="w-[6vw] lg:w-[40px] bg-[#22A447] rounded-[1vw] lg:rounded-[10px] mr-[4vw] lg:mr-6"
