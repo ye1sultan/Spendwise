@@ -64,12 +64,6 @@ const Transaction = ({ transaction, transactionDate, isLast, deleteTransaction, 
         return date.toLocaleDateString('en-GB', options);
     }
 
-    const [mobileMore, setMobileMore] = useState(false);
-
-    const handleMobileMoreClick = () => {
-        setMobileMore(true);
-    }
-
     return (
         <>
             <div className={`w-full hidden 2xl:flex items-center ${isLast ? '' : 'border-b'}  border-[#AEAEAE] border-opacity-50 py-4`}>
@@ -92,24 +86,6 @@ const Transaction = ({ transaction, transactionDate, isLast, deleteTransaction, 
                     </button>
                 </div>
             </div>
-
-            {/* <div className={`w-full 2xl:hidden flex justify-between items-center ${isLast ? '' : 'border-b'} border-[#AEAEAE] border-opacity-50 py-2 px-2`}>
-                <div className="text-[12px] text-[#443A3A] font-medium text-center">
-                    {formatDateMobile(transactionDate)}
-                </div>
-                <div className="text-[12px] text-[#443A3A] font-medium  text-center">
-                    <div className='flex flex-row justify-center items-center'>
-                        {getCategory()}
-                        {category}
-                    </div>
-                </div>
-                <div className={`text-[12px] font-medium  text-center ${transaction_type === "income" ? "text-green-500" : "text-red-500"}`}>
-                    {amount} ₸
-                </div>
-                <button className="flex justify-center" onClick={() => editTransaction(transaction)}>
-                    <BiChevronRight size={25} />
-                </button>
-            </div> */}
         </>
     );
 };

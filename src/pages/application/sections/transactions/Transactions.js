@@ -98,20 +98,9 @@ const Transactions = () => {
     const renderTransactions = () => {
         if (isTLoading) {
             return (
-                <ContentLoader
-                    speed={2}
-                    width={1500}
-                    height={160}
-                    viewBox="0 0 1500 160"
-                    backgroundColor="#f3f3f3"
-                    foregroundColor="#ecebeb">
-                    <rect x="20" y="20" rx="10" ry="10" width="200" height="40" />
-                    <rect x="280" y="20" rx="10" ry="10" width="200" height="40" />
-                    <rect x="540" y="20" rx="10" ry="10" width="200" height="40" />
-                    <rect x="790" y="20" rx="10" ry="10" width="200" height="40" />
-                    <rect x="1040" y="20" rx="10" ry="10" width="200" height="40" />
-                    <rect x="1290" y="20" rx="10" ry="10" width="200" height="40" />
-                </ContentLoader>
+                <div>
+                    Loading...
+                </div>
             );
         }
 
