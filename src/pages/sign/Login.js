@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
 import { login } from '../../services/api';
-import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { AiFillGoogleCircle } from 'react-icons/ai';
 import { BsDot } from 'react-icons/bs';
 
@@ -55,7 +54,7 @@ const Login = () => {
     return (
         <div className="bg-white h-screen flex justify-center items-center relative font-sans w-full">
             <div className="h-[31%] w-full bg-gradient-to-r from-purple-300 via-purple-300 to-pink-100 absolute top-0 z-0"></div>
-            <div className="max-w-[450px] w-full w-min-[320px] py-[20px] px-[30px] mx-[10px] bg-white rounded-[24px] flex flex-col justify-start items-center z-10 shadow-lg">
+            <div className="max-w-[450px] w-full min-w-[320px] py-[20px] px-[30px] mx-[10px] bg-white rounded-[24px] flex flex-col justify-start items-center z-10 shadow-lg">
                 <div className=" text-[#344767] font-semibold mb-[20px] text-[12px]">
                     Continue with
                 </div>

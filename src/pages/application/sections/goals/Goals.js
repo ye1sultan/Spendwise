@@ -9,7 +9,6 @@ import { AiOutlineCheckCircle, AiOutlineClockCircle, AiOutlinePlus } from 'react
 import GoalCreator from "./CreateGoal";
 import Goal from "./Goal";
 import EditModal from "./EditModal";
-import ContentLoader from "react-content-loader";
 import { MdMotionPhotosPaused } from "react-icons/md";
 
 const Goals = () => {
@@ -166,7 +165,6 @@ const Goals = () => {
         );
     }
 
-
     const GoalsDropDown = ({ onSelect }) => {
         return (
             <div
@@ -256,38 +254,6 @@ const Goals = () => {
                     ))
                 )}
             </div>
-            {/* <div className={`z-50 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[850px] h-[400px] rounded-[50px] bg-white px-[65px] py-[40px] ${deleteGoalModal ? 'flex' : 'hidden'} flex-col justify-between items-center border-[1px] border-[#AEAEAE]`}>
-                <div className="text-[45px] font-medium">
-                    Delete goal
-                </div>
-                <div className="text-[32px] font-medium text-[#696969]">
-                    Do you really want to delete this goal?
-                </div>
-                <div className="flex justify-between w-full">
-                    <button className="uppercase w-[220px] h-[50px] rounded-[50px] text-[22px] font-medium" onClick={() => setDeleteGoalModal(false)}>
-                        cancel
-                    </button>
-                    <button className="uppercase w-[220px] h-[50px] rounded-[50px] bg-[#BFA2E5] text-[22px] font-medium" onClick={() => deleteGoal(goalToDelete)}>
-                        confirm
-                    </button>
-                </div>
-            </div>
-            <div className={`z-50 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[850px] h-[400px] rounded-[50px] bg-white px-[65px] py-[40px] ${completeGoalModal ? 'flex' : 'hidden'} flex-col justify-between items-center border-[1px] border-[#AEAEAE]`}>
-                <div className="text-[45px] font-medium">
-                    Complete goal
-                </div>
-                <div className="text-[32px] font-medium text-[#696969]">
-                    Do you really want to complete this goal?
-                </div>
-                <div className="flex justify-between w-full">
-                    <button className="uppercase w-[220px] h-[50px] rounded-[50px] text-[22px] font-medium" onClick={() => setCompleteGoalModal(false)}>
-                        cancel
-                    </button>
-                    <button className="uppercase w-[220px] h-[50px] rounded-[50px] bg-[#BFA2E5] text-[22px] font-medium" onClick={() => completeGoal(goalToComplete)}>
-                        confirm
-                    </button>
-                </div>
-            </div> */}
         </div>
     );
 }

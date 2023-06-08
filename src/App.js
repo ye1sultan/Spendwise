@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Landing from './pages/Landing';
@@ -31,87 +31,24 @@ function App() {
                 <Route path="forgot-password" element={<ForgotPassword />} />
                 <Route path="restore-password" element={<RestorePassword />} />
 
-                <Route
-                    path="application/*"
+                <Route path="application/*"
                     element={
                         <ProtectedWrapper>
                             <Application />
                         </ProtectedWrapper>
                     }>
-                    <Route
-                        path=""
-                        element={
-                            <Navigate
-                                to="dashboard"
-                            />
-                        }
-                    />
-                    <Route
-                        path="*"
-                        element={
-                            <Navigate
-                                to="dashboard"
-                            />
-                        }
-                    />
-                    <Route
-                        path="dashboard"
-                        element={
-                            <Dashboard />
-                        }
-                    />
-                    <Route
-                        path="transactions/*"
-                        element={
-                            <Transactions />
-                        }>
-                        <Route
-                            path=""
-                            element={
-                                <Navigate
-                                    to=":month-year"
-                                />
-                            }
-                        />
-                        <Route
-                            path="*"
-                            element={
-                                <Navigate
-                                    to=":month-year"
-                                />
-                            }
-                        />
-                        <Route
-                            path=":month-:year"
-                            element={
-                                <Transactions />
-                            }
-                        />
+                    <Route path="" element={<Navigate to="dashboard" />} />
+                    <Route path="*" element={<Navigate to="dashboard" />} />
+                    <Route path="dashboard" element={<Dashboard />} />
+                    <Route path="transactions/*" element={<Transactions />}>
+                        <Route path="" element={<Navigate to=":month-year" />} />
+                        <Route path="*" element={<Navigate to=":month-year" />} />
+                        <Route path=":month-:year" element={<Transactions />} />
                     </Route>
-                    <Route
-                        path="goals"
-                        element={
-                            <Goals />
-                        }
-                    />
-                    <Route
-                        path="report"
-                        element={
-                            <Report />
-                        }
-                    />
-                    <Route
-                        path="notifications"
-                        element={
-                            <Notifications />
-                        }
-                    />
-                    <Route
-                        path="settings"
-                        element={
-                            <Settings />
-                        }
-                    />
+                    <Route path="goals" element={<Goals />} />
+                    <Route path="report" element={<Report />} />
+                    <Route path="notifications" element={<Notifications />} />
+                    <Route path="settings" element={<Settings />} />
                 </Route>
             </Routes>
         </div>

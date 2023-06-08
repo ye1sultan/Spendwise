@@ -120,7 +120,7 @@ const Signup = () => {
             <div className="h-[31%] w-full bg-gradient-to-r from-purple-300 via-purple-300 to-pink-100 absolute top-0 z-0">
             </div>
             <div className="max-w-[450px] w-full w-min-[320px] py-[20px] px-[30px] mx-[10px] bg-white rounded-[24px] flex flex-col justify-start items-center z-10 shadow-lg">
-                <div className="text-[#344767] font-semibold mb-[20px] text-[12px]">
+                <div className="font-semibold mb-[20px] text-[12px]">
                     Continue with
                 </div>
                 <div className="flex flex-row justify-center items-center w-full mb-[20px]">

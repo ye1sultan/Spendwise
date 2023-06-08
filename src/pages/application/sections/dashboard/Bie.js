@@ -68,7 +68,6 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
         // Return the corrected number.
         return num;
     }
-    // w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] md:w-[45px] md:h-[45px] lg:w-[50px] lg:h-[50px] 2xl:w-[55px] 2xl:h-[55px]
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [iconSize, setIconSize] = useState(40);

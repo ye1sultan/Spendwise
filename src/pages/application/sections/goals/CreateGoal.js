@@ -3,12 +3,13 @@ import { useState } from 'react';
 import { TbCurrencyTenge, TbIcons } from 'react-icons/tb';
 import { AiOutlineClose, AiOutlineCar, AiOutlineGift, AiOutlineShoppingCart, AiOutlineCalendar, AiOutlineHeart, AiOutlineTrophy } from 'react-icons/ai';
 import { IoBagHandle, IoCheckmarkDone, IoCloseOutline, IoEarthOutline, IoGameControllerOutline, IoLanguage } from 'react-icons/io5';
-import { BsArrowRightShort, BsBookmarks, BsCheck2, BsCheckSquare, BsCoin, BsFileEarmarkText, BsFillAirplaneFill, BsHouse, BsLaptop, BsPiggyBank, BsTruck } from 'react-icons/bs';
+import { BsArrowDownShort, BsArrowRightShort, BsBookmarks, BsCheck2, BsCheckSquare, BsCoin, BsFileEarmarkText, BsFillAirplaneFill, BsHouse, BsLaptop, BsPiggyBank, BsTruck } from 'react-icons/bs';
 import { BiColorFill, BiDumbbell, BiPlanet, BiWine } from 'react-icons/bi';
 import { FaMicrophone, FaMugHot, FaPray, FaRegHandPeace, FaTools } from 'react-icons/fa';
 import { MdOutlineBrokenImage, MdPedalBike, MdStroller } from 'react-icons/md';
 import { RiBookLine, RiMedal2Fill } from 'react-icons/ri';
 import { format, setDate } from 'date-fns';
+import { useEffect } from 'react';
 
 const CreateGoal = ({ onModalClose, addNewGoal }) => {
     const allIcons = [
@@ -81,7 +82,6 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
     const [selectedTotalAmount, setSelectedTotalAmount] = useState(0);
     const [selectedIcon, setSelectedIcon] = useState('car');
     const [selectedColor, setSelectedColor] = useState('#A3D1FB');
-    const [selectedDescription, setSelectedDescription] = useState('');
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -134,7 +134,7 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
             <button
                 key={index}
                 onClick={() => handleIconClick(icon.name)}
-                className='p-2'>
+                className='p-2 hover:scale-110'>
                 {icon.icon}
             </button>
         ));
@@ -144,7 +144,7 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
         return allColors.map((color, index) => (
             <div
                 key={index}
-                className='m-2 w-[40px] h-[40px] rounded-full cursor-pointer'
+                className='m-2 w-[40px] h-[40px] rounded-full cursor-pointer hover:scale-110'
                 onClick={() => handleColorClick(color.name)}
                 style={{ backgroundColor: color.name }}>
             </div>
@@ -165,12 +165,22 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
     const [colorsDropDown, setColorsDropDown] = useState(false);
 
     const showAllColors = () => {
-        setColorsDropDown(true);
+        if (!colorsDropDown) {
+            setColorsDropDown(true);
+        } else {
+            setColorsDropDown(false);
+        }
+
         setIconsDropDown(false);
     }
 
     const showAllIcons = () => {
-        setIconsDropDown(true);
+        if (!iconsDropDown) {
+            setIconsDropDown(true);
+        } else {
+            setIconsDropDown(false);
+        }
+
         setColorsDropDown(false);
     }
 
@@ -223,57 +233,83 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
         }
     }
 
-    let inputStyle = "w-full h-full text-[24px] font-normal pl-[40px]";
+    const [iconSize, setIconSize] = useState(35);
+    const [inputIconSize, setInputIconSize] = useState(30);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        function handleResize() {
+            setWindowWidth(window.innerWidth);
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (windowWidth >= 1024) {
+            setIconSize(35);
+            setInputIconSize(30);
+        } else if (windowWidth >= 768) {
+            setIconSize(30);
+        } else {
+            setInputIconSize(20);
+            setIconSize(25);
+        }
+    }, [windowWidth]);
 
     return (
-        <div className="fixed top-[5%] left-[50%] translate-x-[-50%] z-20 bg-white py-[20px] px-[30px] flex flex-col justify-center shadow-md rounded-[40px]">
+        <div className="max-w-[300px] sm:max-w-[320px] md:max-w-[380px] lg:max-w-[450px] xl:max-w-[450px] 2xl:max-w-[450px] w-full fixed top-[5%] left-[50%] translate-x-[-50%] z-20 bg-white py-[20px] px-[30px] flex flex-col justify-center shadow-md rounded-[40px]">
             <div className='w-full flex justify-between items-center mb-[10px]'>
-                <div className="text-[32px] font-medium">
+                <div className="text-lg lg:text-xl xl:text-[28px] 2xl:text-[32px] font-medium">
                     New Goal
                 </div>
-                <IoCloseOutline className='cursor-pointer' size={35} onClick={() => onModalClose(false)} />
+                <IoCloseOutline className='cursor-pointer' size={iconSize} onClick={() => onModalClose(false)} />
             </div>
             <div className="relative w-full h-[50px] mb-[10px]">
-                <input className={inputStyle} type="text" placeholder="Goal name" onChange={e => setSelectedName(e.target.value)} style={{ borderBottom: `1px solid ${nameInput}` }} />
+                <input className="w-full h-full text-[24px] font-normal pl-[40px]" type="text" placeholder="Goal name" onChange={e => setSelectedName(e.target.value)} style={{ borderBottom: `1px solid ${nameInput}` }} />
                 <div className="absolute top-[50%] translate-y-[-50%] left-0">
-                    <BsCheckSquare size={30} color="#696969" />
+                    <BsCheckSquare size={inputIconSize} color="#696969" />
                 </div>
             </div>
             <div className="relative w-full h-[50px] mb-[10px]">
-                <input className={inputStyle} type="number" placeholder="Your current balance" onChange={e => setSelectedAmount(e.target.value)} style={{ borderBottom: `1px solid ${amountInput}` }} />
+                <input className="w-full h-full text-[24px] font-normal pl-[40px]" type="number" placeholder="Your current balance" onChange={e => setSelectedAmount(e.target.value)} style={{ borderBottom: `1px solid ${amountInput}` }} />
                 <div className="absolute top-[50%] translate-y-[-50%] left-0">
-                    <TbCurrencyTenge size={30} color="#696969" />
+                    <TbCurrencyTenge size={inputIconSize} color="#696969" />
                 </div>
             </div>
             <div className="relative w-full h-[50px] mb-[10px]">
-                <input className={inputStyle} type="number" placeholder="Goal value" onChange={e => setSelectedTotalAmount(e.target.value)} style={{ borderBottom: `1px solid ${totalInput}` }} />
+                <input className="w-full h-full text-[24px] font-normal pl-[40px]" type="number" placeholder="Goal value" onChange={e => setSelectedTotalAmount(e.target.value)} style={{ borderBottom: `1px solid ${totalInput}` }} />
                 <div className="absolute top-[50%] translate-y-[-50%] left-0">
-                    <TbCurrencyTenge size={30} color="#696969" />
+                    <TbCurrencyTenge size={inputIconSize} color="#696969" />
                 </div>
             </div>
             <div className="relative w-full h-[50px] mb-[10px]">
-                <input className={inputStyle} type="date" min={format(new Date(), 'yyyy-MM-dd')} placeholder="Deadline" onChange={e => setSelectedDeadline(e.target.value)} style={{ borderBottom: `1px solid ${dateInput}` }} />
+                <input className="w-full h-full text-[24px] font-normal pl-[40px]" type="date" min={format(new Date(), 'yyyy-MM-dd')} placeholder="Deadline" onChange={e => setSelectedDeadline(e.target.value)} style={{ borderBottom: `1px solid ${dateInput}` }} />
                 <div className="absolute top-[50%] translate-y-[-50%] left-0">
-                    <AiOutlineCalendar size={30} color="#696969" />
+                    <AiOutlineCalendar size={inputIconSize} color="#696969" />
                 </div>
             </div>
             <div className='flex flex-col justify-center items-start mb-[10px]'>
                 <div className='flex justify-center items-center mb-[10px]'>
-                    <TbIcons size={30} color="#696969" />
+                    <TbIcons size={inputIconSize} color="#696969" />
                     <div className='pl-4 text-[24px] font-normal'>
                         Icon
                     </div>
                 </div>
-                <div className='flex flex-row justify-between items-center relative'>
-                    {getIcons()}
+                <div className='w-full flex flex-row justify-between items-center relative'>
+                    <div className='flex'>
+                        {getIcons()}
+                    </div>
                     <div
-                        onClick={showAllIcons}
-                        className="w-[50px] h-[50px] rounded-full flex justify-center items-center mr-[20px] cursor-pointer bg-[#D9D9D9] bg-opacity-50">
-                        <BsArrowRightShort size={35} />
+                        onClick={() => showAllIcons()}
+                        className="w-[50px] h-[50px] rounded-full flex justify-center items-center cursor-pointer bg-[#D9D9D9] bg-opacity-50">
+                        <BsArrowDownShort size={iconSize} />
                     </div>
                     {iconsDropDown && (
-                        <div className='z-20 w-full absolute left-[100%] bg-white border-[1px] border-[#AEAEAE] rounded-[30px] p-[20px]'>
-                            <div className='text-[24px] font-medium'>Colors</div>
+                        <div className='z-20 w-full absolute top-[120%] bg-white rounded-[30px] p-[20px] shadow-lg'>
                             <div className='flex flex-wrap justify-center items-center'>
                                 {getAllIcons()}
                             </div>
@@ -283,21 +319,22 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
             </div>
             <div className='flex flex-col justify-center items-start mb-[30px]'>
                 <div className='flex justify-center items-center mb-[10px]'>
-                    <BiColorFill size={30} color="#696969" />
+                    <BiColorFill size={inputIconSize} color="#696969" />
                     <div className='pl-4 text-[24px] font-normal'>
                         Color
                     </div>
                 </div>
-                <div className='flex justify-between items-center relative'>
-                    {getColors()}
+                <div className='w-full flex justify-between items-center relative'>
+                    <div className='flex'>
+                        {getColors()}
+                    </div>
                     <div
                         onClick={() => showAllColors()}
-                        className="w-[50px] h-[50px] rounded-full flex justify-center items-center mr-[20px] cursor-pointer bg-[#D9D9D9] bg-opacity-50">
-                        <BsArrowRightShort size={35} />
+                        className="w-[50px] h-[50px] rounded-full flex justify-center items-center cursor-pointer bg-[#D9D9D9] bg-opacity-50">
+                        <BsArrowDownShort size={iconSize} />
                     </div>
                     {colorsDropDown && (
-                        <div className='z-20 w-full absolute left-[100%] bg-white border-[1px] border-[#AEAEAE] rounded-[30px] p-[20px]'>
-                            <div className='text-[24px] font-medium'>Icons</div>
+                        <div className='z-20 w-full absolute top-[120%] bg-white rounded-[30px] p-[20px] shadow-lg'>
                             <div className='flex flex-wrap justify-center items-center'>
                                 {getAllColors()}
                             </div>
@@ -305,12 +342,6 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
                     )}
                 </div>
             </div>
-            {/* <div className="relative h-[50px] mb-[30px]">
-                <input className="w-full h-full text-[24px] font-normal text-[#696969] pl-[40px] border-b-[1px] border-[#696969]" type="text" placeholder="Description" onChange={e => setSelectedDescription(e.target.value)} />
-                <div className="absolute top-[50%] translate-y-[-50%] left-0">
-                    <BsFileEarmarkText size={30} color="#696969" />
-                </div>
-            </div> */}
             <button className='uppercase text-black text-[14px] 2xl:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]' onClick={() => saveGoal()}>
                 save
             </button>
