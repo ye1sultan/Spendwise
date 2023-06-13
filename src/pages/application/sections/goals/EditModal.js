@@ -13,38 +13,66 @@ import { RiBookLine, RiMedal2Fill } from 'react-icons/ri';
 import { useState } from 'react';
 import { format } from "date-fns";
 import { TbCurrencyTenge, TbIcons } from "react-icons/tb";
+import { useEffect } from "react";
 
 const EditModal = ({ goal, onSave, onCancel }) => {
+    const [iconSize, setIconSize] = useState(35);
+    const [inputIconSize, setInputIconSize] = useState(30);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        function handleResize() {
+            setWindowWidth(window.innerWidth);
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (windowWidth >= 1024) {
+            setIconSize(35);
+            setInputIconSize(30);
+        } else if (windowWidth >= 768) {
+            setIconSize(30);
+        } else {
+            setInputIconSize(20);
+            setIconSize(25);
+        }
+    }, [windowWidth]);
+
     const allIcons = [
-        { name: 'earth', icon: <IoEarthOutline size={35} /> },
-        { name: 'cart', icon: <AiOutlineShoppingCart size={35} /> },
-        { name: 'coin', icon: <BsCoin size={35} /> },
-        { name: 'gift', icon: <AiOutlineGift size={35} /> },
-        { name: 'rest', icon: <FaPray size={35} /> },
-        { name: 'pic', icon: <MdOutlineBrokenImage size={35} /> },
-        { name: 'bag', icon: <IoBagHandle size={35} /> },
-        { name: 'set', icon: <FaTools size={35} /> },
-        { name: 'car', icon: <AiOutlineCar size={35} /> },
-        { name: 'tea', icon: <FaMugHot size={35} /> },
-        { name: 'plane', icon: <BsFillAirplaneFill size={35} /> },
-        { name: 'saturn', icon: <BiPlanet size={35} /> },
-        { name: 'laptop', icon: <BsLaptop size={35} /> },
-        { name: 'micro', icon: <FaMicrophone size={35} /> },
-        { name: 'buggy', icon: <MdStroller size={35} /> },
-        { name: 'medal', icon: <RiMedal2Fill size={35} /> },
-        { name: 'bike', icon: <MdPedalBike size={35} /> },
-        { name: 'contr', icon: <IoGameControllerOutline size={35} /> },
-        { name: 'wine', icon: <BiWine size={35} /> },
-        { name: 'heart', icon: <AiOutlineHeart size={35} /> },
-        { name: 'truck', icon: <BsTruck size={35} /> },
-        { name: 'book', icon: <RiBookLine size={35} /> },
-        { name: 'home', icon: <BsHouse size={35} /> },
-        { name: 'champ', icon: <AiOutlineTrophy size={35} /> },
-        { name: 'weight', icon: <BiDumbbell size={35} /> },
-        { name: 'pig', icon: <BsPiggyBank size={35} /> },
-        { name: 'lang', icon: <IoLanguage size={35} /> },
-        { name: 'peace', icon: <FaRegHandPeace size={35} /> },
-        { name: 'done', icon: <IoCheckmarkDone size={35} /> },
+        { name: 'earth', icon: <IoEarthOutline size={iconSize} /> },
+        { name: 'cart', icon: <AiOutlineShoppingCart size={iconSize} /> },
+        { name: 'coin', icon: <BsCoin size={iconSize} /> },
+        { name: 'gift', icon: <AiOutlineGift size={iconSize} /> },
+        { name: 'rest', icon: <FaPray size={iconSize} /> },
+        { name: 'pic', icon: <MdOutlineBrokenImage size={iconSize} /> },
+        { name: 'bag', icon: <IoBagHandle size={iconSize} /> },
+        { name: 'set', icon: <FaTools size={iconSize} /> },
+        { name: 'car', icon: <AiOutlineCar size={iconSize} /> },
+        { name: 'tea', icon: <FaMugHot size={iconSize} /> },
+        { name: 'plane', icon: <BsFillAirplaneFill size={iconSize} /> },
+        { name: 'saturn', icon: <BiPlanet size={iconSize} /> },
+        { name: 'laptop', icon: <BsLaptop size={iconSize} /> },
+        { name: 'micro', icon: <FaMicrophone size={iconSize} /> },
+        { name: 'buggy', icon: <MdStroller size={iconSize} /> },
+        { name: 'medal', icon: <RiMedal2Fill size={iconSize} /> },
+        { name: 'bike', icon: <MdPedalBike size={iconSize} /> },
+        { name: 'contr', icon: <IoGameControllerOutline size={iconSize} /> },
+        { name: 'wine', icon: <BiWine size={iconSize} /> },
+        { name: 'heart', icon: <AiOutlineHeart size={iconSize} /> },
+        { name: 'truck', icon: <BsTruck size={iconSize} /> },
+        { name: 'book', icon: <RiBookLine size={iconSize} /> },
+        { name: 'home', icon: <BsHouse size={iconSize} /> },
+        { name: 'champ', icon: <AiOutlineTrophy size={iconSize} /> },
+        { name: 'weight', icon: <BiDumbbell size={iconSize} /> },
+        { name: 'pig', icon: <BsPiggyBank size={iconSize} /> },
+        { name: 'lang', icon: <IoLanguage size={iconSize} /> },
+        { name: 'peace', icon: <FaRegHandPeace size={iconSize} /> },
+        { name: 'done', icon: <IoCheckmarkDone size={iconSize} /> },
     ];
 
     const allColors = [
@@ -65,27 +93,27 @@ const EditModal = ({ goal, onSave, onCancel }) => {
         { name: '#19AD50' },
     ];
 
+    const [colorsDropDown, setColorsDropDown] = useState(null);
+    const [iconsDropDown, setIconsDropDown] = useState(null);
+
     const handleIconClick = (icon) => {
         setEditedGoal({ ...editedGoal, icon: icon.name });
-        setIconDropDown(false);
+        setIconsDropDown(false);
     }
-
 
     const handleColorClick = (color) => {
         setEditedGoal({ ...editedGoal, color: color.name });
-        setColorDropDown(false);
+        setColorsDropDown(false);
     }
 
-    const [colorDropDown, setColorDropDown] = useState(null);
-    const [iconDropDown, setIconDropDown] = useState(null);
     const [editedGoal, setEditedGoal] = useState(goal);
 
     const getIcon = (name) => {
         const icon = allIcons.find((icon) => icon.name === name);
 
         return (
-            <div className="flex justify-start items-center pr-2">
-                {icon ? icon.icon : <AiOutlineCar size={35} />}
+            <div className="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-full bg-[#D9D9D9] bg-opacity-50 flex justify-center items-center mr-2">
+                {icon ? icon.icon : <AiOutlineCar size={iconSize} />}
             </div>
         );
     };
@@ -95,7 +123,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
             <button
                 key={index}
                 onClick={() => handleIconClick(icon)}
-                className="p-2 hover:bg-[#ecf0f1]">
+                className="p-2 hover:scale-110">
                 {icon.icon}
             </button>
         ));
@@ -106,7 +134,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
 
         return (
             <div
-                className="flex justify-start items-center mr-2 w-[40px] h-[40px] rounded-full cursor-pointer"
+                className="w-[40px] h-[40px] md:w-[50px] md:h-[50px] flex justify-start items-center rounded-full cursor-pointer mr-2"
                 style={{ backgroundColor: color ? color.name : goal.color }}></div>
         );
     };
@@ -116,7 +144,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
         return allColors.map((color, index) => (
             <button
                 key={index}
-                className='m-2 w-[35px] h-[35px] rounded-full cursor-pointer hover:translate-x-[5%] hover:translate-y-[-5%]'
+                className='m-2 w-[35px] h-[35px] rounded-full cursor-pointer hover:scale-110'
                 onClick={() => handleColorClick(color)}
                 style={{ backgroundColor: color.name }}>
             </button>
@@ -168,96 +196,118 @@ const EditModal = ({ goal, onSave, onCancel }) => {
         return `${year}-${month}-${day}`;
     };
 
-    let inputStyle = 'w-full h-full text-[24px] font-normal pl-[40px] border-b-[1px] border-[#696969]';
+    const showAllIcons = () => {
+        if (!iconsDropDown) {
+            setIconsDropDown(true);
+        } else {
+            setIconsDropDown(false);
+        }
+
+        setColorsDropDown(false);
+    }
+
+    const showAllColors = () => {
+        if (!colorsDropDown) {
+            setColorsDropDown(true);
+        } else {
+            setColorsDropDown(false);
+        }
+
+        setIconsDropDown(false);
+    }
+
+    let inputStyle = 'w-full h-full text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] border-b-[1px] border-b-[#696969]';
 
     return (
-        <div className="fixed top-[5%] left-[50%] translate-x-[-50%] z-20 bg-white py-[20px] px-[30px] flex flex-col justify-center shadow-md rounded-[40px]">
-            <div className='w-full flex justify-between items-center mb-[10px]'>
-                <div className="text-[32px] font-medium">
-                    Edit Goal
+        <div className="fixed top-0 left-0 right-0 bottom-0 flex items-start justify-center m-6 h-full z-20">
+            <div className='bg-white shadow-md rounded-[30px] xl:rounded-[40px] mx-4 w-full max-w-[350px] xl:max-w-[400px] min-w-[280px] p-6 xl:p-8'>
+                <div className='w-full flex justify-between items-center mb-[10px]'>
+                    <div className="text-lg lg:text-xl xl:text-[28px] 2xl:text-[32px] font-medium">
+                        Edit Goal
+                    </div>
+                    <IoCloseOutline className='cursor-pointer' size={iconSize} onClick={onCancel} />
                 </div>
-                <IoCloseOutline className='cursor-pointer' size={35} onClick={onCancel} />
+                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px]">
+                    <input
+                        className={inputStyle}
+                        type="text"
+                        name="name"
+                        value={editedGoal.name}
+                        onChange={handleChange}
+                    />
+                    <BsCheckSquare className="absolute top-[50%] translate-y-[-50%] left-0" size={inputIconSize} color="#696969" />
+                </div>
+                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px]">
+                    <input
+                        className={inputStyle}
+                        type="number"
+                        name="initial_target_amount"
+                        value={parseInt(editedGoal.initial_target_amount)}
+                        onChange={handleChange}
+                    />
+                    <TbCurrencyTenge className="absolute top-[50%] translate-y-[-50%] left-0" size={inputIconSize} color="#696969" />
+                </div>
+                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px]">
+                    <input
+                        className={inputStyle}
+                        type="number"
+                        name="target_amount"
+                        value={parseInt(editedGoal.target_amount)}
+                        onChange={handleChange}
+                    />
+                    <TbCurrencyTenge className="absolute top-[50%] translate-y-[-50%] left-0" size={inputIconSize} color="#696969" />
+                </div>
+                <div className="relative w-full h-[40px] md:h-[50px] mb-[20px]">
+                    <input
+                        className="w-full min-w-[200px] h-full text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] border-b-[1px] border-b-[#696969]"
+                        type="date"
+                        name="deadline"
+                        min={format(new Date(), 'yyyy-MM-dd')}
+                        value={formatDate(editedGoal.deadline)}
+                        onChange={handleChange}
+                    />
+                    <AiOutlineCalendar className="absolute top-[50%] translate-y-[-50%] left-0" size={inputIconSize} color="#696969" />
+                </div>
+                <div className="relative w-full flex justify-between items-center h-[50px] mb-[30px]">
+                    <div
+                        onClick={() => showAllIcons()}
+                        className="flex justify-start items-center">
+                        <TbIcons size={inputIconSize} color="#696969" />
+                        <div className="flex justify-start items-center w-full h-[50px] text-[18px] cursor-pointer pl-[20px]">
+                            {getIcon(editedGoal.icon)}
+                            <BsChevronDown size={20} />
+                        </div>
+                        {iconsDropDown && (
+                            <div className='z-20 w-full absolute left-0 top-[120%] bg-white rounded-[30px] p-[20px] shadow-lg'>
+                                <div className='flex flex-wrap justify-center items-center'>
+                                    {getAllIcons()}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                    <div
+                        onClick={() => showAllColors()}
+                        className="flex justify-start items-center">
+                        <BiColorFill size={inputIconSize} color="#696969" />
+                        <div className="flex justify-start items-center w-full h-[50px] text-[18px] cursor-pointer pl-[20px]">
+                            {getColor(editedGoal.color)}
+                            <BsChevronDown size={20} />
+                        </div>
+                        {colorsDropDown && (
+                            <div className='z-20 w-full absolute left-0 top-[120%] bg-white rounded-[30px] p-[20px] shadow-lg'>
+                                <div className='flex flex-wrap justify-center items-center'>
+                                    {getAllColors()}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <div className='w-full flex justify-end'>
+                    <button className='uppercase text-black text-[14px] lg:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]' onClick={() => handleSave()}>
+                        save
+                    </button>
+                </div>
             </div>
-            <div className="relative w-full h-[50px] mb-[10px]">
-                <input
-                    className={inputStyle}
-                    type="text"
-                    name="name"
-                    value={editedGoal.name}
-                    onChange={handleChange}
-                />
-                <div className="absolute top-[50%] translate-y-[-50%] left-0">
-                    <BsCheckSquare size={30} color="#696969" />
-                </div>
-            </div>
-            <div className="relative w-full h-[50px] mb-[10px]">
-                <input
-                    className={inputStyle}
-                    type="number"
-                    name="initial_target_amount"
-                    value={parseInt(editedGoal.initial_target_amount)}
-                    onChange={handleChange}
-                />
-                <div className="absolute top-[50%] translate-y-[-50%] left-0">
-                    <TbCurrencyTenge size={30} color="#696969" />
-                </div>
-            </div>
-            <div className="relative w-full h-[50px] mb-[10px]">
-                <input
-                    className={inputStyle}
-                    type="date"
-                    name="deadline"
-                    min={format(new Date(), 'yyyy-MM-dd')}
-                    value={formatDate(editedGoal.deadline)}
-                    onChange={handleChange}
-                />
-                <div className="absolute top-[50%] translate-y-[-50%] left-0">
-                    <AiOutlineCalendar size={30} color="#696969" />
-                </div>
-            </div>
-            <div className="relative w-full h-[50px] mb-[10px]">
-                <input
-                    className={inputStyle}
-                    type="number"
-                    name="target_amount"
-                    value={parseInt(editedGoal.target_amount)}
-                    onChange={handleChange}
-                />
-                <div className="absolute top-[50%] translate-y-[-50%] left-0">
-                    <TbCurrencyTenge size={30} color="#696969" />
-                </div>
-            </div>
-            <div
-                onMouseEnter={() => setIconDropDown(true)}
-                onMouseLeave={() => setIconDropDown(false)}
-                className="relative w-full flex justify-start items-center h-[50px] border-b-[1px] border-[#696969] mb-[10px]">
-                <TbIcons size={30} color="#696969" />
-                <div className="flex justify-start items-center w-full h-[50px] text-[18px] cursor-pointer pl-[20px]">
-                    {getIcon(editedGoal.icon)}
-                    <BsChevronDown size={20} />
-                </div>
-                <div
-                    className={`z-20 absolute top-[100%] left-0 max-h-[300px] overflow-auto ${iconDropDown ? 'flex' : 'hidden'} flex-wrap bg-white py-4 pl-2 pr-10 shadow rounded-[25px] border-[1px] border-black`}>
-                    {getAllIcons()}
-                </div>
-            </div>
-            <div
-                onMouseEnter={() => setColorDropDown(true)}
-                onMouseLeave={() => setColorDropDown(false)}
-                className="relative w-full flex justify-start items-center h-[50px] mb-[30px]">
-                <BiColorFill size={30} color="#696969" />
-                <div className="flex justify-start items-center w-full h-[50px] text-[18px] cursor-pointer pl-[20px]">
-                    {getColor(editedGoal.color)}
-                    <BsChevronDown size={20} />
-                </div>
-                <div
-                    className={`z-20 absolute top-[100%] left-0 max-h-[300px] overflow-auto ${colorDropDown ? 'flex' : 'hidden'} flex-wrap bg-white py-4 pl-2 pr-10 shadow rounded-[25px] border-[1px] border-black`}>
-                    {getAllColors()}
-                </div>
-            </div>
-            <button className="uppercase text-black text-[14px] 2xl:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]" onClick={handleSave}>
-                Save
-            </button>
         </div>
     );
 }
