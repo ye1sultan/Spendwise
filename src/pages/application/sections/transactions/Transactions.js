@@ -175,9 +175,9 @@ const Transactions = () => {
             <div className="self-start relative">
                 <button
                     onClick={() => setShowDropDown(true)}
-                    className="flex flex-row justify-center items-center 2xl:h-[45px] 2xl:w-[140px] cursor-pointer uppercase font-medium text-[14px] 2xl:text-[16px] bg-[#BFA2E5] text-black rounded-[30px] p-1 2xl:p-0">
+                    className="h-[35px] md:h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[16px] lg:text-[20px] flex justify-between items-center px-5 z-10">
                     <AiOutlinePlus className="mr-1 2xl:mr-[10px]" size={iconWidth} />
-                    new
+                    New
                 </button>
                 <div
                     onMouseEnter={() => setShowDropDown(true)}

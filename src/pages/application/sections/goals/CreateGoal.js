@@ -12,36 +12,63 @@ import { format, setDate } from 'date-fns';
 import { useEffect } from 'react';
 
 const CreateGoal = ({ onModalClose, addNewGoal }) => {
+    const [iconSize, setIconSize] = useState(35);
+    const [inputIconSize, setInputIconSize] = useState(30);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        function handleResize() {
+            setWindowWidth(window.innerWidth);
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (windowWidth >= 1024) {
+            setIconSize(35);
+            setInputIconSize(30);
+        } else if (windowWidth >= 768) {
+            setIconSize(30);
+        } else {
+            setInputIconSize(20);
+            setIconSize(25);
+        }
+    }, [windowWidth]);
+
     const allIcons = [
-        { name: 'earth', icon: <IoEarthOutline size={35} /> },
-        { name: 'cart', icon: <AiOutlineShoppingCart size={35} /> },
-        { name: 'coin', icon: <BsCoin size={35} /> },
-        { name: 'gift', icon: <AiOutlineGift size={35} /> },
-        { name: 'rest', icon: <FaPray size={35} /> },
-        { name: 'pic', icon: <MdOutlineBrokenImage size={35} /> },
-        { name: 'bag', icon: <IoBagHandle size={35} /> },
-        { name: 'set', icon: <FaTools size={35} /> },
-        { name: 'car', icon: <AiOutlineCar size={35} /> },
-        { name: 'tea', icon: <FaMugHot size={35} /> },
-        { name: 'plane', icon: <BsFillAirplaneFill size={35} /> },
-        { name: 'saturn', icon: <BiPlanet size={35} /> },
-        { name: 'laptop', icon: <BsLaptop size={35} /> },
-        { name: 'micro', icon: <FaMicrophone size={35} /> },
-        { name: 'buggy', icon: <MdStroller size={35} /> },
-        { name: 'medal', icon: <RiMedal2Fill size={35} /> },
-        { name: 'bike', icon: <MdPedalBike size={35} /> },
-        { name: 'contr', icon: <IoGameControllerOutline size={35} /> },
-        { name: 'wine', icon: <BiWine size={35} /> },
-        { name: 'heart', icon: <AiOutlineHeart size={35} /> },
-        { name: 'truck', icon: <BsTruck size={35} /> },
-        { name: 'book', icon: <RiBookLine size={35} /> },
-        { name: 'home', icon: <BsHouse size={35} /> },
-        { name: 'champ', icon: <AiOutlineTrophy size={35} /> },
-        { name: 'weight', icon: <BiDumbbell size={35} /> },
-        { name: 'pig', icon: <BsPiggyBank size={35} /> },
-        { name: 'lang', icon: <IoLanguage size={35} /> },
-        { name: 'peace', icon: <FaRegHandPeace size={35} /> },
-        { name: 'done', icon: <IoCheckmarkDone size={35} /> },
+        { name: 'earth', icon: <IoEarthOutline size={iconSize} /> },
+        { name: 'cart', icon: <AiOutlineShoppingCart size={iconSize} /> },
+        { name: 'coin', icon: <BsCoin size={iconSize} /> },
+        { name: 'gift', icon: <AiOutlineGift size={iconSize} /> },
+        { name: 'rest', icon: <FaPray size={iconSize} /> },
+        { name: 'pic', icon: <MdOutlineBrokenImage size={iconSize} /> },
+        { name: 'bag', icon: <IoBagHandle size={iconSize} /> },
+        { name: 'set', icon: <FaTools size={iconSize} /> },
+        { name: 'car', icon: <AiOutlineCar size={iconSize} /> },
+        { name: 'tea', icon: <FaMugHot size={iconSize} /> },
+        { name: 'plane', icon: <BsFillAirplaneFill size={iconSize} /> },
+        { name: 'saturn', icon: <BiPlanet size={iconSize} /> },
+        { name: 'laptop', icon: <BsLaptop size={iconSize} /> },
+        { name: 'micro', icon: <FaMicrophone size={iconSize} /> },
+        { name: 'buggy', icon: <MdStroller size={iconSize} /> },
+        { name: 'medal', icon: <RiMedal2Fill size={iconSize} /> },
+        { name: 'bike', icon: <MdPedalBike size={iconSize} /> },
+        { name: 'contr', icon: <IoGameControllerOutline size={iconSize} /> },
+        { name: 'wine', icon: <BiWine size={iconSize} /> },
+        { name: 'heart', icon: <AiOutlineHeart size={iconSize} /> },
+        { name: 'truck', icon: <BsTruck size={iconSize} /> },
+        { name: 'book', icon: <RiBookLine size={iconSize} /> },
+        { name: 'home', icon: <BsHouse size={iconSize} /> },
+        { name: 'champ', icon: <AiOutlineTrophy size={iconSize} /> },
+        { name: 'weight', icon: <BiDumbbell size={iconSize} /> },
+        { name: 'pig', icon: <BsPiggyBank size={iconSize} /> },
+        { name: 'lang', icon: <IoLanguage size={iconSize} /> },
+        { name: 'peace', icon: <FaRegHandPeace size={iconSize} /> },
+        { name: 'done', icon: <IoCheckmarkDone size={iconSize} /> },
     ];
 
     const allColors = [
@@ -63,10 +90,10 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
     ];
 
     const startIcons = [
-        { name: 'car', icon: <AiOutlineCar size={35} /> },
-        { name: 'earth', icon: <IoEarthOutline size={35} /> },
-        { name: 'cart', icon: <AiOutlineShoppingCart size={35} /> },
-        { name: 'gift', icon: <AiOutlineGift size={35} /> },
+        { name: 'car', icon: <AiOutlineCar size={iconSize} /> },
+        { name: 'earth', icon: <IoEarthOutline size={iconSize} /> },
+        { name: 'cart', icon: <AiOutlineShoppingCart size={iconSize} /> },
+        { name: 'gift', icon: <AiOutlineGift size={iconSize} /> },
     ];
 
     const startColors = [
@@ -100,7 +127,7 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
             return (
                 <div
                     key={index}
-                    className="w-[50px] h-[50px] rounded-full flex justify-center items-center mr-[20px] cursor-pointer bg-opacity-50"
+                    className="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-full flex justify-center items-center mr-[10px] md:mr-[20px] cursor-pointer bg-opacity-50"
                     onClick={() => handleIconClick(icon.name)}
                     style={{
                         backgroundColor: colorToDisplay,
@@ -120,7 +147,7 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
             return (
                 <div
                     key={index}
-                    className='w-[50px] h-[50px] rounded-full flex justify-center items-center mr-[20px] cursor-pointer'
+                    className='w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-full flex justify-center items-center mr-[10px] md:mr-[20px] cursor-pointer'
                     onClick={() => handleColorClick(color.name)}
                     style={{ backgroundColor: colorToDisplay.name }}>
                     {iconToDisplay}
@@ -233,119 +260,181 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
         }
     }
 
-    const [iconSize, setIconSize] = useState(35);
-    const [inputIconSize, setInputIconSize] = useState(30);
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    useEffect(() => {
-        function handleResize() {
-            setWindowWidth(window.innerWidth);
-        }
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    useEffect(() => {
-        if (windowWidth >= 1024) {
-            setIconSize(35);
-            setInputIconSize(30);
-        } else if (windowWidth >= 768) {
-            setIconSize(30);
-        } else {
-            setInputIconSize(20);
-            setIconSize(25);
-        }
-    }, [windowWidth]);
-
+    //text-lg lg:text-xl xl:text-[28px] 2xl:text-[32px] 32px
+    //text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] 24px
     return (
-        <div className="max-w-[300px] sm:max-w-[320px] md:max-w-[380px] lg:max-w-[450px] xl:max-w-[450px] 2xl:max-w-[450px] w-full fixed top-[5%] left-[50%] translate-x-[-50%] z-20 bg-white py-[20px] px-[30px] flex flex-col justify-center shadow-md rounded-[40px]">
-            <div className='w-full flex justify-between items-center mb-[10px]'>
-                <div className="text-lg lg:text-xl xl:text-[28px] 2xl:text-[32px] font-medium">
-                    New Goal
+        <div className="fixed top-0 left-0 right-0 bottom-0 flex items-start justify-center m-4 h-full z-20">
+            <div className='bg-white shadow-md rounded-lg mx-4 w-full max-w-[450px] min-w-[280px] p-4'>
+                <div className='w-full flex justify-between items-center mb-[10px]'>
+                    <div className="text-lg lg:text-xl xl:text-[28px] 2xl:text-[32px] font-medium">
+                        New Goal
+                    </div>
+                    <IoCloseOutline className='cursor-pointer' size={iconSize} onClick={() => onModalClose(false)} />
                 </div>
-                <IoCloseOutline className='cursor-pointer' size={iconSize} onClick={() => onModalClose(false)} />
-            </div>
-            <div className="relative w-full h-[50px] mb-[10px]">
-                <input className="w-full h-full text-[24px] font-normal pl-[40px]" type="text" placeholder="Goal name" onChange={e => setSelectedName(e.target.value)} style={{ borderBottom: `1px solid ${nameInput}` }} />
-                <div className="absolute top-[50%] translate-y-[-50%] left-0">
-                    <BsCheckSquare size={inputIconSize} color="#696969" />
-                </div>
-            </div>
-            <div className="relative w-full h-[50px] mb-[10px]">
-                <input className="w-full h-full text-[24px] font-normal pl-[40px]" type="number" placeholder="Your current balance" onChange={e => setSelectedAmount(e.target.value)} style={{ borderBottom: `1px solid ${amountInput}` }} />
-                <div className="absolute top-[50%] translate-y-[-50%] left-0">
-                    <TbCurrencyTenge size={inputIconSize} color="#696969" />
-                </div>
-            </div>
-            <div className="relative w-full h-[50px] mb-[10px]">
-                <input className="w-full h-full text-[24px] font-normal pl-[40px]" type="number" placeholder="Goal value" onChange={e => setSelectedTotalAmount(e.target.value)} style={{ borderBottom: `1px solid ${totalInput}` }} />
-                <div className="absolute top-[50%] translate-y-[-50%] left-0">
-                    <TbCurrencyTenge size={inputIconSize} color="#696969" />
-                </div>
-            </div>
-            <div className="relative w-full h-[50px] mb-[10px]">
-                <input className="w-full h-full text-[24px] font-normal pl-[40px]" type="date" min={format(new Date(), 'yyyy-MM-dd')} placeholder="Deadline" onChange={e => setSelectedDeadline(e.target.value)} style={{ borderBottom: `1px solid ${dateInput}` }} />
-                <div className="absolute top-[50%] translate-y-[-50%] left-0">
-                    <AiOutlineCalendar size={inputIconSize} color="#696969" />
-                </div>
-            </div>
-            <div className='flex flex-col justify-center items-start mb-[10px]'>
-                <div className='flex justify-center items-center mb-[10px]'>
-                    <TbIcons size={inputIconSize} color="#696969" />
-                    <div className='pl-4 text-[24px] font-normal'>
-                        Icon
+                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px]">
+                    <input className="w-full h-full text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px]" type="text" placeholder="Goal name" onChange={e => setSelectedName(e.target.value)} style={{ borderBottom: `1px solid ${nameInput}` }} />
+                    <div className="absolute top-[50%] translate-y-[-50%] left-0">
+                        <BsCheckSquare size={inputIconSize} color="#696969" />
                     </div>
                 </div>
-                <div className='w-full flex flex-row justify-between items-center relative'>
-                    <div className='flex'>
-                        {getIcons()}
+                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px]">
+                    <input className="w-full h-full text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px]" type="number" placeholder="Your current balance" onChange={e => setSelectedAmount(e.target.value)} style={{ borderBottom: `1px solid ${amountInput}` }} />
+                    <div className="absolute top-[50%] translate-y-[-50%] left-0">
+                        <TbCurrencyTenge size={inputIconSize} color="#696969" />
                     </div>
-                    <div
-                        onClick={() => showAllIcons()}
-                        className="w-[50px] h-[50px] rounded-full flex justify-center items-center cursor-pointer bg-[#D9D9D9] bg-opacity-50">
-                        <BsArrowDownShort size={iconSize} />
+                </div>
+                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px]">
+                    <input className="w-full h-full text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px]" type="number" placeholder="Goal value" onChange={e => setSelectedTotalAmount(e.target.value)} style={{ borderBottom: `1px solid ${totalInput}` }} />
+                    <div className="absolute top-[50%] translate-y-[-50%] left-0">
+                        <TbCurrencyTenge size={inputIconSize} color="#696969" />
                     </div>
-                    {iconsDropDown && (
-                        <div className='z-20 w-full absolute top-[120%] bg-white rounded-[30px] p-[20px] shadow-lg'>
-                            <div className='flex flex-wrap justify-center items-center'>
-                                {getAllIcons()}
-                            </div>
+                </div>
+                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px]">
+                    <input className="w-full min-w-[280px] h-full text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] overflow-hidden" type="date" min={format(new Date(), 'yyyy-MM-dd')} placeholder="Deadline" onChange={e => setSelectedDeadline(e.target.value)} style={{ borderBottom: `1px solid ${dateInput}` }} />
+                    <div className="absolute top-[50%] translate-y-[-50%] left-0">
+                        <AiOutlineCalendar size={inputIconSize} color="#696969" />
+                    </div>
+                </div>
+                <div className='flex flex-col justify-center items-start mb-[10px]'>
+                    <div className='flex justify-center items-center mb-[10px]'>
+                        <TbIcons size={inputIconSize} color="#696969" />
+                        <div className='pl-4 text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal'>
+                            Icon
                         </div>
-                    )}
-                </div>
-            </div>
-            <div className='flex flex-col justify-center items-start mb-[30px]'>
-                <div className='flex justify-center items-center mb-[10px]'>
-                    <BiColorFill size={inputIconSize} color="#696969" />
-                    <div className='pl-4 text-[24px] font-normal'>
-                        Color
                     </div>
-                </div>
-                <div className='w-full flex justify-between items-center relative'>
-                    <div className='flex'>
-                        {getColors()}
-                    </div>
-                    <div
-                        onClick={() => showAllColors()}
-                        className="w-[50px] h-[50px] rounded-full flex justify-center items-center cursor-pointer bg-[#D9D9D9] bg-opacity-50">
-                        <BsArrowDownShort size={iconSize} />
-                    </div>
-                    {colorsDropDown && (
-                        <div className='z-20 w-full absolute top-[120%] bg-white rounded-[30px] p-[20px] shadow-lg'>
-                            <div className='flex flex-wrap justify-center items-center'>
-                                {getAllColors()}
-                            </div>
+                    <div className='w-full flex flex-row justify-between items-center relative'>
+                        <div className='flex'>
+                            {getIcons()}
                         </div>
-                    )}
+                        <div
+                            onClick={() => showAllIcons()}
+                            className="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-full flex justify-center items-center cursor-pointer bg-[#D9D9D9] bg-opacity-50">
+                            <BsArrowDownShort size={iconSize} />
+                        </div>
+                        {iconsDropDown && (
+                            <div className='z-20 w-full absolute top-[120%] bg-white rounded-[30px] p-[20px] shadow-lg'>
+                                <div className='flex flex-wrap justify-center items-center'>
+                                    {getAllIcons()}
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </div>
+                <div className='flex flex-col justify-center items-start mb-[30px]'>
+                    <div className='flex justify-center items-center mb-[10px]'>
+                        <BiColorFill size={inputIconSize} color="#696969" />
+                        <div className='pl-4 text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal'>
+                            Color
+                        </div>
+                    </div>
+                    <div className='w-full flex justify-between items-center relative'>
+                        <div className='flex'>
+                            {getColors()}
+                        </div>
+                        <div
+                            onClick={() => showAllColors()}
+                            className="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-full flex justify-center items-center cursor-pointer bg-[#D9D9D9] bg-opacity-50">
+                            <BsArrowDownShort size={iconSize} />
+                        </div>
+                        {colorsDropDown && (
+                            <div className='z-20 w-full absolute top-[120%] bg-white rounded-[30px] p-[20px] shadow-lg'>
+                                <div className='flex flex-wrap justify-center items-center'>
+                                    {getAllColors()}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <button className='uppercase text-black text-[14px] 2xl:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]' onClick={() => saveGoal()}>
+                    save
+                </button>
             </div>
-            <button className='uppercase text-black text-[14px] 2xl:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]' onClick={() => saveGoal()}>
-                save
-            </button>
         </div>
+        // <div className="max-w-[300px] sm:max-w-[320px] md:max-w-[380px] lg:max-w-[450px] xl:max-w-[450px] 2xl:max-w-[450px] w-full fixed top-[5%] left-[50%] translate-x-[-50%] z-20 bg-white py-[20px] px-[30px] flex flex-col justify-center shadow-md rounded-[40px]">
+        //     <div className='w-full flex justify-between items-center mb-[10px]'>
+        //         <div className="text-lg lg:text-xl xl:text-[28px] 2xl:text-[32px] font-medium">
+        //             New Goal
+        //         </div>
+        //         <IoCloseOutline className='cursor-pointer' size={iconSize} onClick={() => onModalClose(false)} />
+        //     </div>
+        //     <div className="relative w-full h-[50px] mb-[10px]">
+        //         <input className="w-full h-full text-[24px] font-normal pl-[40px]" type="text" placeholder="Goal name" onChange={e => setSelectedName(e.target.value)} style={{ borderBottom: `1px solid ${nameInput}` }} />
+        //         <div className="absolute top-[50%] translate-y-[-50%] left-0">
+        //             <BsCheckSquare size={inputIconSize} color="#696969" />
+        //         </div>
+        //     </div>
+        //     <div className="relative w-full h-[50px] mb-[10px]">
+        //         <input className="w-full h-full text-[24px] font-normal pl-[40px]" type="number" placeholder="Your current balance" onChange={e => setSelectedAmount(e.target.value)} style={{ borderBottom: `1px solid ${amountInput}` }} />
+        //         <div className="absolute top-[50%] translate-y-[-50%] left-0">
+        //             <TbCurrencyTenge size={inputIconSize} color="#696969" />
+        //         </div>
+        //     </div>
+        //     <div className="relative w-full h-[50px] mb-[10px]">
+        //         <input className="w-full h-full text-[24px] font-normal pl-[40px]" type="number" placeholder="Goal value" onChange={e => setSelectedTotalAmount(e.target.value)} style={{ borderBottom: `1px solid ${totalInput}` }} />
+        //         <div className="absolute top-[50%] translate-y-[-50%] left-0">
+        //             <TbCurrencyTenge size={inputIconSize} color="#696969" />
+        //         </div>
+        //     </div>
+        //     <div className="relative w-full h-[50px] mb-[10px]">
+        //         <input className="w-full h-full text-[24px] font-normal pl-[40px]" type="date" min={format(new Date(), 'yyyy-MM-dd')} placeholder="Deadline" onChange={e => setSelectedDeadline(e.target.value)} style={{ borderBottom: `1px solid ${dateInput}` }} />
+        //         <div className="absolute top-[50%] translate-y-[-50%] left-0">
+        //             <AiOutlineCalendar size={inputIconSize} color="#696969" />
+        //         </div>
+        //     </div>
+        //     <div className='flex flex-col justify-center items-start mb-[10px]'>
+        //         <div className='flex justify-center items-center mb-[10px]'>
+        //             <TbIcons size={inputIconSize} color="#696969" />
+        //             <div className='pl-4 text-[24px] font-normal'>
+        //                 Icon
+        //             </div>
+        //         </div>
+        //         <div className='w-full flex flex-row justify-between items-center relative'>
+        //             <div className='flex'>
+        //                 {getIcons()}
+        //             </div>
+        //             <div
+        //                 onClick={() => showAllIcons()}
+        //                 className="w-[50px] h-[50px] rounded-full flex justify-center items-center cursor-pointer bg-[#D9D9D9] bg-opacity-50">
+        //                 <BsArrowDownShort size={iconSize} />
+        //             </div>
+        //             {iconsDropDown && (
+        //                 <div className='z-20 w-full absolute top-[120%] bg-white rounded-[30px] p-[20px] shadow-lg'>
+        //                     <div className='flex flex-wrap justify-center items-center'>
+        //                         {getAllIcons()}
+        //                     </div>
+        //                 </div>
+        //             )}
+        //         </div>
+        //     </div>
+        //     <div className='flex flex-col justify-center items-start mb-[30px]'>
+        //         <div className='flex justify-center items-center mb-[10px]'>
+        //             <BiColorFill size={inputIconSize} color="#696969" />
+        //             <div className='pl-4 text-[24px] font-normal'>
+        //                 Color
+        //             </div>
+        //         </div>
+        //         <div className='w-full flex justify-between items-center relative'>
+        //             <div className='flex'>
+        //                 {getColors()}
+        //             </div>
+        //             <div
+        //                 onClick={() => showAllColors()}
+        //                 className="w-[50px] h-[50px] rounded-full flex justify-center items-center cursor-pointer bg-[#D9D9D9] bg-opacity-50">
+        //                 <BsArrowDownShort size={iconSize} />
+        //             </div>
+        //             {colorsDropDown && (
+        //                 <div className='z-20 w-full absolute top-[120%] bg-white rounded-[30px] p-[20px] shadow-lg'>
+        //                     <div className='flex flex-wrap justify-center items-center'>
+        //                         {getAllColors()}
+        //                     </div>
+        //                 </div>
+        //             )}
+        //         </div>
+        //     </div>
+        //     <button className='uppercase text-black text-[14px] 2xl:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]' onClick={() => saveGoal()}>
+        //         save
+        //     </button>
+        // </div>
     );
 }
 

@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 import { register } from '../../services/api';
-import { AiFillGoogleCircle } from 'react-icons/ai';
+
 import { BsDot } from 'react-icons/bs';
+import Logo from '../assets/Logo.png';
 
 const Signup = () => {
     const [name, setName] = useState('');
@@ -101,7 +103,6 @@ const Signup = () => {
         return isValid;
     };
 
-
     const validatePassword = (password) => {
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
         const isValid = passwordRegex.test(password);
@@ -119,45 +120,112 @@ const Signup = () => {
         <div className="bg-white h-screen flex justify-center items-center relative font-sans">
             <div className="h-[31%] w-full bg-gradient-to-r from-purple-300 via-purple-300 to-pink-100 absolute top-0 z-0">
             </div>
-            <div className="max-w-[450px] w-full w-min-[320px] py-[20px] px-[30px] mx-[10px] bg-white rounded-[24px] flex flex-col justify-start items-center z-10 shadow-lg">
-                <div className="font-semibold mb-[20px] text-[12px]">
-                    Continue with
-                </div>
-                <div className="flex flex-row justify-center items-center w-full mb-[20px]">
-                    <AiFillGoogleCircle size={45} color='#4285F4' />
-                </div>
-                <div className='font-semibold text-[12px] text-[#ADB5BD] mb-[20px]'>
-                    or
+            <div className="max-w-[425px] w-full w-min-[320px] py-[20px] px-[30px] mx-[10px] bg-white rounded-[24px] flex flex-col justify-start items-center z-10 shadow-xl">
+                <div className='w-full flex justify-between items-center mb-[30px]'>
+                    <div className='flex flex-col items-start'>
+                        <div className='text-[32px] font-semibold'>
+                            Sign up
+                        </div>
+                        <div className='text-[16px] text-[#6A6A6A]'>
+                            to calculate your budget!
+                        </div>
+                    </div>
+                    <img className='h-16' src={Logo} alt='Logo' />
                 </div>
                 <form onSubmit={handleSubmit} className='flex flex-col w-full mb-[20px]'>
                     <div className='flex flex-col justify-center items-center w-full'>
-                        <input onChange={(e) => { setName(e.target.value); setNameEdited(true); validateName(e.target.value); }} className={`border-[1px] rounded-[8px] border-[#CED4DA] w-full h-[40px] text-[12px] py-[12px] pl-[12px] ${submitted && nameText ? 'mb-[12px]' : 'mb-[24px]'}`} type='text' placeholder='Name' />
-                        {nameText && <div className='text-[12px] text-red-600 mb-[12px]'>Please enter valid name.</div>}
+                        <input
+                            onChange={(e) => {
+                                setName(e.target.value);
+                                setNameEdited(true);
+                                validateName(e.target.value);
+                            }}
+                            className={`
+                                border-[1px] rounded-[8px] border-[#CED4DA] w-full 
+                                h-[40px] text-[14px] py-[12px] pl-[12px] 
+                                ${submitted && nameText ? 'mb-[12px]' : 'mb-[24px]'}`}
+                            type='text'
+                            placeholder='Name' />
 
-                        <input onChange={(e) => { setEmail(e.target.value); setEmailEdited(true); validateEmail(e.target.value); }} className={`border-[1px] rounded-[8px] border-[#CED4DA] w-full h-[40px] text-[12px] py-[12px] pl-[12px] ${submitted && emailText ? 'mb-[12px]' : 'mb-[24px]'}`} type='email' placeholder='Email' />
-                        {submitted && emailText && <div className='text-[12px] text-red-600 mb-[12px]'>Please enter a valid email address.</div>}
+                        {/* {nameText && <div className='text-[14px] text-red-600 mb-[12px]'>
+                            Please enter valid name.
+                        </div>} */}
 
-                        <input onChange={(e) => { setPassword(e.target.value); setPasswordEdited(true); validatePassword(e.target.value); }} className={`border-[1px] rounded-[8px] border-[#CED4DA] w-full h-[40px] text-[12px] py-[12px] pl-[12px] ${submitted && passwordText ? 'mb-[12px]' : 'mb-[24px]'}`} type='password' placeholder='Password' />
-                        {submitted && passwordText && <div className='text-[12px] text-red-600 mb-[12px]'>Password must be at least 8 characters long, contain at least one letter and one number.</div>}
+                        <input
+                            onChange={(e) => {
+                                setEmail(e.target.value);
+                                setEmailEdited(true);
+                                validateEmail(e.target.value);
+                            }}
+                            className={`
+                                border-[1px] rounded-[8px] border-[#CED4DA] w-full 
+                                h-[40px] text-[14px] py-[12px] pl-[12px] 
+                                ${submitted && emailText ? 'mb-[12px]' : 'mb-[24px]'}`}
+                            type='email'
+                            placeholder='Email' />
 
-                        <input onChange={(e) => { setPasswordConfirmation(e.target.value); checkPasswordsMatch(password, e.target.value); }} className={`border-[1px] rounded-[8px] border-[#CED4DA] w-full h-[40px] text-[12px] py-[12px] pl-[12px] ${submitted && !passwordsMatch ? 'mb-[12px]' : 'mb-[24px]'}`} type='password' placeholder='Confirm Password' />
-                        {submitted && !passwordsMatch && <div className='text-[12px] text-red-600 mb-[12px]'>Passwords do not match.</div>}
+                        {/* {submitted && emailText && <div className='text-[14px] text-red-600 mb-[12px]'>
+                            Please enter a valid email address.
+                        </div>} */}
+
+                        <input
+                            onChange={(e) => {
+                                setPassword(e.target.value);
+                                setPasswordEdited(true);
+                                validatePassword(e.target.value);
+                            }}
+                            className={`
+                                border-[1px] rounded-[8px] border-[#CED4DA] w-full 
+                                h-[40px] text-[14px] py-[12px] pl-[12px] 
+                                ${submitted && passwordText ? 'mb-[12px]' : 'mb-[24px]'}`}
+                            type='password'
+                            placeholder='Password' />
+
+                        {/* {submitted && passwordText && <div className='text-[14px] text-red-600 mb-[12px]'>
+                            Password must be at least 8 characters long, contain at least one letter and one number.
+                        </div>} */}
+
+                        <input
+                            onChange={(e) => {
+                                setPasswordConfirmation(e.target.value);
+                                checkPasswordsMatch(password, e.target.value);
+                            }}
+                            className={`
+                                border-[1px] rounded-[8px] border-[#CED4DA] w-full 
+                                h-[40px] text-[14px] py-[12px] pl-[12px] 
+                                ${submitted && !passwordsMatch ? 'mb-[12px]' : 'mb-[24px]'}`}
+                            type='password'
+                            placeholder='Confirm Password' />
+                        {/* {submitted && !passwordsMatch && <div className='text-[14px] text-red-600 mb-[12px]'>
+                            Passwords do not match.
+                        </div>} */}
+
                     </div>
                     <div className='mb-[24px] font-semibold flex flex-col justify-start items-start w-full'>
-                        <div className='flex flex-row justify-start items-center w-full'>
-                            <input id='checkbox' type='checkbox' value='' className='w-[18px] h-[18px] mr-[16px]' onChange={handleCheckboxChange} />
-                            <label htmlFor='checkbox' className='text-[12px]'>I agree to the Terms of Use </label>
+                        <div className='flex flex-row justify-start items-center w-full ml-1'>
+                            <input
+                                id='checkbox'
+                                type='checkbox'
+                                value=''
+                                className='w-[18px] h-[18px] mr-[24px]'
+                                onChange={handleCheckboxChange} />
+                            <label htmlFor='checkbox' className='text-[14px]'>
+                                I agree to the Terms of Use
+                            </label>
                         </div>
-                        {termsText && <div className='text-[12px] text-red-600'>Please accept terms of use</div>}
+
+                        {/* {termsText && <div className='text-[14px] text-red-600'>
+                            Please accept terms of use
+                        </div>} */}
                     </div>
-                    <input className='cursor-pointer bg-[#343A40] text-white font-semibold text-[14px] w-full h-[40px] rounded-[8px]' value='Sign Up' type='submit' />
+                    <input className='cursor-pointer bg-[#343A40] text-white font-semibold text-[16px] w-full h-[40px] rounded-[8px]' value='Create Account' type='submit' />
                 </form>
                 <div className='flex flex-row justify-center items-center'>
-                    <button data-route='/login' className='font-semibold text-[14px] underline text-black' onClick={handleNavigation}>
-                        Log In!
+                    <button data-route='/login' className='font-semibold text-[16px] underline text-black' onClick={handleNavigation}>
+                        Log In
                     </button>
                     <BsDot size={30} />
-                    <button data-route='/terms-of-use' className='font-semibold text-[14px] underline' onClick={handleNavigation}>
+                    <button data-route='/term-of-use' className='font-semibold text-[16px] underline' onClick={handleNavigation}>
                         Terms of Use
                     </button>
                 </div>
