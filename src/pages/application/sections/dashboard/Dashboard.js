@@ -10,6 +10,8 @@ const Dashboard = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        const controller = new AbortController();
+
         const fetchTransactions = async () => {
             try {
                 const data = await getAllTransactions();
@@ -24,6 +26,10 @@ const Dashboard = () => {
         };
 
         fetchTransactions();
+
+        return () => {
+            controller.abort();
+        };
     }, []);
 
     const getCurrentMonthTransactions = (transactions) => {
@@ -49,6 +55,8 @@ const Dashboard = () => {
     const [totals, setTotals] = useState({ totalIncome: 0, totalExpense: 0 });
 
     useEffect(() => {
+        const controller = new AbortController();
+
         const fetchTransactions = async () => {
             try {
                 const data = await getAllTransactions();
@@ -70,6 +78,10 @@ const Dashboard = () => {
         };
 
         fetchTransactions();
+
+        return () => {
+            controller.abort();
+        };
     }, []);
 
     const calculateTotals = (transactions) => {

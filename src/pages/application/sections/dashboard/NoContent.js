@@ -1,43 +1,15 @@
-import { useEffect, useState } from "react";
 import { BsFlag } from "react-icons/bs";
 import { FiPieChart } from "react-icons/fi"
 import { MdSignalCellularAlt } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 const NoContent = ({ is }) => {
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const [iconSize, setIconSize] = useState(40);
-
-    useEffect(() => {
-        function handleResize() {
-            setWindowWidth(window.innerWidth);
-        }
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    useEffect(() => {
-        if (windowWidth >= 1024) {
-            setIconSize(45);
-        } else if (windowWidth >= 768) {
-            setIconSize(35);
-        } else if (windowWidth >= 640) {
-            setIconSize(30);
-        } else {
-            setIconSize(25);
-        }
-    }, [windowWidth]);
-
     const getNoContent = () => {
         if (is === 'expense') {
             return (
                 <>
                     <div className="block my-4">
-                        <FiPieChart size={iconSize} />
+                        <FiPieChart className="text-[25px] sm:text-[30px] md:text-[35px] lg:text-[45px]" />
                     </div>
                     <div className="text-center mb-6">
                         <div className="lg:text-2xl md:text-xl sm:text-lg text-base px-4 mb-2">
@@ -60,7 +32,7 @@ const NoContent = ({ is }) => {
             return (
                 <>
                     <div className="block my-4">
-                        <FiPieChart size={iconSize} />
+                        <FiPieChart className="text-[25px] sm:text-[30px] md:text-[35px] lg:text-[45px]" />
                     </div>
                     <div className="text-center mb-6">
                         <div className="lg:text-2xl md:text-xl sm:text-lg text-base px-4 mb-2">
@@ -83,7 +55,7 @@ const NoContent = ({ is }) => {
             return (
                 <>
                     <div className="block my-4">
-                        <MdSignalCellularAlt size={iconSize} />
+                        <MdSignalCellularAlt className="text-[25px] sm:text-[30px] md:text-[35px] lg:text-[45px]" />
                     </div>
                     <div className="text-center mb-6">
                         <div className="lg:text-2xl md:text-xl sm:text-lg text-base px-4 mb-2">
@@ -105,7 +77,7 @@ const NoContent = ({ is }) => {
         if (is === 'goal') {
             return (
                 <div className="w-full h-full flex flex-col justify-evenly items-center">
-                    <BsFlag size={iconSize} />
+                    <BsFlag className="text-[25px] sm:text-[30px] md:text-[35px] lg:text-[45px]" />
                     <div className="text-center">
                         <div className="lg:text-2xl md:text-xl sm:text-lg text-base px-4 pb-2">
                             Ops! You have no registered goals this month.

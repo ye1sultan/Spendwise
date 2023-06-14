@@ -7,9 +7,9 @@ const Header = () => {
     useEffect(() => {
         const intervalId = setInterval(() => {
             setName(JSON.parse(sessionStorage.getItem('userData')).name ?? '');
-        }, 500); // checks every 500 ms
+        }, 500);
 
-        return () => clearInterval(intervalId); // cleanup on unmount
+        return () => clearInterval(intervalId);
     }, []);
 
     return (

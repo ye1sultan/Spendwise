@@ -1,18 +1,5 @@
 import { Chart } from 'chart.js';
-import 'chartjs';
 import { Doughnut } from 'react-chartjs-2';
-import 'chart.js/auto';
-
-import { AiOutlineCar, AiOutlineHeart, AiOutlineHome, AiOutlineShop, AiOutlineShoppingCart } from 'react-icons/ai';
-import { BiBookAlt } from 'react-icons/bi';
-import { BsAirplaneEngines, BsLaptop, BsThreeDots } from 'react-icons/bs';
-import { MdOutlineMiscellaneousServices } from 'react-icons/md';
-import { RiRestaurant2Line } from 'react-icons/ri';
-import { IoWalletSharp } from 'react-icons/io5';
-import { AiOutlineGift, AiOutlineStar } from 'react-icons/ai';
-import { BsCoin } from 'react-icons/bs';
-import { FaPray } from 'react-icons/fa';
-import { TbHealthRecognition } from 'react-icons/tb';
 
 const getTotalExpense = (data) => {
     return data.datasets[0].data.reduce((acc, val) => acc + val, 0);
@@ -46,24 +33,24 @@ Chart.register(centerTextPlugin);
 
 const PieChart = ({ transactions = [] }) => {
     const categories = [
-        { name: "Clothing", icon: <AiOutlineShop size={25} color="#ffffff" />, color: "#D942A6" },
-        { name: "Health", icon: <TbHealthRecognition size={25} color="#ffffff" />, color: "#19AD50" },
-        { name: "Beauty", icon: <AiOutlineHeart size={25} color="#ffffff" />, color: "#75C5D6" },
-        { name: "Home", icon: <AiOutlineHome size={25} color="#ffffff" />, color: "#9CC741" },
-        { name: "Supermarket", icon: <AiOutlineShoppingCart size={25} color="#ffffff" />, color: "#E1B136" },
-        { name: "Education", icon: <BiBookAlt size={25} color="#ffffff" />, color: "#DB2647" },
-        { name: "Restaurant", icon: <RiRestaurant2Line size={25} color="#ffffff" />, color: "#EB9499" },
-        { name: "Transport", icon: <AiOutlineCar size={25} color="#ffffff" />, color: "#8DE7AE" },
-        { name: "Travel", icon: <BsAirplaneEngines size={25} color="#ffffff" />, color: "#F67730" },
-        { name: "Services", icon: <MdOutlineMiscellaneousServices size={25} color="#ffffff" />, color: "#A17BD0" },
-        { name: "Electronics", icon: <BsLaptop size={25} color="#ffffff" />, color: "#3391D0" },
-        { name: "Recreation", icon: <FaPray size={25} color="#ffffff" />, color: "#8D66E2" },
-        { name: "Others", icon: <BsThreeDots size={25} color="#ffffff" />, color: "#AEAEAE" },
-        { name: "Salary", icon: <IoWalletSharp size={25} color="#ffffff" />, color: "#6681DF" },
-        { name: "Gift", icon: <AiOutlineGift size={25} color="#ffffff" />, color: "#B6415D" },
-        { name: "Investment", icon: <AiOutlineStar size={25} color="#ffffff" />, color: "#2DB252" },
-        { name: "Rewards", icon: <BsCoin size={25} color="#ffffff" />, color: "#EDBC3E" },
-        { name: "Other", icon: <BsThreeDots size={25} color="#ffffff" />, color: "#AEAEAE" },
+        { name: "Clothing", color: "#D942A6" },
+        { name: "Health", color: "#19AD50" },
+        { name: "Beauty", color: "#75C5D6" },
+        { name: "Home", color: "#9CC741" },
+        { name: "Supermarket", color: "#E1B136" },
+        { name: "Education", color: "#DB2647" },
+        { name: "Restaurant", color: "#EB9499" },
+        { name: "Transport", color: "#8DE7AE" },
+        { name: "Travel", color: "#F67730" },
+        { name: "Services", color: "#A17BD0" },
+        { name: "Electronics", color: "#3391D0" },
+        { name: "Recreation", color: "#8D66E2" },
+        { name: "Others", color: "#AEAEAE" },
+        { name: "Salary", color: "#6681DF" },
+        { name: "Gift", color: "#B6415D" },
+        { name: "Investment", color: "#2DB252" },
+        { name: "Rewards", color: "#EDBC3E" },
+        { name: "Other", color: "#AEAEAE" },
     ];
 
 
@@ -91,26 +78,26 @@ const PieChart = ({ transactions = [] }) => {
         plugins: {
             centerText: centerTextPlugin,
             tooltip: {
-                backgroundColor: "rgba(0, 0, 0, 0.8)", // Set the background color of the tooltip
+                backgroundColor: "rgba(0, 0, 0, 0.8)",
                 titleFont: {
-                    size: 24, // Set the font size for the title
-                    weight: "bold", // Set the font weight for the title
-                    family: "Montserrat", // Set the font family for the title
+                    size: 24,
+                    weight: "bold",
+                    family: "Montserrat",
                 },
-                titleColor: "#ffffff", // Set the font color for the title
-                titleSpacing: 4, // Set the space between title lines
-                titleMarginBottom: 10, // Set the space between the title and body
+                titleColor: "#ffffff",
+                titleSpacing: 4,
+                titleMarginBottom: 10,
                 bodyFont: {
-                    size: 20, // Set the font size for the body
-                    weight: "normal", // Set the font weight for the body
-                    family: "Montserrat", // Set the font family for the body
+                    size: 20,
+                    weight: "normal",
+                    family: "Montserrat",
                 },
-                bodyColor: "#ffffff", // Set the font color for the body
-                bodySpacing: 4, // Set the space between body lines
-                borderWidth: 1, // Set the border width
-                borderColor: "#ffffff", // Set the border color
-                borderRadius: 8, // Set the border radius
-                padding: 20, // Set the padding around the tooltip
+                bodyColor: "#ffffff",
+                bodySpacing: 4,
+                borderWidth: 1,
+                borderColor: "#ffffff",
+                borderRadius: 8,
+                padding: 20,
                 callbacks: {
                     title: (context) => {
                         const index = context[0].dataIndex;
@@ -126,7 +113,7 @@ const PieChart = ({ transactions = [] }) => {
         },
         elements: {
             arc: {
-                borderRadius: 10, // Set the border radius to make the segments rounder
+                borderRadius: 10,
             },
         },
         legend: {
@@ -135,16 +122,17 @@ const PieChart = ({ transactions = [] }) => {
     };
 
     return (
-        <div className='lg:max-w-[350px] lg:max-h-[350px] md:max-w-[300px] md:max-h-[300px] sm:max-w-[250px] sm:max-h-[250px] max-w-[200px] max-h-[200px] w-full h-full flex justify-center items-center'>
+        <div
+            className='
+                lg:max-w-[350px] lg:max-h-[350px] 
+                md:max-w-[300px] md:max-h-[300px] 
+                sm:max-w-[250px] sm:max-h-[250px] 
+                max-w-[200px] max-h-[200px] 
+                w-full h-full flex justify-center items-center'>
             <Doughnut
                 data={data}
                 options={options}
-                style={
-                    {
-                        width: `350px`,
-                        height: `350px`,
-                    }
-                }
+                style={{ width: `350px`, height: `350px`, }}
             />
         </div>
     );

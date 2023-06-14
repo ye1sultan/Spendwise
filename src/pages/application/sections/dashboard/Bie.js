@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { AiFillClockCircle, AiOutlineArrowDown, AiOutlineArrowUp, AiOutlineClockCircle } from "react-icons/ai";
+import { useState } from "react";
+import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import { BsFillCalendar2CheckFill, BsFillClockFill } from "react-icons/bs";
 import { TbCurrencyTenge } from "react-icons/tb";
 
@@ -36,13 +36,11 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
 
     const saveBalance = async () => {
         const correctedAmount = correctNumber(selectedAmount);
-
-        // Get today's date in "YYYY-MM-DD" format
         const today = new Date();
         const date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
 
         try {
-            await createMonthlyBalance(date, correctedAmount); // You may replace these parameters as per your API requirements
+            await createMonthlyBalance(date, correctedAmount);
             console.log('Monthly balance saved successfully');
             setShowBalanceModal(false);
         } catch (err) {
@@ -51,50 +49,19 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
     }
 
     function correctNumber(num) {
-        // First, check if num is a number.
         if (isNaN(num)) {
             console.error('Input is not a number');
             return;
         }
 
-        // Convert the number to a positive one if it's negative.
         num = Math.abs(num);
 
-        // If the number is zero or starts with zero and has more digits, return 0.
         if (num === 0 || num < 1) {
             return 0;
         }
 
-        // Return the corrected number.
         return num;
     }
-
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const [iconSize, setIconSize] = useState(40);
-
-    useEffect(() => {
-        function handleResize() {
-            setWindowWidth(window.innerWidth);
-        }
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    useEffect(() => {
-        if (windowWidth >= 1024) {
-            setIconSize(40);
-        } else if (windowWidth >= 768) {
-            setIconSize(35);
-        } else if (windowWidth >= 640) {
-            setIconSize(30);
-        } else {
-            setIconSize(25);
-        }
-    }, [windowWidth]);
 
     const getBie = () => {
         if (svg === 'current') {
@@ -106,10 +73,7 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
                         <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium">
                             {title}
                         </div>
-                        <BsFillClockFill
-                            className="absolute right-2 sm:right-4 sm:top-[50%] bottom-2 sm:translate-y-[-50%]"
-                            size={iconSize}
-                            color="#85B0E2" />
+                        <BsFillClockFill className="absolute right-2 sm:right-4 sm:top-[50%] bottom-2 sm:translate-y-[-50%] text-[25px] sm:text-[30px] md:text-[35px] lg:text-[40px]" color="#85B0E2" />
                         <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium">
                             {formatNumber(calculateTotals(transactions).totalExpense + calculateTotals(transactions).totalIncome) + " ₸"}
                         </div>
@@ -127,10 +91,7 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
                         <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium">
                             {title}
                         </div>
-                        <AiOutlineArrowDown
-                            className="absolute right-2 sm:right-4 sm:top-[50%] bottom-2 sm:translate-y-[-50%]"
-                            size={iconSize}
-                            color="#C51F1F" />
+                        <AiOutlineArrowDown className="absolute right-2 sm:right-4 sm:top-[50%] bottom-2 sm:translate-y-[-50%] text-[25px] sm:text-[30px] md:text-[35px] lg:text-[40px]" color="#C51F1F" />
                         <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium">
                             {formatNumber(calculateTotals(transactions).totalExpense) + " ₸"}
                         </div>
@@ -148,10 +109,7 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
                         <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium">
                             {title}
                         </div>
-                        <AiOutlineArrowUp
-                            className="absolute right-2 sm:right-4 sm:top-[50%] bottom-2 sm:translate-y-[-50%]"
-                            size={iconSize}
-                            color="#86B88A" />
+                        <AiOutlineArrowUp className="absolute right-2 sm:right-4 sm:top-[50%] bottom-2 sm:translate-y-[-50%] text-[25px] sm:text-[30px] md:text-[35px] lg:text-[40px]" color="#86B88A" />
                         <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium">
                             {formatNumber(calculateTotals(transactions).totalIncome) + " ₸"}
                         </div>
@@ -169,10 +127,7 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
                         <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium">
                             {title}
                         </div>
-                        <BsFillCalendar2CheckFill
-                            className="absolute right-2 sm:right-4 sm:top-[50%] bottom-2 sm:translate-y-[-50%]"
-                            size={iconSize}
-                            color="#86B88A" />
+                        <BsFillCalendar2CheckFill className="absolute right-2 sm:right-4 sm:top-[50%] bottom-2 sm:translate-y-[-50%] text-[25px] sm:text-[30px] md:text-[35px] lg:text-[40px]" color="#86B88A" />
                         <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium flex justify-start items-center">
                             {formatNumber(Math.floor(monthlyBalance?.balance ? monthlyBalance?.balance : "0")) + " ₸"}
                             {!monthlyBalance && (

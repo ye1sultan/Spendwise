@@ -6,76 +6,49 @@ import { FaMicrophone, FaMugHot, FaPray, FaRegHandPeace, FaTools } from 'react-i
 import { MdOutlineBrokenImage, MdPedalBike, MdStroller } from 'react-icons/md';
 import { RiBookLine, RiMedal2Fill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 
 const Goal = ({ name, icon, deadline, totalAmount, amount, color }) => {
     const getPercent = (amount, totalAmount) => {
         let res = parseFloat(((amount / totalAmount) * 100).toFixed(2));
         return (res);
     }
-
     let progress = getPercent(amount, totalAmount);
 
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const [iconSize, setIconSize] = useState(35);
-
-    useEffect(() => {
-        function handleResize() {
-            setWindowWidth(window.innerWidth);
-        }
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    useEffect(() => {
-        if (windowWidth >= 1024) {
-            setIconSize(35);
-        } else if (windowWidth >= 768) {
-            setIconSize(30);
-        } else {
-            setIconSize(25);
-        }
-    }, [windowWidth]);
-
     const allIcons = [
-        { name: 'earth', icon: <IoEarthOutline size={iconSize} /> },
-        { name: 'cart', icon: <AiOutlineShoppingCart size={iconSize} /> },
-        { name: 'coin', icon: <BsCoin size={iconSize} /> },
-        { name: 'gift', icon: <AiOutlineGift size={iconSize} /> },
-        { name: 'rest', icon: <FaPray size={iconSize} /> },
-        { name: 'pic', icon: <MdOutlineBrokenImage size={iconSize} /> },
-        { name: 'bag', icon: <IoBagHandle size={iconSize} /> },
-        { name: 'set', icon: <FaTools size={iconSize} /> },
-        { name: 'car', icon: <AiOutlineCar size={iconSize} /> },
-        { name: 'tea', icon: <FaMugHot size={iconSize} /> },
-        { name: 'plane', icon: <BsFillAirplaneFill size={iconSize} /> },
-        { name: 'saturn', icon: <BiPlanet size={iconSize} /> },
-        { name: 'laptop', icon: <BsLaptop size={iconSize} /> },
-        { name: 'micro', icon: <FaMicrophone size={iconSize} /> },
-        { name: 'buggy', icon: <MdStroller size={iconSize} /> },
-        { name: 'medal', icon: <RiMedal2Fill size={iconSize} /> },
-        { name: 'bike', icon: <MdPedalBike size={iconSize} /> },
-        { name: 'contr', icon: <IoGameControllerOutline size={iconSize} /> },
-        { name: 'wine', icon: <BiWine size={iconSize} /> },
-        { name: 'heart', icon: <AiOutlineHeart size={iconSize} /> },
-        { name: 'truck', icon: <BsTruck size={iconSize} /> },
-        { name: 'book', icon: <RiBookLine size={iconSize} /> },
-        { name: 'home', icon: <BsHouse size={iconSize} /> },
-        { name: 'champ', icon: <AiOutlineTrophy size={iconSize} /> },
-        { name: 'weight', icon: <BiDumbbell size={iconSize} /> },
-        { name: 'pig', icon: <BsPiggyBank size={iconSize} /> },
-        { name: 'lang', icon: <IoLanguage size={iconSize} /> },
-        { name: 'peace', icon: <FaRegHandPeace size={iconSize} /> },
-        { name: 'done', icon: <IoCheckmarkDone size={iconSize} /> },
+        { name: 'earth', icon: <IoEarthOutline className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'cart', icon: <AiOutlineShoppingCart className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'coin', icon: <BsCoin className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'gift', icon: <AiOutlineGift className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'rest', icon: <FaPray className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'pic', icon: <MdOutlineBrokenImage className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'bag', icon: <IoBagHandle className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'set', icon: <FaTools className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'car', icon: <AiOutlineCar className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'tea', icon: <FaMugHot className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'plane', icon: <BsFillAirplaneFill className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'saturn', icon: <BiPlanet className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'laptop', icon: <BsLaptop className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'micro', icon: <FaMicrophone className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'buggy', icon: <MdStroller className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'medal', icon: <RiMedal2Fill className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'bike', icon: <MdPedalBike className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'contr', icon: <IoGameControllerOutline className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'wine', icon: <BiWine className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'heart', icon: <AiOutlineHeart className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'truck', icon: <BsTruck className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'book', icon: <RiBookLine className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'home', icon: <BsHouse className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'champ', icon: <AiOutlineTrophy className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'weight', icon: <BiDumbbell className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'pig', icon: <BsPiggyBank className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'lang', icon: <IoLanguage className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'peace', icon: <FaRegHandPeace className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'done', icon: <IoCheckmarkDone className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
     ];
 
     const getIconComponent = (iconPrompt) => {
         const foundIcon = allIcons.find((iconObj) => iconObj.name === iconPrompt);
-        const DefaultIconComponent = <AiOutlineCar size={iconSize} />;
+        const DefaultIconComponent = <AiOutlineCar className="text-[25px] md:text-[30px] lg:text-[35px]" />;
 
         return foundIcon ? foundIcon.icon : DefaultIconComponent;
     };
@@ -94,7 +67,7 @@ const Goal = ({ name, icon, deadline, totalAmount, amount, color }) => {
                     </div>
                 </div>
                 <Link to='/application/goals' className='cursor-pointer'>
-                    <BsArrowRightShort size={iconSize + 5} />
+                    <BsArrowRightShort className="text-[30px] md:text-[35px] lg:text-[40px]" />
                 </Link>
             </div>
             <div className="w-full flex justify-between items-center">
