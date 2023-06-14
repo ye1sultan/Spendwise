@@ -46,7 +46,9 @@ const SideBar = () => {
     return (
         <div className="sticky left-0 top-0 bg-white flex flex-col justify-start xl:justify-between items-center h-screen py-6 xl:py-14 xl:px-[30px] shadow-sm">
             <div className="flex flex-col justify-center items-center xl:items-start mb-16 xl:mb-0">
-                <img className='hidden xl:block z-50  mb-12' src={FullLogo} alt="Logo" />
+                <div className='w-[210px] h-full hidden xl:block mb-12 z-50'>
+                    <img src={FullLogo} alt="Logo" />
+                </div>
                 <img className='block xl:hidden h-[40px] z-50 mb-6' src={Logo} alt="Logo" />
                 {
                     buttons.map((button, index) => (

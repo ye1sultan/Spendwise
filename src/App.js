@@ -19,6 +19,10 @@ import TermOfUse from './pages/sign/TermOfUse';
 import ProtectedWrapper from './ProtectedRoute';
 
 function App() {
+    
+    //text-lg lg:text-xl xl:text-[28px] 2xl:text-[32px] 32px
+    //text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] 24px
+    
     return (
         <div className="App">
             <Routes>

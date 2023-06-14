@@ -201,20 +201,30 @@ const Transactions = () => {
                     </div>
                 )}
             </div>
-            <div className="w-full min-h-[550px] bg-white rounded-[40px] mt-[40px] pb-[20px]">
+            <div className="w-full bg-white rounded-[40px] mt-[40px] pb-[20px]">
                 <MonthSelector
                     currentMonth={currentMonth}
                     currentYear={currentYear}
                     setCurrentMonth={setCurrentMonth}
                     setCurrentYear={setCurrentYear}
                 />
-                <div className="w-full h-[60px]  bg-[#BFA2E5] bg-opacity-90 flex justify-around items-center">
+
+                <div className="hidden sm:flex justify-around items-center w-full bg-[#BFA2E5] bg-opacity-90">
                     {['Date', 'Category', 'Description', 'Type', 'Amount', 'Action'].map((text, index) => (
-                        <div key={index} className="text-[22px] text-[#000] font-medium w-1/6 text-center">
+                        <div key={index} className="py-3 md:py-5 text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium w-1/6 text-center">
                             {text}
                         </div>
                     ))}
                 </div>
+
+                <div className="flex sm:hidden justify-around items-center w-full bg-[#BFA2E5] bg-opacity-90">
+                    {['Date', 'Category', 'Amount', 'More'].map((text, index) => (
+                        <div key={index} className="py-3 md:py-5 text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium w-1/4 text-center">
+                            {text}
+                        </div>
+                    ))}
+                </div>
+
                 {renderTransactions()}
             </div>
         </>

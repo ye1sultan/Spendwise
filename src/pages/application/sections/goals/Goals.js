@@ -167,10 +167,7 @@ const Goals = () => {
 
     const GoalsDropDown = ({ onSelect }) => {
         return (
-            <div
-                onMouseEnter={() => setShowDropDown(showDropDown)}
-                onMouseLeave={() => setShowDropDown(!showDropDown)}
-                className="absolute top-full mt-2 bg-white rounded-xl shadow-md overflow-hidden">
+            <div className="absolute top-full mt-2 bg-white rounded-xl shadow-md overflow-hidden">
                 <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[16px] lg:text-[20px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('active')}>
                     <AiOutlineClockCircle size={iconSize} className="mr-2" /> Active Goals
                 </button>
@@ -213,10 +210,7 @@ const Goals = () => {
 
             <Title title={'My Goals'} />
             <div className="relative self-start z-10 w-full mb-[30px]">
-                <button
-                    onMouseEnter={() => setShowDropDown(!showDropDown)}
-                    className="h-[35px] md:h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[16px] lg:text-[20px] flex justify-between items-center px-5 z-10"
-                >
+                <button onClick={() => setShowDropDown(!showDropDown)} className="h-[35px] md:h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[16px] lg:text-[20px] flex justify-between items-center px-5 z-10">
                     <BsChevronDown className="mr-2" />
                     {goalFilter.charAt(0).toUpperCase() + goalFilter.slice(1)} Goals
                 </button>

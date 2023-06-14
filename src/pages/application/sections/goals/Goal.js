@@ -75,7 +75,7 @@ const Goal = ({ goal, name, icon, deadline, target_amount, initial_target_amount
             setIconSize(20);
         }
     }, [windowWidth]);
-
+    
     const allIcons = [
         { name: 'earth', icon: <IoEarthOutline size={iconSize} /> },
         { name: 'cart', icon: <AiOutlineShoppingCart size={iconSize} /> },
@@ -116,6 +116,7 @@ const Goal = ({ goal, name, icon, deadline, target_amount, initial_target_amount
     };
 
     const iconComponent = getIconComponent(icon);
+
 
     return (
         <div
