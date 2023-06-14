@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { getAllTransactions, addTransaction, deleteTransaction as deleteTransactionAPI, updateMonthlyBalance, getMontlyBalance } from '../../../../services/api';
-import ContentLoader from 'react-content-loader';
 
 import Title from "../../components/Title";
 import MonthSelector from "./MonthSelector";
@@ -140,16 +139,22 @@ const Transactions = () => {
     const handleIncomeClick = (trns) => {
         setTrn(trns);
         setShowCreateModal(true);
+        setShowDropDown(false);
     }
 
     const handleExpenseClick = (trns) => {
         setTrn(trns);
         setShowCreateModal(true);
+        setShowDropDown(false);
     }
 
     const closeCreateModal = (bool) => {
         setShowCreateModal(bool);
         setShowDropDown(false);
+    }
+
+    const toggleState = () => {
+        setShowDropDown((prevState) => !prevState);
     }
 
     return (
@@ -174,25 +179,19 @@ const Transactions = () => {
             <Title title={'Transaction'} />
             <div className="self-start relative">
                 <button
-                    onClick={() => setShowDropDown(true)}
+                    onClick={() => toggleState()}
                     className="h-[35px] md:h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[16px] lg:text-[20px] flex justify-between items-center px-5 z-10">
                     <AiOutlinePlus className="mr-1 2xl:mr-[10px]" size={iconWidth} />
                     New
                 </button>
-                <div
-                    onMouseEnter={() => setShowDropDown(true)}
-                    onMouseLeave={() => setShowDropDown(false)}
-                    className={`${showDropDown ? 'flex flex-col opacity-100' : 'hidden opacity-0'} 
-                absolute top-full 2xl:w-[160px] 2xl:mt-2 bg-white rounded-xl shadow-lg overflow-hidden`}>
-                    <div>
+                {showDropDown && (
+                    <div className="flex flex-col absolute top-full 2xl:w-[160px] 2xl:mt-2 bg-white rounded-xl shadow-lg overflow-hidden">
                         <button
                             onClick={() => handleIncomeClick('income')}
                             className="w-full flex justify-between items-center px-4 py-2 text-left 2xl:text-[22px] font-medium text-black hover:bg-gray-100 focus:outline-none">
                             <BsArrowUpRight className="mr-2 2xl:mr-0" size={iconWidth} color="#2ecc71" />
                             Income
                         </button>
-                    </div>
-                    <div>
                         <button
                             onClick={() => handleExpenseClick('expense')}
                             className="w-full flex justify-between items-center px-4 py-2 text-left 2xl:text-[22px] font-medium text-black hover:bg-gray-100 focus:outline-none">
@@ -200,9 +199,9 @@ const Transactions = () => {
                             Expense
                         </button>
                     </div>
-                </div>
+                )}
             </div>
-            <div className="hidden 2xl:block w-full min-h-[550px] bg-white rounded-[40px] mt-[40px] py-[20px] pt-[35px]">
+            <div className="w-full min-h-[550px] bg-white rounded-[40px] mt-[40px] pb-[20px]">
                 <MonthSelector
                     currentMonth={currentMonth}
                     currentYear={currentYear}

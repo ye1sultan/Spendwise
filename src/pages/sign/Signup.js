@@ -225,7 +225,7 @@ const Signup = () => {
                         Log In
                     </button>
                     <BsDot size={30} />
-                    <button data-route='/term-of-use' className='font-semibold text-[16px] underline' onClick={handleNavigation}>
+                    <button data-route='/terms-of-use' className='font-semibold text-[16px] underline' onClick={handleNavigation}>
                         Terms of Use
                     </button>
                 </div>

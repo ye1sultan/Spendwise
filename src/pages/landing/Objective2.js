@@ -4,7 +4,7 @@ const Objective2 = () => {
             <div className="flex flex-col justify-center items-center w-[370px] 2xl:w-full">
                 <div className="flex flex-col text-start 2xl:text-center mb-[45px] 2xl:mb-[70px]">
                     <div className="text-[40px] 2xl:text-[85px] font-bold 2xl:font-extrabold text-[#381C46] mb-[25px] 2xl:mb-0">
-                        How ... Works?
+                        How Spenwise Works?
                     </div>
                     <div className="text-[15px] 2xl:text-[32px] 2xl:w-[1450px]">
                         Simplify your spending decisions without sacrificing the finer things in life, like fancy coffee drinks with hard-to-pronounce names.

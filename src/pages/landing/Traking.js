@@ -187,7 +187,7 @@ const Traking = () => {
                         </defs>
                     </svg>
                 </div>
-                <div className='block 2xl:hidden'>
+                <div className='block 2xl:hidden self-end'>
                     <Button route='/signup' text='Try Now' width='w-[160px]' height='h-[40px]' bg='bg-[#19AD50CC]' rounded='rounded-[20px]' size='text-[16px]' color='text-white' bold='font-bold' font='font-inter' />
                 </div>
             </div>

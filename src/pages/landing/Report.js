@@ -86,7 +86,7 @@ const Report = () => {
                     <div className="font-amiri text-[24px] 2xl:text-[42px] 2xl:w-[660px] mb-[25px] 2xl:mb-[60px]">
                         Based on expenses and income, we will make you a weekly/monthly report. It shows the progress or regression of finance.
                     </div>
-                    <div>
+                    <div className='self-end 2xl:self-start'>
                         <Button route='/signup' text='Get Report' width='w-[160px] 2xl:w-[290px]' height='h-[40px] 2xl:h-[80px]' bg='bg-[#19AD50CC]' rounded='rounded-[20px]' size='text-[16px] 2xl:text-[32px]' color='text-white' bold='font-bold' font='font-inter' />
                     </div>
                 </div>

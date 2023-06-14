@@ -7,9 +7,13 @@ import { FiBell, FiPieChart, FiSettings } from 'react-icons/fi';
 import { MdSpaceDashboard } from 'react-icons/md';
 import { RiMedal2Fill } from 'react-icons/ri';
 
+import FullLogo from "../assets/FullLogo.png";
+import Logo from "../assets/Logo.png";
+
 const SideBar = () => {
     const navigate = useNavigate();
     const location = useLocation();
+
     const handleExit = () => {
         sessionStorage.removeItem('authToken');
         sessionStorage.removeItem('userData');
@@ -42,8 +46,8 @@ const SideBar = () => {
     return (
         <div className="sticky left-0 top-0 bg-white flex flex-col justify-start xl:justify-between items-center h-screen py-6 xl:py-14 xl:px-[30px] shadow-sm">
             <div className="flex flex-col justify-center items-center xl:items-start mb-16 xl:mb-0">
-                <div className='hidden xl:flex text-3xl text-[#2c3e50] font-semibold z-50 p-2 mb-12'>LOGO</div>
-                <div className='text-3xl xl:hidden text-[#2c3e50] font-semibold z-50 p-2 mb-12'>L</div>
+                <img className='hidden xl:block z-50  mb-12' src={FullLogo} alt="Logo" />
+                <img className='block xl:hidden h-[40px] z-50 mb-6' src={Logo} alt="Logo" />
                 {
                     buttons.map((button, index) => (
                         <Link
@@ -57,7 +61,7 @@ const SideBar = () => {
                     ))
                 }
             </div>
-            <button onClick={handleExit} className="font-semibold text-[15px] text-[#e74c3c] flex justify-start items-center xl:w-[200px]">
+            <button onClick={() => handleExit()} className="font-semibold text-[15px] text-[#e74c3c] flex justify-start items-center xl:w-[200px]">
                 <div className="xl:mr-4">
                     <BiLogOut size={30} />
                 </div>
