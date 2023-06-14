@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import { getAllGoals, addNewGoal as addNewGoalAPI, deleteGoal, updateGoal } from '../../../../services/api';
 
-import Title from "../../components/Title";
-
 import { BsChevronDown } from 'react-icons/bs';
 import { AiOutlineCheckCircle, AiOutlineClockCircle, AiOutlinePlus } from 'react-icons/ai';
+import { MdMotionPhotosPaused } from "react-icons/md";
 
+import Title from "../../components/Title";
 import GoalCreator from "./CreateGoal";
 import Goal from "./Goal";
 import EditModal from "./EditModal";
-import { MdMotionPhotosPaused } from "react-icons/md";
 
 const Goals = () => {
     const [showDropDown, setShowDropDown] = useState(false);
@@ -18,6 +17,8 @@ const Goals = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        const controller = new AbortController();
+
         const fetchData = async () => {
             try {
                 const data = await getAllGoals();
@@ -30,6 +31,10 @@ const Goals = () => {
         };
 
         fetchData();
+
+        return () => {
+            controller.abort();
+        };
     }, []);
 
     const addNewGoal = async (goal) => {
@@ -119,36 +124,6 @@ const Goals = () => {
         setShowEditModal(true);
     }
 
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const [iconSize, setIconSize] = useState(25);
-    const [plusSize, setPlusSize] = useState(40);
-
-    useEffect(() => {
-        function handleResize() {
-            setWindowWidth(window.innerWidth);
-        }
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    useEffect(() => {
-        if (windowWidth >= 1024) {
-            setIconSize(25);
-            setPlusSize(40);
-        } else if (windowWidth >= 768) {
-            setPlusSize(35);
-        } else if (windowWidth >= 640) {
-            setPlusSize(30);
-        } else {
-            setIconSize(20);
-            setPlusSize(30);
-        }
-    }, [windowWidth]);
-
     const NewGoalButton = ({ onClick }) => {
         return (
             <div
@@ -159,7 +134,7 @@ const Goals = () => {
                     bg-white 
                     rounded-[15px] md:rounded-[20px] lg:rounded-[30px] 
                     flex flex-col justify-center items-center cursor-pointer shadow-md" onClick={onClick}>
-                <AiOutlinePlus size={plusSize} />
+                <AiOutlinePlus className="text-[30px] md:text-[35px] lg:text-[40px]" />
                 <div className="text-2xl lg:text-3xl xl:text-[40px] font-medium">New goal</div>
             </div>
         );
@@ -169,13 +144,13 @@ const Goals = () => {
         return (
             <div className="absolute top-full mt-2 bg-white rounded-xl shadow-md overflow-hidden">
                 <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[16px] lg:text-[20px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('active')}>
-                    <AiOutlineClockCircle size={iconSize} className="mr-2" /> Active Goals
+                    <AiOutlineClockCircle className="mr-2 text-[20px] lg:text-[25px]" /> Active Goals
                 </button>
                 <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[16px] lg:text-[20px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('paused')}>
-                    <MdMotionPhotosPaused size={iconSize} className="mr-2" /> Paused Goals
+                    <MdMotionPhotosPaused className="mr-2 text-[20px] lg:text-[25px]" /> Paused Goals
                 </button>
                 <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[16px] lg:text-[20px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('reached')}>
-                    <AiOutlineCheckCircle size={iconSize} className="mr-2" /> Reached Goals
+                    <AiOutlineCheckCircle className="mr-2 text-[20px] lg:text-[25px]" /> Reached Goals
                 </button>
             </div>
         );

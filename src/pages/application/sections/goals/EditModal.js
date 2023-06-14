@@ -13,66 +13,38 @@ import { RiBookLine, RiMedal2Fill } from 'react-icons/ri';
 import { useState } from 'react';
 import { format } from "date-fns";
 import { TbCurrencyTenge, TbIcons } from "react-icons/tb";
-import { useEffect } from "react";
 
 const EditModal = ({ goal, onSave, onCancel }) => {
-    const [iconSize, setIconSize] = useState(35);
-    const [inputIconSize, setInputIconSize] = useState(30);
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    useEffect(() => {
-        function handleResize() {
-            setWindowWidth(window.innerWidth);
-        }
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    useEffect(() => {
-        if (windowWidth >= 1024) {
-            setIconSize(35);
-            setInputIconSize(30);
-        } else if (windowWidth >= 768) {
-            setIconSize(30);
-        } else {
-            setInputIconSize(20);
-            setIconSize(25);
-        }
-    }, [windowWidth]);
-
     const allIcons = [
-        { name: 'earth', icon: <IoEarthOutline size={iconSize} /> },
-        { name: 'cart', icon: <AiOutlineShoppingCart size={iconSize} /> },
-        { name: 'coin', icon: <BsCoin size={iconSize} /> },
-        { name: 'gift', icon: <AiOutlineGift size={iconSize} /> },
-        { name: 'rest', icon: <FaPray size={iconSize} /> },
-        { name: 'pic', icon: <MdOutlineBrokenImage size={iconSize} /> },
-        { name: 'bag', icon: <IoBagHandle size={iconSize} /> },
-        { name: 'set', icon: <FaTools size={iconSize} /> },
-        { name: 'car', icon: <AiOutlineCar size={iconSize} /> },
-        { name: 'tea', icon: <FaMugHot size={iconSize} /> },
-        { name: 'plane', icon: <BsFillAirplaneFill size={iconSize} /> },
-        { name: 'saturn', icon: <BiPlanet size={iconSize} /> },
-        { name: 'laptop', icon: <BsLaptop size={iconSize} /> },
-        { name: 'micro', icon: <FaMicrophone size={iconSize} /> },
-        { name: 'buggy', icon: <MdStroller size={iconSize} /> },
-        { name: 'medal', icon: <RiMedal2Fill size={iconSize} /> },
-        { name: 'bike', icon: <MdPedalBike size={iconSize} /> },
-        { name: 'contr', icon: <IoGameControllerOutline size={iconSize} /> },
-        { name: 'wine', icon: <BiWine size={iconSize} /> },
-        { name: 'heart', icon: <AiOutlineHeart size={iconSize} /> },
-        { name: 'truck', icon: <BsTruck size={iconSize} /> },
-        { name: 'book', icon: <RiBookLine size={iconSize} /> },
-        { name: 'home', icon: <BsHouse size={iconSize} /> },
-        { name: 'champ', icon: <AiOutlineTrophy size={iconSize} /> },
-        { name: 'weight', icon: <BiDumbbell size={iconSize} /> },
-        { name: 'pig', icon: <BsPiggyBank size={iconSize} /> },
-        { name: 'lang', icon: <IoLanguage size={iconSize} /> },
-        { name: 'peace', icon: <FaRegHandPeace size={iconSize} /> },
-        { name: 'done', icon: <IoCheckmarkDone size={iconSize} /> },
+        { name: 'earth', icon: <IoEarthOutline className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'cart', icon: <AiOutlineShoppingCart className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'coin', icon: <BsCoin className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'gift', icon: <AiOutlineGift className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'rest', icon: <FaPray className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'pic', icon: <MdOutlineBrokenImage className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'bag', icon: <IoBagHandle className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'set', icon: <FaTools className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'car', icon: <AiOutlineCar className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'tea', icon: <FaMugHot className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'plane', icon: <BsFillAirplaneFill className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'saturn', icon: <BiPlanet className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'laptop', icon: <BsLaptop className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'micro', icon: <FaMicrophone className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'buggy', icon: <MdStroller className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'medal', icon: <RiMedal2Fill className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'bike', icon: <MdPedalBike className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'contr', icon: <IoGameControllerOutline className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'wine', icon: <BiWine className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'heart', icon: <AiOutlineHeart className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'truck', icon: <BsTruck className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'book', icon: <RiBookLine className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'home', icon: <BsHouse className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'champ', icon: <AiOutlineTrophy className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'weight', icon: <BiDumbbell className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'pig', icon: <BsPiggyBank className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'lang', icon: <IoLanguage className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'peace', icon: <FaRegHandPeace className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
+        { name: 'done', icon: <IoCheckmarkDone className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
     ];
 
     const allColors = [
@@ -113,7 +85,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
 
         return (
             <div className="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-full bg-[#D9D9D9] bg-opacity-50 flex justify-center items-center mr-2">
-                {icon ? icon.icon : <AiOutlineCar size={iconSize} />}
+                {icon ? icon.icon : <AiOutlineCar className="text-[25px] md:text-[30px] lg:text-[35px]" />}
             </div>
         );
     };
@@ -134,7 +106,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
 
         return (
             <div
-                className="w-[40px] h-[40px] md:w-[50px] md:h-[50px] flex justify-start items-center rounded-full cursor-pointer mr-2"
+                className="w-[40px] h-[40px] md:w-[45px] md:h-[45px] flex justify-start items-center rounded-full cursor-pointer mr-2"
                 style={{ backgroundColor: color ? color.name : goal.color }}></div>
         );
     };
@@ -225,7 +197,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                     <div className="text-lg lg:text-xl xl:text-[28px] 2xl:text-[32px] font-medium">
                         Edit Goal
                     </div>
-                    <IoCloseOutline className='cursor-pointer' size={iconSize} onClick={onCancel} />
+                    <IoCloseOutline className='cursor-pointer text-[25px] md:text-[30px] lg:text-[35px]' onClick={onCancel} />
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[10px]">
                     <input
@@ -235,7 +207,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                         value={editedGoal.name}
                         onChange={handleChange}
                     />
-                    <BsCheckSquare className="absolute top-[50%] translate-y-[-50%] left-0" size={inputIconSize} color="#696969" />
+                    <BsCheckSquare className="absolute top-[50%] translate-y-[-50%] left-0 text-[20px] lg:text-[30px]" color="#696969" />
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[10px]">
                     <input
@@ -245,7 +217,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                         value={parseInt(editedGoal.initial_target_amount)}
                         onChange={handleChange}
                     />
-                    <TbCurrencyTenge className="absolute top-[50%] translate-y-[-50%] left-0" size={inputIconSize} color="#696969" />
+                    <TbCurrencyTenge className="absolute top-[50%] translate-y-[-50%] left-0 text-[20px] lg:text-[30px]" color="#696969" />
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[10px]">
                     <input
@@ -255,7 +227,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                         value={parseInt(editedGoal.target_amount)}
                         onChange={handleChange}
                     />
-                    <TbCurrencyTenge className="absolute top-[50%] translate-y-[-50%] left-0" size={inputIconSize} color="#696969" />
+                    <TbCurrencyTenge className="absolute top-[50%] translate-y-[-50%] left-0 text-[20px] lg:text-[30px]" color="#696969" />
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[20px]">
                     <input
@@ -266,13 +238,13 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                         value={formatDate(editedGoal.deadline)}
                         onChange={handleChange}
                     />
-                    <AiOutlineCalendar className="absolute top-[50%] translate-y-[-50%] left-0" size={inputIconSize} color="#696969" />
+                    <AiOutlineCalendar className="absolute top-[50%] translate-y-[-50%] left-0 text-[20px] lg:text-[30px]" color="#696969" />
                 </div>
                 <div className="relative w-full flex justify-between items-center h-[50px] mb-[30px]">
                     <div
                         onClick={() => showAllIcons()}
                         className="flex justify-start items-center">
-                        <TbIcons size={inputIconSize} color="#696969" />
+                        <TbIcons className="text-[20px] lg:text-[30px]" color="#696969" />
                         <div className="flex justify-start items-center w-full h-[50px] text-[18px] cursor-pointer pl-[20px]">
                             {getIcon(editedGoal.icon)}
                             <BsChevronDown size={20} />
@@ -288,7 +260,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                     <div
                         onClick={() => showAllColors()}
                         className="flex justify-start items-center">
-                        <BiColorFill size={inputIconSize} color="#696969" />
+                        <BiColorFill className="text-[20px] lg:text-[30px]" color="#696969" />
                         <div className="flex justify-start items-center w-full h-[50px] text-[18px] cursor-pointer pl-[20px]">
                             {getColor(editedGoal.color)}
                             <BsChevronDown size={20} />
