@@ -13,7 +13,7 @@ import { FaPray } from 'react-icons/fa';
 import { TbCoin, TbHealthRecognition, TbCurrencyTenge } from 'react-icons/tb';
 import { format } from "date-fns";
 
-const EditModal = ({ transaction, onSave, onCancel }) => {
+const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
     const expenseCategories = [
         { name: "Clothing", icon: <AiOutlineShop className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#D942A6" },
         { name: "Health", icon: <TbHealthRecognition className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#19AD50" },
@@ -128,6 +128,11 @@ const EditModal = ({ transaction, onSave, onCancel }) => {
         setEditedTransaction({ ...editedTransaction, [name]: value });
     }
 
+    const handleDelete = () => {
+        onDelete(transaction.id);
+        onCancel();
+    }
+
     const handleSave = async () => {
         try {
             const updatedTransaction = await updateTransaction(editedTransaction.id, removeKeys(editedTransaction, ['created_at', 'updated_at', 'id']));
@@ -238,7 +243,10 @@ const EditModal = ({ transaction, onSave, onCancel }) => {
                         <AiOutlineTag className="text-[25px] 2xl:text-[30px] absolute top-[50%] translate-y-[-50%] left-0" color="#696969" />
                     </div>
 
-                    <div className='w-full flex justify-end'>
+                    <div className='w-full flex justify-between'>
+                        <button className="uppercase text-red-500 text-[14px] lg:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] rounded-[20px] 2xl:rounded-[40px]" onClick={() => handleDelete()}>
+                            delete
+                        </button>
                         <button className='uppercase text-black text-[14px] lg:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]' onClick={() => handleSave()}>
                             save
                         </button>

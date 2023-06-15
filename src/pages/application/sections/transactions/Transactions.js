@@ -89,7 +89,7 @@ const Transactions = () => {
 
     const [transactionOnEdit, setTransactionOnEdit] = useState(null);
 
-    const editTransaction = (transaction) => {
+    const editTransaction = (transaction, id) => {
         setTransactionOnEdit(transaction);
         setShowEditModal(true);
     }

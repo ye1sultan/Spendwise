@@ -72,7 +72,7 @@ const Transaction = ({ transaction, transactionDate, isLast, deleteTransaction, 
                 <div className="hidden sm:block w-1/6 text-center">{payment_method}</div>
                 <div className={`w-1/4 sm:w-1/6 text-center ${transaction_type === "income" ? "text-green-500" : "text-red-500"}`}>{amount} ₸</div>
                 <div className="flex sm:space-x-4 w-1/4 sm:w-1/6 justify-center">
-                    <button onClick={() => editTransaction(transaction)}>
+                    <button onClick={() => editTransaction(transaction, transaction.id)}>
                         <BiPencil className='hidden sm:block text-[20px] lg:text-[30px]' color="#443A3A" />
                         <BsChevronRight className='block sm:hidden text-[15px]' color="#443A3A" />
                     </button>
