@@ -188,8 +188,6 @@ const EditModal = ({ goal, onSave, onCancel }) => {
         setIconsDropDown(false);
     }
 
-    let inputStyle = 'w-full h-full text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] border-b-[1px] border-b-[#696969]';
-
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 flex items-start justify-center m-6 h-full z-20">
             <div className='bg-white shadow-md rounded-[30px] xl:rounded-[40px] mx-4 w-full max-w-[350px] xl:max-w-[400px] min-w-[280px] p-6 xl:p-8'>
@@ -199,9 +197,9 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                     </div>
                     <IoCloseOutline className='cursor-pointer text-[25px] md:text-[30px] lg:text-[35px]' onClick={onCancel} />
                 </div>
-                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px]">
+                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className={inputStyle}
+                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px]"
                         type="text"
                         name="name"
                         value={editedGoal.name}
@@ -209,9 +207,9 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                     />
                     <BsCheckSquare className="absolute top-[50%] translate-y-[-50%] left-0 text-[20px] lg:text-[30px]" color="#696969" />
                 </div>
-                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px]">
+                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className={inputStyle}
+                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px]"
                         type="number"
                         name="initial_target_amount"
                         value={parseInt(editedGoal.initial_target_amount)}
@@ -219,9 +217,9 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                     />
                     <TbCurrencyTenge className="absolute top-[50%] translate-y-[-50%] left-0 text-[20px] lg:text-[30px]" color="#696969" />
                 </div>
-                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px]">
+                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className={inputStyle}
+                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px]"
                         type="number"
                         name="target_amount"
                         value={parseInt(editedGoal.target_amount)}
@@ -229,9 +227,9 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                     />
                     <TbCurrencyTenge className="absolute top-[50%] translate-y-[-50%] left-0 text-[20px] lg:text-[30px]" color="#696969" />
                 </div>
-                <div className="relative w-full h-[40px] md:h-[50px] mb-[20px]">
+                <div className="relative w-full h-[40px] md:h-[50px] mb-[20px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full min-w-[200px] h-full text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] border-b-[1px] border-b-[#696969]"
+                        className="w-full min-w-[95%] h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px]"
                         type="date"
                         name="deadline"
                         min={format(new Date(), 'yyyy-MM-dd')}

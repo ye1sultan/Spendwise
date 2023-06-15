@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { addDays, format, parseISO } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { AiOutlineCalendar, AiOutlineCar, AiOutlineCreditCard, AiOutlineHeart, AiOutlineHome, AiOutlineShop, AiOutlineShoppingCart, AiOutlineTag } from 'react-icons/ai';
 import { BiBookAlt, BiChevronDown, BiFileBlank } from 'react-icons/bi';
 import { BsAirplaneEngines, BsLaptop, BsThreeDots } from 'react-icons/bs';
@@ -12,11 +12,6 @@ import { FaPray } from 'react-icons/fa';
 import { TbCoin, TbCurrencyTenge, TbHealthRecognition } from 'react-icons/tb';
 
 const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => {
-    const iconWidth = window.innerWidth < 1536 ? 15 : 25;
-    const iconMWidth = window.innerWidth < 1536 ? 25 : 30;
-
-    const [activeButton, setActiveButton] = useState('');
-
     const [selectedAmount, setSelectedAmount] = useState(0);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedDescription, setSelectedDescription] = useState('')
@@ -27,47 +22,33 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
     const [paymentDropDown, setPaymentDropDown] = useState(false);
 
     const expenseCategories = [
-        { name: "Clothing", icon: <AiOutlineShop size={iconWidth} color="#ffffff" />, color: "#D942A6" },
-        { name: "Health", icon: <TbHealthRecognition size={iconWidth} color="#ffffff" />, color: "#19AD50" },
-        { name: "Beauty", icon: <AiOutlineHeart size={iconWidth} color="#ffffff" />, color: "#75C5D6" },
-        { name: "Home", icon: <AiOutlineHome size={iconWidth} color="#ffffff" />, color: "#9CC741" },
-        { name: "Supermarket", icon: <AiOutlineShoppingCart size={iconWidth} color="#ffffff" />, color: "#E1B136" },
-        { name: "Education", icon: <BiBookAlt size={iconWidth} color="#ffffff" />, color: "#DB2647" },
-        { name: "Restaurant", icon: <RiRestaurant2Line size={iconWidth} color="#ffffff" />, color: "#EB9499" },
-        { name: "Transport", icon: <AiOutlineCar size={iconWidth} color="#ffffff" />, color: "#8DE7AE" },
-        { name: "Travel", icon: <BsAirplaneEngines size={iconWidth} color="#ffffff" />, color: "#F67730" },
-        { name: "Services", icon: <MdOutlineMiscellaneousServices size={iconWidth} color="#ffffff" />, color: "#A17BD0" },
-        { name: "Electronics", icon: <BsLaptop size={iconWidth} color="#ffffff" />, color: "#3391D0" },
-        { name: "Recreation", icon: <FaPray size={iconWidth} color="#ffffff" />, color: "#8D66E2" },
-        { name: "Others", icon: <BsThreeDots size={iconWidth} color="#ffffff" />, color: "#AEAEAE" },
+        { name: "Clothing", icon: <AiOutlineShop className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#D942A6" },
+        { name: "Health", icon: <TbHealthRecognition className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#19AD50" },
+        { name: "Beauty", icon: <AiOutlineHeart className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#75C5D6" },
+        { name: "Home", icon: <AiOutlineHome className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#9CC741" },
+        { name: "Supermarket", icon: <AiOutlineShoppingCart className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#E1B136" },
+        { name: "Education", icon: <BiBookAlt className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#DB2647" },
+        { name: "Restaurant", icon: <RiRestaurant2Line className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#EB9499" },
+        { name: "Transport", icon: <AiOutlineCar className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#8DE7AE" },
+        { name: "Travel", icon: <BsAirplaneEngines className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#F67730" },
+        { name: "Services", icon: <MdOutlineMiscellaneousServices className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#A17BD0" },
+        { name: "Electronics", icon: <BsLaptop className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#3391D0" },
+        { name: "Recreation", icon: <FaPray className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#8D66E2" },
+        { name: "Others", icon: <BsThreeDots className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#AEAEAE" },
     ];
 
     const incomeCategories = [
-        { name: "Salary", icon: <IoWalletSharp size={iconWidth} color="#ffffff" />, color: "#6681DF" },
-        { name: "Gift", icon: <AiOutlineGift size={iconWidth} color="#ffffff" />, color: "#B6415D" },
-        { name: "Investment", icon: <AiOutlineStar size={iconWidth} color="#ffffff" />, color: "#2DB252" },
-        { name: "Rewards", icon: <BsCoin size={iconWidth} color="#ffffff" />, color: "#EDBC3E" },
-        { name: "Other", icon: <BsThreeDots size={iconWidth} color="#ffffff" />, color: "#AEAEAE" },
+        { name: "Salary", icon: <IoWalletSharp className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#6681DF" },
+        { name: "Gift", icon: <AiOutlineGift className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#B6415D" },
+        { name: "Investment", icon: <AiOutlineStar className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#2DB252" },
+        { name: "Rewards", icon: <BsCoin className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#EDBC3E" },
+        { name: "Other", icon: <BsThreeDots className="text-[15px] 2xl:text-[25px]" color="#ffffff" />, color: "#AEAEAE" },
     ];
 
     const paymentMethods = [
-        { name: "Cash", icon: <TbCoin size={iconWidth} /> },
-        { name: "Debit Card", icon: <AiOutlineCreditCard size={iconWidth} /> },
+        { name: "Cash", icon: <TbCoin className="text-[15px] 2xl:text-[25px]" /> },
+        { name: "Debit Card", icon: <AiOutlineCreditCard className="text-[15px] 2xl:text-[25px]" /> },
     ];
-
-    const handleClick = (type) => {
-        if (type === 'today') {
-            setSelectedDate(new Date());
-            setActiveButton('today');
-        } else if (type === 'yesterday') {
-            const yesterday = addDays(new Date(), -1);
-
-            setSelectedDate(yesterday);
-            setActiveButton('yesterday');
-        } else {
-            setActiveButton('other');
-        }
-    };
 
     const handleDateChange = (date) => {
         if (isNaN(date.getTime())) {
@@ -75,7 +56,6 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
         }
 
         setSelectedDate(date);
-        setActiveButton('other');
     };
 
     let categories = transaction === 'income' ? incomeCategories : expenseCategories;
@@ -95,13 +75,15 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
         return (
             selectedCategory ? (
                 <div className='flex flex-row justify-center items-center w-full h-full'>
-                    <div className="w-[25px] h-[25px] 2xl:w-[35px] 2xl:h-[35px] rounded-full flex justify-center items-center mr-2 2xl:mr-4" style={{ backgroundColor: selectedCategory.color }}>
+                    <div className="w-[25px] h-[25px] 2xl:w-[40px] 2xl:h-[40px] rounded-full flex justify-center items-center mr-2 2xl:mr-4" style={{ backgroundColor: selectedCategory.color }}>
                         {selectedCategory.icon}
                     </div>
-                    {selectedCategory.name}
+                    <div className='flex items-center text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal'>
+                        {selectedCategory.name}
+                    </div>
                 </div>
             ) : (
-                <span className="text-[#828282]">Category</span>
+                <span className="flex items-center text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal">Category</span>
             )
         );
     }
@@ -115,7 +97,7 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
                 <div className="w-[25px] h-[25px] 2xl:w-[40px] 2xl:h-[40px] rounded-full flex justify-center items-center mr-2 2xl:mr-4" style={{ backgroundColor: category.color }}>
                     {category.icon}
                 </div>
-                <div>
+                <div className='flex items-center text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal'>
                     {category.name}
                 </div>
             </button>
@@ -126,13 +108,15 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
         return (
             selectedPaymentMethod ? (
                 <div className='flex flex-row justify-center items-center w-full h-full'>
-                    <div className="w-[25px] h-[25px] 2xl:w-[35px] 2xl:h-[35px] rounded-full flex justify-center items-center mr-2 2xl:mr-4">
+                    <div className="w-[25px] h-[25px] 2xl:w-[40px] 2xl:h-[40px] rounded-full flex justify-center items-center mr-2 2xl:mr-4">
                         {selectedPaymentMethod.icon}
                     </div>
-                    {selectedPaymentMethod.name}
+                    <div className='flex items-center text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal'>
+                        {selectedPaymentMethod.name}
+                    </div>
                 </div>
             ) : (
-                <span className="text-[#828282]">Payment Method</span>
+                <span className="flex items-center text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal">Payment Method</span>
             )
         );
     }
@@ -146,7 +130,7 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
                 <div className="w-[25px] h-[25px] 2xl:w-[40px] 2xl:h-[40px] rounded-full flex justify-center items-center mr-2 2xl:mr-4">
                     {method.icon}
                 </div>
-                <div>
+                <div className='flex items-center text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal'>
                     {method.name}
                 </div>
             </button>
@@ -174,86 +158,97 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
         }
     }
 
-    let inputStyle = 'w-full h-full text-[24px] font-normal pl-[40px] border-b-[1px] border-[#696969]';
+    const showAllCategories = () => {
+        if (!categoriesDropDown) {
+            setCategoriesDropDown(true);
+        } else {
+            setCategoriesDropDown(false);
+        }
+
+        setPaymentDropDown(false);
+    }
+
+    const showAllPaymentMethod = () => {
+        if (!paymentDropDown) {
+            setPaymentDropDown(true);
+        } else {
+            setPaymentDropDown(false);
+        }
+
+        setCategoriesDropDown(false);
+    }
 
     return (
-        <div className="fixed top-[5%] left-[50%] translate-x-[-50%] z-20 bg-white py-[20px] px-[30px] flex flex-col justify-center shadow-md rounded-[40px]">
-            <div className="w-full flex justify-between items-center mb-[10px]">
-                <div className="text-[32px] font-medium">
-                    New <span style={{ color: color }}>{transaction === 'income' ? 'Income' : 'Expense'}</span>
-                </div>
-                <IoCloseOutline className='cursor-pointer' size={35} onClick={() => onModalClose(false)} />
-            </div>
-            <div className="relative w-full h-[50px] mb-[10px]">
-                <div className='absolute top-[50%] translate-y-[-50%] left-0'>
-                    <TbCurrencyTenge size={iconMWidth} />
-                </div>
-                <input
-                    className={inputStyle}
-                    style={{
-                        color: color,
-                        borderColor: color
-                    }}
-                    type="number"
-                    placeholder="0.00 ₸"
-                    onChange={(e) => setSelectedAmount(e.target.value)}
-                />
-            </div>
-            <div className="relative w-full h-[50px] mb-[10px]">
-                <div className='absolute top-[50%] translate-y-[-50%] left-0'>
-                    <AiOutlineCalendar size={iconMWidth} />
-                </div>
-                <input className={inputStyle} type="date" max={format(new Date(), 'yyyy-MM-dd')} onChange={(e) => handleDateChange(parseISO(e.target.value))} />
-            </div>
-            <div className="relative w-full h-[50px] mb-[10px]">
-                <div className='absolute top-[50%] translate-y-[-50%] left-0'>
-                    <BiFileBlank size={iconMWidth} />
-                </div>
-                <input
-                    className={inputStyle}
-                    type="text"
-                    placeholder="Description"
-                    value={selectedDescription}
-                    onChange={(e) => setSelectedDescription(e.target.value)}
-                />
-            </div>
-            <div
-                onMouseEnter={() => setCategoriesDropDown(true)}
-                onMouseLeave={() => setCategoriesDropDown(false)}
-                className="relative w-full h-[50px] mb-[10px]">
-                <div className='absolute top-[50%] translate-y-[-50%] left-0'>
-                    <AiOutlineTag size={iconMWidth} />
-                </div>
-                <div className={`${inputStyle} flex justify-between items-center relative`}>
-                    <div className="cursor-pointer">
-                        {getCategory()}
+        <div className="fixed top-0 left-0 right-0 bottom-0 flex items-start justify-center m-6 h-full z-20">
+            <div className='bg-white shadow-md rounded-[30px] xl:rounded-[40px] mx-4 w-full max-w-[350px] xl:max-w-[400px] min-w-[280px] p-6 xl:p-8'>
+                <div className='w-full flex justify-between items-center mb-[10px]'>
+                    <div className="text-lg lg:text-xl xl:text-[28px] 2xl:text-[32px] font-medium">
+                        New <span style={{ color: color }}>{transaction === 'income' ? 'Income' : 'Expense'}</span>
                     </div>
-                    <BiChevronDown className={`cursor-pointer ${categoriesDropDown ? 'rotate-180' : 'rotate-0'}`} size={iconMWidth} />
-                    <div className={`${categoriesDropDown ? 'flex' : 'hidden'} flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[10px] border-[1px] border-black rounded-[20px] 2xl:rounded-[25px] shadow z-10`}>
-                        {getCategories()}
+                    <IoCloseOutline className='cursor-pointer text-[25px] md:text-[30px] lg:text-[35px]' onClick={() => onModalClose(false)} />
+                </div>
+                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
+                    <input
+                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A]"
+                        style={{ color: color, borderColor: color }}
+                        type="number"
+                        placeholder="0.00 ₸"
+                        onChange={(e) => setSelectedAmount(e.target.value)}
+                    />
+                    <TbCurrencyTenge className="text-[25px] 2xl:text-[30px] absolute top-[50%] translate-y-[-50%] left-0" color="#696969" />
+                </div>
+                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
+                    <input
+                        className="w-full min-w-[95%] h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A]"
+                        type="date"
+                        max={format(new Date(), 'yyyy-MM-dd')}
+                        onChange={(e) => handleDateChange(parseISO(e.target.value))} />
+                    <AiOutlineCalendar className="text-[25px] 2xl:text-[30px] absolute top-[50%] translate-y-[-50%] left-0" color="#696969" />
+                </div>
+                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
+                    <input
+                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A]"
+                        type="text"
+                        placeholder="Description"
+                        value={selectedDescription}
+                        onChange={(e) => setSelectedDescription(e.target.value)}
+                    />
+                    <BiFileBlank className="text-[25px] 2xl:text-[30px] absolute top-[50%] translate-y-[-50%] left-0" color="#696969" />
+                </div>
+
+                <div onClick={() => showAllCategories()} className="relative w-full h-[40px] md:h-[50px] mb-[10px]">
+                    <div className="w-full h-full text-[24px] font-normal pl-[40px] border-b-[1px] border-[#696969] flex justify-between items-center relative">
+                        <div className="cursor-pointer">
+                            {getCategory()}
+                        </div>
+                        <BiChevronDown className={`cursor-pointer ${categoriesDropDown ? 'rotate-180' : 'rotate-0'} text-[25px] 2xl:text-[30px]`} />
+                        {categoriesDropDown && (
+                            <div className="flex flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[10px] rounded-[20px] 2xl:rounded-[25px] shadow-lg z-10">
+                                {getCategories()}
+                            </div>)}
                     </div>
+                    <AiOutlineTag className="text-[25px] 2xl:text-[30px] absolute top-[50%] translate-y-[-50%] left-0" color="#696969" />
+                </div>
+
+                <div onClick={() => showAllPaymentMethod()} className="relative w-full h-[40px] md:h-[50px] mb-[10px]">
+                    <div className="w-full h-full text-[24px] font-normal pl-[40px] flex justify-between items-center relative">
+                        <div className="cursor-pointer">
+                            {getPaymentMethod()}
+                        </div>
+                        <BiChevronDown className={`cursor-pointer ${paymentDropDown ? 'rotate-180' : 'rotate-0'} text-[25px] 2xl:text-[30px]`} />
+                        {paymentDropDown && (
+                            <div className="flex flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[10px] rounded-[20px] 2xl:rounded-[25px] shadow-lg z-10">
+                                {getPaymentMethods()}
+                            </div>)}
+                    </div>
+                    <AiOutlineTag className="text-[25px] 2xl:text-[30px] absolute top-[50%] translate-y-[-50%] left-0" color="#696969" />
+                </div>
+                <div className='w-full flex justify-end'>
+                    <button className='uppercase text-black text-[14px] lg:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]' onClick={() => handleSave()}>
+                        save
+                    </button>
                 </div>
             </div>
-            <div
-                onMouseEnter={() => setPaymentDropDown(true)}
-                onMouseLeave={() => setPaymentDropDown(false)}
-                className="relative w-full h-[50px] mb-[30px]">
-                <div className='absolute top-[50%] translate-y-[-50%] left-0'>
-                    <AiOutlineTag size={iconMWidth} />
-                </div>
-                <div className={`${inputStyle} flex justify-between items-center relative`}>
-                    <div className="cursor-pointer">
-                        {getPaymentMethod()}
-                    </div>
-                    <BiChevronDown className={`cursor-pointer ${paymentDropDown ? 'rotate-180' : 'rotate-0'}`} size={iconMWidth} />
-                    <div className={`${paymentDropDown ? 'flex' : 'hidden'} flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[10px] border-[1px] border-black rounded-[20px] 2xl:rounded-[25px] shadow z-10`}>
-                        {getPaymentMethods()}
-                    </div>
-                </div>
-            </div>
-            <button onClick={handleSave} className='uppercase text-black text-[14px] 2xl:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]'>
-                save
-            </button>
         </div>
     );
 }

@@ -31,12 +31,12 @@ const SideBar = () => {
     }, [location.pathname]);
 
     const buttons = [
-        { view: 'dashboard', label: 'Dashboard', icon: <MdSpaceDashboard className="xl:mr-6" size={35} /> },
-        { view: 'transactions', label: 'Transactions', icon: <AiOutlineUnorderedList className="xl:mr-6" size={35} /> },
-        { view: 'goals', label: 'Goals', icon: <RiMedal2Fill className="xl:mr-6" size={35} /> },
-        { view: 'report', label: 'Report', icon: <FiPieChart className="xl:mr-7" size={30} /> },
-        { view: 'notifications', label: 'Notifications', icon: <FiBell className="xl:mr-7" size={30} /> },
-        { view: 'settings', label: 'Settings', icon: <FiSettings className="xl:mr-7" size={30} /> },
+        { view: 'dashboard', label: 'Dashboard', icon: <MdSpaceDashboard className="text-[25px] md:text-[35px] xl:mr-6" /> },
+        { view: 'transactions', label: 'Transactions', icon: <AiOutlineUnorderedList className="text-[25px] md:text-[35px] xl:mr-6" /> },
+        { view: 'goals', label: 'Goals', icon: <RiMedal2Fill className="text-[25px] md:text-[35px] xl:mr-6" /> },
+        { view: 'report', label: 'Report', icon: <FiPieChart className="text-[25px] md:text-[30px] xl:mr-7" /> },
+        { view: 'notifications', label: 'Notifications', icon: <FiBell className="text-[25px] md:text-[30px] xl:mr-7" /> },
+        { view: 'settings', label: 'Settings', icon: <FiSettings className="text-[25px] md:text-[30px] xl:mr-7" /> },
     ];
 
     const handleButtonClick = (view) => {

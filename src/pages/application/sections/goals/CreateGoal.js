@@ -143,7 +143,7 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
         return allColors.map((color, index) => (
             <div
                 key={index}
-                className='m-2 w-[40px] h-[40px] rounded-full cursor-pointer hover:scale-110'
+                className='w-[30px] h-[30px] md:w-[40px] md:h-[40px] rounded-full cursor-pointer m-2 hover:scale-110'
                 onClick={() => handleColorClick(color.name)}
                 style={{ backgroundColor: color.name }}>
             </div>
@@ -183,11 +183,6 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
         setColorsDropDown(false);
     }
 
-    const [nameInput, setNameInput] = useState("#696969");
-    const [amountInput, setAmountInput] = useState("#696969");
-    const [dateInput, setDateInput] = useState("#696969");
-    const [totalInput, setTotalInput] = useState("#696969");
-
     const saveGoal = () => {
         if (selectedName && formatDate(selectedDeadline) && selectedTotalAmount && (parseInt(selectedAmount) < parseInt(selectedTotalAmount)) && selectedColor && selectedIcon) {
             let status = selectedAmount === selectedTotalAmount ? 'reached' : 'active';
@@ -205,31 +200,6 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
 
             addNewGoal(newGoal);
             onModalClose(false);
-
-        } else {
-            if (!selectedAmount || !selectedDeadline || !selectedName || !selectedTotalAmount) {
-                if (!selectedName) {
-                    setNameInput("#EA1A1A")
-                    setTimeout(() => setNameInput("#696969"), 2000);
-                }
-                if (!selectedAmount) {
-                    setAmountInput("#EA1A1A")
-                    setTimeout(() => setAmountInput("#696969"), 2000);
-                }
-                if (!selectedDeadline) {
-                    setDateInput("#EA1A1A")
-                    setTimeout(() => setDateInput("#696969"), 2000);
-                }
-                if (!selectedTotalAmount) {
-                    setTotalInput("#EA1A1A")
-                    setTimeout(() => setTotalInput("#696969"), 2000);
-                }
-            } else if (selectedTotalAmount <= selectedAmount) {
-                setTotalInput("#EA1A1A")
-                setTimeout(() => setTotalInput("#696969"), 2000);
-                setAmountInput("#EA1A1A")
-                setTimeout(() => setAmountInput("#696969"), 2000);
-            }
         }
     }
 
@@ -242,47 +212,43 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
                     </div>
                     <IoCloseOutline className='cursor-pointer text-[25px] md:text-[30px] lg:text-[35px]' onClick={() => onModalClose(false)} />
                 </div>
-                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px]">
+                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full h-full text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px]"
+                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A]"
                         type="text"
                         placeholder="Goal name"
-                        onChange={e => setSelectedName(e.target.value)}
-                        style={{ borderBottom: `1px solid ${nameInput}` }} />
+                        onChange={e => setSelectedName(e.target.value)} />
                     <BsCheckSquare className='absolute top-[50%] translate-y-[-50%] left-0 text-[20px] lg:text-[30px]' color="#696969" />
                 </div>
-                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px]">
+                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full h-full text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px]"
+                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A]"
                         type="number"
                         placeholder="Your current balance"
-                        onChange={e => setSelectedAmount(e.target.value)}
-                        style={{ borderBottom: `1px solid ${amountInput}` }} />
+                        onChange={e => setSelectedAmount(e.target.value)} />
                     <TbCurrencyTenge className='absolute top-[50%] translate-y-[-50%] left-0 text-[20px] lg:text-[30px]' color="#696969" />
                 </div>
-                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px]">
+                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full h-full text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px]"
+                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A]"
                         type="number"
                         placeholder="Goal value"
-                        onChange={e => setSelectedTotalAmount(e.target.value)}
-                        style={{ borderBottom: `1px solid ${totalInput}` }} />
+                        onChange={e => setSelectedTotalAmount(e.target.value)} />
                     <TbCurrencyTenge className='absolute top-[50%] translate-y-[-50%] left-0 text-[20px] lg:text-[30px]' color="#696969" />
                 </div>
-                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px]">
+                <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full min-w-[200px] h-full text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px]"
+                        className="w-full min-w-[95%] h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A]"
                         type="date"
                         min={format(new Date(), 'yyyy-MM-dd')}
                         placeholder="Deadline"
-                        onChange={e => setSelectedDeadline(e.target.value)}
-                        style={{ borderBottom: `1px solid ${dateInput}` }} />
-                    <AiOutlineCalendar className='absolute top-[50%] translate-y-[-50%] left-0 text-[20px] lg:text-[30px]' color="#696969" />
+                        onChange={e => setSelectedDeadline(e.target.value)} />
+                    <AiOutlineCalendar className='absolute top-[50%] translate-y-[-50%] left-0 text-[20px] lg:text-[30px] ' color="#696969" />
                 </div>
                 <div className='flex flex-col justify-center items-start mb-[10px]'>
                     <div className='flex justify-center items-center mb-[10px]'>
                         <TbIcons className='text-[20px] lg:text-[30px]' color="#696969" />
-                        <div className='pl-4 text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal'>
+                        <div className='pl-4 text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal'>
                             Icon
                         </div>
                     </div>
@@ -307,7 +273,7 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
                 <div className='flex flex-col justify-center items-start mb-[30px]'>
                     <div className='flex justify-center items-center mb-[10px]'>
                         <BiColorFill className='text-[20px] lg:text-[30px]' color="#696969" />
-                        <div className='pl-4 text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal'>
+                        <div className='pl-4 text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal'>
                             Color
                         </div>
                     </div>

@@ -60,7 +60,7 @@ const Transaction = ({ transaction, transactionDate, isLast, deleteTransaction, 
 
     return (
         <>
-            <div className={`w-full flex items-center ${isLast ? '' : 'border-b'}  border-[#AEAEAE] border-opacity-50 py-4 text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium`}>
+            <div className={`w-full flex items-center ${isLast ? '' : 'border-b'}  border-[#AEAEAE] border-opacity-50 py-4 text-xs md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium`}>
                 <div className="w-1/4 sm:w-1/6 text-center">{formatDate(transactionDate)}</div>
                 <div className="w-1/4 sm:w-1/6 text-center">
                     <div className='flex flex-row justify-center items-center'>
@@ -71,7 +71,7 @@ const Transaction = ({ transaction, transactionDate, isLast, deleteTransaction, 
                 <div className="hidden sm:block w-1/6 text-center truncate overflow-hidden">{description}</div>
                 <div className="hidden sm:block w-1/6 text-center">{payment_method}</div>
                 <div className={`w-1/4 sm:w-1/6 text-center ${transaction_type === "income" ? "text-green-500" : "text-red-500"}`}>{amount} ₸</div>
-                <div className="flex space-x-4 w-1/4 sm:w-1/6 justify-center">
+                <div className="flex sm:space-x-4 w-1/4 sm:w-1/6 justify-center">
                     <button onClick={() => editTransaction(transaction)}>
                         <BiPencil className='hidden sm:block text-[20px] lg:text-[30px]' color="#443A3A" />
                         <BsChevronRight className='block sm:hidden text-[15px]' color="#443A3A" />
