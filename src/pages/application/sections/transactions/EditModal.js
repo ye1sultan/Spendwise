@@ -134,11 +134,16 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
     }
 
     const handleSave = async () => {
-        try {
-            const updatedTransaction = await updateTransaction(editedTransaction.id, removeKeys(editedTransaction, ['created_at', 'updated_at', 'id']));
-            onSave(updatedTransaction);
-        } catch (error) {
-            console.error("Error updating transaction:", error);
+        if (transaction === editedTransaction) {
+            onCancel();
+        } else {
+            try {
+                const updatedTransaction = await updateTransaction(editedTransaction.id, removeKeys(editedTransaction, ['created_at', 'updated_at', 'id']));
+                onSave(updatedTransaction);
+                console.log("TRANSACTION UPDATED!");
+            } catch (error) {
+                console.error("Error updating transaction:", error);
+            }
         }
     }
 
@@ -243,8 +248,8 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
                         <AiOutlineTag className="text-[25px] 2xl:text-[30px] absolute top-[50%] translate-y-[-50%] left-0" color="#696969" />
                     </div>
 
-                    <div className='w-full flex justify-between'>
-                        <button className="uppercase text-red-500 text-[14px] lg:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] rounded-[20px] 2xl:rounded-[40px]" onClick={() => handleDelete()}>
+                    <div className='w-full flex sm:flex-row-reverse justify-between'>
+                        <button className="sm:hidden uppercase text-red-500 text-[14px] lg:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] rounded-[20px] 2xl:rounded-[40px]" onClick={() => handleDelete()}>
                             delete
                         </button>
                         <button className='uppercase text-black text-[14px] lg:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]' onClick={() => handleSave()}>

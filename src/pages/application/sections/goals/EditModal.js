@@ -139,15 +139,20 @@ const EditModal = ({ goal, onSave, onCancel }) => {
     };
 
     const handleSave = async () => {
-        try {
-            const updatedGoalData = removeKeys(editedGoal, ['created_at', 'updated_at', 'id']);
-            if (parseInt(updatedGoalData.initial_target_amount) >= parseInt(updatedGoalData.target_amount)) {
-                updatedGoalData.status = 'reached';
+        if (goal === editedGoal) {
+            onCancel();
+        } else {
+            try {
+                const updatedGoalData = removeKeys(editedGoal, ['created_at', 'updated_at', 'id']);
+                if (parseInt(updatedGoalData.initial_target_amount) >= parseInt(updatedGoalData.target_amount)) {
+                    updatedGoalData.status = 'reached';
+                }
+                const updatedGoal = await updateGoal(goal.id, updatedGoalData);
+                onSave(updatedGoal);
+                console.log("GOAL UPDATED!");
+            } catch (error) {
+                console.error("Error updating goals:", error);
             }
-            const updatedGoal = await updateGoal(goal.id, updatedGoalData);
-            onSave(updatedGoal);
-        } catch (error) {
-            console.error("Error updating goals:", error);
         }
     };
 
@@ -195,7 +200,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                     <div className="text-lg lg:text-xl xl:text-[28px] 2xl:text-[32px] font-medium">
                         Edit Goal
                     </div>
-                    <IoCloseOutline className='cursor-pointer text-[25px] md:text-[30px] lg:text-[35px]' onClick={onCancel} />
+                    <IoCloseOutline className='cursor-pointer text-[25px] md:text-[30px] lg:text-[35px]' onClick={() => onCancel()} />
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input

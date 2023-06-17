@@ -227,7 +227,7 @@ const Report = () => {
                 <FiPieChart className="absolute top-[50%] translate-y-[-50%] left-[20%] z-50" size={35} />
                 <FiBarChart className="absolute top-[50%] translate-y-[-50%] right-[20%] z-50" size={35} />
             </button>
-            <div className="w-full h-full max-h-[1000px] bg-white rounded-[40px] mt-[30px] py-[30px] px-[60px] overflow-auto relative">
+            {/* <div className="w-full h-full max-h-[1000px] bg-white rounded-[40px] mt-[30px] py-[30px] px-[60px] overflow-auto relative">
                 <div
                     className={`absolute ${switched ? 'hidden' : 'flex flex-col'}`}
                     onMouseEnter={() => setDropDown(true)}
@@ -253,7 +253,7 @@ const Report = () => {
                     setCurrentMonth={setCurrentMonth}
                 />
                 {renderData()}
-            </div>
+            </div> */}
         </>
     );
 };

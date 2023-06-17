@@ -24,7 +24,6 @@ const Goals = () => {
                 const data = await getAllGoals();
                 setGoals(data);
                 setIsLoading(false);
-                console.log(data);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }

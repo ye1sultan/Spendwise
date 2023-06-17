@@ -72,7 +72,6 @@ export const getAllTransactions = async () => {
 };
 
 export const addTransaction = async (transaction) => {
-    console.log('Transaction to add:', transaction);
     const response = await authenticatedFetch(`${API_URL}/transactions`, {
         method: 'POST',
         headers: {
