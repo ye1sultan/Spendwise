@@ -19,10 +19,11 @@ import TermOfUse from './pages/sign/TermOfUse';
 import ProtectedWrapper from './ProtectedRoute';
 
 function App() {
-    
-    //text-lg lg:text-xl xl:text-[28px] 2xl:text-[32px] 32px
-    //text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] 24px
-    
+
+    //text-lg lg:text-xl xl:text-[28px] 2xl:text-[32px] text 32px
+    //text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] text 24px
+    //text-[25px] md:text-[30px] lg:text-[35px] icon 35
+
     return (
         <div className="App">
             <Routes>
@@ -44,11 +45,7 @@ function App() {
                     <Route path="" element={<Navigate to="dashboard" />} />
                     <Route path="*" element={<Navigate to="dashboard" />} />
                     <Route path="dashboard" element={<Dashboard />} />
-                    <Route path="transactions/*" element={<Transactions />}>
-                        <Route path="" element={<Navigate to=":month-year" />} />
-                        <Route path="*" element={<Navigate to=":month-year" />} />
-                        <Route path=":month-:year" element={<Transactions />} />
-                    </Route>
+                    <Route path="transactions/*" element={<Transactions />} />
                     <Route path="goals" element={<Goals />} />
                     <Route path="report" element={<Report />} />
                     <Route path="notifications" element={<Notifications />} />

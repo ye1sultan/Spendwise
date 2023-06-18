@@ -222,38 +222,39 @@ const Report = () => {
     return (
         <>
             <Title title={"Report"} />
-            <button className="w-[420px] h-[60px] bg-[#381C46] bg-opacity-10 rounded-[30px] self-start relative" onClick={handleSwitch}>
-                <div className={`w-[210px] h-full rounded-[30px] bg-[#9F75D6] bg-opacity-80 ${switched ? " translate-x-[100%]" : "translate-x-0"} transition-transform ease-in-out duration-300`}></div>
-                <FiPieChart className="absolute top-[50%] translate-y-[-50%] left-[20%] z-50" size={35} />
-                <FiBarChart className="absolute top-[50%] translate-y-[-50%] right-[20%] z-50" size={35} />
+            <button className="max-w-[50%] lg:max-w-[30%] w-full min-w-[160px] h-[30px] sm:h-[40px] md:h-[50px] lg:h-[60px] bg-[#381C46] bg-opacity-10 rounded-[30px] self-start relative" onClick={handleSwitch}>
+                <div className={`w-[50%] h-full rounded-[30px] bg-[#9F75D6] bg-opacity-80 ${switched ? " translate-x-[100%]" : "translate-x-0"} transition-transform ease-in-out duration-300`}></div>
+                <FiPieChart className="absolute top-[50%] translate-y-[-50%] left-[20%] z-50 text-[25px] md:text-[30px] lg:text-[35px]" />
+                <FiBarChart className="absolute top-[50%] translate-y-[-50%] right-[20%] z-50 text-[25px] md:text-[30px] lg:text-[35px]" />
             </button>
-            {/* <div className="w-full h-full max-h-[1000px] bg-white rounded-[40px] mt-[30px] py-[30px] px-[60px] overflow-auto relative">
-                <div
-                    className={`absolute ${switched ? 'hidden' : 'flex flex-col'}`}
-                    onMouseEnter={() => setDropDown(true)}
-                    onMouseLeave={() => setDropDown(false)}>
-                    <button className="text-[24px] flex items-center">
-                        <div className="border-b-[1px] border-black capitalize">{currentTransaction}</div>
-                        <BiChevronDown size={30} />
-                    </button>
-                    <div className={`${dropDown ? 'flex' : 'hidden'} w-full flex-col justify-start items-center text-[24px] bg-white shadow-md rounded-[20px] py-2`}>
-                        <button className="w-full mb-2 hover:bg-gray-100 px-4" onClick={() => handleDropDownClick('transactions')}>
-                            Transactions
-                        </button>
-                        <button className="w-full mb-2 hover:bg-gray-100 px-4" onClick={() => handleDropDownClick('expenses')}>
-                            Expenses
-                        </button>
-                        <button className="w-full hover:bg-gray-100 px-4" onClick={() => handleDropDownClick('incomes')}>
-                            Incomes
-                        </button>
-                    </div>
+            <div className="w-full h-full max-h-[1000px] bg-white rounded-[40px] mt-[30px] pb-[30px] px-[30px] overflow-auto relative">
+                <div className="w-full flex items-center">
+                    {!switched && (
+                        <div className="flex flex-col relative" onClick={() => setDropDown(!dropDown)}>
+                            <button className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] flex items-center">
+                                <div className="capitalize">{currentTransaction}</div>
+                                <BiChevronDown size={30} />
+                            </button>
+                            {dropDown && (
+                                <div className="absolute top-[120%] flex flex-col justify-start items-center text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] bg-white shadow-md rounded-[20px] py-2">
+                                    <button className="w-full mb-2 hover:bg-gray-100 px-4" onClick={() => handleDropDownClick('transactions')}>
+                                        Transactions
+                                    </button>
+                                    <button className="w-full mb-2 hover:bg-gray-100 px-4" onClick={() => handleDropDownClick('expenses')}>
+                                        Expenses
+                                    </button>
+                                    <button className="w-full hover:bg-gray-100 px-4" onClick={() => handleDropDownClick('incomes')}>
+                                        Incomes
+                                    </button>
+                                </div>)}
+                        </div>)}
+                    <MonthSelector
+                        currentMonth={currentMonth}
+                        setCurrentMonth={setCurrentMonth}
+                    />  
                 </div>
-                <MonthSelector
-                    currentMonth={currentMonth}
-                    setCurrentMonth={setCurrentMonth}
-                />
                 {renderData()}
-            </div> */}
+            </div>
         </>
     );
 };

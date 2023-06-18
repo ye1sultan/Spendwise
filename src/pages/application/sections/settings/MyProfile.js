@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BiPencil } from "react-icons/bi";
+// import { BiPencil } from "react-icons/bi";
 import { updateUser } from "../../../../services/api";
 
 const MyProfile = () => {
@@ -33,16 +33,16 @@ const MyProfile = () => {
         }
     };
 
-    const handleAvatarChange = (e) => {
-        if (e.target.files && e.target.files[0]) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                setEditedAvatar(e.target.result);
-                setButtonColor("#9F75D6");
-            };
-            reader.readAsDataURL(e.target.files[0]);
-        }
-    };
+    // const handleAvatarChange = (e) => {
+    //     if (e.target.files && e.target.files[0]) {
+    //         const reader = new FileReader();
+    //         reader.onload = (e) => {
+    //             setEditedAvatar(e.target.result);
+    //             setButtonColor("#9F75D6");
+    //         };
+    //         reader.readAsDataURL(e.target.files[0]);
+    //     }
+    // };
 
     const handleNameChange = (e) => {
         setEditedName(e.target.value);
@@ -92,7 +92,7 @@ const MyProfile = () => {
                                         {(editedName.charAt(0)) || ''}
                                     </div>
                             }
-                            <label htmlFor="avatarInput" className="cursor-pointer">
+                            {/* <label htmlFor="avatarInput" className="cursor-pointer">
                                 <div className="w-[60px] h-[60px] rounded-full bg-[#9F75D6] absolute right-0 bottom-0 flex justify-center items-center">
                                     <BiPencil size={35} />
                                 </div>
@@ -102,8 +102,8 @@ const MyProfile = () => {
                                 className="hidden"
                                 type="file"
                                 accept="image/*"
-                                onChange={handleAvatarChange}
-                            />
+                                onChange={}
+                            /> */}
                         </div>
                     </div>
                 </div>

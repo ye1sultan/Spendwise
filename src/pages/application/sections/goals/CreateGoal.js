@@ -206,8 +206,8 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 flex items-start justify-center m-6 h-full z-20">
             <div className='bg-white shadow-md rounded-[30px] xl:rounded-[40px] mx-4 w-full max-w-[350px] xl:max-w-[400px] min-w-[280px] p-6 xl:p-8'>
-                <div className='w-full flex justify-between items-center mb-[10px]'>
-                    <div className="text-lg lg:text-xl xl:text-[28px] 2xl:text-[32px] font-medium">
+                <div className='w-full flex justify-between items-center mb-[20px]'>
+                    <div className="text-xl xl:text-[28px] 2xl:text-[32px] font-medium">
                         New Goal
                     </div>
                     <IoCloseOutline className='cursor-pointer text-[25px] md:text-[30px] lg:text-[35px]' onClick={() => onModalClose(false)} />

@@ -182,7 +182,7 @@ const Goals = () => {
                     addNewGoal={addNewGoal} />
             )}
 
-            <Title title={'My Goals'} />
+            <Title title={'Goals'} />
             <div className="relative self-start z-10 w-full mb-[30px]">
                 <button onClick={() => setShowDropDown(!showDropDown)} className="h-[35px] md:h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[16px] lg:text-[20px] flex justify-between items-center px-5 z-10">
                     <BsChevronDown className="mr-2" />

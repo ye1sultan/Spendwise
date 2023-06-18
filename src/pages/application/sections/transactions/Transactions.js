@@ -84,8 +84,11 @@ const Transactions = () => {
 
     const [showCreateModal, setShowCreateModal] = useState(false);
 
-    const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
-    const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+    const currentDate = new Date();
+    const [currentMonth, setCurrentMonth] = useState({
+        month: currentDate.getMonth(),
+        year: currentDate.getFullYear(),
+    });
 
     const [transactionOnEdit, setTransactionOnEdit] = useState(null);
 
@@ -106,8 +109,8 @@ const Transactions = () => {
         const filteredTransactions = transactions.filter((transaction) => {
             const transactionDate = new Date(transaction.date);
             return (
-                transactionDate.getMonth() === currentMonth &&
-                transactionDate.getFullYear() === currentYear
+                transactionDate.getMonth() === currentMonth.month &&
+                transactionDate.getFullYear() === currentMonth.year
             );
         });
 
@@ -176,7 +179,7 @@ const Transactions = () => {
                 />
             )}
 
-            <Title title={'Transaction'} />
+            <Title title={'Transactions'} />
             <div className="self-start relative">
                 <button
                     onClick={() => toggleState()}
@@ -204,9 +207,7 @@ const Transactions = () => {
             <div className="w-full bg-white rounded-[40px] mt-[40px] pb-[20px]">
                 <MonthSelector
                     currentMonth={currentMonth}
-                    currentYear={currentYear}
                     setCurrentMonth={setCurrentMonth}
-                    setCurrentYear={setCurrentYear}
                 />
 
                 <div className="hidden sm:flex justify-around items-center w-full bg-[#BFA2E5] bg-opacity-90">
