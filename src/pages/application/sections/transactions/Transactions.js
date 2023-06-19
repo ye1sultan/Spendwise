@@ -204,12 +204,11 @@ const Transactions = () => {
                     </div>
                 )}
             </div>
-            <div className="w-full bg-white rounded-[40px] mt-[40px] pb-[20px]">
+            <div className="w-full bg-white rounded-[10px] sm:rounded-[20px] md:rounded-[30px] lg:rounded-[40px] mt-[40px] pb-[20px]">
                 <MonthSelector
                     currentMonth={currentMonth}
                     setCurrentMonth={setCurrentMonth}
                 />
-
                 <div className="hidden sm:flex justify-around items-center w-full bg-[#BFA2E5] bg-opacity-90">
                     {['Date', 'Category', 'Description', 'Type', 'Amount', 'Action'].map((text, index) => (
                         <div key={index} className="py-3 md:py-5 text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium w-1/6 text-center">
@@ -217,7 +216,6 @@ const Transactions = () => {
                         </div>
                     ))}
                 </div>
-
                 <div className="flex sm:hidden justify-around items-center w-full bg-[#BFA2E5] bg-opacity-90">
                     {['Date', 'Category', 'Amount', 'More'].map((text, index) => (
                         <div key={index} className="py-3 md:py-5 text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium w-1/4 text-center">
@@ -225,7 +223,6 @@ const Transactions = () => {
                         </div>
                     ))}
                 </div>
-
                 {renderTransactions()}
             </div>
         </>

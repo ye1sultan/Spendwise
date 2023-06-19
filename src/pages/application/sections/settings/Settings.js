@@ -35,7 +35,7 @@ const Settings = () => {
   return (
     <>
       <Title title={"Settings"} />
-      <div className="w-[555px] h-[50px] bg-[#381C46] bg-opacity-10 rounded-[30px] flex justify-center items-center self-start relative mb-[90px]">
+      <div className="w-[555px] h-[50px] bg-[#381C46] bg-opacity-10 rounded-[10px] sm:rounded-[20px] md:rounded-[30px] lg:rounded-[40px] flex justify-center items-center self-start relative mb-[90px]">
         {tabButtons.map((tab, index) => (
           <button
             key={index}

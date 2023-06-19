@@ -96,7 +96,7 @@ const Security = () => {
     return (
         <>
             <div className="self-start w-[85%]">
-                <div className="w-full h-[280px] bg-white mb-[55px] rounded-[30px] flex flex-col justify-between items-start py-[30px] px-[55px]">
+                <div className="w-full h-[280px] bg-white mb-[55px] rounded-[10px] sm:rounded-[20px] md:rounded-[30px] lg:rounded-[40px] flex flex-col justify-between items-start py-[30px] px-[55px]">
                     <div className="text-[36px] font-medium ">
                         Change my email
                     </div>

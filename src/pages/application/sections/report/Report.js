@@ -248,7 +248,7 @@ const Report = () => {
                     )}
                 </div>
             )}
-            <div className="w-full h-full max-h-[1000px] bg-white rounded-[40px] mt-[30px] pb-[30px] px-[30px] overflow-auto relative">
+            <div className="w-full h-full max-h-[1000px] bg-white rounded-[10px] sm:rounded-[20px] md:rounded-[30px] lg:rounded-[40px] mt-[30px] pb-[30px] px-[30px] overflow-auto relative">
                 <MonthSelector
                     currentMonth={currentMonth}
                     setCurrentMonth={setCurrentMonth}

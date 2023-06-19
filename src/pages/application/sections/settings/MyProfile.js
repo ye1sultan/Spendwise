@@ -34,7 +34,7 @@ const MyProfile = () => {
     }
 
     return (
-        <div className="self-start w-[970px] bg-white rounded-[30px] px-[45px] py-[25px] flex justify-center items-center">
+        <div className="self-start w-[970px] bg-white rounded-[10px] sm:rounded-[20px] md:rounded-[30px] lg:rounded-[40px] px-[45px] py-[25px] flex justify-center items-center">
             <div className="w-full">
                 <div className="text-[40px] font-medium mb-8">
                     Account Details

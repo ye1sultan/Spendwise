@@ -12,7 +12,7 @@ import Dashboard from './pages/application/sections/dashboard/Dashboard';
 import Transactions from './pages/application/sections/transactions/Transactions';
 import Goals from './pages/application/sections/goals/Goals';
 import Report from './pages/application/sections/report/Report';
-import Notifications from './pages/application/sections/Notifications';
+import Notifications from './pages/application/sections/notifications/Notifications';
 import Settings from './pages/application/sections/settings/Settings';
 import TermOfUse from './pages/sign/TermOfUse';
 
@@ -21,12 +21,18 @@ import ProtectedWrapper from './ProtectedRoute';
 function App() {
 
     //text-lg lg:text-xl xl:text-[28px] 2xl:text-[32px] text 32px
+    //text-md lg:text-lg xl:text-[26px] 2xl:text-[30px] text 30px
     //text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] text 24px
     //text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] text 22px
     //text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] text 20px
     //text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] text 18px
 
     //text-[25px] md:text-[30px] lg:text-[35px] icon 35
+
+    //px-[20px] sm:px-[30px] md:px-[40px] lg:px-[50px] padding x 50
+    //py-[20px] md:py-[30px] lg:py-[40px] padding y 40
+
+    //rounded-[10px] sm:rounded-[20px] md:rounded-[30px] lg:rounded-[40px] rounded 40
 
     return (
         <div className="App">
