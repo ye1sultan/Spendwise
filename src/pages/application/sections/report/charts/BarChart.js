@@ -4,8 +4,8 @@ const BarChart = ({ expenses, incomes }) => {
     const expensePercentage = ((Math.abs(expenses) / total) * 100).toFixed(2) + "%";
 
     return (
-        <div className="w-full h-full flex justify-evenly items-center pr-[40px]">
-            <div className="w-[50%] h-[400px] flex flex-row justify-center items-center">
+        <div className="w-full h-full flex flex-col sm:flex-row justify-evenly items-center sm:pr-[40px]">
+            <div className="w-full sm:w-[50%] h-[200px] md:h-[300px] lg:h-[400px] flex flex-row justify-center items-center">
                 <div className="h-full flex flex-col justify-end items-center mr-6">
                     <div
                         className="w-[40px] bg-[#22A447] rounded-[10px]"
@@ -14,7 +14,7 @@ const BarChart = ({ expenses, incomes }) => {
                             minHeight: '10px',
                         }}
                     ></div>
-                    <div className="text-[20px]">
+                    <div className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
                         {incomePercentage}
                     </div>
                 </div>
@@ -26,12 +26,12 @@ const BarChart = ({ expenses, incomes }) => {
                             minHeight: '10px',
                         }}
                     ></div>
-                    <div className="text-[20px]">
+                    <div className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
                         {expensePercentage}
                     </div>
                 </div>
             </div>
-            <div className="text-[24px] flex flex-col justify-center items-center h-full w-[40%]">
+            <div className="mt-[40px] sm:mt-0 text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] flex flex-col justify-center items-center h-full w-full sm:w-[40%]">
                 <div className="flex flex-row justify-between items-center w-full mb-4">
                     <div>Incomes</div>
                     <div className="text-[#34C05C] font-semibold">{incomes}</div>

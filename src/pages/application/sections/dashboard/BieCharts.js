@@ -1,4 +1,5 @@
-import PieChart from "./PieChart.js";
+
+import PieChart from "../../components/PieChart";
 import BarChart from "./BarChart.js";
 import NoContent from "./NoContent.js";
 import Goal from "./Goal.js";

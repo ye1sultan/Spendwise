@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import Title from "../../components/Title";
 import BarChart from "./charts/BarChart";
-import PieChart from "./charts/PieChart";
+import PieChart from "../../components/PieChart";
 import MonthSelector from "./MonthSelector";
 
 import { ReactComponent as NoResultRp } from "./NoResultRp.svg";
@@ -108,9 +108,9 @@ const Report = () => {
                                 );
                             } else if (!getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year) || getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year).length === 0) {
                                 return (
-                                    <div className={`flex flex-col justify-center items-center`}>
-                                        <NoResultRp />
-                                        <div className="font-medium text-[24px] text-[#696969] w-full flex justify-center items-center mt-6">
+                                    <div className="flex flex-col w-full justify-center items-center 2xl:mb-8">
+                                        <NoResultRp className="w-[160px] 2xl:w-full 2xl:mt-8" />
+                                        <div className="font-medium 2xl:text-[24px] text-[#696969] w-full flex justify-center items-center 2xl:mt-8">
                                             No results
                                         </div>
                                     </div>
@@ -118,7 +118,7 @@ const Report = () => {
                             } else {
                                 if (!switched) {
                                     return (
-                                        <div className="flex justify-between items-center w-full min-h-[300px]">
+                                        <div className="flex flex-col sm:flex-row justify-between items-center w-full min-h-[300px]">
                                             <PieChart transactions={getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)} type={currentTransaction} />
                                         </div>
                                     );
@@ -149,9 +149,9 @@ const Report = () => {
                                 );
                             } else if (!separateIncomeAndExpense(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).incomeObjects || separateIncomeAndExpense(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).incomeObjects.length === 0) {
                                 return (
-                                    <div className={`flex flex-col justify-center items-center`}>
-                                        <NoResultRp />
-                                        <div className="font-medium text-[24px] text-[#696969] w-full flex justify-center items-center mt-6">
+                                    <div className="flex flex-col w-full justify-center items-center 2xl:mb-8">
+                                        <NoResultRp className="w-[160px] 2xl:w-full 2xl:mt-8" />
+                                        <div className="font-medium 2xl:text-[24px] text-[#696969] w-full flex justify-center items-center 2xl:mt-8">
                                             No results
                                         </div>
                                     </div>
@@ -159,7 +159,7 @@ const Report = () => {
                             } else {
                                 if (!switched) {
                                     return (
-                                        <div className="flex justify-between items-center w-full min-h-[300px]">
+                                        <div className="flex flex-col sm:flex-row justify-between items-center w-full min-h-[300px]">
                                             <PieChart transactions={separateIncomeAndExpense(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).incomeObjects} type={'incomes'} />
                                         </div>
                                     );
@@ -190,9 +190,9 @@ const Report = () => {
                                 );
                             } else if (!separateIncomeAndExpense(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).expenseObjects || separateIncomeAndExpense(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).expenseObjects.length === 0) {
                                 return (
-                                    <div className={`flex flex-col justify-center items-center`}>
-                                        <NoResultRp />
-                                        <div className="font-medium text-[24px] text-[#696969] w-full flex justify-center items-center mt-6">
+                                    <div className="flex flex-col w-full justify-center items-center 2xl:mb-8">
+                                        <NoResultRp className="w-[160px] 2xl:w-full 2xl:mt-8" />
+                                        <div className="font-medium 2xl:text-[24px] text-[#696969] w-full flex justify-center items-center 2xl:mt-8">
                                             No results
                                         </div>
                                     </div>
@@ -200,7 +200,7 @@ const Report = () => {
                             } else {
                                 if (!switched) {
                                     return (
-                                        <div className="flex justify-between items-center w-full min-h-[300px]">
+                                        <div className="flex flex-col sm:flex-row justify-between items-center w-full min-h-[300px]">
                                             <PieChart transactions={separateIncomeAndExpense(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).expenseObjects} type={'expenses'} />
                                         </div>
                                     );
@@ -222,37 +222,37 @@ const Report = () => {
     return (
         <>
             <Title title={"Report"} />
-            <button className="max-w-[50%] lg:max-w-[30%] w-full min-w-[160px] h-[30px] sm:h-[40px] md:h-[50px] lg:h-[60px] bg-[#381C46] bg-opacity-10 rounded-[30px] self-start relative" onClick={handleSwitch}>
-                <div className={`w-[50%] h-full rounded-[30px] bg-[#9F75D6] bg-opacity-80 ${switched ? " translate-x-[100%]" : "translate-x-0"} transition-transform ease-in-out duration-300`}></div>
-                <FiPieChart className="absolute top-[50%] translate-y-[-50%] left-[20%] z-50 text-[25px] md:text-[30px] lg:text-[35px]" />
-                <FiBarChart className="absolute top-[50%] translate-y-[-50%] right-[20%] z-50 text-[25px] md:text-[30px] lg:text-[35px]" />
+            <button className="max-w-[60%] sm:max-w-[50%] lg:max-w-[30%] w-full min-w-[160px] h-[30px] sm:h-[40px] md:h-[50px] lg:h-[60px] bg-[#381C46] bg-opacity-10 rounded-[30px] self-start relative" onClick={handleSwitch}>
+                <div className={`w-[50%] h-full rounded-[30px] bg-[#BFA2E5] bg-opacity-80 ${switched ? " translate-x-[100%]" : "translate-x-0"} transition-transform ease-in-out duration-300`}></div>
+                <FiPieChart className="absolute top-[50%] translate-y-[-50%] left-[20%] z-50 text-[20px] md:text-[30px] lg:text-[35px]" />
+                <FiBarChart className="absolute top-[50%] translate-y-[-50%] right-[20%] z-50 text-[20px] md:text-[30px] lg:text-[35px]" />
             </button>
-            <div className="w-full h-full max-h-[1000px] bg-white rounded-[40px] mt-[30px] pb-[30px] px-[30px] overflow-auto relative">
-                <div className="w-full flex items-center">
-                    {!switched && (
-                        <div className="flex flex-col relative" onClick={() => setDropDown(!dropDown)}>
-                            <button className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] flex items-center">
-                                <div className="capitalize">{currentTransaction}</div>
-                                <BiChevronDown size={30} />
+            {!switched && (
+                <div className="self-start flex flex-col relative mt-[30px] ml-[20px]" onClick={() => setDropDown(!dropDown)}>
+                    <button className="text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] flex items-center">
+                        <div className="capitalize">{currentTransaction}</div>
+                        <BiChevronDown size={30} />
+                    </button>
+                    {dropDown && (
+                        <div className="absolute top-[120%] flex flex-col justify-start items-center text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] bg-white shadow-md rounded-[20px] py-2 z-50">
+                            <button className="w-full mb-2 hover:bg-gray-100 px-4" onClick={() => handleDropDownClick('transactions')}>
+                                Transactions
                             </button>
-                            {dropDown && (
-                                <div className="absolute top-[120%] flex flex-col justify-start items-center text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] bg-white shadow-md rounded-[20px] py-2">
-                                    <button className="w-full mb-2 hover:bg-gray-100 px-4" onClick={() => handleDropDownClick('transactions')}>
-                                        Transactions
-                                    </button>
-                                    <button className="w-full mb-2 hover:bg-gray-100 px-4" onClick={() => handleDropDownClick('expenses')}>
-                                        Expenses
-                                    </button>
-                                    <button className="w-full hover:bg-gray-100 px-4" onClick={() => handleDropDownClick('incomes')}>
-                                        Incomes
-                                    </button>
-                                </div>)}
-                        </div>)}
-                    <MonthSelector
-                        currentMonth={currentMonth}
-                        setCurrentMonth={setCurrentMonth}
-                    />  
+                            <button className="w-full mb-2 hover:bg-gray-100 px-4" onClick={() => handleDropDownClick('expenses')}>
+                                Expenses
+                            </button>
+                            <button className="w-full hover:bg-gray-100 px-4" onClick={() => handleDropDownClick('incomes')}>
+                                Incomes
+                            </button>
+                        </div>
+                    )}
                 </div>
+            )}
+            <div className="w-full h-full max-h-[1000px] bg-white rounded-[40px] mt-[30px] pb-[30px] px-[30px] overflow-auto relative">
+                <MonthSelector
+                    currentMonth={currentMonth}
+                    setCurrentMonth={setCurrentMonth}
+                />
                 {renderData()}
             </div>
         </>
@@ -260,4 +260,3 @@ const Report = () => {
 };
 
 export default Report;
-
