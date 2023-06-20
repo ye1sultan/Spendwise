@@ -36,9 +36,6 @@ const Login = () => {
             } else {
                 localStorage.removeItem('rememberedEmail');
             }
-
-            toast("Success!");
-
             navigate("/application");
         } catch (error) {
             toast.error(error.message, {

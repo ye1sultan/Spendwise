@@ -6,6 +6,9 @@ import { register } from '../../services/api';
 import { BsDot } from 'react-icons/bs';
 import Logo from '../assets/Logo.png';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Signup = () => {
     const navigate = useNavigate();
 
@@ -23,95 +26,128 @@ const Signup = () => {
 
     const handleCheckboxChange = (e) => {
         setAgreeTerms(e.target.checked);
-
-        if (!agreeTerms) {
-            // setPopup(false);
-        }
     }
-
-    const [submitted, setSubmitted] = useState(false);
-
-    const [nameEdited, setNameEdited] = useState(false);
-
-    const [emailEdited, setEmailEdited] = useState(false);
-
-    const [passwordEdited, setPasswordEdited] = useState(false);
 
     const [passwordsMatch, setPasswordsMatch] = useState(true);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setSubmitted(true);
-        setNameEdited(false);
-        setPasswordEdited(false);
-        setEmailEdited(false);
 
         if (!agreeTerms) {
-            // setPopup(true);
-            // setMessage('Please accept terms of use.');
+            toast.error("Please accept terms of use.", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             return;
         }
 
         if (!validateName(name)) {
-            // setPopup(true);
-            // setMessage('Please enter valid name.');
+            toast.error("Please enter a valid name.", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             return;
         }
 
         if (!validatePassword(password)) {
-            // setPopup(true);
-            // setMessage('Password must be at least 8 characters long, contain at least one letter and one number.');
+            toast.error("Password must be at least 8 characters long, contain at least one letter and one number.", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             return;
         }
 
         if (!validateEmail(email)) {
-            // setPopup(true);
-            // setMessage('Please enter a valid email address.');
+            toast.error("Please enter a valid email address.", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             return;
         }
 
         if (!passwordsMatch) {
-            // setPopup(true);
-            // setMessage('Passwords do not match.');
+            toast.error("Passwords do not match.", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             return;
         }
 
         try {
             await register(name, email, password, passwordConfirmation);
+            toast.success("Success!", {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             setTimeout(() => {
                 navigate('/login');
             }, 1000);
 
         } catch (error) {
-            // setPopup(true);
-            // setMessage(error.message);
+            toast.error(error.message, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
     };
 
     const validateName = (name) => {
         const nameRegex = /^[a-zA-Z ]{2,30}$/;
         const isValid = nameRegex.test(name);
-        if (submitted && nameEdited) {
-            // setPopup(!isValid);
-        }
         return isValid;
     };
 
     const validateEmail = (email) => {
         const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
         const isValid = emailRegex.test(email);
-        if (submitted && emailEdited) {
-            // setPopup(!isValid);
-        }
         return isValid;
     };
 
     const validatePassword = (password) => {
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
         const isValid = passwordRegex.test(password);
-        if (submitted && passwordEdited) {
-            // setPopup(!isValid);
-        }
         return isValid;
     };
 
@@ -121,7 +157,20 @@ const Signup = () => {
 
     return (
         <div className="bg-white h-screen flex justify-center items-center relative font-sans">
-
+            <ToastContainer
+                position="top-center"
+                autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                icon={false}
+                limit={3}
+            />
             <div className="h-[31%] w-full bg-gradient-to-r from-purple-300 via-purple-300 to-pink-100 absolute top-0 z-0">
             </div>
             <div className="max-w-[425px] w-full w-min-[320px] py-[20px] px-[30px] mx-[10px] bg-white rounded-[24px] flex flex-col justify-start items-center z-10 shadow-xl">
@@ -141,7 +190,6 @@ const Signup = () => {
                         <input
                             onChange={(e) => {
                                 setName(e.target.value);
-                                setNameEdited(true);
                                 validateName(e.target.value);
                             }}
                             className={`
@@ -152,7 +200,6 @@ const Signup = () => {
                         <input
                             onChange={(e) => {
                                 setEmail(e.target.value);
-                                setEmailEdited(true);
                                 validateEmail(e.target.value);
                             }}
                             className={`
@@ -163,7 +210,6 @@ const Signup = () => {
                         <input
                             onChange={(e) => {
                                 setPassword(e.target.value);
-                                setPasswordEdited(true);
                                 validatePassword(e.target.value);
                             }}
                             className={`

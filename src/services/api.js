@@ -1,4 +1,4 @@
-const API_URL = 'https://personalfinance.herokuapp.com/api';
+const API_URL = process.env.REACT_APP_API_URL;
 
 export const login = async (email, password) => {
     const requestOptions = {
@@ -42,7 +42,27 @@ export const register = async (name, email, password, passwordConfirmation) => {
     return data;
 };
 
-// api.js
+export const forgotPassword = async (email) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+    };
+
+    const response = await fetch(`${API_URL}/forgot-password`, requestOptions);
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message);
+    }
+
+    return data;
+}
+
 export const authenticatedFetch = (url, options = {}) => {
     const token = sessionStorage.getItem('authToken');
     if (!token) {
@@ -59,6 +79,8 @@ export const authenticatedFetch = (url, options = {}) => {
         headers,
     });
 };
+
+
 
 export const getAllTransactions = async () => {
     const response = await authenticatedFetch(`${API_URL}/transactions`);

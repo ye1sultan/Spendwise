@@ -2,8 +2,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from '../assets/Logo.png';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { forgotPassword } from "../../services/api";
+
 const ForgotPassword = () => {
-    const [password, setPassword] = useState(false);
+    const [email, setEmail] = useState(false);
 
     const navigate = useNavigate();
 
@@ -12,21 +16,50 @@ const ForgotPassword = () => {
         navigate(route);
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
-        if (password) {
-            console.log("Submitted!");
-            console.log(password);
-
-            navigate('/restore-password')
-        } else {
-            console.log("Some error occured...");
+        try {
+            await forgotPassword(email);
+            toast.error("We've send link to your email", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        } catch (error) {
+            toast.error(error.message, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
-    }
+    };
 
     return (
         <div className="bg-white h-screen flex justify-center items-center relative font-sans">
+            <ToastContainer
+                position="top-center"
+                autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                icon={false}
+                limit={3}
+            />
             <div className="h-[31%] w-full bg-gradient-to-r from-purple-300 via-purple-300 to-pink-100 absolute top-0 z-0">
             </div>
             <div className="max-w-[425px] w-full w-min-[320px] py-[20px] px-[30px] mx-[10px] bg-white rounded-[24px] flex flex-col justify-start items-center z-10 shadow-xl">
@@ -43,7 +76,7 @@ const ForgotPassword = () => {
                 </div>
                 <form onSubmit={(e) => handleSubmit(e)} className='flex flex-col w-full mb-[24px]'>
                     <input
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={(e) => setEmail(e.target.value)}
                         className='border-[1px] rounded-[8px] border-[#CED4DA] w-full h-[40px] text-[14px] py-[12px] pl-[12px] mb-[24px]'
                         type='email'
                         placeholder='Email'
