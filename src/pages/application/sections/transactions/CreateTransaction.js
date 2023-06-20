@@ -10,8 +10,11 @@ import { AiOutlineGift, AiOutlineStar } from 'react-icons/ai';
 import { BsCoin } from 'react-icons/bs';
 import { FaPray } from 'react-icons/fa';
 import { TbCoin, TbCurrencyTenge, TbHealthRecognition } from 'react-icons/tb';
+import { useTranslation } from 'react-i18next';
 
 const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => {
+    const { t, i18n } = useTranslation();
+    //t(`dashboard.pie.category.${category}`)
     const [selectedAmount, setSelectedAmount] = useState(0);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedDescription, setSelectedDescription] = useState('')
@@ -79,11 +82,11 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
                         {selectedCategory.icon}
                     </div>
                     <div className='flex items-center text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal'>
-                        {selectedCategory.name}
+                        {t(`dashboard.pie.category.${selectedCategory.name}`)}
                     </div>
                 </div>
             ) : (
-                <span className="flex items-center text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal">Category</span>
+                <span className="flex items-center text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal">{t("trn.bar.category")}</span>
             )
         );
     }
@@ -98,7 +101,7 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
                     {category.icon}
                 </div>
                 <div className='flex items-center text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal'>
-                    {category.name}
+                    {t(`dashboard.pie.category.${category.name}`)}
                 </div>
             </button>
         ))
@@ -112,11 +115,11 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
                         {selectedPaymentMethod.icon}
                     </div>
                     <div className='flex items-center text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal'>
-                        {selectedPaymentMethod.name}
+                        {t(`trn.method.${selectedPaymentMethod.name}`)}
                     </div>
                 </div>
             ) : (
-                <span className="flex items-center text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal">Payment Method</span>
+                <span className="flex items-center text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal">{t("trn.bar.type")}</span>
             )
         );
     }
@@ -131,7 +134,7 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
                     {method.icon}
                 </div>
                 <div className='flex items-center text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal'>
-                    {method.name}
+                    {t(`trn.method.${method.name}`)}
                 </div>
             </button>
         ))
@@ -183,7 +186,7 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
             <div className='bg-white shadow-md rounded-[30px] xl:rounded-[40px] mx-4 w-full max-w-[350px] xl:max-w-[400px] min-w-[280px] p-6 xl:p-8'>
                 <div className='w-full flex justify-between items-center mb-[20px]'>
                     <div className="text-xl xl:text-[28px] 2xl:text-[32px] font-medium">
-                        New <span style={{ color: color }}>{transaction === 'income' ? 'Income' : 'Expense'}</span>
+                        {t("trn.new")} <span style={{ color: color }}>{transaction === 'income' ? t("trn.income") : t("trn.expense")}</span>
                     </div>
                     <IoCloseOutline className='cursor-pointer text-[25px] md:text-[30px] lg:text-[35px]' onClick={() => onModalClose(false)} />
                 </div>
@@ -209,7 +212,7 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
                     <input
                         className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A]"
                         type="text"
-                        placeholder="Description"
+                        placeholder={t("trn.bar.description")}
                         value={selectedDescription}
                         onChange={(e) => setSelectedDescription(e.target.value)}
                     />
@@ -245,7 +248,7 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
                 </div>
                 <div className='w-full flex justify-end'>
                     <button className='uppercase text-black text-[14px] lg:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]' onClick={() => handleSave()}>
-                        save
+                        {t("trn.save")}
                     </button>
                 </div>
             </div>

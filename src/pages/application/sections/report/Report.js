@@ -9,12 +9,14 @@ import { ReactComponent as NoResultRp } from "./NoResultRp.svg";
 import { FiBarChart, FiPieChart } from "react-icons/fi";
 import { BiChevronDown } from "react-icons/bi";
 import { getAllTransactions } from "../../../../services/api";
+import { useTranslation } from "react-i18next";
 
 const Report = () => {
+    const { t, i18n } = useTranslation();
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    const [currentTransaction, setCurrentTransaction] = useState('transactions');
+    const [currentTransaction, setCurrentTransaction] = useState(t("rep.Transactions"));
 
     useEffect(() => {
         const fetchTransactions = async () => {
@@ -95,7 +97,7 @@ const Report = () => {
     }
 
     const renderData = () => {
-        if (currentTransaction === 'transactions') {
+        if (currentTransaction === t("rep.Transactions")) {
             return (
                 <>
                     {
@@ -111,7 +113,7 @@ const Report = () => {
                                     <div className="flex flex-col w-full justify-center items-center 2xl:mb-8">
                                         <NoResultRp className="w-[160px] 2xl:w-full 2xl:mt-8" />
                                         <div className="font-medium 2xl:text-[24px] text-[#696969] w-full flex justify-center items-center 2xl:mt-8">
-                                            No results
+                                            {t("trn.noResults")}
                                         </div>
                                     </div>
                                 );
@@ -136,7 +138,7 @@ const Report = () => {
             );
         }
 
-        if (currentTransaction === 'incomes') {
+        if (currentTransaction === t("rep.Incomes")) {
             return (
                 <>
                     {
@@ -152,7 +154,7 @@ const Report = () => {
                                     <div className="flex flex-col w-full justify-center items-center 2xl:mb-8">
                                         <NoResultRp className="w-[160px] 2xl:w-full 2xl:mt-8" />
                                         <div className="font-medium 2xl:text-[24px] text-[#696969] w-full flex justify-center items-center 2xl:mt-8">
-                                            No results
+                                            {t("trn.noResults")}
                                         </div>
                                     </div>
                                 );
@@ -160,7 +162,7 @@ const Report = () => {
                                 if (!switched) {
                                     return (
                                         <div className="flex flex-col sm:flex-row justify-between items-center w-full min-h-[300px]">
-                                            <PieChart transactions={separateIncomeAndExpense(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).incomeObjects} type={'incomes'} />
+                                            <PieChart transactions={separateIncomeAndExpense(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).incomeObjects} type={currentTransaction} />
                                         </div>
                                     );
                                 } else {
@@ -177,7 +179,7 @@ const Report = () => {
             );
         }
 
-        if (currentTransaction === 'expenses') {
+        if (currentTransaction === t("rep.Expenses")) {
             return (
                 <>
                     {
@@ -193,7 +195,7 @@ const Report = () => {
                                     <div className="flex flex-col w-full justify-center items-center 2xl:mb-8">
                                         <NoResultRp className="w-[160px] 2xl:w-full 2xl:mt-8" />
                                         <div className="font-medium 2xl:text-[24px] text-[#696969] w-full flex justify-center items-center 2xl:mt-8">
-                                            No results
+                                            {t("trn.noResults")}
                                         </div>
                                     </div>
                                 );
@@ -201,7 +203,7 @@ const Report = () => {
                                 if (!switched) {
                                     return (
                                         <div className="flex flex-col sm:flex-row justify-between items-center w-full min-h-[300px]">
-                                            <PieChart transactions={separateIncomeAndExpense(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).expenseObjects} type={'expenses'} />
+                                            <PieChart transactions={separateIncomeAndExpense(getCurrentMonthTransactions(data, currentMonth.month, currentMonth.year)).expenseObjects} type={currentTransaction} />
                                         </div>
                                     );
                                 } else {
@@ -221,7 +223,7 @@ const Report = () => {
 
     return (
         <>
-            <Title title={"Report"} />
+            <Title title={t("sidebar.report")} />
             <button className="max-w-[180px] sm:max-w-[220px] md:max-w-[260px] lg:max-w-[340px] w-full min-w-[160px] h-[30px] sm:h-[40px] md:h-[50px] bg-[#381C46] bg-opacity-10 rounded-[30px] self-start relative" onClick={handleSwitch}>
                 <div className={`w-[50%] h-full rounded-[30px] bg-[#BFA2E5] bg-opacity-80 ${switched ? " translate-x-[100%]" : "translate-x-0"} transition-transform ease-in-out duration-300`}></div>
                 <FiPieChart className="absolute top-[50%] translate-y-[-50%] left-[20%] z-50 text-[20px] md:text-[30px] lg:text-[35px]" />
@@ -235,14 +237,14 @@ const Report = () => {
                     </button>
                     {dropDown && (
                         <div className="absolute top-[120%] flex flex-col justify-start items-center text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] bg-white shadow-md rounded-[20px] py-2 z-50">
-                            <button className="w-full mb-2 hover:bg-gray-100 px-4" onClick={() => handleDropDownClick('transactions')}>
-                                Transactions
+                            <button className="w-full mb-2 hover:bg-gray-100 px-4 capitalize" onClick={() => handleDropDownClick(t("rep.Transactions"))}>
+                                {t("rep.Transactions")}
                             </button>
-                            <button className="w-full mb-2 hover:bg-gray-100 px-4" onClick={() => handleDropDownClick('expenses')}>
-                                Expenses
+                            <button className="w-full mb-2 hover:bg-gray-100 px-4 capitalize" onClick={() => handleDropDownClick(t("rep.Expenses"))}>
+                                {t("rep.Expenses")}
                             </button>
-                            <button className="w-full hover:bg-gray-100 px-4" onClick={() => handleDropDownClick('incomes')}>
-                                Incomes
+                            <button className="w-full hover:bg-gray-100 px-4 capitalize" onClick={() => handleDropDownClick(t("rep.Incomes"))}>
+                                {t("rep.Incomes")}
                             </button>
                         </div>
                     )}

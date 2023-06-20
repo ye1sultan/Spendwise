@@ -125,7 +125,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <Title title={t("dashboard.title")} />
+            <Title title={t("sidebar.dashboard")} />
             <div className="flex justify-between items-center flex-wrap w-full gap-x-12 gap-y-6 lg:mb-[40px] mb-[20px]">
                 <Bie title={t("dashboard.bie.currentBalance")} svg="current" transactions={transactions} isLoading={isLoading} />
                 <Bie title={t("dashboard.bie.incomes")} svg="incomes" transactions={transactions} isLoading={isLoading} />

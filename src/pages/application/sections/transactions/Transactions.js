@@ -10,8 +10,11 @@ import { ReactComponent as NoResultTr } from './NoResultTr.svg';
 
 import { BsArrowDownRight, BsArrowUpRight } from 'react-icons/bs';
 import { AiOutlinePlus } from "react-icons/ai";
+import { useTranslation } from "react-i18next";
 
 const Transactions = () => {
+    const { t, i18n } = useTranslation();
+
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDropDown, setShowDropDown] = useState(false);
     const [transactions, setTransactions] = useState([]);
@@ -119,7 +122,7 @@ const Transactions = () => {
                 <div className="flex flex-col w-full justify-center items-center 2xl:mb-8">
                     <NoResultTr className="w-[160px] 2xl:w-full 2xl:mt-8" />
                     <div className="font-medium 2xl:text-[24px] text-[#696969] w-full flex justify-center items-center 2xl:mt-8">
-                        No results
+                        {t("trn.noResults")}
                     </div>
                 </div>
             );
@@ -179,13 +182,13 @@ const Transactions = () => {
                 />
             )}
 
-            <Title title={'Transactions'} />
+            <Title title={t("sidebar.transactions")} />
             <div className="self-start relative">
                 <button
                     onClick={() => toggleState()}
                     className="h-[35px] md:h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[16px] lg:text-[20px] flex justify-between items-center px-5 z-10">
                     <AiOutlinePlus className="mr-1 2xl:mr-[10px]" size={iconWidth} />
-                    New
+                    {t("trn.new")}
                 </button>
                 {showDropDown && (
                     <div className="flex flex-col absolute top-full 2xl:w-[160px] 2xl:mt-2 bg-white rounded-xl shadow-lg overflow-hidden">
@@ -193,13 +196,13 @@ const Transactions = () => {
                             onClick={() => handleIncomeClick('income')}
                             className="w-full flex justify-between items-center px-4 py-2 text-left 2xl:text-[22px] font-medium text-black hover:bg-gray-100 focus:outline-none">
                             <BsArrowUpRight className="mr-2 2xl:mr-0" size={iconWidth} color="#2ecc71" />
-                            Income
+                            {t("trn.income")}
                         </button>
                         <button
                             onClick={() => handleExpenseClick('expense')}
                             className="w-full flex justify-between items-center px-4 py-2 text-left 2xl:text-[22px] font-medium text-black hover:bg-gray-100 focus:outline-none">
                             <BsArrowDownRight className="mr-2 2xl:mr-0" size={iconWidth} color="#e74c3c" />
-                            Expense
+                            {t("trn.expense")}
                         </button>
                     </div>
                 )}
@@ -210,14 +213,14 @@ const Transactions = () => {
                     setCurrentMonth={setCurrentMonth}
                 />
                 <div className="hidden sm:flex justify-around items-center w-full bg-[#BFA2E5] bg-opacity-90">
-                    {['Date', 'Category', 'Description', 'Type', 'Amount', 'Action'].map((text, index) => (
+                    {[t("trn.bar.date"), t("trn.bar.category"), t("trn.bar.description"), t("trn.bar.type"), t("trn.bar.amount"), t("trn.bar.action")].map((text, index) => (
                         <div key={index} className="py-3 md:py-5 text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium w-1/6 text-center">
                             {text}
                         </div>
                     ))}
                 </div>
                 <div className="flex sm:hidden justify-around items-center w-full bg-[#BFA2E5] bg-opacity-90">
-                    {['Date', 'Category', 'Amount', 'More'].map((text, index) => (
+                    {[t("trn.bar.date"), t("trn.bar.category"), t("trn.bar.amount"), t("trn.bar.more")].map((text, index) => (
                         <div key={index} className="py-3 md:py-5 text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium w-1/4 text-center">
                             {text}
                         </div>

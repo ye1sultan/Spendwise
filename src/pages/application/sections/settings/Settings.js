@@ -5,6 +5,7 @@ import Title from "../../components/Title";
 import MyProfile from "./MyProfile";
 import Preferences from "./Preferences";
 import Security from "./Security";
+import { useTranslation } from "react-i18next";
 
 const Settings = () => {
 	const [selectedTab, setSelectedTab] = useState("profile");
@@ -32,9 +33,11 @@ const Settings = () => {
 		}
 	};
 
+    const { t, i18n } = useTranslation();
+	
 	return (
 		<>
-			<Title title={"Settings"} />
+			<Title title={t("sidebar.settings")} />
 			<div className="max-w-[330px] md:max-w-[390px] lg:max-w-[510px] w-full h-[30px] sm:h-[40px] md:h-[50px] bg-opacity-10 rounded-full flex justify-center items-center self-start relative mb-[50px] bg-[#381C46]">
 				{tabButtons.map((tab, index) => (
 					<button

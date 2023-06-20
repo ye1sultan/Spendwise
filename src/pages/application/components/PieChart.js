@@ -12,37 +12,40 @@ import { BsCoin } from 'react-icons/bs';
 import { FaPray } from 'react-icons/fa';
 import { TbHealthRecognition } from 'react-icons/tb';
 import Transaction from '../sections/report/Transaction';
-
-const getTotalExpense = (data) => {
-    return data.datasets[0].data.reduce((acc, val) => acc + val, 0);
-};
-
-const centerTextPlugin = {
-    id: "centerText",
-    afterDraw: (chart) => {
-        const total = getTotalExpense(chart.data);
-        const ctx = chart.ctx;
-        const centerX = (chart.chartArea.left + chart.chartArea.right) / 2;
-        const centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
-
-        ctx.font = "24px Montserrat";
-        ctx.fillStyle = "#000000";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-
-        const text2 = "Total";
-        const text1 = `${total.toLocaleString()} ₸`;
-        const lineHeight = 28;
-        const totalHeight = lineHeight * 2;
-
-        ctx.fillText(text1, centerX, centerY - totalHeight / 4);
-        ctx.fillText(text2, centerX, centerY + totalHeight / 4);
-    },
-};
-
-Chart.register(centerTextPlugin);
+import { useTranslation } from 'react-i18next';
 
 const PieChart = ({ transactions, type }) => {
+    const { t, i18n } = useTranslation();
+
+    const getTotalExpense = (data) => {
+        return data.datasets[0].data.reduce((acc, val) => acc + val, 0);
+    };
+
+    const centerTextPlugin = {
+        id: "centerText",
+        afterDraw: (chart) => {
+            const total = getTotalExpense(chart.data);
+            const ctx = chart.ctx;
+            const centerX = (chart.chartArea.left + chart.chartArea.right) / 2;
+            const centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
+
+            ctx.font = "24px Montserrat";
+            ctx.fillStyle = "#000000";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+
+            const text2 = t("dashboard.pie.total");
+            const text1 = `${total.toLocaleString()} ₸`;
+            const lineHeight = 28;
+            const totalHeight = lineHeight * 2;
+
+            ctx.fillText(text1, centerX, centerY - totalHeight / 4);
+            ctx.fillText(text2, centerX, centerY + totalHeight / 4);
+        },
+    };
+
+    Chart.register(centerTextPlugin);
+
     const categories = [
         { name: "Clothing", icon: <AiOutlineShop className="text-[15px] lg:text-[30px]" color="#ffffff" />, color: "#D942A6" },
         { name: "Health", icon: <TbHealthRecognition className="text-[15px] lg:text-[30px]" color="#ffffff" />, color: "#19AD50" },
@@ -110,7 +113,7 @@ const PieChart = ({ transactions, type }) => {
                 callbacks: {
                     title: (context) => {
                         const index = context[0].dataIndex;
-                        return transactions[index].category;
+                        return t(`dashboard.pie.category.${transactions[index].category}`);
                     },
                     label: (context) => {
                         const index = context.dataIndex;
@@ -168,7 +171,7 @@ const PieChart = ({ transactions, type }) => {
             </div>
             {type && (<div className="w-[100%] sm:w-[50%] mt-[40px] sm:mt-0">
                 <div className="text-lg lg:text-xl xl:text-[28px] 2xl:text-[32px] font-medium mb-6 capitalize">
-                    <span className={type === 'incomes' ? 'text-green-500' : type === 'expenses' ? 'text-red-500' : ''}>{type}</span> by category
+                    {type} {t("rep.by")}
                 </div>
                 {getTransactions()}
             </div>)}

@@ -6,6 +6,7 @@ import { FaMicrophone, FaMugHot, FaPray, FaRegHandPeace, FaTools } from 'react-i
 import { MdOutlineBrokenImage, MdPedalBike, MdStroller } from 'react-icons/md';
 import { RiBookLine, RiMedal2Fill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Goal = ({ name, icon, deadline, totalAmount, amount, color }) => {
     const getPercent = (amount, totalAmount) => {
@@ -13,6 +14,8 @@ const Goal = ({ name, icon, deadline, totalAmount, amount, color }) => {
         return (res);
     }
     let progress = getPercent(amount, totalAmount);
+
+    const { t, i18n } = useTranslation();
 
     const allIcons = [
         { name: 'earth', icon: <IoEarthOutline className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
@@ -72,8 +75,8 @@ const Goal = ({ name, icon, deadline, totalAmount, amount, color }) => {
             </div>
             <div className="w-full flex justify-between items-center">
                 <div>
-                    <div className="text-sm sm:text-lg lg:text-xl font-medium text-[#6A6A6A]">
-                        Till
+                    <div className="text-sm sm:text-lg lg:text-xl font-medium text-[#6A6A6A] capitalize">
+                        {t("dashboard.goal.till")}
                     </div>
                     <div className="text-base sm:text-xl lg:text-2xl font-medium">
                         {deadline}

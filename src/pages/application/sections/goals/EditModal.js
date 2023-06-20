@@ -13,8 +13,11 @@ import { RiBookLine, RiMedal2Fill } from 'react-icons/ri';
 import { useState } from 'react';
 import { format } from "date-fns";
 import { TbCurrencyTenge, TbIcons } from "react-icons/tb";
+import { useTranslation } from "react-i18next";
 
 const EditModal = ({ goal, onSave, onCancel }) => {
+    const { t, i18n } = useTranslation();
+
     const allIcons = [
         { name: 'earth', icon: <IoEarthOutline className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
         { name: 'cart', icon: <AiOutlineShoppingCart className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
@@ -279,7 +282,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                 </div>
                 <div className='w-full flex justify-end'>
                     <button className='uppercase text-black text-[14px] lg:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]' onClick={() => handleSave()}>
-                        save
+                        {t("trn.save")}
                     </button>
                 </div>
             </div>

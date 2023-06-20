@@ -1,6 +1,8 @@
+import moment from 'moment';
+import 'moment/locale/kk';
+
 import { BsChevronRight, BsTrashFill } from 'react-icons/bs';
 import { BiPencil } from 'react-icons/bi';
-
 import { AiOutlineCar, AiOutlineHeart, AiOutlineHome, AiOutlineShop, AiOutlineShoppingCart } from 'react-icons/ai';
 import { BiBookAlt } from 'react-icons/bi';
 import { BsAirplaneEngines, BsLaptop, BsThreeDots } from 'react-icons/bs';
@@ -11,8 +13,10 @@ import { AiOutlineGift, AiOutlineStar } from 'react-icons/ai';
 import { BsCoin } from 'react-icons/bs';
 import { FaPray } from 'react-icons/fa';
 import { TbHealthRecognition } from 'react-icons/tb';
+import { useTranslation } from 'react-i18next';
 
 const Transaction = ({ transaction, transactionDate, isLast, deleteTransaction, editTransaction }) => {
+    const { t, i18n } = useTranslation();
     const { category, description, payment_method, amount, transaction_type } = transaction;
 
     const categories = [
@@ -55,7 +59,22 @@ const Transaction = ({ transaction, transactionDate, isLast, deleteTransaction, 
         let date = new Date(dateString);
         const options = { day: 'numeric', month: 'long' };
 
-        return date.toLocaleDateString('en-GB', options);
+        if (localStorage.getItem("i18nextLng") === "en") {
+            return date.toLocaleDateString('en-GB', options);
+        }
+
+        if (localStorage.getItem("i18nextLng") === "ru") {
+            return date.toLocaleDateString('ru-RU', options);
+        }
+
+        if (localStorage.getItem("i18nextLng") === "kz") {
+            const date = moment(dateString);
+            date.locale('kk');
+
+            return date.format('D MMMM');
+        }
+
+        return date.toLocaleDateString('en-GB', options);;
     }
 
     return (
@@ -65,11 +84,11 @@ const Transaction = ({ transaction, transactionDate, isLast, deleteTransaction, 
                 <div className="w-1/4 sm:w-1/6 text-center">
                     <div className='flex flex-row justify-center items-center'>
                         <div className="flex-shrink-0">{getCategory()}</div>
-                        <div className="flex-shrink truncate">{category}</div>
+                        <div className="flex-shrink truncate">{t(`dashboard.pie.category.${category}`)}</div>
                     </div>
                 </div>
                 <div className="hidden sm:block w-1/6 text-center truncate overflow-hidden">{description}</div>
-                <div className="hidden sm:block w-1/6 text-center">{payment_method}</div>
+                <div className="hidden sm:block w-1/6 text-center">{t(`trn.method.${payment_method}`)}</div>
                 <div className={`w-1/4 sm:w-1/6 text-center ${transaction_type === "income" ? "text-green-500" : "text-red-500"}`}>{parseInt(amount)} ₸</div>
                 <div className="flex sm:space-x-4 w-1/4 sm:w-1/6 justify-center">
                     <button onClick={() => editTransaction(transaction, transaction.id)}>

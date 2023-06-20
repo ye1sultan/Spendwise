@@ -9,8 +9,11 @@ import Title from "../../components/Title";
 import GoalCreator from "./CreateGoal";
 import Goal from "./Goal";
 import EditModal from "./EditModal";
+import { useTranslation } from "react-i18next";
 
 const Goals = () => {
+    const { t, i18n } = useTranslation();
+
     const [showDropDown, setShowDropDown] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [goals, setGoals] = useState([]);
@@ -134,7 +137,7 @@ const Goals = () => {
                     rounded-[15px] md:rounded-[20px] lg:rounded-[30px] 
                     flex flex-col justify-center items-center cursor-pointer shadow-md" onClick={onClick}>
                 <AiOutlinePlus className="text-[30px] md:text-[35px] lg:text-[40px]" />
-                <div className="text-2xl lg:text-3xl xl:text-[40px] font-medium">New goal</div>
+                <div className="text-2xl lg:text-3xl xl:text-[40px] font-medium">{t("goals.goal")}</div>
             </div>
         );
     }
@@ -142,14 +145,17 @@ const Goals = () => {
     const GoalsDropDown = ({ onSelect }) => {
         return (
             <div className="absolute top-full mt-2 bg-white rounded-xl shadow-md overflow-hidden">
-                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[16px] lg:text-[20px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('active')}>
-                    <AiOutlineClockCircle className="mr-2 text-[20px] lg:text-[25px]" /> Active Goals
+                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[16px] lg:text-[20px] font-medium capitalize text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('active')}>
+                    <AiOutlineClockCircle className="mr-2 text-[20px] lg:text-[25px]" />
+                    {t("goals.active")} {t("sidebar.goals")}
                 </button>
-                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[16px] lg:text-[20px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('paused')}>
-                    <MdMotionPhotosPaused className="mr-2 text-[20px] lg:text-[25px]" /> Paused Goals
+                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[16px] lg:text-[20px] font-medium capitalize text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('paused')}>
+                    <MdMotionPhotosPaused className="mr-2 text-[20px] lg:text-[25px]" />
+                    {t("goals.paused")} {t("sidebar.goals")}
                 </button>
-                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[16px] lg:text-[20px] font-medium text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('reached')}>
-                    <AiOutlineCheckCircle className="mr-2 text-[20px] lg:text-[25px]" /> Reached Goals
+                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[16px] lg:text-[20px] font-medium capitalize text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('reached')}>
+                    <AiOutlineCheckCircle className="mr-2 text-[20px] lg:text-[25px]" />
+                    {t("goals.reached")} {t("sidebar.goals")}
                 </button>
             </div>
         );
@@ -182,11 +188,11 @@ const Goals = () => {
                     addNewGoal={addNewGoal} />
             )}
 
-            <Title title={'Goals'} />
+            <Title title={t("sidebar.goals")} />
             <div className="relative self-start z-10 w-full mb-[30px]">
-                <button onClick={() => setShowDropDown(!showDropDown)} className="h-[35px] md:h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[16px] lg:text-[20px] flex justify-between items-center px-5 z-10">
+                <button onClick={() => setShowDropDown(!showDropDown)} className="capitalize h-[35px] md:h-[40px] bg-[#BFA2E5] rounded-[30px] text-black font-medium text-[16px] lg:text-[20px] flex justify-between items-center px-5 z-10">
                     <BsChevronDown className="mr-2" />
-                    {goalFilter.charAt(0).toUpperCase() + goalFilter.slice(1)} Goals
+                    {t(`goals.${goalFilter.charAt(0).toLowerCase() + goalFilter.slice(1)}`)} {t("sidebar.goals")}
                 </button>
                 {showDropDown && <GoalsDropDown onSelect={handleFilterSelect} />}
             </div>

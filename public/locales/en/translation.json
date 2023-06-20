@@ -46,6 +46,105 @@
                 "subtitle": "Improve your finances now!",
                 "setGoals": "set my goals"
             }
+        },
+        "pie": {
+            "total": "Total",
+            "category": {
+                "Clothing": "Clothing",
+                "Health": "Health",
+                "Beauty": "Beauty",
+                "Home": "Home",
+                "Supermarket": "Supermarket",
+                "Education": "Education",
+                "Restaurant": "Restaurant",
+                "Transport": "Transport",
+                "Travel": "Travel",
+                "Services": "Services",
+                "Electronics": "Electronics",
+                "Recreation": "Recreation",
+                "Others": "Others",
+                "Salary": "Salary",
+                "Gift": "Gift",
+                "Investment": "Investment",
+                "Rewards": "Rewards",
+                "Other": "Other"
+            }
+        },
+        "bar": {
+            "incomes": "incomes",
+            "expenses": "expenses",
+            "balance": "balance"
+        },
+        "goal": {
+            "till": "till"
+        }
+    },
+    "trn": {
+        "new": "new",
+        "income": "income",
+        "expense": "expense",
+        "month": {
+            "january": "january",
+            "february": "february",
+            "march": "march",
+            "april": "april",
+            "may": "may",
+            "june": "june",
+            "july": "july",
+            "august": "august",
+            "september": "september",
+            "october": "october",
+            "november": "november",
+            "december": "december"
+        },
+        "bar": {
+            "date": "date",
+            "category": "category",
+            "description": "description",
+            "type": "payment method",
+            "amount": "amount",
+            "action": "action",
+            "more": "more"
+        },
+        "noResults": "no results",
+        "method": {
+            "Cash": "cash",
+            "Debit Card": "debit card"
+        },
+        "save": "save"
+    },
+    "goals": {
+        "active": "active",
+        "paused": "paused",
+        "reached": "reached",
+        "goal": "new goal",
+        "name": "goal name",
+        "curBal": "current balance",
+        "goalBal": "goal value",
+        "icon": "icon",
+        "color": "color"
+    },
+    "rep": {
+        "Transactions": "transactions",
+        "Expenses": "Expenses",
+        "Incomes": "Incomes",
+        "percentage": "percentage",
+        "by": "by category"
+    },
+    "notif": {
+        "email": "email",
+        "recieve": "Receive notifications",
+        "news": {
+            "title": "news",
+            "text": "Miscellaneous financial news."
+        },
+        "goal": {
+            "title": "Goal status",
+            "text": "You can find out if you are close to the goal."
+        },
+        "debt": {
+            "title": "Debt",
+            "text": "It's better to run from debt, isn't it?"
         }
     }
 }

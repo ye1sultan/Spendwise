@@ -9,8 +9,11 @@ import { FaMicrophone, FaMugHot, FaPray, FaRegHandPeace, FaTools } from 'react-i
 import { MdOutlineBrokenImage, MdPedalBike, MdStroller } from 'react-icons/md';
 import { RiBookLine, RiMedal2Fill } from 'react-icons/ri';
 import { format } from 'date-fns';
+import { useTranslation } from 'react-i18next';
 
 const CreateGoal = ({ onModalClose, addNewGoal }) => {
+    const { t, i18n } = useTranslation();
+    
     const allIcons = [
         { name: 'earth', icon: <IoEarthOutline className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
         { name: 'cart', icon: <AiOutlineShoppingCart className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
@@ -208,48 +211,48 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
             <div className='bg-white shadow-md rounded-[30px] xl:rounded-[40px] mx-4 w-full max-w-[350px] xl:max-w-[400px] min-w-[280px] p-6 xl:p-8'>
                 <div className='w-full flex justify-between items-center mb-[20px]'>
                     <div className="text-xl xl:text-[28px] 2xl:text-[32px] font-medium">
-                        New Goal
+                        {t("goals.goal")}
                     </div>
                     <IoCloseOutline className='cursor-pointer text-[25px] md:text-[30px] lg:text-[35px]' onClick={() => onModalClose(false)} />
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A]"
+                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A] placeholder:capitalize"
                         type="text"
-                        placeholder="Goal name"
+                        placeholder={t("goals.name")}
                         onChange={e => setSelectedName(e.target.value)} />
                     <BsCheckSquare className='absolute top-[50%] translate-y-[-50%] left-0 text-[20px] lg:text-[30px]' color="#696969" />
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A]"
+                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A] placeholder:capitalize"
                         type="number"
-                        placeholder="Your current balance"
+                        placeholder={t("goals.curBal")}
                         onChange={e => setSelectedAmount(e.target.value)} />
                     <TbCurrencyTenge className='absolute top-[50%] translate-y-[-50%] left-0 text-[20px] lg:text-[30px]' color="#696969" />
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A]"
+                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A] placeholder:capitalize"
                         type="number"
-                        placeholder="Goal value"
+                        placeholder={t("goals.goalBal")}
                         onChange={e => setSelectedTotalAmount(e.target.value)} />
                     <TbCurrencyTenge className='absolute top-[50%] translate-y-[-50%] left-0 text-[20px] lg:text-[30px]' color="#696969" />
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full min-w-[95%] h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A]"
+                        className="w-full min-w-[95%] h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A] placeholder:capitalize"
                         type="date"
                         min={format(new Date(), 'yyyy-MM-dd')}
-                        placeholder="Deadline"
+                        placeholder={t("dashboard.goal.till")}
                         onChange={e => setSelectedDeadline(e.target.value)} />
                     <AiOutlineCalendar className='absolute top-[50%] translate-y-[-50%] left-0 text-[20px] lg:text-[30px] ' color="#696969" />
                 </div>
                 <div className='flex flex-col justify-center items-start mb-[10px]'>
                     <div className='flex justify-center items-center mb-[10px]'>
                         <TbIcons className='text-[20px] lg:text-[30px]' color="#696969" />
-                        <div className='pl-4 text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal'>
-                            Icon
+                        <div className='pl-4 text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal capitalize'>
+                            {t("goals.icon")}
                         </div>
                     </div>
                     <div className='w-full flex flex-row justify-between items-center relative'>
@@ -273,8 +276,8 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
                 <div className='flex flex-col justify-center items-start mb-[30px]'>
                     <div className='flex justify-center items-center mb-[10px]'>
                         <BiColorFill className='text-[20px] lg:text-[30px]' color="#696969" />
-                        <div className='pl-4 text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal'>
-                            Color
+                        <div className='pl-4 text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal capitalize'>
+                            {t("goals.color")}
                         </div>
                     </div>
                     <div className='w-full flex justify-between items-center relative'>
@@ -297,7 +300,7 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
                 </div>
                 <div className='w-full flex justify-end'>
                     <button className='uppercase text-black text-[14px] lg:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]' onClick={() => saveGoal()}>
-                        save
+                        {t("trn.save")}
                     </button>
                 </div>
             </div>

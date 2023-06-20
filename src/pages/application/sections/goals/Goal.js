@@ -1,3 +1,5 @@
+import moment from 'moment';
+import 'moment/locale/kk';
 import { AiFillDelete, AiOutlineCar, AiOutlineGift, AiOutlineShoppingCart } from 'react-icons/ai';
 import { IoEarthOutline } from 'react-icons/io5';
 import { BsCheckAll, BsFillPauseFill, BsFillPlayFill } from 'react-icons/bs';
@@ -9,8 +11,10 @@ import { BiDumbbell, BiPlanet, BiWine } from 'react-icons/bi';
 import { FaMicrophone, FaMugHot, FaPray, FaRegHandPeace, FaTools } from 'react-icons/fa';
 import { MdOutlineBrokenImage, MdPedalBike, MdStroller } from 'react-icons/md';
 import { RiBookLine, RiMedal2Fill } from 'react-icons/ri';
-
+import { useTranslation } from 'react-i18next';
 const Goal = ({ goal, name, icon, deadline, target_amount, initial_target_amount, color, id, status, onPauseGoal, onDeleteGoal, onReachGoal, onEditGoal }) => {
+    const { t, i18n } = useTranslation();
+    
     let fixedAmount = status === 'reached' ? target_amount : initial_target_amount;
 
     const getPercent = (initial_target_amount, target_amount) => {
@@ -23,7 +27,22 @@ const Goal = ({ goal, name, icon, deadline, target_amount, initial_target_amount
         let date = new Date(dateString);
         const options = { day: 'numeric', month: 'long' };
 
-        return date.toLocaleDateString('en-GB', options);
+        if (localStorage.getItem("i18nextLng") === "en") {
+            return date.toLocaleDateString('en-GB', options);
+        }
+
+        if (localStorage.getItem("i18nextLng") === "ru") {
+            return date.toLocaleDateString('ru-RU', options);
+        }
+
+        if (localStorage.getItem("i18nextLng") === "kz") {
+            const date = moment(dateString);
+            date.locale('kk');
+
+            return date.format('D MMMM');
+        }
+
+        return date.toLocaleDateString('en-GB', options);;
     }
 
     const allIcons = [
@@ -95,9 +114,9 @@ const Goal = ({ goal, name, icon, deadline, target_amount, initial_target_amount
             <div className="w-full flex justify-between items-center">
                 <div>
                     <div className="text-[14px] md:text-[16px] lg:text-[20px] font-medium text-[#6A6A6A]">
-                        Till
+                        {t("dashboard.goal.till")}
                     </div>
-                    <div className="text-[16px] md:text-[20px] lg:text-[24px] font-medium">
+                    <div className="text-[16px] md:text-[20px] lg:text-[24px] font-medium capitalize">
                         {formatDate(deadline)}
                     </div>
                 </div>

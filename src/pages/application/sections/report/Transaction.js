@@ -1,4 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 const Transaction = ({ name, value, icon, color, percentage, type }) => {
+    const { t, i18n } = useTranslation();
     return (
         <div className="max-w-[560px] w-full flex flex-col justify-center items-center mb-6">
             <div className="w-full flex justify-between items-center ">
@@ -10,10 +13,10 @@ const Transaction = ({ name, value, icon, color, percentage, type }) => {
                     </div>
                     <div className="flex flex-col">
                         <div className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] font-semibold">
-                            {name}
+                            {t(`dashboard.pie.category.${name}`)}
                         </div>
                         <div className="text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] text-[#000000]">
-                            Percentage
+                            {t("rep.percentage")}
                         </div>
                     </div>
                 </div>
