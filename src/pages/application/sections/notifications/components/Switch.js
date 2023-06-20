@@ -1,4 +1,4 @@
-const Switch = ({ onChange, checked, name, notif }) => {
+const Switch = ({ onChange, checked, name }) => {
     return (
         <>
             <div onClick={() => onChange(name)} className={`flex-shrink-0 w-[40px] lg:w-[60px] h-[20px] lg:h-[30px] ${checked ? 'bg-[#BFA2E5]' : 'bg-[#d0c6dd]'} rounded-full relative cursor-pointer`}>

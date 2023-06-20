@@ -222,7 +222,7 @@ const Report = () => {
     return (
         <>
             <Title title={"Report"} />
-            <button className="max-w-[60%] sm:max-w-[50%] lg:max-w-[30%] w-full min-w-[160px] h-[30px] sm:h-[40px] md:h-[50px] lg:h-[60px] bg-[#381C46] bg-opacity-10 rounded-[30px] self-start relative" onClick={handleSwitch}>
+            <button className="max-w-[180px] sm:max-w-[220px] md:max-w-[260px] lg:max-w-[340px] w-full min-w-[160px] h-[30px] sm:h-[40px] md:h-[50px] bg-[#381C46] bg-opacity-10 rounded-[30px] self-start relative" onClick={handleSwitch}>
                 <div className={`w-[50%] h-full rounded-[30px] bg-[#BFA2E5] bg-opacity-80 ${switched ? " translate-x-[100%]" : "translate-x-0"} transition-transform ease-in-out duration-300`}></div>
                 <FiPieChart className="absolute top-[50%] translate-y-[-50%] left-[20%] z-50 text-[20px] md:text-[30px] lg:text-[35px]" />
                 <FiBarChart className="absolute top-[50%] translate-y-[-50%] right-[20%] z-50 text-[20px] md:text-[30px] lg:text-[35px]" />
@@ -231,7 +231,7 @@ const Report = () => {
                 <div className="self-start flex flex-col relative mt-[30px] ml-[20px]" onClick={() => setDropDown(!dropDown)}>
                     <button className="text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] flex items-center">
                         <div className="capitalize">{currentTransaction}</div>
-                        <BiChevronDown size={30} />
+                        <BiChevronDown className="text-[20px] md:text-[25px] lg:text-[30px]" />
                     </button>
                     {dropDown && (
                         <div className="absolute top-[120%] flex flex-col justify-start items-center text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] bg-white shadow-md rounded-[20px] py-2 z-50">

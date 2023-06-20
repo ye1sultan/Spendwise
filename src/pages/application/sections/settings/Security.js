@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { updateUser } from '../../../../services/api';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { IoCloseOutline } from 'react-icons/io5';
 
 const Security = () => {
     const data = JSON.parse(sessionStorage.getItem('userData'));
@@ -25,7 +26,11 @@ const Security = () => {
     const [pwdErrorMsg, setPwdErrorMsg] = useState('');
 
     const handleEmailSubmit = async () => {
-        if (email !== confirmEmail) {
+        if (confirmEmail === '' && email === '') {
+            setEmailError(true);
+            setEmailErrorMsg('The email and confirm email fields are empty.');
+            return;
+        } else if (email !== confirmEmail) {
             setEmailError(true);
             setEmailErrorMsg('The email and confirm email fields value must be matched.');
             return;
@@ -91,133 +96,138 @@ const Security = () => {
         }
     }
 
-    const [transparentPassword, setTransparentPassword] = useState(false);
-
     return (
         <>
-            <div className="self-start w-[85%]">
-                <div className="w-full h-[280px] bg-white mb-[55px] rounded-[10px] sm:rounded-[20px] md:rounded-[30px] lg:rounded-[40px] flex flex-col justify-between items-start py-[30px] px-[55px]">
-                    <div className="text-[36px] font-medium ">
-                        Change my email
-                    </div>
-                    <div className="text-[20px] font-medium text-[#696969]">
-                        After requesting the change, we will send a confirmation to the new registered email. Until confirmation, your Mobills account will remain linked to your current email.
-                    </div>
-                    <button className="uppercase text-white text-[16px] w-[270px] h-[45px] bg-[#9F75D6] bg-opacity-90 rounded-[30px]"
-                        onClick={() => {
-                            setPasswordModal(false);
-                            setEmailModal(true);
-                        }}>
-                        change e-mail
-                    </button>
+            <div className="self-start max-w-[970px] w-full bg-white mb-[55px] rounded-[10px] sm:rounded-[20px] md:rounded-[30px] lg:rounded-[40px] flex flex-col justify-between items-start px-[20px] sm:px-[30px] md:px-[40px] lg:px-[50px] py-[20px] md:py-[30px] lg:py-[40px]">
+                <div className="text-[18px] lg:text-[24px] xl:text-[28px] 2xl:text-[32px] font-medium mb-4 sm:mb-8">
+                    Change my email
                 </div>
-                <div className="w-full h-[280px] bg-white mb-[55px] rounded-[30px] flex flex-col justify-between items-start py-[30px] px-[55px]">
-                    <div className="text-[36px] font-medium ">
-                        Change my password
-                    </div>
-                    <div className="text-[20px] font-medium text-[#696969]">
-                        Tip: If possible, use a password that contains numbers, uppercase, lowercase, and special characters.
-                    </div>
-                    <button className="uppercase text-white text-[16px] w-[270px] h-[45px] bg-[#9F75D6] bg-opacity-90 rounded-[30px]" onClick={() => {
-                        setEmailModal(false);
-                        setPasswordModal(true);
+                <div className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] font-medium text-[#696969] mb-4 sm:mb-8">
+                    After requesting the change, we will send a confirmation to the new registered email. Until confirmation, your Spendwise account will remain linked to your current email.
+                </div>
+                <button className="self-start px-4 h-[30px] sm:h-[40px] md:h-[50px] rounded-[30px] text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] font-medium uppercase bg-[#BFA2E5] cursor-pointer"
+                    onClick={() => {
+                        setPasswordModal(false);
+                        setEmailModal(true);
                     }}>
-                        CHANGE PASSWORD
-                    </button>
-                </div>
+                    change e-mail
+                </button>
             </div>
-            <div className={`${emailModal ? 'flex' : 'hidden'} fixed top-[5%] left-[50%] translate-x-[-50%] z-20 bg-white py-[20px] px-[30px] flex-col justify-center shadow-md rounded-[40px] max-w-[350px] w-full`} >
-                <div className="flex justify-between items-center w-full mb-6">
-                    <div className="text-[22px] font-medium">
-                        Change E-mail
-                    </div>
-                    <button onClick={() => setEmailModal(false)}>
-                        <AiOutlineClose size={25} />
-                    </button>
+
+            <div className="self-start max-w-[970px] w-full bg-white mb-[55px] rounded-[10px] sm:rounded-[20px] md:rounded-[30px] lg:rounded-[40px] flex flex-col justify-between items-start px-[20px] sm:px-[30px] md:px-[40px] lg:px-[50px] py-[20px] md:py-[30px] lg:py-[40px]">
+                <div className="text-[18px] lg:text-[24px] xl:text-[28px] 2xl:text-[32px] font-medium mb-4 sm:mb-8">
+                    Change my password
                 </div>
-                <div className="flex flex-col justify-between items-center w-full">
-                    <input
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full border-b-[1px] border-[#696969] text-[20px] px-4 py-2 mb-6"
-                        type="email"
-                        placeholder="New Email"
-                        required />
-                    <input
-                        onChange={(e) => setConfirmEmail(e.target.value)}
-                        className="w-full border-b-[1px] border-[#696969] text-[20px] px-4 py-2"
-                        type="email"
-                        placeholder="Confirm Email"
-                        style={{ marginBottom: emailError ? '12px' : '30px' }}
-                        required />
-                    {emailError && (
-                        <div
-                            className='text-center mb-3 text-[16px]'
-                            style={{ color: success ? '#000000' : '#EA1A1A' }}>
-                            {success ? 'Your email has been successfully updated!' : emailErrorMsg}
+                <div className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] font-medium text-[#696969] mb-4 sm:mb-8">
+                    Tip: If possible, use a password that contains numbers, uppercase, lowercase, and special characters.
+                </div>
+                <button className="self-start px-4 h-[30px] sm:h-[40px] md:h-[50px] rounded-[30px] text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] font-medium uppercase bg-[#BFA2E5] cursor-pointer" onClick={() => {
+                    setEmailModal(false);
+                    setPasswordModal(true);
+                }}>
+                    CHANGE PASSWORD
+                </button>
+            </div>
+
+            {emailModal && (
+                <div className="fixed top-0 left-0 right-0 bottom-0 flex items-start justify-center m-6 h-full z-20">
+                    <div className='bg-white shadow-md rounded-[30px] xl:rounded-[40px] mx-4 w-full max-w-[350px] xl:max-w-[400px] min-w-[280px] p-6 xl:p-8'>
+                        <div className='w-full flex justify-between items-center mb-[20px]'>
+                            <div className="text-xl xl:text-[28px] 2xl:text-[32px] font-medium">
+                                Change E-mail
+                            </div>
+                            <IoCloseOutline className='cursor-pointer text-[25px] md:text-[30px] lg:text-[35px]' onClick={() => setEmailModal(false)} />
                         </div>
-                    )}
-                    <button
-                        onClick={() => handleEmailSubmit()}
-                        className="uppercase w-full h-[40px] bg-[#9F75D6] bg-opacity-90 rounded-[50px] text-white text-[16px]"
-                        type="button">
-                        save
-                    </button>
-                </div>
-            </div>
-            <div className={`${passwordModal ? 'flex' : 'hidden'} fixed top-[5%] left-[50%] translate-x-[-50%] z-20 bg-white py-[20px] px-[30px] flex-col justify-center shadow-md rounded-[40px] max-w-[350px] w-full`} >
-                <div className="flex justify-between items-center w-full mb-6">
-                    <div className="text-[22px] font-medium">
-                        Change E-mail
-                    </div>
-                    <button onClick={() => setPasswordModal(false)}>
-                        <AiOutlineClose size={25} />
-                    </button>
-                </div>
-                <div className="flex flex-col justify-between items-center w-full">
-                    <div className='w-full h-full relative'>
-                        <input
-                            onChange={(e) => setOldPwd(e.target.value)}
-                            className="w-full h-full border-b-[1px] border-[#696969] text-[20px] px-4 py-2 mb-6"
-                            type={transparentPassword ? 'text' : 'password'}
-                            placeholder="Old Password"
-                            required />
-                        <button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setTransparentPassword(!transparentPassword);
-                            }}
-                            className='absolute top-[50%] right-2 translate-y-[-100%]'>
-                            {transparentPassword ? <FiEye size={20} /> : <FiEyeOff size={20} />}
-                        </button>
-                    </div>
-                    <input
-                        onChange={(e) => setNewPwd(e.target.value)}
-                        className="w-full h-full border-b-[1px] border-[#696969] text-[20px] px-4 py-2 mb-6"
-                        type={transparentPassword ? 'text' : 'password'}
-                        placeholder="New Password"
-                        required />
-                    <input
-                        onChange={(e) => setConfirmPwd(e.target.value)}
-                        className="w-full h-full border-b-[1px] border-[#696969] text-[20px] px-4 py-2"
-                        type={transparentPassword ? 'text' : 'password'}
-                        placeholder="Confirm Password"
-                        style={{ marginBottom: pwdError ? '12px' : '30px' }}
-                        required />
-                    {pwdError && (
-                        <div
-                            className='text-center mb-3 text-[16px]'
-                            style={{ color: success ? '#000000' : '#EA1A1A' }}>
-                            {success ? 'Your password has been successfully updated!' : pwdErrorMsg}
+                        <div className="flex flex-col justify-between items-center w-full">
+                            <div className='w-full h-[40px] md:h-[50px] mb-[20px] border-b-[1px] border-[#696969] '>
+                                <input
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-4 placeholder:text-[#6A6A6A]"
+                                    type="email"
+                                    placeholder="New Email"
+                                    required />
+                            </div>
+
+                            <div className='w-full h-[40px] md:h-[50px] mb-[40px] border-b-[1px] border-[#696969] '>
+                                <input
+                                    onChange={(e) => setConfirmEmail(e.target.value)}
+                                    className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-4 placeholder:text-[#6A6A6A]"
+                                    type="email"
+                                    placeholder="Confirm Email"
+                                    style={{ marginBottom: emailError ? '12px' : '30px' }}
+                                    required />
+                            </div>
+                            {emailError && (
+                                <div
+                                    className='text-center mb-3 text-[16px]'
+                                    style={{ color: success ? '#000000' : '#EA1A1A' }}>
+                                    {success ? 'Your email has been successfully updated!' : emailErrorMsg}
+                                </div>
+                            )}
+                            <div className='w-full flex justify-end'>
+                                <button className='uppercase text-black text-[14px] lg:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]' onClick={() => handleEmailSubmit()}>
+                                    save
+                                </button>
+                            </div>
                         </div>
-                    )}
-                    <button
-                        onClick={() => handlePwdSubmit()}
-                        className="uppercase w-full h-[40px] bg-[#9F75D6] bg-opacity-90 rounded-[50px] text-white text-[16px]"
-                        type="button">
-                        save
-                    </button>
-                </div>
-            </div>
+                    </div>
+                </div>)}
+
+            {passwordModal && (
+                <div className="fixed top-0 left-0 right-0 bottom-0 flex items-start justify-center m-6 h-full z-20">
+                    <div className='bg-white shadow-md rounded-[30px] xl:rounded-[40px] mx-4 w-full max-w-[350px] xl:max-w-[400px] min-w-[280px] p-6 xl:p-8'>
+                        <div className='w-full flex justify-between items-center mb-[20px]'>
+                            <div className="text-xl xl:text-[28px] 2xl:text-[32px] font-medium">
+                                Change E-mail
+                            </div>
+                            <IoCloseOutline className='cursor-pointer text-[25px] md:text-[30px] lg:text-[35px]' onClick={() => setPasswordModal(false)} />
+                        </div>
+                        <div className="flex flex-col justify-between items-center w-full">
+                            <div className='w-full h-[40px] md:h-[50px] mb-[40px] border-b-[1px] border-[#696969] '>
+                                <input
+                                    onChange={(e) => setOldPwd(e.target.value)}
+                                    className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-4 placeholder:text-[#6A6A6A]"
+                                    type='password'
+                                    placeholder="Old Password"
+                                    required />
+                            </div>
+
+                            <div className='w-full h-[40px] md:h-[50px] mb-[40px] border-b-[1px] border-[#696969] '>
+                                <input
+                                    onChange={(e) => setNewPwd(e.target.value)}
+                                    className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-4 placeholder:text-[#6A6A6A]"
+                                    type='password'
+                                    placeholder="New Password"
+                                    required />
+                            </div>
+
+                            <div className='w-full h-[40px] md:h-[50px] mb-[40px] border-b-[1px] border-[#696969] '>
+                                <input
+                                    onChange={(e) => setConfirmPwd(e.target.value)}
+                                    className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-4 placeholder:text-[#6A6A6A]"
+                                    type='password'
+                                    placeholder="Confirm Password"
+                                    style={{ marginBottom: pwdError ? '12px' : '30px' }}
+                                    required />
+                            </div>
+
+                            {pwdError && (
+                                <div
+                                    className='text-center mb-3 text-[16px]'
+                                    style={{ color: success ? '#000000' : '#EA1A1A' }}>
+                                    {success ? 'Your password has been successfully updated!' : pwdErrorMsg}
+                                </div>
+                            )}
+
+                            <div className='w-full flex justify-end'>
+                                <button className='uppercase text-black text-[14px] lg:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]' onClick={() => handlePwdSubmit()}>
+                                    save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div >)
+            }
         </>
     );
 }

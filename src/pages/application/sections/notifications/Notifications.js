@@ -42,7 +42,7 @@ const Notifications = () => {
                     <div className="text-lg lg:text-xl xl:text-[28px] 2xl:text-[32px] font-medium">
                         Receive notifications
                     </div>
-                    <Switch onChange={onChange} checked={notifValue} name="notif" notif={notifValue} />
+                    <Switch onChange={onChange} checked={notifValue} name="notif"/>
                 </div>
                 <hr className="h-[2px] bg-black" />
 

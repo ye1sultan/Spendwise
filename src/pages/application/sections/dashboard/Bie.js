@@ -4,8 +4,11 @@ import { BsFillCalendar2CheckFill, BsFillClockFill } from "react-icons/bs";
 import { TbCurrencyTenge } from "react-icons/tb";
 
 import { createMonthlyBalance } from "../../../../services/api";
+import { IoCloseOutline } from "react-icons/io5";
 
 const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
+    const [render, setRender] = useState(false);
+
     const calculateTotals = (transactions) => {
         let totalIncome = 0;
         let totalExpense = 0;
@@ -34,7 +37,7 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
     const [showBalanceModal, setShowBalanceModal] = useState(false);
     const [selectedAmount, setSelectedAmount] = useState(0);
 
-    const saveBalance = async () => {
+    const handleSave = async () => {
         const correctedAmount = correctNumber(selectedAmount);
         const today = new Date();
         const date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
@@ -43,6 +46,7 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
             await createMonthlyBalance(date, correctedAmount);
             console.log('Monthly balance saved successfully');
             setShowBalanceModal(false);
+            setRender(true);
         } catch (err) {
             console.error('Failed to save monthly balance', err);
         }
@@ -128,37 +132,42 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
                             {title}
                         </div>
                         <BsFillCalendar2CheckFill className="absolute right-2 sm:right-4 sm:top-[50%] bottom-2 sm:translate-y-[-50%] text-[25px] sm:text-[30px] md:text-[35px] lg:text-[40px]" color="#86B88A" />
-                        <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium flex justify-start items-center">
-                            {formatNumber(Math.floor(monthlyBalance?.balance ? monthlyBalance?.balance : "0")) + " ₸"}
-                            {!monthlyBalance && (
-                                <button
-                                    onClick={() => { setShowBalanceModal(true) }}
-                                    className="ml-4 uppercase text-black text-[16px] font-medium py-[10px] px-[40px] bg-[#BFA2E5] rounded-[40px] hover:bg-[#a97fdf]">
-                                    set
-                                </button>
-                            )}
-                        </div>
+                        {(!monthlyBalance && !render) ? (
+                            <button
+                                onClick={() => { setShowBalanceModal(true) }}
+                                className="uppercase text-black text-[12px] md:text-[14px] lg:text-[18px] font-medium py-[5px] px-[20px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]">
+                                set
+                            </button>
+                        ) : (
+                            <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium flex justify-start items-center">
+                                {formatNumber(Math.floor(monthlyBalance?.balance ? monthlyBalance?.balance : "0")) + " ₸"}
+                            </div>
+                        )}
+
                         {showBalanceModal && (
-                            <div className="fixed top-[5%] left-[50%] translate-x-[-50%] z-20 p-4 rounded-[30px] bg-white flex flex-col justify-center shadow-md ">
-                                <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium mb-[10px]">
-                                    Set monthly balance
-                                </div>
-                                <div className="relative w-full h-[50px] mb-[20px]">
-                                    <input
-                                        onChange={(e) => setSelectedAmount(e.target.value)}
-                                        className="w-full h-full text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] border-b-[1px] border-[#696969]"
-                                        type="number"
-                                        placeholder="Set balance" />
-                                    <div className="absolute top-[50%] translate-y-[-50%] left-0">
-                                        <TbCurrencyTenge size={30} color="#696969" />
+                            <div className="fixed top-0 left-0 right-0 bottom-0 flex items-start justify-center m-6 h-full z-20">
+                                <div className='bg-white shadow-md rounded-[30px] xl:rounded-[40px] mx-4 w-full max-w-[350px] xl:max-w-[400px] min-w-[280px] p-6 xl:p-8'>
+                                    <div className='w-full flex justify-between items-center mb-[20px]'>
+                                        <div className="text-xl xl:text-[28px] 2xl:text-[32px] font-medium">
+                                            Set Balance
+                                        </div>
+                                        <IoCloseOutline className='cursor-pointer text-[25px] md:text-[30px] lg:text-[35px]' onClick={() => setShowBalanceModal(false)} />
                                     </div>
-                                </div>
-                                <button
-                                    onClick={saveBalance}
-                                    className='uppercase text-black text-[16px] font-medium py-[10px] px-[40px] bg-[#BFA2E5] rounded-[40px]'>
-                                    save
-                                </button>
-                            </div >
+                                    <div className="relative w-full h-[40px] md:h-[50px] mb-[40px] border-b-[1px] border-[#696969]">
+                                        <input
+                                            onChange={(e) => setSelectedAmount(e.target.value)}
+                                            className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A]"
+                                            type="number"
+                                            placeholder="Set balance" />
+                                        <TbCurrencyTenge className="text-[25px] 2xl:text-[30px] absolute top-[50%] translate-y-[-50%] left-0" color="#696969" />
+                                    </div>
+                                    <div className='w-full flex justify-end'>
+                                        <button className='uppercase text-black text-[14px] lg:text-[18px] font-medium py-[5px] px-[20px] 2xl:py-[10px] 2xl:px-[40px] bg-[#BFA2E5] rounded-[20px] 2xl:rounded-[40px]' onClick={() => handleSave()}>
+                                            save
+                                        </button>
+                                    </div>
+                                </div >
+                            </div>
                         )}
                     </>
                 );
@@ -174,7 +183,7 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
             md:w-[220px] md:h-[105px] md:rounded-[20px] md:p-[20px]
             lg:w-[250px] lg:h-[120px] lg:rounded-[30px] lg:p-[25px]
             xl:w-[300px] xl:h-[140px]
-            bg-white border-[1px] border-[#AEAEAE] relative">
+            bg-white relative">
             {getBie()}
         </div>
     );

@@ -4,8 +4,8 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AiOutlineUnorderedList } from 'react-icons/ai';
 import { BiLogOut } from 'react-icons/bi';
 import { FiBell, FiPieChart, FiSettings } from 'react-icons/fi';
-import { MdSpaceDashboard } from 'react-icons/md';
-import { RiMedal2Fill } from 'react-icons/ri';
+import { MdOutlineSpaceDashboard, MdSpaceDashboard } from 'react-icons/md';
+import { RiCheckboxMultipleLine, RiMedal2Fill, RiPlayListAddFill } from 'react-icons/ri';
 
 import FullLogo from "../assets/FullLogo.png";
 import Logo from "../assets/Logo.png";
@@ -31,12 +31,12 @@ const SideBar = () => {
     }, [location.pathname]);
 
     const buttons = [
-        { view: 'dashboard', label: 'Dashboard', icon: <MdSpaceDashboard className="text-[25px] md:text-[35px] xl:mr-6" /> },
-        { view: 'transactions', label: 'Transactions', icon: <AiOutlineUnorderedList className="text-[25px] md:text-[35px] xl:mr-6" /> },
-        { view: 'goals', label: 'Goals', icon: <RiMedal2Fill className="text-[25px] md:text-[35px] xl:mr-6" /> },
-        { view: 'report', label: 'Report', icon: <FiPieChart className="text-[25px] md:text-[30px] xl:mr-7" /> },
-        { view: 'notifications', label: 'Notifications', icon: <FiBell className="text-[25px] md:text-[30px] xl:mr-7" /> },
-        { view: 'settings', label: 'Settings', icon: <FiSettings className="text-[25px] md:text-[30px] xl:mr-7" /> },
+        { view: 'dashboard', label: 'Dashboard', icon: <MdOutlineSpaceDashboard className="text-[25px] md:text-[30px] xl:mr-6" /> },
+        { view: 'transactions', label: 'Transactions', icon: <RiPlayListAddFill className="text-[25px] md:text-[30px] xl:mr-6" /> },
+        { view: 'goals', label: 'Goals', icon: <RiCheckboxMultipleLine className="text-[25px] md:text-[30px] xl:mr-6" /> },
+        { view: 'report', label: 'Report', icon: <FiPieChart className="text-[25px] md:text-[30px] xl:mr-6" /> },
+        { view: 'notifications', label: 'Notifications', icon: <FiBell className="text-[25px] md:text-[30px] xl:mr-6" /> },
+        { view: 'settings', label: 'Settings', icon: <FiSettings className="text-[25px] md:text-[30px] xl:mr-6" /> },
     ];
 
     const handleButtonClick = (view) => {

@@ -20,9 +20,9 @@ import ProtectedWrapper from './ProtectedRoute';
 
 function App() {
 
-    //text-lg lg:text-xl xl:text-[28px] 2xl:text-[32px] text 32px
+    //text-[18px] lg:text-[20px] xl:text-[28px] 2xl:text-[32px] text 32px
     //text-md lg:text-lg xl:text-[26px] 2xl:text-[30px] text 30px
-    //text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] text 24px
+    //text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[24px] text 24px
     //text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] text 22px
     //text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] text 20px
     //text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] text 18px
