@@ -40,6 +40,10 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
+.Toastify__toast {
+    border-radius: 10px !important;
+}
+
 /* 
 primary color: BFA2E5
 main black text: #2c3e50

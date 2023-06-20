@@ -38,10 +38,19 @@ const Login = () => {
             }
 
             toast("Success!");
-            
+
             navigate("/application");
         } catch (error) {
-            toast(error.message);
+            toast.error(error.message, {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
     };
 
@@ -56,7 +65,20 @@ const Login = () => {
 
     return (
         <div className="bg-white h-screen flex justify-center items-center relative font-sans">
-            <ToastContainer />
+            <ToastContainer
+                position="top-center"
+                autoClose={1000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                icon={false}
+                limit={3}
+            />
             <div className="h-[31%] w-full bg-gradient-to-r from-purple-300 via-purple-300 to-pink-100 absolute top-0 z-0">
             </div>
             <div className="max-w-[425px] w-full w-min-[320px] py-[20px] px-[30px] mx-[10px] bg-white rounded-[24px] flex flex-col justify-start items-center z-10 shadow-xl">
