@@ -21,7 +21,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
                                         <h2>Loading...</h2>
                                     </div>
                                 );
-                            } else if (separatedTransactions.expenseObjects || separatedTransactions.expenseObjects.length === 0) {
+                            } else if (!separatedTransactions.expenseObjects || separatedTransactions.expenseObjects.length === 0) {
                                 return <NoContent is={'expense'} />;
                             } else {
                                 return (
@@ -52,7 +52,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
                                         <h2>Loading...</h2>
                                     </div>
                                 );
-                            } else if (separatedTransactions.incomeObjects || separatedTransactions.incomeObjects.length === 0) {
+                            } else if (!separatedTransactions.incomeObjects || separatedTransactions.incomeObjects.length === 0) {
                                 return <NoContent is={'income'} />;
                             } else {
                                 return (
@@ -83,7 +83,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
                                         <h2>Loading...</h2>
                                     </div>
                                 );
-                            } else if (!(totals.totalExpense === 0 && totals.totalExpense === 0)) {
+                            } else if (totals.totalExpense === 0 && totals.totalExpense === 0) {
                                 return <NoContent is={'month'} />;
                             } else {
                                 return (
@@ -116,7 +116,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
                                         <h2>Loading...</h2>
                                     </div>
                                 );
-                            } else if (goal) {
+                            } else if (!goal) {
                                 return <NoContent is={'goal'} />;
                             } else {
                                 return (
