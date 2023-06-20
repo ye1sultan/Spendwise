@@ -43,11 +43,13 @@ const Security = () => {
                 name: data.name,
                 email: email,
                 password: sessionStorage.getItem("pwd"),
-                avatar: data.avatar,
+                goal_notifications_enabled: false,
+                transaction_notifications_enabled: false,
+                monthly_balance_notifications_enabled: false
             };
 
             try {
-                const updatedUser = await updateUser(data.id, obj);
+                const updatedUser = await updateUser(obj);
 
                 let updatedData = { ...data, email: updatedUser.email };
                 sessionStorage.setItem('userData', JSON.stringify(updatedData));
@@ -78,11 +80,13 @@ const Security = () => {
                 name: data.name,
                 email: data.email,
                 password: newPwd,
-                avatar: data.avatar,
+                goal_notifications_enabled: false,
+                transaction_notifications_enabled: false,
+                monthly_balance_notifications_enabled: false
             };
 
             try {
-                const updatedUser = await updateUser(data.id, obj);
+                await updateUser(obj);
 
                 sessionStorage.setItem('pwd', newPwd);
 
@@ -183,7 +187,7 @@ const Security = () => {
                             <IoCloseOutline className='cursor-pointer text-[25px] md:text-[30px] lg:text-[35px]' onClick={() => setPasswordModal(false)} />
                         </div>
                         <div className="flex flex-col justify-between items-center w-full">
-                            <div className='w-full h-[40px] md:h-[50px] mb-[40px] border-b-[1px] border-[#696969] '>
+                            <div className='w-full h-[40px] md:h-[50px] mb-[20px] border-b-[1px] border-[#696969] '>
                                 <input
                                     onChange={(e) => setOldPwd(e.target.value)}
                                     className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-4 placeholder:text-[#6A6A6A]"
@@ -192,7 +196,7 @@ const Security = () => {
                                     required />
                             </div>
 
-                            <div className='w-full h-[40px] md:h-[50px] mb-[40px] border-b-[1px] border-[#696969] '>
+                            <div className='w-full h-[40px] md:h-[50px] mb-[20px] border-b-[1px] border-[#696969] '>
                                 <input
                                     onChange={(e) => setNewPwd(e.target.value)}
                                     className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-4 placeholder:text-[#6A6A6A]"

@@ -122,9 +122,8 @@ export const updateTransaction = async (id, updatedTransaction) => {
     return await response.json();
 };
 
-export const updateUser = async (id, updatedUser) => {
-    console.log(id);
-    const response = await authenticatedFetch(`${API_URL}/users/${id}`, {
+export const updateUser = async (updatedUser) => {
+    const response = await authenticatedFetch(`${API_URL}/users/settings`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -133,7 +132,7 @@ export const updateUser = async (id, updatedUser) => {
     });
 
     if (!response.ok) {
-        throw new Error(`Error updating user with ID ${id}: ${response.statusText}`);
+        throw new Error(`Error updating user: ${response.statusText}`);
     }
 
     return await response.json();

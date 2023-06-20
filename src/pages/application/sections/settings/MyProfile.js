@@ -3,7 +3,7 @@ import { updateUser } from "../../../../services/api";
 
 const MyProfile = () => {
     const data = JSON.parse(sessionStorage.getItem('userData'));
-
+    const pwd = sessionStorage.getItem('pwd');
     const [editedName, setEditedName] = useState(data.name ?? '');
     const [buttonColor, setButtonColor] = useState("#AEAEAE");
 
@@ -11,11 +11,14 @@ const MyProfile = () => {
         let obj = {
             name: editedName,
             email: data.email,
-            avatar: data.avatar,
+            password: pwd,
+            goal_notifications_enabled: false,
+            transaction_notifications_enabled: false,
+            monthly_balance_notifications_enabled: false
         };
 
         try {
-            const updatedUser = await updateUser(data.id, obj);
+            const updatedUser = await updateUser(obj);
             setEditedName(updatedUser.name);
 
             let updatedData = { ...data, name: updatedUser.name };

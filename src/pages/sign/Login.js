@@ -1,11 +1,13 @@
-import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { login } from '../../services/api';
 
-import { AiFillGoogleCircle } from 'react-icons/ai';
 import { BsDot } from 'react-icons/bs';
 import Logo from '../assets/Logo.png';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -19,14 +21,12 @@ const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
     const [rememberMe, setRememberMe] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const { user, token } = await login(email, password);
-            console.log(user);
             sessionStorage.setItem('userData', JSON.stringify(user));
             sessionStorage.setItem('authToken', token);
             sessionStorage.setItem('pwd', password);
@@ -37,10 +37,11 @@ const Login = () => {
                 localStorage.removeItem('rememberedEmail');
             }
 
+            toast("Success!");
+            
             navigate("/application");
         } catch (error) {
-            console.error(error.message);
-            alert(error.message);
+            toast(error.message);
         }
     };
 
@@ -51,10 +52,11 @@ const Login = () => {
         }
     }, []);
 
-    const [transparentPassword, setTransparentPassword] = useState(false);
+    let text = "Invalid cridentials!";
 
     return (
         <div className="bg-white h-screen flex justify-center items-center relative font-sans">
+            <ToastContainer />
             <div className="h-[31%] w-full bg-gradient-to-r from-purple-300 via-purple-300 to-pink-100 absolute top-0 z-0">
             </div>
             <div className="max-w-[425px] w-full w-min-[320px] py-[20px] px-[30px] mx-[10px] bg-white rounded-[24px] flex flex-col justify-start items-center z-10 shadow-xl">
@@ -82,7 +84,7 @@ const Login = () => {
                         <input
                             onChange={(e) => setPassword(e.target.value)}
                             className='border-[1px] rounded-[8px] border-[#CED4DA] w-full h-[40px] text-[14px] py-[12px] pl-[12px] mb-[24px]'
-                            type={transparentPassword ? 'text' : 'password'}
+                            type='password'
                             placeholder='Password'
                             required />
                     </div>
@@ -101,7 +103,7 @@ const Login = () => {
                     <input className='cursor-pointer bg-[#343A40] text-white font-semibold text-[16px] w-full h-[40px] rounded-[8px]' type='submit' value='Log In' />
                 </form>
                 <div className='flex flex-row justify-center items-center'>
-                    <button data-route='/signup' className='font-semibold text-[16px] underline text-black' onClick={handleNavigation}>
+                    <button data-route='/signup' className='font-semibold text-[16px] underline' onClick={handleNavigation}>
                         Sign up!
                     </button>
                     <BsDot size={30} />

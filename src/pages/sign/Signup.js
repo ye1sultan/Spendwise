@@ -7,12 +7,12 @@ import { BsDot } from 'react-icons/bs';
 import Logo from '../assets/Logo.png';
 
 const Signup = () => {
+    const navigate = useNavigate();
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
-
-    const navigate = useNavigate();
 
     const handleNavigation = (e) => {
         const route = e.currentTarget.getAttribute('data-route');
@@ -25,21 +25,16 @@ const Signup = () => {
         setAgreeTerms(e.target.checked);
 
         if (!agreeTerms) {
-            setTermsText(false);
+            // setPopup(false);
         }
     }
 
     const [submitted, setSubmitted] = useState(false);
 
-    const [termsText, setTermsText] = useState(false);
-
-    const [nameText, setNameText] = useState(false);
     const [nameEdited, setNameEdited] = useState(false);
 
-    const [emailText, setEmailText] = useState(false);
     const [emailEdited, setEmailEdited] = useState(false);
 
-    const [passwordText, setPasswordText] = useState(false);
     const [passwordEdited, setPasswordEdited] = useState(false);
 
     const [passwordsMatch, setPasswordsMatch] = useState(true);
@@ -52,36 +47,44 @@ const Signup = () => {
         setEmailEdited(false);
 
         if (!agreeTerms) {
-            setTermsText(true);
+            // setPopup(true);
+            // setMessage('Please accept terms of use.');
             return;
         }
 
         if (!validateName(name)) {
-            setNameText(true);
+            // setPopup(true);
+            // setMessage('Please enter valid name.');
             return;
         }
 
         if (!validatePassword(password)) {
-            setPasswordText(true);
+            // setPopup(true);
+            // setMessage('Password must be at least 8 characters long, contain at least one letter and one number.');
             return;
         }
 
         if (!validateEmail(email)) {
-            setEmailText(true);
+            // setPopup(true);
+            // setMessage('Please enter a valid email address.');
             return;
         }
 
         if (!passwordsMatch) {
+            // setPopup(true);
+            // setMessage('Passwords do not match.');
             return;
         }
 
         try {
-            const data = await register(name, email, password, passwordConfirmation);
-            console.log("Registered successful:", data);
-            navigate("/login");
+            await register(name, email, password, passwordConfirmation);
+            setTimeout(() => {
+                navigate('/login');
+            }, 1000);
+
         } catch (error) {
-            console.error(error.message);
-            alert(error.message);
+            // setPopup(true);
+            // setMessage(error.message);
         }
     };
 
@@ -89,7 +92,7 @@ const Signup = () => {
         const nameRegex = /^[a-zA-Z ]{2,30}$/;
         const isValid = nameRegex.test(name);
         if (submitted && nameEdited) {
-            setNameText(!isValid);
+            // setPopup(!isValid);
         }
         return isValid;
     };
@@ -98,7 +101,7 @@ const Signup = () => {
         const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
         const isValid = emailRegex.test(email);
         if (submitted && emailEdited) {
-            setEmailText(!isValid);
+            // setPopup(!isValid);
         }
         return isValid;
     };
@@ -107,7 +110,7 @@ const Signup = () => {
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
         const isValid = passwordRegex.test(password);
         if (submitted && passwordEdited) {
-            setPasswordText(!isValid);
+            // setPopup(!isValid);
         }
         return isValid;
     };
@@ -118,6 +121,7 @@ const Signup = () => {
 
     return (
         <div className="bg-white h-screen flex justify-center items-center relative font-sans">
+
             <div className="h-[31%] w-full bg-gradient-to-r from-purple-300 via-purple-300 to-pink-100 absolute top-0 z-0">
             </div>
             <div className="max-w-[425px] w-full w-min-[320px] py-[20px] px-[30px] mx-[10px] bg-white rounded-[24px] flex flex-col justify-start items-center z-10 shadow-xl">
@@ -142,15 +146,9 @@ const Signup = () => {
                             }}
                             className={`
                                 border-[1px] rounded-[8px] border-[#CED4DA] w-full 
-                                h-[40px] text-[14px] py-[12px] pl-[12px] 
-                                ${submitted && nameText ? 'mb-[12px]' : 'mb-[24px]'}`}
+                                h-[40px] text-[14px] py-[12px] pl-[12px] mb-[24px]`}
                             type='text'
                             placeholder='Name' />
-
-                        {/* {nameText && <div className='text-[14px] text-red-600 mb-[12px]'>
-                            Please enter valid name.
-                        </div>} */}
-
                         <input
                             onChange={(e) => {
                                 setEmail(e.target.value);
@@ -159,15 +157,9 @@ const Signup = () => {
                             }}
                             className={`
                                 border-[1px] rounded-[8px] border-[#CED4DA] w-full 
-                                h-[40px] text-[14px] py-[12px] pl-[12px] 
-                                ${submitted && emailText ? 'mb-[12px]' : 'mb-[24px]'}`}
+                                h-[40px] text-[14px] py-[12px] pl-[12px] mb-[24px]`}
                             type='email'
                             placeholder='Email' />
-
-                        {/* {submitted && emailText && <div className='text-[14px] text-red-600 mb-[12px]'>
-                            Please enter a valid email address.
-                        </div>} */}
-
                         <input
                             onChange={(e) => {
                                 setPassword(e.target.value);
@@ -176,15 +168,9 @@ const Signup = () => {
                             }}
                             className={`
                                 border-[1px] rounded-[8px] border-[#CED4DA] w-full 
-                                h-[40px] text-[14px] py-[12px] pl-[12px] 
-                                ${submitted && passwordText ? 'mb-[12px]' : 'mb-[24px]'}`}
+                                h-[40px] text-[14px] py-[12px] pl-[12px] mb-[24px]`}
                             type='password'
                             placeholder='Password' />
-
-                        {/* {submitted && passwordText && <div className='text-[14px] text-red-600 mb-[12px]'>
-                            Password must be at least 8 characters long, contain at least one letter and one number.
-                        </div>} */}
-
                         <input
                             onChange={(e) => {
                                 setPasswordConfirmation(e.target.value);
@@ -192,14 +178,9 @@ const Signup = () => {
                             }}
                             className={`
                                 border-[1px] rounded-[8px] border-[#CED4DA] w-full 
-                                h-[40px] text-[14px] py-[12px] pl-[12px] 
-                                ${submitted && !passwordsMatch ? 'mb-[12px]' : 'mb-[24px]'}`}
+                                h-[40px] text-[14px] py-[12px] pl-[12px] mb-[24px]`}
                             type='password'
                             placeholder='Confirm Password' />
-                        {/* {submitted && !passwordsMatch && <div className='text-[14px] text-red-600 mb-[12px]'>
-                            Passwords do not match.
-                        </div>} */}
-
                     </div>
                     <div className='mb-[24px] font-semibold flex flex-col justify-start items-start w-full'>
                         <div className='flex flex-row justify-start items-center w-full ml-1'>
@@ -213,10 +194,6 @@ const Signup = () => {
                                 I agree to the Terms of Use
                             </label>
                         </div>
-
-                        {/* {termsText && <div className='text-[14px] text-red-600'>
-                            Please accept terms of use
-                        </div>} */}
                     </div>
                     <input className='cursor-pointer bg-[#343A40] text-white font-semibold text-[16px] w-full h-[40px] rounded-[8px]' value='Create Account' type='submit' />
                 </form>
