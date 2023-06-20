@@ -1,4 +1,5 @@
 # Spendwise
+- https://spendwise-ashy.vercel.app/home
 
 Spendwise is a comprehensive personal finance management application designed to help users take control of their spending habits and achieve financial stability. With Spendwise, users can easily create an account or log in to start tracking their expenses and income.
 
@@ -17,4 +18,4 @@ Spendwise is a comprehensive personal finance management application designed to
 - **/services/api.js**: This file contains the API URL and all functions used to fetch data from the API.
 - **/pages/landing/**: This directory houses the main landing page of the application.
 - **/pages/application/**: This directory contains the main application logic and components.
-- **/pages/sign/**: This directory includes all files related to user authentication, such as sign up, log in, forgot password, and restore password functionalities.
+- **/pages/sign/**: This directory includes files related to user authentication, such as sign up, log in, forgot password, and restore password functionalities.
