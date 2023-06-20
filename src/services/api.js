@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const API_URL = 'https://personalfinance.herokuapp.com/api';
 
 export const login = async (email, password) => {
     const requestOptions = {
