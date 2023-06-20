@@ -1,4 +1,4 @@
-const API_URL = 'https://personalfinance.herokuapp.com/api';
+const API_URL = process.env.REACT_APP_API_URL;
 
 export const login = async (email, password) => {
     const requestOptions = {
@@ -102,7 +102,6 @@ export const deleteTransaction = async (id) => {
         const data = await response.json();
         return data;
     } else {
-        // If there's no JSON content in the response, return an empty object
         return {};
     }
 };
@@ -124,6 +123,7 @@ export const updateTransaction = async (id, updatedTransaction) => {
 };
 
 export const updateUser = async (id, updatedUser) => {
+    console.log(id);
     const response = await authenticatedFetch(`${API_URL}/users/${id}`, {
         method: "PUT",
         headers: {

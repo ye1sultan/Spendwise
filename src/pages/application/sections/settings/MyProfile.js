@@ -11,7 +11,6 @@ const MyProfile = () => {
         let obj = {
             name: editedName,
             email: data.email,
-            password: sessionStorage.getItem("pwd"),
             avatar: data.avatar,
         };
 
