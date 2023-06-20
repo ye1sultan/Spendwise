@@ -3,7 +3,7 @@ import Wave from 'react-wavify';
 
 const Hero = () => {
     return (
-        <div id='hero' className='font-andada w-full mx-auto h-full mb-24 mt-12 2xl:mt-24 2xl:mt-12 relative'>
+        <div id='hero' className='font-andada w-full mx-auto h-full mb-24 mt-6 2xl:mt-12 relative'>
             <div className="flex flex-col 2xl:flex-row justify-center items-center max-w-[1550px] mx-auto">
                 <div className="flex flex-col justify-center items-center 2xl:items-start text-center 2xl:text-left w-full">
                     <div className='text-[48px] 2xl:text-[96px] font-bold text-[#240150] leading-none mb-[30px] 2xl:mb-[50px] w-full 2xl:max-w-[550px] relative'>

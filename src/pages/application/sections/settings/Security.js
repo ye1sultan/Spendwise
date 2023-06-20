@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
 import { updateUser } from '../../../../services/api';
-import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { IoCloseOutline } from 'react-icons/io5';
+import { useTranslation } from 'react-i18next';
 
 const Security = () => {
     const data = JSON.parse(sessionStorage.getItem('userData'));
     const pwd = sessionStorage.getItem('pwd');
+
+    const { t, i18n } = useTranslation();
 
     const [emailModal, setEmailModal] = useState(false);
     const [passwordModal, setPasswordModal] = useState(false);

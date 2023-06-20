@@ -3,6 +3,7 @@ import BieCharts from "./BieCharts";
 import Title from "../../components/Title";
 import { useEffect, useState } from "react";
 import { getAllGoals, getAllTransactions, getMontlyBalance } from "../../../../services/api";
+import { useTranslation } from "react-i18next";
 
 const Dashboard = () => {
     const [transactions, setTransactions] = useState([]);
@@ -120,20 +121,22 @@ const Dashboard = () => {
         };
     };
 
+    const { t, i18n } = useTranslation();
+
     return (
         <>
-            <Title title={'Dashboard'} />
+            <Title title={t("dashboard.title")} />
             <div className="flex justify-between items-center flex-wrap w-full gap-x-12 gap-y-6 lg:mb-[40px] mb-[20px]">
-                <Bie title="Current balance" svg="current" transactions={transactions} isLoading={isLoading} />
-                <Bie title="Incomes" svg="incomes" transactions={transactions} isLoading={isLoading} />
-                <Bie title="Expenses" svg="expenses" transactions={transactions} isLoading={isLoading} />
-                <Bie title="Monthly balance" svg="monthly" transactions={transactions} isLoading={isLoading} monthlyBalance={monthlyBalance} />
+                <Bie title={t("dashboard.bie.currentBalance")} svg="current" transactions={transactions} isLoading={isLoading} />
+                <Bie title={t("dashboard.bie.incomes")} svg="incomes" transactions={transactions} isLoading={isLoading} />
+                <Bie title={t("dashboard.bie.expenses")} svg="expenses" transactions={transactions} isLoading={isLoading} />
+                <Bie title={t("dashboard.bie.monthlyBalance")} svg="monthly" transactions={transactions} isLoading={isLoading} monthlyBalance={monthlyBalance} />
             </div>
             <div className="flex justify-between items-start flex-wrap w-full gap-x-6 gap-y-12">
-                <BieCharts title="Expenses by category" isLoading={isTLoading} isGLoading={isGLoading} goal={goal} separatedTransactions={separatedTransactions} totals={totals} />
-                <BieCharts title="Incomes by category" isLoading={isTLoading} isGLoading={isGLoading} goal={goal} separatedTransactions={separatedTransactions} totals={totals} />
-                <BieCharts title="Monthly balance" isLoading={isTLoading} isGLoading={isGLoading} goal={goal} separatedTransactions={separatedTransactions} totals={totals} />
-                <BieCharts title="Goals" isLoading={isTLoading} isGLoading={isGLoading} goal={goal} separatedTransactions={separatedTransactions} totals={totals} />
+                <BieCharts title={t("dashboard.bieChart.expenses")} isLoading={isTLoading} isGLoading={isGLoading} goal={goal} separatedTransactions={separatedTransactions} totals={totals} />
+                <BieCharts title={t("dashboard.bieChart.incomes")} isLoading={isTLoading} isGLoading={isGLoading} goal={goal} separatedTransactions={separatedTransactions} totals={totals} />
+                <BieCharts title={t("dashboard.bieChart.monthlyBalance")} isLoading={isTLoading} isGLoading={isGLoading} goal={goal} separatedTransactions={separatedTransactions} totals={totals} />
+                <BieCharts title={t("dashboard.bieChart.goals")} isLoading={isTLoading} isGLoading={isGLoading} goal={goal} separatedTransactions={separatedTransactions} totals={totals} />
             </div>
         </>
     );

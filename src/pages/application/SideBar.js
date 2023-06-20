@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-
-import { AiOutlineUnorderedList } from 'react-icons/ai';
 import { BiLogOut } from 'react-icons/bi';
 import { FiBell, FiPieChart, FiSettings } from 'react-icons/fi';
-import { MdOutlineSpaceDashboard, MdSpaceDashboard } from 'react-icons/md';
-import { RiCheckboxMultipleLine, RiMedal2Fill, RiPlayListAddFill } from 'react-icons/ri';
+import { MdOutlineSpaceDashboard } from 'react-icons/md';
+import { RiCheckboxMultipleLine, RiPlayListAddFill } from 'react-icons/ri';
 
 import FullLogo from "../assets/FullLogo.png";
 import Logo from "../assets/Logo.png";
+import { useTranslation } from 'react-i18next';
 
 const SideBar = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { t, i18n } = useTranslation();
 
     const handleExit = () => {
         sessionStorage.removeItem('authToken');
@@ -31,12 +31,12 @@ const SideBar = () => {
     }, [location.pathname]);
 
     const buttons = [
-        { view: 'dashboard', label: 'Dashboard', icon: <MdOutlineSpaceDashboard className="text-[25px] md:text-[30px] xl:mr-6" /> },
-        { view: 'transactions', label: 'Transactions', icon: <RiPlayListAddFill className="text-[25px] md:text-[30px] xl:mr-6" /> },
-        { view: 'goals', label: 'Goals', icon: <RiCheckboxMultipleLine className="text-[25px] md:text-[30px] xl:mr-6" /> },
-        { view: 'report', label: 'Report', icon: <FiPieChart className="text-[25px] md:text-[30px] xl:mr-6" /> },
-        { view: 'notifications', label: 'Notifications', icon: <FiBell className="text-[25px] md:text-[30px] xl:mr-6" /> },
-        { view: 'settings', label: 'Settings', icon: <FiSettings className="text-[25px] md:text-[30px] xl:mr-6" /> },
+        { view: 'dashboard', label: t("sidebar.dashboard"), icon: <MdOutlineSpaceDashboard className="text-[25px] md:text-[30px] xl:mr-6" /> },
+        { view: 'transactions', label: t("sidebar.transactions"), icon: <RiPlayListAddFill className="text-[25px] md:text-[30px] xl:mr-6" /> },
+        { view: 'goals', label: t("sidebar.goals"), icon: <RiCheckboxMultipleLine className="text-[25px] md:text-[30px] xl:mr-6" /> },
+        { view: 'report', label: t("sidebar.report"), icon: <FiPieChart className="text-[25px] md:text-[30px] xl:mr-6" /> },
+        { view: 'notifications', label: t("sidebar.notifications"), icon: <FiBell className="text-[25px] md:text-[30px] xl:mr-6" /> },
+        { view: 'settings', label: t("sidebar.settings"), icon: <FiSettings className="text-[25px] md:text-[30px] xl:mr-6" /> },
     ];
 
     const handleButtonClick = (view) => {
@@ -44,8 +44,8 @@ const SideBar = () => {
     };
 
     return (
-        <div className="sticky left-0 top-0 bg-white flex flex-col justify-start xl:justify-between items-center h-screen py-6 xl:py-14 xl:px-[30px] shadow-sm">
-            <div className="flex flex-col justify-center items-center xl:items-start mb-16 xl:mb-0">
+        <div className="sticky left-0 top-0 xl:max-w-[300px] xl:w-full bg-white flex flex-col justify-start xl:justify-between items-center h-screen py-6 xl:py-14 xl:px-[30px] shadow-sm">
+            <div className="flex flex-col justify-center items-center xl:items-start mb-16 xl:mb-0 w-full">
                 <div className='w-[210px] h-full hidden xl:block mb-12 z-50'>
                     <img src={FullLogo} alt="Logo" />
                 </div>
@@ -56,9 +56,9 @@ const SideBar = () => {
                             key={index}
                             to={`/application/${button.view}`}
                             onClick={() => handleButtonClick(button.view)}
-                            className={`flex items-center xl:w-[210px] h-[50px] p-[10px] text-[#2c3e50] text-[15px] font-semibold mb-[15px] ${activeButton === button.view ? 'bg-[#BFA2E5] bg-opacity-70' : 'bg-transparent'}`}>
+                            className={`flex items-center w-full h-[50px] p-[10px] text-[#2c3e50] text-[15px] font-semibold mb-[15px] ${activeButton === button.view ? 'bg-[#BFA2E5] bg-opacity-70' : 'bg-transparent'}`}>
                             {button.icon}
-                            <div className="hidden xl:flex xl:flex-1">{button.label}</div>
+                            <div className="hidden xl:flex xl:flex-1 capitalize">{button.label}</div>
                         </Link>
                     ))
                 }

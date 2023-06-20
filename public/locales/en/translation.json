@@ -1,0 +1,51 @@
+{
+    "text": "Language",
+    "sidebar": {
+        "dashboard": "dashboard",
+        "transactions": "transactions",
+        "goals": "goals",
+        "report": "report",
+        "notifications": "notifications",
+        "settings": "settings"
+    },
+    "header": {
+        "subtitle": "The Complete Wallet",
+        "title": "Manage Your ",
+        "finance": "Finance"
+    },
+    "dashboard": {
+        "title": "dashboard",
+        "bie": {
+            "currentBalance": "current balance",
+            "incomes": "incomes",
+            "expenses": "expenses",
+            "monthlyBalance": "monthly balance"
+        },
+        "bieChart": {
+            "expenses": "expenses by category",
+            "incomes": "incomes by category",
+            "monthlyBalance": "monthly balance",
+            "goals": "goals",
+            "see": "see more"
+        },
+        "noContent": {
+            "expenses": {
+                "title": "Oops! You don't have any registered expenses this month.",
+                "subtitle": "Register the expenses made this month using the (+) button in transactions to check your charts."
+            },
+            "incomes": {
+                "title": "Oops! You don't have any registered income this month.",
+                "subtitle": "Register the incomes made this month using the (+) button in transactions to check your charts."
+            },
+            "monthly": {
+                "title": "Oops! You don't have any registered transactions on your monthly balance yet.",
+                "subtitle": "What about start registering the expenses and incomes made this month?"
+            },
+            "goals": {
+                "title": "Oops! You have no registered goals this month.",
+                "subtitle": "Improve your finances now!",
+                "setGoals": "set my goals"
+            }
+        }
+    }
+}

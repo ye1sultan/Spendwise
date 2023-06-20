@@ -21,8 +21,8 @@ const Header = () => {
     }
 
     return (
-        <div id='header' className='flex justify-between items-center w-full 2xl:max-w-[1690px] 2xl:mx-auto h-16 2xl:h-40 px-4 bg-white 2xl:bg-transparent relative z-50'>
-            <img className="h-[50px] block 2xl:hidden" src={Logo} alt="Logo" />
+        <div id='header' className='flex justify-between items-center w-full 2xl:max-w-[1690px] 2xl:mx-auto 2xl:h-40 px-4 bg-transparent relative z-50'>
+            <img className="h-[50px] block 2xl:hidden z-50" src={Logo} alt="Logo" />
             <img className="h-[60px] hidden 2xl:block" src={FullLogo} alt="Logo" />
             <div className='hidden 2xl:flex flex-row justify-between items-center'>
                 <div className="flex flex-row justify-between">

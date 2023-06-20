@@ -1,9 +1,12 @@
+import { useTranslation } from "react-i18next";
 import { BsFlag } from "react-icons/bs";
 import { FiPieChart } from "react-icons/fi"
 import { MdSignalCellularAlt } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 const NoContent = ({ is }) => {
+    const { t, i18n } = useTranslation();
+
     const getNoContent = () => {
         if (is === 'expense') {
             return (
@@ -13,16 +16,16 @@ const NoContent = ({ is }) => {
                     </div>
                     <div className="text-center mb-6">
                         <div className="lg:text-2xl md:text-xl sm:text-lg text-base px-4 mb-2">
-                            Oops! You don't have any registered expenses this month.
+                            {t("dashboard.noContent.expenses.title")}
                         </div>
                         <div className="lg:text-xl md:text-lg sm:text-base text-sm text-[#6A6A6A] px-4">
-                            Register the expenses made this month using the (+) button in transactions to check your charts.
+                            {t("dashboard.noContent.expenses.subtitle")}
                         </div>
                     </div>
                     <Link
                         to="/application/report"
                         className="flex justify-center items-center lg:text-2xl md:text-xl sm:text-lg text-base text-purple-700 uppercase w-full lg:h-16 md:h-14 sm:h-12 h-10 border-t border-[#AEAEAE]">
-                        see more
+                        {t("dashboard.bieChart.see")}
                     </Link>
                 </>
             );
@@ -36,16 +39,16 @@ const NoContent = ({ is }) => {
                     </div>
                     <div className="text-center mb-6">
                         <div className="lg:text-2xl md:text-xl sm:text-lg text-base px-4 mb-2">
-                            Oops! You don't have any registered income this month.
+                            {t("dashboard.noContent.incomes.title")}
                         </div>
                         <div className="lg:text-xl md:text-lg sm:text-base text-sm text-[#6A6A6A] px-4">
-                            Register the incomes made this month using the (+) button in transactions to check your charts.
+                            {t("dashboard.noContent.incomes.subtitle")}
                         </div>
                     </div>
                     <Link
                         to="/application/report"
                         className="flex justify-center items-center lg:text-2xl md:text-xl sm:text-lg text-base text-purple-700 uppercase w-full lg:h-16 md:h-14 sm:h-12 h-10 border-t border-[#AEAEAE]">
-                        see more
+                        {t("dashboard.bieChart.see")}
                     </Link>
                 </>
             );
@@ -59,16 +62,16 @@ const NoContent = ({ is }) => {
                     </div>
                     <div className="text-center mb-6">
                         <div className="lg:text-2xl md:text-xl sm:text-lg text-base px-4 mb-2">
-                            Oops! You don't have any registered transactions on your monthly balance yet.
+                            {t("dashboard.noContent.monthly.title")}
                         </div>
                         <div className="lg:text-xl md:text-lg sm:text-base text-sm text-[#6A6A6A] px-4">
-                            What about start registering the expenses and incomes made this month?
+                            {t("dashboard.noContent.monthly.subtitle")}
                         </div>
                     </div>
                     <Link
                         to="/application/report"
                         className="flex justify-center items-center lg:text-2xl md:text-xl sm:text-lg text-base text-purple-700 uppercase w-full lg:h-16 md:h-14 sm:h-12 h-10 border-t border-[#AEAEAE]">
-                        see more
+                        {t("dashboard.bieChart.see")}
                     </Link>
                 </>
             );
@@ -80,16 +83,16 @@ const NoContent = ({ is }) => {
                     <BsFlag className="text-[25px] sm:text-[30px] md:text-[35px] lg:text-[45px]" />
                     <div className="text-center">
                         <div className="lg:text-2xl md:text-xl sm:text-lg text-base px-4 pb-2">
-                            Ops! You have no registered goals this month.
+                            {t("dashboard.noContent.goals.title")}
                         </div>
                         <div className="lg:text-xl md:text-lg sm:text-base text-sm text-[#6A6A6A]">
-                            Improve your finances now!
+                            {t("dashboard.noContent.goals.subtitle")}
                         </div>
                     </div>
                     <Link
                         to="/application/goals"
                         className="flex justify-center items-center uppercase md:max-w-[270px] max-w-[200px] w-full md:h-14 sm:h-12 h-10 bg-[#9F75D6] bg-opacity-90 rounded-[30px] text-white lg:text-xl md:text-lg sm:text-base text-sm  mx-[5px]">
-                        Set my goals
+                        {t("dashboard.noContent.goals.setGoals")}
                     </Link>
                 </div>
             );

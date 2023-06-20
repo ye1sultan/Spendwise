@@ -58,8 +58,6 @@ const Login = () => {
         }
     }, []);
 
-    let text = "Invalid cridentials!";
-
     return (
         <div className="bg-white h-screen flex justify-center items-center relative font-sans">
             <ToastContainer

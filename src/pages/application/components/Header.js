@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
     const [name, setName] = useState(JSON.parse(sessionStorage.getItem('userData')).name ?? '');
@@ -11,14 +12,16 @@ const Header = () => {
         return () => clearInterval(intervalId);
     }, []);
 
+    const { t, i18n } = useTranslation();
+
     return (
         <div className="w-full flex flex-row justify-between items-start mb-[20px]">
             <div className="flex flex-col">
                 <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] mb-[5px]">
-                    The Complete Wallet
+                    {t("header.subtitle")}
                 </div>
                 <div className="text-base md:text-lg lg:text-xl xl:text-[28px] 2xl:text-[36px] font-medium">
-                    Manage Your <span className="font-bold">Finance</span>
+                    {t("header.title")}<span className="font-bold">{t("header.finance")}</span>
                 </div>
             </div>
             <div className="flex flex-row justify-center items-center">

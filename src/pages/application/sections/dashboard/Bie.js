@@ -38,7 +38,7 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
             } else {
                 return (
                     <>
-                        <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium">
+                        <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium capitalize">
                             {title}
                         </div>
                         <BsFillClockFill className="absolute right-2 sm:right-4 sm:top-[50%] bottom-2 sm:translate-y-[-50%] text-[25px] sm:text-[30px] md:text-[35px] lg:text-[40px]" color="#85B0E2" />
@@ -56,7 +56,7 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
             } else {
                 return (
                     <>
-                        <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium">
+                        <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium capitalize">
                             {title}
                         </div>
                         <AiOutlineArrowDown className="absolute right-2 sm:right-4 sm:top-[50%] bottom-2 sm:translate-y-[-50%] text-[25px] sm:text-[30px] md:text-[35px] lg:text-[40px]" color="#C51F1F" />
@@ -74,7 +74,7 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
             } else {
                 return (
                     <>
-                        <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium">
+                        <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium capitalize">
                             {title}
                         </div>
                         <AiOutlineArrowUp className="absolute right-2 sm:right-4 sm:top-[50%] bottom-2 sm:translate-y-[-50%] text-[25px] sm:text-[30px] md:text-[35px] lg:text-[40px]" color="#86B88A" />
@@ -92,7 +92,7 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
             } else {
                 return (
                     <>
-                        <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium">
+                        <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium capitalize">
                             {title}
                         </div>
                         <BsFillCalendar2CheckFill className="absolute right-2 sm:right-4 sm:top-[50%] bottom-2 sm:translate-y-[-50%] text-[25px] sm:text-[30px] md:text-[35px] lg:text-[40px]" color="#86B88A" />
