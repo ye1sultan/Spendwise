@@ -14,6 +14,8 @@ import { TbHealthRecognition } from 'react-icons/tb';
 import Transaction from '../sections/report/Transaction';
 import { useTranslation } from 'react-i18next';
 
+import { useEffect, useRef } from 'react';
+
 const PieChart = ({ transactions, type }) => {
     const { t, i18n } = useTranslation();
 
@@ -29,7 +31,7 @@ const PieChart = ({ transactions, type }) => {
             const centerX = (chart.chartArea.left + chart.chartArea.right) / 2;
             const centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
 
-            ctx.font = "24px Montserrat";
+            ctx.font = `${window.innerWidth > 1536 ? '24px' : window.innerWidth > 1280 ? '22px' : window.innerWidth > 1280 ? '18px' : window.innerWidth > 1280 ? '16px' : '14px'} Montserrat`;
             ctx.fillStyle = "#000000";
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
