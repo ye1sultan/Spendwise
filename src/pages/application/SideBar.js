@@ -67,7 +67,9 @@ const SideBar = () => {
                 <div className="xl:mr-4">
                     <BiLogOut size={30} />
                 </div>
-                <span className='hidden xl:inline'>Log out</span>
+                <span className='hidden xl:inline capitalize'>
+                    {t("sidebar.exit")}
+                </span>
             </button>
         </div>
     );

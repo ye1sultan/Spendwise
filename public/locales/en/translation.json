@@ -6,7 +6,8 @@
         "goals": "goals",
         "report": "report",
         "notifications": "notifications",
-        "settings": "settings"
+        "settings": "settings",
+        "exit": "log out"
     },
     "header": {
         "subtitle": "The Complete Wallet",
@@ -145,6 +146,49 @@
         "debt": {
             "title": "Debt",
             "text": "It's better to run from debt, isn't it?"
+        }
+    },
+    "settings": {
+        "profile": {
+            "title": "my profile",
+            "details": "Account Details",
+            "name": "name",
+            "email": "email"
+        },
+        "preferences": {
+            "title": "preferences",
+            "language": "language",
+            "appearance": {
+                "title": "appearance",
+                "Light Mode": "light mode",
+                "Dark Mode": "dark mode"
+            }
+        },
+        "security": {
+            "title": "security",
+            "email": {
+                "title": "Change my email",
+                "text": "After requesting the change, we will send a confirmation to the new registered email. Until confirmation, your Spendwise account will remain linked to your current email.",
+                "button": "change"
+            },
+            "pwd": {
+                "title": "Change my password",
+                "text": "Tip: If possible, use a password that contains numbers, uppercase, lowercase, and special characters.",
+                "button": "change"
+            }
+        },
+        "modals": {
+            "email": {
+                "title": "Change E-mail",
+                "new": "New email",
+                "confirm": "Confirm email"
+            },
+            "pwd": {
+                "title": "Change Password",
+                "old": "Old password",
+                "new": "New password",
+                "confirm": "Confirm password"
+            }
         }
     }
 }

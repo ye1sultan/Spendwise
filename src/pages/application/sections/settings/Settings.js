@@ -8,6 +8,8 @@ import Security from "./Security";
 import { useTranslation } from "react-i18next";
 
 const Settings = () => {
+	const { t, i18n } = useTranslation();
+	
 	const [selectedTab, setSelectedTab] = useState("profile");
 
 	const handleTabClick = (tab) => {
@@ -15,9 +17,9 @@ const Settings = () => {
 	};
 
 	const tabButtons = [
-		{ label: "My Profile", value: "profile" },
-		{ label: "Preferences", value: "preferences" },
-		{ label: "Security", value: "security" },
+		{ label: t("settings.profile.title"), value: "profile" },
+		{ label: t("settings.preferences.title"), value: "preferences" },
+		{ label: t("settings.security.title"), value: "security" },
 	];
 
 	const renderContent = () => {
@@ -33,16 +35,14 @@ const Settings = () => {
 		}
 	};
 
-    const { t, i18n } = useTranslation();
-	
 	return (
 		<>
 			<Title title={t("sidebar.settings")} />
-			<div className="max-w-[330px] md:max-w-[390px] lg:max-w-[510px] w-full h-[30px] sm:h-[40px] md:h-[50px] bg-opacity-10 rounded-full flex justify-center items-center self-start relative mb-[50px] bg-[#381C46]">
+			<div className="max-w-full md:max-w-[420px] lg:max-w-[550px] w-full py-[10px] bg-opacity-10 rounded-full flex justify-center items-center self-start relative mb-[50px] bg-[#381C46]">
 				{tabButtons.map((tab, index) => (
 					<button
 						key={index}
-						className={`w-[33.33%] h-full rounded-full text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-medium`}
+						className={`w-[33.33%] h-full rounded-full text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] font-medium capitalize`}
 						onClick={() => handleTabClick(tab.value)}
 					>
 						{tab.label}
