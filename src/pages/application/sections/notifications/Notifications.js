@@ -2,6 +2,7 @@ import { useState } from "react";
 import Title from "../../components/Title";
 import Switch from "./components/Switch";
 import { useTranslation } from "react-i18next";
+import { updateUser } from "../../../../services/api";
 
 const Notifications = () => {
     const { t, i18n } = useTranslation();
@@ -12,7 +13,7 @@ const Notifications = () => {
     const [goalValue, setGoalValue] = useState(false);
     const [debtValue, setDebtValue] = useState(false);
 
-    const onChange = (name) => {
+    const onChange = async (name) => {
         if (name === 'notif') {
             setNotifValue(!notifValue);
 
@@ -24,12 +25,63 @@ const Notifications = () => {
         }
         if (name === 'news') {
             setNewsValue(!newsValue);
+            console.log(name);
+
+            let obj = {
+                name: JSON.parse(sessionStorage.getItem('userData')).name,
+                email: JSON.parse(sessionStorage.getItem('userData')).email,
+                password: sessionStorage.getItem('pwd'),
+                goal_notifications_enabled: false,
+                transaction_notifications_enabled: newsValue ? true : false,
+                monthly_balance_notifications_enabled: false
+            };
+
+            try {
+                await updateUser(obj); 
+                console.log("Success!");
+            } catch (error) {
+                console.error("Error updating user:", error);
+            }
         }
         if (name === 'goal') {
             setGoalValue(!goalValue);
+            console.log(name);
+
+            let obj = {
+                name: JSON.parse(sessionStorage.getItem('userData')).name,
+                email: JSON.parse(sessionStorage.getItem('userData')).email,
+                password: sessionStorage.getItem('pwd'),
+                goal_notifications_enabled: goalValue ? true : false,
+                transaction_notifications_enabled: false,
+                monthly_balance_notifications_enabled: false
+            };
+
+            try {
+                await updateUser(obj); 
+                console.log("Success!");
+            } catch (error) {
+                console.error("Error updating user:", error);
+            }
         }
         if (name === 'debt') {
             setDebtValue(!debtValue);
+            console.log(name);
+
+            let obj = {
+                name: JSON.parse(sessionStorage.getItem('userData')).name,
+                email: JSON.parse(sessionStorage.getItem('userData')).email,
+                password: sessionStorage.getItem('pwd'),
+                goal_notifications_enabled: false,
+                transaction_notifications_enabled: false,
+                monthly_balance_notifications_enabled: debtValue ? true : false
+            };
+
+            try {
+                await updateUser(obj); 
+                console.log("Success!");
+            } catch (error) {
+                console.error("Error updating user:", error);
+            }
         }
     }
 
