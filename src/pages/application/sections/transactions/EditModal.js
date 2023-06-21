@@ -200,7 +200,7 @@ const EditModal = ({ transaction, onSave, onCancel, onDelete }) => {
                     </div>
                     <div className="relative w-full h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                         <input
-                            className={`${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A]`}
+                            className={`${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} min-w-[95%] w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A]`}
                             type="date"
                             name="date"
                             value={editedTransaction.date}
