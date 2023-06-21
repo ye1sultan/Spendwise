@@ -36,7 +36,7 @@ const Signup = () => {
         e.preventDefault();
 
         if (!agreeTerms) {
-            toast.error("Please accept terms of use.", {
+            toast.error(t("popup.signup.accept"), {
                 position: "top-center",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -50,7 +50,7 @@ const Signup = () => {
         }
 
         if (!validateName(name)) {
-            toast.error("Please enter a valid name.", {
+            toast.error(t("popup.signup.name"), {
                 position: "top-center",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -64,7 +64,7 @@ const Signup = () => {
         }
 
         if (!validatePassword(password)) {
-            toast.error("Password must be at least 8 characters long, contain at least one letter and one number.", {
+            toast.error(t("popup.signup.pwd"), {
                 position: "top-center",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -78,7 +78,7 @@ const Signup = () => {
         }
 
         if (!validateEmail(email)) {
-            toast.error("Please enter a valid email address.", {
+            toast.error(t("popup.signup.email"), {
                 position: "top-center",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -92,7 +92,7 @@ const Signup = () => {
         }
 
         if (!passwordsMatch) {
-            toast.error("Passwords do not match.", {
+            toast.error(t("popup.signup.miss"), {
                 position: "top-center",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -107,7 +107,7 @@ const Signup = () => {
 
         try {
             await register(name, email, password, passwordConfirmation);
-            toast.success("Success!", {
+            toast.success(t("popup.signup.success"), {
                 position: "top-center",
                 autoClose: 1000,
                 hideProgressBar: false,
@@ -122,7 +122,8 @@ const Signup = () => {
             }, 1000);
 
         } catch (error) {
-            toast.error(error.message, {
+            console.log(error.message);
+            toast.error(t("popup.signup.smth"), {
                 position: "top-center",
                 autoClose: 3000,
                 hideProgressBar: false,

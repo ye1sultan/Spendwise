@@ -308,5 +308,17 @@
         "footer": {
             "text": "Follow us to get support and lots of great ideas on budgeting."
         }
+    },
+    "popup": {
+        "login": "Invalid email or password",
+        "signup": {
+            "smth": "Something went wrong...",
+            "success": "Success",
+            "accept": "Please accept terms of use",
+            "name": "Please enter a valid name",
+            "pwd": "Password must be at least 8 characters long, contain at least one letter and one number",
+            "email": "Please enter a valid email address",
+            "miss": "Passwords do not match"
+        }
     }
 }

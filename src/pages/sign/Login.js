@@ -40,7 +40,8 @@ const Login = () => {
             }
             navigate("/application");
         } catch (error) {
-            toast.error(error.message, {
+            console.log(error.message);
+            toast.error(t("popup.login"), {
                 position: "top-center",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -119,7 +120,7 @@ const Login = () => {
                             {t("login.me")}
                         </label>
                     </div>
-                    <input className='cursor-pointer bg-[#343A40] text-white font-semibold text-[16px] w-full h-[40px] rounded-[8px]' type='submit' value= {t("login.title")} />
+                    <input className='cursor-pointer bg-[#343A40] text-white font-semibold text-[16px] w-full h-[40px] rounded-[8px]' type='submit' value={t("login.title")} />
                 </form>
                 <div className='flex flex-row justify-center items-center'>
                     <button data-route='/signup' className='font-semibold text-[16px] underline' onClick={handleNavigation}>
