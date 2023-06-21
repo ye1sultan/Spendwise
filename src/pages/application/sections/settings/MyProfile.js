@@ -40,7 +40,10 @@ const MyProfile = () => {
     }
 
     return (
-        <div className="self-start max-w-[970px] w-full bg-white rounded-[10px] sm:rounded-[20px] md:rounded-[30px] lg:rounded-[40px] px-[20px] sm:px-[30px] md:px-[40px] lg:px-[50px] py-[20px] md:py-[30px] lg:py-[40px] flex flex-col sm:flex-row justify-between items-center">
+        <div className={`self-start max-w-[970px] w-full 
+                ${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8] bg-opacity-10'}
+                ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'}
+                rounded-[10px] sm:rounded-[20px] md:rounded-[30px] lg:rounded-[40px] px-[20px] sm:px-[30px] md:px-[40px] lg:px-[50px] py-[20px] md:py-[30px] lg:py-[40px] flex flex-col sm:flex-row justify-between items-center`}>
             <div className="w-[100%] sm:w-[50%] flex flex-col items-start justify-center mb-12 sm:mb-0">
                 <div className="text-[18px] lg:text-[24px] xl:text-[28px] 2xl:text-[32px] font-medium mb-4 sm:mb-8">
                     {t("settings.profile.details")}
@@ -51,7 +54,7 @@ const MyProfile = () => {
                             {t("settings.profile.name")}
                         </label>
                         <input
-                            className="w-full h-[30px] sm:h-[40px] md:h-[50px] text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[24px] font-medium pl-2"
+                            className={`w-full h-[30px] sm:h-[40px] md:h-[50px] text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[24px] font-medium pl-2 ${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'}`}
                             type="text"
                             placeholder={t("settings.profile.name")}
                             value={editedName}
@@ -63,7 +66,7 @@ const MyProfile = () => {
                             {t("settings.profile.email")}
                         </label>
                         <input
-                            className="w-full h-[30px] sm:h-[40px] md:h-[50px] text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[24px] text-[#6A6A6A] font-medium pl-2 pointer-events-none"
+                            className={`w-full h-[30px] sm:h-[40px] md:h-[50px] text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[24px] font-medium pl-2 ${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} pointer-events-none`}
                             type="email"
                             placeholder={t("settings.profile.email")}
                             value={data.email}

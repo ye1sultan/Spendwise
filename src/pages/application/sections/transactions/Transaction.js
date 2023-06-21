@@ -92,11 +92,11 @@ const Transaction = ({ transaction, transactionDate, isLast, deleteTransaction, 
                 <div className={`w-1/4 sm:w-1/6 text-center ${transaction_type === "income" ? "text-green-500" : "text-red-500"}`}>{parseInt(amount)} ₸</div>
                 <div className="flex sm:space-x-4 w-1/4 sm:w-1/6 justify-center">
                     <button onClick={() => editTransaction(transaction, transaction.id)}>
-                        <BiPencil className='hidden sm:block text-[20px] lg:text-[30px]' color="#443A3A" />
-                        <BsChevronRight className='block sm:hidden text-[15px]' color="#443A3A" />
+                        <BiPencil className='hidden sm:block text-[20px] lg:text-[30px]'/>
+                        <BsChevronRight className='block sm:hidden text-[15px]'/>
                     </button>
                     <button className='hidden sm:block' onClick={() => deleteTransaction(transaction.id)}>
-                        <BsTrashFill className='text-[17px] lg:text-[25px]' color="#443A3A" />
+                        <BsTrashFill className='text-[17px] lg:text-[25px]'/>
                     </button>
                 </div>
             </div>

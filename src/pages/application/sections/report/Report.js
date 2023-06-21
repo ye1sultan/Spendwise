@@ -112,7 +112,7 @@ const Report = () => {
                                 return (
                                     <div className="flex flex-col w-full justify-center items-center 2xl:mb-8">
                                         <NoResultRp className="w-[160px] 2xl:w-full 2xl:mt-8" />
-                                        <div className="font-medium 2xl:text-[24px] text-[#696969] w-full flex justify-center items-center 2xl:mt-8">
+                                        <div className={`font-medium 2xl:text-[24px] ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#696969]' : 'text-white'} w-full flex justify-center items-center 2xl:mt-8`}>
                                             {t("trn.noResults")}
                                         </div>
                                     </div>
@@ -153,7 +153,7 @@ const Report = () => {
                                 return (
                                     <div className="flex flex-col w-full justify-center items-center 2xl:mb-8">
                                         <NoResultRp className="w-[160px] 2xl:w-full 2xl:mt-8" />
-                                        <div className="font-medium 2xl:text-[24px] text-[#696969] w-full flex justify-center items-center 2xl:mt-8">
+                                        <div className={`font-medium 2xl:text-[24px] ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#696969]' : 'text-white'} w-full flex justify-center items-center 2xl:mt-8`}>
                                             {t("trn.noResults")}
                                         </div>
                                     </div>
@@ -194,7 +194,7 @@ const Report = () => {
                                 return (
                                     <div className="flex flex-col w-full justify-center items-center 2xl:mb-8">
                                         <NoResultRp className="w-[160px] 2xl:w-full 2xl:mt-8" />
-                                        <div className="font-medium 2xl:text-[24px] text-[#696969] w-full flex justify-center items-center 2xl:mt-8">
+                                        <div className={`font-medium 2xl:text-[24px] ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#696969]' : 'text-white'} w-full flex justify-center items-center 2xl:mt-8`}>
                                             {t("trn.noResults")}
                                         </div>
                                     </div>
@@ -224,19 +224,21 @@ const Report = () => {
     return (
         <>
             <Title title={t("sidebar.report")} />
-            <button className="max-w-[180px] sm:max-w-[220px] md:max-w-[260px] lg:max-w-[340px] w-full min-w-[160px] h-[30px] sm:h-[40px] md:h-[50px] bg-[#381C46] bg-opacity-10 rounded-[30px] self-start relative" onClick={handleSwitch}>
+            <button className={`max-w-[180px] sm:max-w-[220px] md:max-w-[260px] lg:max-w-[340px] w-full min-w-[160px] h-[30px] sm:h-[40px] md:h-[50px] ${localStorage.getItem("mode") === "Light Mode" ? 'bg-[#381C46]' : 'bg-[#BCB8B8]'}  bg-opacity-10 rounded-[30px] self-start relative`} onClick={handleSwitch}>
                 <div className={`w-[50%] h-full rounded-[30px] bg-[#BFA2E5] bg-opacity-80 ${switched ? " translate-x-[100%]" : "translate-x-0"} transition-transform ease-in-out duration-300`}></div>
-                <FiPieChart className="absolute top-[50%] translate-y-[-50%] left-[20%] z-50 text-[20px] md:text-[30px] lg:text-[35px]" />
-                <FiBarChart className="absolute top-[50%] translate-y-[-50%] right-[20%] z-50 text-[20px] md:text-[30px] lg:text-[35px]" />
+                <FiPieChart className={`absolute top-[50%] translate-y-[-50%] left-[20%] z-50 text-[20px] md:text-[30px] lg:text-[35px] ${localStorage.getItem("mode") === "Light Mode" ? 'text-black' : 'text-white'}`} />
+                <FiBarChart className={`absolute top-[50%] translate-y-[-50%] right-[20%] z-50 text-[20px] md:text-[30px] lg:text-[35px] ${localStorage.getItem("mode") === "Light Mode" ? 'text-black' : 'text-white'}`} />
             </button>
             {!switched && (
                 <div className="self-start flex flex-col relative mt-[30px] ml-[20px]" onClick={() => setDropDown(!dropDown)}>
                     <button className="text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] flex items-center">
-                        <div className="capitalize">{currentTransaction}</div>
-                        <BiChevronDown className="text-[20px] md:text-[25px] lg:text-[30px]" />
+                        <div className={`capitalize ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'}`}>{currentTransaction}</div>
+                        <BiChevronDown className={`text-[20px] md:text-[25px] lg:text-[30px] ${localStorage.getItem(" mode") === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'}`} />
                     </button>
                     {dropDown && (
-                        <div className="absolute top-[120%] flex flex-col justify-start items-center text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] bg-white shadow-md rounded-[20px] py-2 z-50">
+                        <div className={`absolute top-[120%] flex flex-col justify-start items-center text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] ${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} 
+                        ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'}
+                        shadow-md rounded-[20px] py-2 z-50`}>
                             <button className="w-full mb-2 hover:bg-gray-100 px-4 capitalize" onClick={() => handleDropDownClick(t("rep.Transactions"))}>
                                 {t("rep.Transactions")}
                             </button>
@@ -250,7 +252,9 @@ const Report = () => {
                     )}
                 </div>
             )}
-            <div className="w-full h-full max-h-[1000px] bg-white rounded-[10px] sm:rounded-[20px] md:rounded-[30px] lg:rounded-[40px] mt-[30px] pb-[30px] px-[30px] overflow-auto relative">
+            <div className={`w-full h-full max-h-[1000px] rounded-[10px] sm:rounded-[20px] md:rounded-[30px] lg:rounded-[40px] mt-[30px] pb-[30px] px-[30px] overflow-auto relative 
+            ${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8] bg-opacity-10'}
+            ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'}`}>
                 <MonthSelector
                     currentMonth={currentMonth}
                     setCurrentMonth={setCurrentMonth}

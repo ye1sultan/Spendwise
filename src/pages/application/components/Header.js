@@ -14,13 +14,15 @@ const Header = () => {
 
     const { t, i18n } = useTranslation();
 
+    let mode = localStorage.getItem("mode");
+
     return (
         <div className="w-full flex flex-row justify-between items-start mb-[20px]">
             <div className="flex flex-col">
-                <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] mb-[5px]">
+                <div className={`${mode === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'} text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] mb-[5px]`}>
                     {t("header.subtitle")}
                 </div>
-                <div className="text-base md:text-lg lg:text-xl xl:text-[28px] 2xl:text-[36px] font-medium">
+                <div className={`${mode === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'} text-base md:text-lg lg:text-xl xl:text-[28px] 2xl:text-[36px] font-medium`}>
                     {t("header.title")}<span className="font-bold">{t("header.finance")}</span>
                 </div>
             </div>
@@ -30,7 +32,7 @@ const Header = () => {
                         src={'https://picsum.photos/200/200'}
                         alt='avatar'
                     />
-                    <div className="flex justify-center items-center text-base md:text-lg lg:text-xl font-semibold ml-[10px] lg:ml-[20px]">
+                    <div className={`${mode === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'} flex justify-center items-center text-base md:text-lg lg:text-xl font-semibold ml-[10px] lg:ml-[20px]`}>
                         {name}
                     </div>
                 </div>

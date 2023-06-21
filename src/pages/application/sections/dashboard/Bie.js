@@ -31,6 +31,8 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
 
     const [showBalanceModal, setShowBalanceModal] = useState(false);
 
+    let mode = localStorage.getItem("mode");
+    
     const getBie = () => {
         if (svg === 'current') {
             if (isLoading) {
@@ -117,13 +119,13 @@ const Bie = ({ title, svg, transactions, isLoading, monthlyBalance }) => {
     }
 
     return (
-        <div className="flex flex-col justify-between items-start flex-grow flex-shrink flex-basis-[140px] 
-            w-[140px] h-[70px] rounded-[10px] p-[10px]
-            sm:w-[180px] sm:h-[85px] sm:rounded-[15px] sm:p-[15px]
-            md:w-[220px] md:h-[105px] md:rounded-[20px] md:p-[20px]
-            lg:w-[250px] lg:h-[120px] lg:rounded-[30px] lg:p-[25px]
-            xl:w-[300px] xl:h-[140px]
-            bg-white relative">
+        <div className={`flex flex-col justify-between items-start flex-grow flex-shrink flex-basis-[140px] 
+        w-[140px] h-[70px] rounded-[10px] p-[10px]
+        sm:w-[180px] sm:h-[85px] sm:rounded-[15px] sm:p-[15px]
+        md:w-[220px] md:h-[105px] md:rounded-[20px] md:p-[20px]
+        lg:w-[250px] lg:h-[120px] lg:rounded-[30px] lg:p-[25px]
+        xl:w-[300px] xl:h-[140px] relative 
+        ${mode === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8] bg-opacity-10'}  ${mode === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'}`}>
             {getBie()}
         </div>
     );

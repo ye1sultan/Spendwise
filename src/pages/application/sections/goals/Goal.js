@@ -14,7 +14,7 @@ import { RiBookLine, RiMedal2Fill } from 'react-icons/ri';
 import { useTranslation } from 'react-i18next';
 const Goal = ({ goal, name, icon, deadline, target_amount, initial_target_amount, color, id, status, onPauseGoal, onDeleteGoal, onReachGoal, onEditGoal }) => {
     const { t, i18n } = useTranslation();
-    
+
     let fixedAmount = status === 'reached' ? target_amount : initial_target_amount;
 
     const getPercent = (initial_target_amount, target_amount) => {
@@ -88,14 +88,14 @@ const Goal = ({ goal, name, icon, deadline, target_amount, initial_target_amount
 
     return (
         <div
-            className="
-                w-[300px] md:w-[400px] lg:w-[500px] xl:w-[500px] 
-                h-[200px] md:h-[250px] lg:h-[315px] xl:h-[315px] 
-                min-w-[220px] min-h-[150px]
-                bg-white
-                rounded-[15px] md:rounded-[20px] lg:rounded-[30px] 
-                p-[15px] md:p-[20px] lg:p-[25px] xl:p-[30px]
-                flex flex-col justify-between items-start">
+            className={`w-[300px] md:w-[400px] lg:w-[500px] xl:w-[500px] 
+            h-[200px] md:h-[250px] lg:h-[315px] xl:h-[315px] 
+            min-w-[220px] min-h-[150px]
+            ${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8] bg-opacity-10'}  
+            ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'}
+            rounded-[15px] md:rounded-[20px] lg:rounded-[30px] 
+            p-[15px] md:p-[20px] lg:p-[25px] xl:p-[30px]
+            flex flex-col justify-between items-start`}>
             <div className="flex justify-start items-center w-full">
                 <div
                     className="
@@ -113,7 +113,7 @@ const Goal = ({ goal, name, icon, deadline, target_amount, initial_target_amount
             </div>
             <div className="w-full flex justify-between items-center">
                 <div>
-                    <div className="text-[14px] md:text-[16px] lg:text-[20px] font-medium text-[#6A6A6A]">
+                    <div className={`text-[14px] md:text-[16px] lg:text-[20px] font-medium  ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#696969]' : 'text-white'} capitalize`}>
                         {t("dashboard.goal.till")}
                     </div>
                     <div className="text-[16px] md:text-[20px] lg:text-[24px] font-medium capitalize">
@@ -127,7 +127,7 @@ const Goal = ({ goal, name, icon, deadline, target_amount, initial_target_amount
             <div className="w-full h-[10px] md:h-[20px] bg-[#EEECEC] rounded-[10px]">
                 <div className="h-full rounded-[10px]" style={{ width: progress + "%", backgroundColor: color }}></div>
             </div>
-            <div className="text-[12px] md:text-[14px] lg:text-[16px] font-semibold text-[#6A6A6A]">
+            <div className={`text-[12px] md:text-[14px] lg:text-[16px] font-semibold ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#696969]' : 'text-white'}`}>
                 {`₸ ${parseInt(fixedAmount)} / ₸ ${parseInt(target_amount)}`}
             </div>
             <div className="w-full flex gap-x-1 justify-end items-center">

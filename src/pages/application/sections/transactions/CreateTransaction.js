@@ -183,16 +183,16 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
 
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 flex items-start justify-center m-6 h-full z-20">
-            <div className='bg-white shadow-md rounded-[30px] xl:rounded-[40px] mx-4 w-full max-w-[350px] xl:max-w-[400px] min-w-[280px] p-6 xl:p-8'>
+            <div className={`${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'}  shadow-md rounded-[30px] xl:rounded-[40px] mx-4 w-full max-w-[350px] xl:max-w-[400px] min-w-[280px] p-6 xl:p-8`}>
                 <div className='w-full flex justify-between items-center mb-[20px]'>
-                    <div className="text-xl xl:text-[28px] 2xl:text-[32px] font-medium">
+                    <div className="text-xl xl:text-[28px] 2xl:text-[32px] font-medium capitalize">
                         {t("trn.new")} <span style={{ color: color }}>{transaction === 'income' ? t("trn.income") : t("trn.expense")}</span>
                     </div>
                     <IoCloseOutline className='cursor-pointer text-[25px] md:text-[30px] lg:text-[35px]' onClick={() => onModalClose(false)} />
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A]"
+                        className={`${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] ${localStorage.getItem("mode") === "Light Mode" ? 'placehodler:text-[#696969]' : 'placeholder:text-white'}`}
                         style={{ color: color, borderColor: color }}
                         type="number"
                         placeholder="0.00 ₸"
@@ -202,7 +202,7 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full min-w-[95%] h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A]"
+                        className={`${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A]`}
                         type="date"
                         max={format(new Date(), 'yyyy-MM-dd')}
                         onChange={(e) => handleDateChange(parseISO(e.target.value))} />
@@ -210,7 +210,7 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A]"
+                        className={`${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] ${localStorage.getItem("mode") === "Light Mode" ? 'placehodler:text-[#696969]' : 'placeholder:text-white'}`}
                         type="text"
                         placeholder={t("trn.bar.description")}
                         value={selectedDescription}
@@ -226,7 +226,7 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
                         </div>
                         <BiChevronDown className={`cursor-pointer ${categoriesDropDown ? 'rotate-180' : 'rotate-0'} text-[25px] 2xl:text-[30px]`} />
                         {categoriesDropDown && (
-                            <div className="flex flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[10px] rounded-[20px] 2xl:rounded-[25px] shadow-lg z-10">
+                            <div className={`flex flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto ${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} py-[10px] rounded-[20px] 2xl:rounded-[25px] shadow-lg z-10`}>
                                 {getCategories()}
                             </div>)}
                     </div>
@@ -240,7 +240,7 @@ const CreateTransaction = ({ transaction, onModalClose, addNewTransaction }) => 
                         </div>
                         <BiChevronDown className={`cursor-pointer ${paymentDropDown ? 'rotate-180' : 'rotate-0'} text-[25px] 2xl:text-[30px]`} />
                         {paymentDropDown && (
-                            <div className="flex flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto bg-white py-[10px] rounded-[20px] 2xl:rounded-[25px] shadow-lg z-10">
+                            <div className={`${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} flex flex-col absolute top-[100%] left-0 w-full max-h-[300px] overflow-auto py-[10px] rounded-[20px] 2xl:rounded-[25px] shadow-lg z-10`}>
                                 {getPaymentMethods()}
                             </div>)}
                     </div>

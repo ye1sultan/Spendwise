@@ -75,7 +75,7 @@ const Goal = ({ name, icon, deadline, totalAmount, amount, color }) => {
             </div>
             <div className="w-full flex justify-between items-center">
                 <div>
-                    <div className="text-sm sm:text-lg lg:text-xl font-medium text-[#6A6A6A] capitalize">
+                    <div className={`text-sm sm:text-lg lg:text-xl font-medium capitalize ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#6A6A6A]' : 'text-white'}`}>
                         {t("dashboard.goal.till")}
                     </div>
                     <div className="text-base sm:text-xl lg:text-2xl font-medium">
@@ -89,7 +89,7 @@ const Goal = ({ name, icon, deadline, totalAmount, amount, color }) => {
             <div className="w-full md:h-[20px] h-[10px] bg-[#EEECEC] rounded-[10px]">
                 <div className="h-full rounded-[10px]" style={{ width: progress + "%", backgroundColor: color }}></div>
             </div>
-            <div className="text-sm sm:text-base lg:text-lg font-semibold text-[#6A6A6A]">
+            <div className={`text-sm sm:text-base lg:text-lg font-semibold ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#6A6A6A]' : 'text-white'}`}>
                 {`₸ ${amount} / ₸ ${totalAmount}`}
             </div>
         </div>

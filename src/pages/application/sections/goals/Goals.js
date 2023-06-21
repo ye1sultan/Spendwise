@@ -129,13 +129,13 @@ const Goals = () => {
     const NewGoalButton = ({ onClick }) => {
         return (
             <div
-                className="
-                    w-[300px] md:w-[400px] lg:w-[500px] xl:w-[500px] 
-                    h-[200px] md:h-[250px] lg:h-[315px] xl:h-[315px] 
-                    min-w-[220px] min-h-[150px] 
-                    bg-white 
-                    rounded-[15px] md:rounded-[20px] lg:rounded-[30px] 
-                    flex flex-col justify-center items-center cursor-pointer shadow-md" onClick={onClick}>
+                className={`${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8] bg-opacity-10'}  
+                ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'}
+                w-[300px] md:w-[400px] lg:w-[500px] xl:w-[500px] 
+                h-[200px] md:h-[250px] lg:h-[315px] xl:h-[315px] 
+                min-w-[220px] min-h-[150px]  
+                rounded-[15px] md:rounded-[20px] lg:rounded-[30px] 
+                flex flex-col justify-center items-center cursor-pointer shadow-md`} onClick={onClick}>
                 <AiOutlinePlus className="text-[30px] md:text-[35px] lg:text-[40px]" />
                 <div className="text-2xl lg:text-3xl xl:text-[40px] font-medium">{t("goals.goal")}</div>
             </div>
@@ -144,16 +144,16 @@ const Goals = () => {
 
     const GoalsDropDown = ({ onSelect }) => {
         return (
-            <div className="absolute top-full mt-2 bg-white rounded-xl shadow-md overflow-hidden">
-                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[16px] lg:text-[20px] font-medium capitalize text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('active')}>
+            <div className={`${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'}  ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'}  absolute top-full mt-2 rounded-xl shadow-md overflow-hidden`}>
+                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[16px] lg:text-[20px] font-medium capitalize hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('active')}>
                     <AiOutlineClockCircle className="mr-2 text-[20px] lg:text-[25px]" />
                     {t("goals.active")} {t("sidebar.goals")}
                 </button>
-                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[16px] lg:text-[20px] font-medium capitalize text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('paused')}>
+                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[16px] lg:text-[20px] font-medium capitalize hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('paused')}>
                     <MdMotionPhotosPaused className="mr-2 text-[20px] lg:text-[25px]" />
                     {t("goals.paused")} {t("sidebar.goals")}
                 </button>
-                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[16px] lg:text-[20px] font-medium capitalize text-black hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('reached')}>
+                <button className="w-full flex justify-start items-center px-4 py-2 text-left text-[16px] lg:text-[20px] font-medium capitalize hover:bg-gray-100 focus:outline-none" onClick={() => onSelect('reached')}>
                     <AiOutlineCheckCircle className="mr-2 text-[20px] lg:text-[25px]" />
                     {t("goals.reached")} {t("sidebar.goals")}
                 </button>

@@ -198,16 +198,16 @@ const EditModal = ({ goal, onSave, onCancel }) => {
 
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 flex items-start justify-center m-6 h-full z-20">
-            <div className='bg-white shadow-md rounded-[30px] xl:rounded-[40px] mx-4 w-full max-w-[350px] xl:max-w-[400px] min-w-[280px] p-6 xl:p-8'>
+            <div className={`${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'}  shadow-md rounded-[30px] xl:rounded-[40px] mx-4 w-full max-w-[350px] xl:max-w-[400px] min-w-[280px] p-6 xl:p-8`}>
                 <div className='w-full flex justify-between items-center mb-[20px]'>
-                    <div className="text-xl xl:text-[28px] 2xl:text-[32px] font-medium">
+                    <div className="text-xl xl:text-[28px] 2xl:text-[32px] font-medium capitalize">
                         Edit Goal
                     </div>
                     <IoCloseOutline className='cursor-pointer text-[25px] md:text-[30px] lg:text-[35px]' onClick={() => onCancel()} />
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px]"
+                        className={`${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] ${localStorage.getItem("mode") === "Light Mode" ? 'placehodler:text-[#696969]' : 'placeholder:text-white'} capitalize`}
                         type="text"
                         name="name"
                         value={editedGoal.name}
@@ -217,7 +217,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px]"
+                        className={`${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] ${localStorage.getItem("mode") === "Light Mode" ? 'placehodler:text-[#696969]' : 'placeholder:text-white'} capitalize`}
                         type="number"
                         name="initial_target_amount"
                         value={parseInt(editedGoal.initial_target_amount)}
@@ -227,7 +227,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px]"
+                        className={`${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] ${localStorage.getItem("mode") === "Light Mode" ? 'placehodler:text-[#696969]' : 'placeholder:text-white'} capitalize`}
                         type="number"
                         name="target_amount"
                         value={parseInt(editedGoal.target_amount)}
@@ -237,7 +237,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[20px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full min-w-[95%] h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px]"
+                        className={`${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} min-w-[95%] w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] ${localStorage.getItem("mode") === "Light Mode" ? 'placehodler:text-[#696969]' : 'placeholder:text-white'} capitalize`}
                         type="date"
                         name="deadline"
                         min={format(new Date(), 'yyyy-MM-dd')}
@@ -256,7 +256,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                             <BsChevronDown size={20} />
                         </div>
                         {iconsDropDown && (
-                            <div className='z-20 w-full absolute left-0 top-[120%] bg-white rounded-[30px] p-[20px] shadow-lg'>
+                            <div className={`z-20 w-full absolute left-0 top-[120%] ${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} rounded-[30px] p-[20px] shadow-lg`}>
                                 <div className='flex flex-wrap justify-center items-center'>
                                     {getAllIcons()}
                                 </div>
@@ -272,7 +272,7 @@ const EditModal = ({ goal, onSave, onCancel }) => {
                             <BsChevronDown size={20} />
                         </div>
                         {colorsDropDown && (
-                            <div className='z-20 w-full absolute left-0 top-[120%] bg-white rounded-[30px] p-[20px] shadow-lg'>
+                            <div className={`z-20 w-full absolute left-0 top-[120%] ${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} rounded-[30px] p-[20px] shadow-lg`}>
                                 <div className='flex flex-wrap justify-center items-center'>
                                     {getAllColors()}
                                 </div>

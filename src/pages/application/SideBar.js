@@ -42,9 +42,14 @@ const SideBar = () => {
     const handleButtonClick = (view) => {
         setActiveButton(view);
     };
-
+    
+    let mode = localStorage.getItem("mode");
+    //${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8] bg-opacity-10'}  
+    //${localStorage.getItem("mode") === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'}
+    //${localStorage.getItem("mode") === "Light Mode" ? 'placehodler:text-[#696969]' : 'placeholder:text-white'}
+    
     return (
-        <div className="sticky left-0 top-0 xl:max-w-[300px] xl:w-full bg-white flex flex-col justify-start xl:justify-between items-center h-screen py-6 xl:py-14 xl:px-[30px] shadow-sm">
+        <div className={`${mode === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8] bg-opacity-10'} sticky left-0 top-0 xl:max-w-[300px] xl:w-full flex flex-col justify-start xl:justify-between items-center h-screen py-6 xl:py-14 xl:px-[30px] shadow-sm`}>
             <div className="flex flex-col justify-center items-center xl:items-start mb-16 xl:mb-0 w-full">
                 <div className='w-[210px] h-full hidden xl:block mb-12 z-50'>
                     <img src={FullLogo} alt="Logo" />
@@ -56,7 +61,7 @@ const SideBar = () => {
                             key={index}
                             to={`/application/${button.view}`}
                             onClick={() => handleButtonClick(button.view)}
-                            className={`flex items-center w-full h-[50px] p-[10px] text-[#2c3e50] text-[15px] font-semibold mb-[15px] ${activeButton === button.view ? 'bg-[#BFA2E5] bg-opacity-70' : 'bg-transparent'}`}>
+                            className={`flex items-center w-full h-[50px] p-[10px] ${mode === "Light Mode" ? 'text-[#2c3e50]' : 'text-[#ffffff]'} text-[15px] font-semibold mb-[15px] ${activeButton === button.view ? 'bg-[#BFA2E5] bg-opacity-70' : 'bg-transparent'}`}>
                             {button.icon}
                             <div className="hidden xl:flex xl:flex-1 capitalize">{button.label}</div>
                         </Link>

@@ -19,6 +19,8 @@ import { useEffect, useRef } from 'react';
 const PieChart = ({ transactions, type }) => {
     const { t, i18n } = useTranslation();
 
+    let mode = localStorage.getItem("mode");
+    
     const getTotalExpense = (data) => {
         return data.datasets[0].data.reduce((acc, val) => acc + val, 0);
     };
@@ -32,7 +34,7 @@ const PieChart = ({ transactions, type }) => {
             const centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
 
             ctx.font = `${window.innerWidth > 1536 ? '24px' : window.innerWidth > 1280 ? '22px' : window.innerWidth > 1280 ? '18px' : window.innerWidth > 1280 ? '16px' : '14px'} Montserrat`;
-            ctx.fillStyle = "#000000";
+            ctx.fillStyle = mode === "Light Mode" ? '#000000' : '#ffffff';
             ctx.textAlign = "center";
             ctx.textBaseline = "middle";
 

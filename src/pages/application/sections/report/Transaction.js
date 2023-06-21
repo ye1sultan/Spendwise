@@ -15,7 +15,7 @@ const Transaction = ({ name, value, icon, color, percentage, type }) => {
                         <div className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] font-semibold">
                             {t(`dashboard.pie.category.${name}`)}
                         </div>
-                        <div className="text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] text-[#000000]">
+                        <div className="text-[12px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px]">
                             {t("rep.percentage")}
                         </div>
                     </div>
@@ -24,7 +24,7 @@ const Transaction = ({ name, value, icon, color, percentage, type }) => {
                     <div className={`font-medium text-[16px] lg:text-[18px] xl:text-[20px] 2xl:text-[22px] ${type === 'income' ? 'text-green-500' : 'text-red-500'}`}>
                         {type === 'expense' ? '- ' + value : value}
                     </div>
-                    <div className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px] text-[#443A3A]">
+                    <div className="text-[14px] lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">
                         {percentage}
                     </div>
                 </div>

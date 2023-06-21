@@ -9,10 +9,12 @@ import { useTranslation } from "react-i18next";
 const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, totals }) => {
     const { t, i18n } = useTranslation();
 
+    let mode = localStorage.getItem("mode");
+
     const getBieChart = () => {
         if (title === t("dashboard.bieChart.expenses")) {
             return (
-                <div className="flex flex-col justify-between items-center w-full rounded-[10px] sm:rounded-[15px] md:rounded-[20px] lg:rounded-[30px] bg-white">
+                <div className="flex flex-col justify-between items-center w-full rounded-[10px] sm:rounded-[15px] md:rounded-[20px] lg:rounded-[30px]">
                     {
                         (() => {
                             if (isLoading) {
@@ -43,7 +45,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
 
         if (title === t("dashboard.bieChart.incomes")) {
             return (
-                <div className="flex flex-col justify-between items-center w-full rounded-[10px] sm:rounded-[15px] md:rounded-[20px] lg:rounded-[30px] bg-white">
+                <div className="flex flex-col justify-between items-center w-full rounded-[10px] sm:rounded-[15px] md:rounded-[20px] lg:rounded-[30px]">
                     {
                         (() => {
                             if (isLoading) {
@@ -74,7 +76,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
 
         if (title === t("dashboard.bieChart.monthlyBalance")) {
             return (
-                <div className="flex flex-col justify-between items-center w-full rounded-[10px] sm:rounded-[15px] md:rounded-[20px] lg:rounded-[30px] bg-white">
+                <div className="flex flex-col justify-between items-center w-full rounded-[10px] sm:rounded-[15px] md:rounded-[20px] lg:rounded-[30px]">
                     {
                         (() => {
                             if (isLoading) {
@@ -107,7 +109,7 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
 
         if (title === t("dashboard.bieChart.goals")) {
             return (
-                <div className="flex flex-col justify-center items-center h-[170px] md:h-[220px] lg:h-[270px] w-full rounded-[10px] sm:rounded-[15px] md:rounded-[20px] lg:rounded-[30px] bg-white mb-8">
+                <div className="flex flex-col justify-center items-center h-[170px] md:h-[220px] lg:h-[270px] w-full rounded-[10px] sm:rounded-[15px] md:rounded-[20px] lg:rounded-[30px] mb-8">
                     {
                         (() => {
                             if (isGLoading) {
@@ -135,7 +137,9 @@ const BieCharts = ({ title, isLoading, isGLoading, goal, separatedTransactions, 
             <div className="text-base md:text-lg lg:text-xl xl:text-[28px] 2xl:text-[32px] mb-2 text-[#6A6A6A] font-medium capitalize">
                 {title}
             </div>
-            {getBieChart()}
+            <div className={`${mode === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8] bg-opacity-10'}  ${mode === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'}`}>
+                {getBieChart()}
+            </div>
         </div>
     );
 }

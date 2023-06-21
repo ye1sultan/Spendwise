@@ -37,7 +37,9 @@ const Notifications = () => {
         <>
             <Title title={t("sidebar.notifications")} />
 
-            <div className="w-full h-full bg-white rounded-[10px] sm:rounded-[20px] md:rounded-[30px] lg:rounded-[40px] px-[20px] sm:px-[30px] md:px-[40px] lg:px-[50px] py-[20px] md:py-[30px] lg:py-[40px] relative">
+            <div className={`w-full h-full rounded-[10px] sm:rounded-[20px] md:rounded-[30px] lg:rounded-[40px] px-[20px] sm:px-[30px] md:px-[40px] lg:px-[50px] py-[20px] md:py-[30px] lg:py-[40px] relative 
+            ${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8] bg-opacity-10'}
+            ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'}`}>
                 <div className="text-lg lg:text-xl xl:text-[28px] 2xl:text-[32px] font-medium lg:mb-[20px] capitalize">
                     {t("notif.email")}
                 </div>
@@ -55,7 +57,7 @@ const Notifications = () => {
                             {t("notif.news.title")}
                         </div>
                         <div className="w-full flex justify-between items-center">
-                            <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium text-[#696969]">
+                            <div className={`text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#696969]' : 'text-white'}`}>
                                 {t("notif.news.text")}
                             </div>
                             <Switch onChange={onChange} checked={newsValue && notifValue} name={"news"} />
@@ -66,7 +68,7 @@ const Notifications = () => {
                             {t("notif.goal.title")}
                         </div>
                         <div className="w-full flex justify-between items-center">
-                            <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium text-[#696969]">
+                            <div className={`text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#696969]' : 'text-white'}`}>
                                 {t("notif.goal.text")}
                             </div>
                             <Switch onChange={onChange} checked={goalValue && notifValue} name={"goal"} />
@@ -77,7 +79,7 @@ const Notifications = () => {
                             {t("notif.debt.title")}
                         </div>
                         <div className="w-full flex justify-between items-center">
-                            <div className="text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium text-[#696969]">
+                            <div className={`text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#696969]' : 'text-white'}`}>
                                 {t("notif.debt.text")}
                             </div>
                             <Switch onChange={onChange} checked={debtValue && notifValue} name={"debt"} />

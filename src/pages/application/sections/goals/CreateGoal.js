@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 
 const CreateGoal = ({ onModalClose, addNewGoal }) => {
     const { t, i18n } = useTranslation();
-    
+
     const allIcons = [
         { name: 'earth', icon: <IoEarthOutline className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
         { name: 'cart', icon: <AiOutlineShoppingCart className="text-[25px] md:text-[30px] lg:text-[35px]" /> },
@@ -208,16 +208,16 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
 
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 flex items-start justify-center m-6 h-full z-20">
-            <div className='bg-white shadow-md rounded-[30px] xl:rounded-[40px] mx-4 w-full max-w-[350px] xl:max-w-[400px] min-w-[280px] p-6 xl:p-8'>
+            <div className={`${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'}  shadow-md rounded-[30px] xl:rounded-[40px] mx-4 w-full max-w-[350px] xl:max-w-[400px] min-w-[280px] p-6 xl:p-8`}>
                 <div className='w-full flex justify-between items-center mb-[20px]'>
-                    <div className="text-xl xl:text-[28px] 2xl:text-[32px] font-medium">
+                    <div className="text-xl xl:text-[28px] 2xl:text-[32px] font-medium capitalize">
                         {t("goals.goal")}
                     </div>
                     <IoCloseOutline className='cursor-pointer text-[25px] md:text-[30px] lg:text-[35px]' onClick={() => onModalClose(false)} />
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A] placeholder:capitalize"
+                        className={`${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] ${localStorage.getItem("mode") === "Light Mode" ? 'placehodler:text-[#696969]' : 'placeholder:text-white'} capitalize`}
                         type="text"
                         placeholder={t("goals.name")}
                         onChange={e => setSelectedName(e.target.value)} />
@@ -225,7 +225,7 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A] placeholder:capitalize"
+                        className={`${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] ${localStorage.getItem("mode") === "Light Mode" ? 'placehodler:text-[#696969]' : 'placeholder:text-white'} capitalize`}
                         type="number"
                         placeholder={t("goals.curBal")}
                         onChange={e => setSelectedAmount(e.target.value)} />
@@ -233,7 +233,7 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A] placeholder:capitalize"
+                        className={`${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] ${localStorage.getItem("mode") === "Light Mode" ? 'placehodler:text-[#696969]' : 'placeholder:text-white'} capitalize`}
                         type="number"
                         placeholder={t("goals.goalBal")}
                         onChange={e => setSelectedTotalAmount(e.target.value)} />
@@ -241,7 +241,7 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
                 </div>
                 <div className="relative w-full h-[40px] md:h-[50px] mb-[10px] border-b-[1px] border-[#696969]">
                     <input
-                        className="w-full min-w-[95%] h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] placeholder:text-[#6A6A6A] placeholder:capitalize"
+                        className={`${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} min-w-[95%] w-full h-full text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-normal pl-[40px] ${localStorage.getItem("mode") === "Light Mode" ? 'placehodler:text-[#696969]' : 'placeholder:text-white'} capitalize`}
                         type="date"
                         min={format(new Date(), 'yyyy-MM-dd')}
                         placeholder={t("dashboard.goal.till")}
@@ -265,7 +265,7 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
                             <BsArrowDownShort className='text-[25px] md:text-[30px] lg:text-[35px]' />
                         </div>
                         {iconsDropDown && (
-                            <div className='z-20 w-full absolute top-[120%] bg-white rounded-[30px] p-[20px] shadow-lg'>
+                            <div className={`z-20 w-full absolute top-[120%] ${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} rounded-[30px] p-[20px] shadow-lg`}>
                                 <div className='flex flex-wrap justify-center items-center'>
                                     {getAllIcons()}
                                 </div>
@@ -290,7 +290,7 @@ const CreateGoal = ({ onModalClose, addNewGoal }) => {
                             <BsArrowDownShort className='text-[25px] md:text-[30px] lg:text-[35px]' />
                         </div>
                         {colorsDropDown && (
-                            <div className='z-20 w-full absolute top-[120%] bg-white rounded-[30px] p-[20px] shadow-lg'>
+                            <div className={`z-20 w-full absolute top-[120%] ${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8]'} rounded-[30px] p-[20px] shadow-lg`}>
                                 <div className='flex flex-wrap justify-center items-center'>
                                     {getAllColors()}
                                 </div>

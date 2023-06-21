@@ -121,7 +121,7 @@ const Transactions = () => {
             return (
                 <div className="flex flex-col w-full justify-center items-center 2xl:mb-8">
                     <NoResultTr className="w-[160px] 2xl:w-full 2xl:mt-8" />
-                    <div className="font-medium 2xl:text-[24px] text-[#696969] w-full flex justify-center items-center 2xl:mt-8">
+                    <div className={`font-medium 2xl:text-[24px] ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#696969]' : 'text-white'} w-full flex justify-center items-center 2xl:mt-8`}>
                         {t("trn.noResults")}
                     </div>
                 </div>
@@ -207,21 +207,21 @@ const Transactions = () => {
                     </div>
                 )}
             </div>
-            <div className="w-full bg-white rounded-[10px] sm:rounded-[20px] md:rounded-[30px] lg:rounded-[40px] mt-[40px] pb-[20px]">
+            <div className={`w-full ${localStorage.getItem("mode") === "Light Mode" ? 'bg-white' : 'bg-[#BCB8B8] bg-opacity-10'} rounded-[10px] sm:rounded-[20px] md:rounded-[30px] lg:rounded-[40px] mt-[40px] pb-[20px] ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'}`}>
                 <MonthSelector
                     currentMonth={currentMonth}
                     setCurrentMonth={setCurrentMonth}
                 />
                 <div className="hidden sm:flex justify-around items-center w-full bg-[#BFA2E5] bg-opacity-90">
                     {[t("trn.bar.date"), t("trn.bar.category"), t("trn.bar.description"), t("trn.bar.type"), t("trn.bar.amount"), t("trn.bar.action")].map((text, index) => (
-                        <div key={index} className="py-3 md:py-5 text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium w-1/6 text-center">
+                        <div key={index} className={`py-3 md:py-5 text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium w-1/6 text-center ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'}`}>
                             {text}
                         </div>
                     ))}
                 </div>
                 <div className="flex sm:hidden justify-around items-center w-full bg-[#BFA2E5] bg-opacity-90">
                     {[t("trn.bar.date"), t("trn.bar.category"), t("trn.bar.amount"), t("trn.bar.more")].map((text, index) => (
-                        <div key={index} className="py-3 md:py-5 text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium w-1/4 text-center">
+                        <div key={index} className={`py-3 md:py-5 text-sm md:text-base lg:text-lg xl:text-[20px] 2xl:text-[24px] font-medium w-1/4 text-center ${localStorage.getItem("mode") === "Light Mode" ? 'text-[#2c3e50]' : 'text-white'}`}>
                             {text}
                         </div>
                     ))}
