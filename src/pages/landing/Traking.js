@@ -1,18 +1,21 @@
+import { useTranslation } from 'react-i18next';
 import Button from './components/Button';
 
 const Traking = () => {
+    const { t, i18n } = useTranslation();
+
     return (
         <div id='tracking' className="bg-[#ffffff] py-[100px] 2xl:py-[150px] w-full relative">
             <div className="flex flex-col 2xl:flex-row justify-center items-center max-w-[350px] 2xl:max-w-full h-full mx-auto">
                 <div className="flex flex-col 2xl:w-[700px]">
                     <div className="font-inter text-[40px] 2xl:text-[75px] font-semibold leading-tight mb-[30px] 2xl:mb-[40px] z-10">
-                        Traking your budget up to date
+                        {t("landing.tracking.title")}
                     </div>
                     <div className="font-amiri text-[24px] 2xl:text-[42px] 2xl:w-[555px] mb-[15px] 2xl:mb-[60px]">
-                        With this site you can monitor your financial status at any time. It is very convenient.
+                    {t("landing.tracking.text")}
                     </div>
                     <div className='hidden 2xl:block'>
-                        <Button route='/signup' text='Try Now' width='2xl:w-[290px]' height='2xl:h-[80px]' bg='bg-[#19AD50CC]' rounded='2xl:rounded-[20px]' size='2xl:text-[32px]' color='text-white' bold='font-bold' font='font-inter' />
+                        <Button route='/signup' text={t("landing.tracking.btn")} width='2xl:w-[290px]' height='2xl:h-[80px]' bg='bg-[#19AD50CC]' rounded='2xl:rounded-[20px]' size='2xl:text-[32px]' color='text-white' bold='font-bold' font='font-inter' />
                     </div>
                 </div>
                 <div className='block 2xl:hidden mb-[50px]'>

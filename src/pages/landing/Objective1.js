@@ -1,11 +1,15 @@
+import { useTranslation } from "react-i18next";
+
 const Objective1 = () => {
+    const { t, i18n } = useTranslation();
+
     return (
         <div id='objective-1' className="flex flex-col items-center bg-[#EBF0FECC] w-full">
             <div className="2xl:py-[100px] flex flex-col items-center justify-center w-full">
                 <div className="font-cormorant 2xl:font-inter bg-[#E2C3F1CC] 2xl:bg-transparent text-[30px] 2xl:text-[75px] w-full 2xl:max-w-[1000px] items-center justify-center text-center font-bold 2xl:font-semibold 2xl:mb-40 p-8">
-                    <span className="mr-4">Spend less time worrying <br ></br> and more time</span> 
+                    <span className="mr-4">{t("landing.objf.title")}</span>
                     <span className="relative">
-                         living life.
+                        {t("landing.objf.under")}
                         <div className="block 2xl:hidden absolute -bottom-2 right-0">
                             <svg width="114" height="13" viewBox="0 0 114 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M5.30784 3.51911C2.72624 3.87838 1.18829 4.20169 0.941118 4.56096C0.336913 5.35135 1.54528 5.74669 5.36276 5.78262C5.39022 5.78262 104.507 2.83653 104.535 2.83653C109.011 2.58504 109.368 2.26177 109.368 1.65101C109.368 0.860611 108.16 0.321565 105.578 0.0700753C102.173 -0.325122 24.3952 0.968287 5.30784 3.51911ZM106.21 5.31546C105.002 5.38731 26.3452 7.75847 24.3678 7.97403C0.144682 10.3093 -1.72286 10.6687 0.886203 12.3932C2.14954 13.2195 4.5389 13.2194 14.8928 12.2853C39.8574 10.0937 110.934 9.84238 113.433 8.65678C114.586 8.08195 114.751 4.92026 106.21 5.31546Z" fill="#E868C4" />
@@ -33,10 +37,10 @@ const Objective1 = () => {
                             </svg>
                         </div>
                         <div className="font-amiri text-[24px] 2xl:text-[40px] font-bold 2xl:mb-[45px]">
-                            Calculate your budget
+                            {t("landing.objf.fisrt.title")}
                         </div>
                         <div className="font-amiri text-[16px] 2xl:text-[32px] font-normal leading-normal w-[320px] 2xl:w-full">
-                            We give you the opportunity to set goals and calculate your budget. With this you can regularly share behind the process.
+                            {t("landing.objf.fisrt.text")}
                         </div>
                     </div>
                     <div className="flex flex-col justify-center items-center text-center 2xl:w-[525px] mb-12 2xl:mb-0">
@@ -53,11 +57,10 @@ const Objective1 = () => {
                             </svg>
                         </div>
                         <div className="font-amiri text-[24px] 2xl:text-[40px] font-bold 2xl:mb-[45px]">
-                            Generate monthly report
+                            {t("landing.objf.second.title")}
                         </div>
                         <div className="font-amiri text-[16px] 2xl:text-[32px] font-normal leading-normal w-[320px] 2xl:w-full">
-                            You can create your own weekly/monthly reports. This will help you see the full status of your finance.
-
+                            {t("landing.objf.second.text")}
                         </div>
                     </div>
                     <div className="flex flex-col justify-center items-center text-center 2xl:w-[525px] 2xl:mb-0">
@@ -74,10 +77,10 @@ const Objective1 = () => {
                             </svg>
                         </div>
                         <div className="font-amiri text-[24px] 2xl:text-[40px] font-bold 2xl:mb-[45px]">
-                            Real-time tracker
+                            {t("landing.objf.third.title")}
                         </div>
                         <div className="font-amiri text-[16px] 2xl:text-[32px] font-normal leading-normal w-[320px] 2xl:w-full">
-                            Real-time expense tracking allows you to properly plan your expenses and adapt to changing needs.
+                            {t("landing.objf.third.text")}
                         </div>
                     </div>
                 </div>

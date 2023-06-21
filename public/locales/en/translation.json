@@ -190,5 +190,123 @@
                 "confirm": "Confirm password"
             }
         }
+    },
+    "login": {
+        "title": "Log in",
+        "subtitle": "Welcome back!",
+        "email": "Email",
+        "pwd": "Password",
+        "me": "Remember me",
+        "signup": "Sign up!",
+        "forgot": "Forgot password?"
+    },
+    "signup": {
+        "title": "Sign up",
+        "subtitle": "to calculate your budget!",
+        "name": "Name",
+        "email": "Email",
+        "pwd": "Password",
+        "confirmpwd": "Confirm Password",
+        "terms": "I agree to the Terms of Use",
+        "login": "Log in!",
+        "use": "Terms of Use"
+    },
+    "forgot": {
+        "title": "Forgot password",
+        "subtitle": "No worries!",
+        "email": "Email",
+        "text": "Enter the email address you used to sign up to. We will send you a link to reset your password.",
+        "send": "Send Link",
+        "login": "Log in"
+    },
+    "restore": {
+        "title": "Restore Password",
+        "subtitle": "Make strong password!",
+        "one": "1.Password must be at least 8 characters long.",
+        "two": "2.Password must contain at least one upper case",
+        "three": "3.Password must contain at least one number or special character",
+        "new": "New password",
+        "confirm": "Confirm password",
+        "btn": "Confirm",
+        "login": "Log in"
+    },
+    "landing": {
+        "header": {
+            "nav": {
+                "us": "About Us",
+                "tracking": "Tracking",
+                "Report": "Report",
+                "Support": "Support"
+            },
+            "login": "Log in",
+            "signup": "Sign up"
+        },
+        "hero": {
+            "title": "Personal Finance Made ",
+            "under": "Easy.",
+            "subtitle": "Become financially independent today.",
+            "btn": "Get Started"
+        },
+        "us": {
+            "first": {
+                "title": "What is Spendwise?",
+                "text": "Spendwise brings together everything from spending, balances, and budgets to your credit score and more. Access your financial life in one powerful site."
+            },
+            "second": {
+                "title": "What is our goal?",
+                "text": "Our goal is to help every person live in a financially independent reality."
+            }
+        },
+        "objf": {
+            "title": "Spend less time worrying and more time ",
+            "under": "living life.",
+            "fisrt": {
+                "title": "Calculate your budget",
+                "text": "We give you the opportunity to set goals and calculate your budget. With this you can regularly share behind the process."
+            },
+            "second": {
+                "title": "Generate monthly report",
+                "text": "You can create your own weekly/monthly reports. This will help you see the full status of your finance."
+            },
+            "third": {
+                "title": "Real-time tracker",
+                "text": "Real-time expense tracking allows you to properly plan your expenses and adapt to changing needs."
+            }
+        },
+        "tracking": {
+            "title": "Traking your budget up to date",
+            "text": "With this site you can monitor your financial status at any time. It is very convenient.",
+            "btn": "Try Now"
+        },
+        "report": {
+            "title": "Generate report",
+            "text": "Based on expenses and income, we will make you a weekly/monthly report. It shows the progress or regression of finance.",
+            "btn": "Get Report"
+        },
+        "objs": {
+            "title": "How Spenwise Works?",
+            "text": "Simplify your spending decisions without sacrificing the finer things in life, like fancy coffee drinks with hard-to-pronounce names.",
+            "first": {
+                "title": "Sign Up for Free",
+                "text": "Start your journey with Sing Up. It's easy—no credit card or commitment required."
+            },
+            "second": {
+                "title": "Build Your Budget",
+                "text": "Add your accounts and expenses, set savings targets, and share your budget with loved ones."
+            },
+            "third": {
+                "title": "Breathe Easier",
+                "text": "Start feeling confident, content, and secure in your financial life. You might even sleep better."
+            }
+        },
+        "love": {
+            "under": "Love ",
+            "title": " How You Spend Your Money.",
+            "text": "Start saving and spending with confidence and clarity.",
+            "btnf": "Try Spendwise Free"
+        },
+        "footer": {
+            "text": "Follow us to get support and lots of great ideas on budgeting."
+        }
     }
 }

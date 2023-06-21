@@ -5,8 +5,10 @@ import Logo from '../assets/Logo.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { forgotPassword } from "../../services/api";
+import { useTranslation } from "react-i18next";
 
 const ForgotPassword = () => {
+    const { t, i18n } = useTranslation();
     const [email, setEmail] = useState(false);
 
     const navigate = useNavigate();
@@ -66,10 +68,10 @@ const ForgotPassword = () => {
                 <div className='w-full flex justify-between items-center mb-[30px]'>
                     <div className='flex flex-col items-start'>
                         <div className='text-[32px] font-semibold'>
-                            Forgot Password?
+                            {t("forgot.title")}
                         </div>
                         <div className='text-[16px] text-[#6A6A6A]'>
-                            No worries!
+                            {t("forgot.subtitle")}
                         </div>
                     </div>
                     <img className='h-16' src={Logo} alt='Logo' />
@@ -79,17 +81,17 @@ const ForgotPassword = () => {
                         onChange={(e) => setEmail(e.target.value)}
                         className='border-[1px] rounded-[8px] border-[#CED4DA] w-full h-[40px] text-[14px] py-[12px] pl-[12px] mb-[24px]'
                         type='email'
-                        placeholder='Email'
+                        placeholder={t("forgot.email")}
                         required />
                     <div className="w-full text-[14px] font-semibold mb-[24px]">
-                        Enter the email address you used to sign up to. <br></br>We will send you a link to reset your password.
+                        {t("forgot.text")}
                     </div>
                     <button className='cursor-pointer bg-[#343A40] text-white font-semibold text-[16px] w-full h-[40px] rounded-[8px]' type="submit" >
-                        Send Link
+                        {t("forgot.send")}
                     </button>
                 </form>
                 <button data-route='/login' className='font-semibold text-[16px] underline' onClick={handleNavigation}>
-                    Log In!
+                    {t("forgot.login")}
                 </button>
             </div>
         </div>

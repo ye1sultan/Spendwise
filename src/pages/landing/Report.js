@@ -1,12 +1,15 @@
+import { useTranslation } from 'react-i18next';
 import Button from './components/Button';
 
 const Report = () => {
+    const { t, i18n } = useTranslation();
+
     return (
         <div id='report' className="bg-[#EBF0FEBF] py-[100px] 2xl:py-[150px] w-full">
             <div className="flex flex-col 2xl:flex-row-reverse justify-center 2xl:justify-around items-center max-w-[350px] 2xl:max-w-full h-full mx-auto">
                 <div className="flex flex-col 2xl:w-[700px]">
                     <div className="font-inter text-[40px] 2xl:text-[75px] font-semibold leading-tight mb-[60px] 2xl:mb-[40px]">
-                        Generate report
+                        {t("landing.report.title")}
                     </div>
                     <div className='block 2xl:hidden mb-[50px]'>
                         <svg width="355" height="229" viewBox="0 0 355 229" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -84,10 +87,10 @@ const Report = () => {
                         </svg>
                     </div>
                     <div className="font-amiri text-[24px] 2xl:text-[42px] 2xl:w-[660px] mb-[25px] 2xl:mb-[60px]">
-                        Based on expenses and income, we will make you a weekly/monthly report. It shows the progress or regression of finance.
+                        {t("landing.report.text")}
                     </div>
                     <div className='self-end 2xl:self-start'>
-                        <Button route='/signup' text='Get Report' width='w-[160px] 2xl:w-[290px]' height='h-[40px] 2xl:h-[80px]' bg='bg-[#19AD50CC]' rounded='rounded-[20px]' size='text-[16px] 2xl:text-[32px]' color='text-white' bold='font-bold' font='font-inter' />
+                        <Button route='/signup' text={t("landing.report.btn")} width='w-[160px] 2xl:w-[290px]' height='h-[40px] 2xl:h-[80px]' bg='bg-[#19AD50CC]' rounded='rounded-[20px]' size='text-[16px] 2xl:text-[32px]' color='text-white' bold='font-bold' font='font-inter' />
                     </div>
                 </div>
                 <div className='hidden 2xl:block'>

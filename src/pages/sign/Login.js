@@ -8,8 +8,10 @@ import Logo from '../assets/Logo.png';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
+    const { t, i18n } = useTranslation();
     const navigate = useNavigate();
 
     const handleNavigation = (e) => {
@@ -80,10 +82,10 @@ const Login = () => {
                 <div className='w-full flex justify-between items-center mb-[30px]'>
                     <div className='flex flex-col items-start'>
                         <div className='text-[32px] font-semibold'>
-                            Log in
+                            {t("login.title")}
                         </div>
                         <div className='text-[16px] text-[#6A6A6A]'>
-                            Welcome back!
+                            {t("login.subtitle")}
                         </div>
                     </div>
                     <img className='h-16' src={Logo} alt='Logo' />
@@ -95,14 +97,14 @@ const Login = () => {
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
                             type="email"
-                            placeholder="Email"
+                            placeholder={t("login.email")}
                             required
                         />
                         <input
                             onChange={(e) => setPassword(e.target.value)}
                             className='border-[1px] rounded-[8px] border-[#CED4DA] w-full h-[40px] text-[14px] py-[12px] pl-[12px] mb-[24px]'
                             type='password'
-                            placeholder='Password'
+                            placeholder={t("login.pwd")}
                             required />
                     </div>
                     <div className="mb-[24px] text-black font-semibold flex flex-row justify-start items-center w-full ml-1">
@@ -114,18 +116,18 @@ const Login = () => {
                             onChange={(e) => setRememberMe(e.target.checked)}
                         />
                         <label htmlFor="checkbox" className="text-[14px] cursor-pointer">
-                            Remember me
+                            {t("login.me")}
                         </label>
                     </div>
-                    <input className='cursor-pointer bg-[#343A40] text-white font-semibold text-[16px] w-full h-[40px] rounded-[8px]' type='submit' value='Log In' />
+                    <input className='cursor-pointer bg-[#343A40] text-white font-semibold text-[16px] w-full h-[40px] rounded-[8px]' type='submit' value= {t("login.title")} />
                 </form>
                 <div className='flex flex-row justify-center items-center'>
                     <button data-route='/signup' className='font-semibold text-[16px] underline' onClick={handleNavigation}>
-                        Sign up!
+                        {t("login.signup")}
                     </button>
                     <BsDot size={30} />
                     <button data-route='/forgot-password' className='font-semibold text-[16px] underline' onClick={handleNavigation}>
-                        Forgot Password?
+                        {t("login.forgot")}
                     </button>
                 </div>
             </div>

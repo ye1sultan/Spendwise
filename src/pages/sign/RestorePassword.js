@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from '../assets/Logo.png';
+import { useTranslation } from "react-i18next";
 
 const RestorePassword = () => {
+    const { t, i18n } = useTranslation();
+
     const [password, setPassword] = useState(false);
     const [newPassword, setNewPassword] = useState(false);
 
@@ -35,23 +38,23 @@ const RestorePassword = () => {
                 <div className='w-full flex justify-between items-center mb-[20px]'>
                     <div className='flex flex-col items-start'>
                         <div className='text-[32px] font-semibold'>
-                            Restore Password
+                            {t("restore.title")}
                         </div>
                         <div className='text-[16px] text-[#6A6A6A]'>
-                            Make strong password!
+                            {t("restore.subtitle")}
                         </div>
                     </div>
                     <img className='h-16' src={Logo} alt='Logo' />
                 </div>
                 <div className="w-full text-[14px] font-normal mb-[24px] pl-2">
                     <div>
-                        1.Password must be at least 8 characters long.
+                        {t("restore.one")}
                     </div>
                     <div>
-                        2.Password must contain at least one upper case.
+                        {t("restore.two")}
                     </div>
                     <div>
-                        3.Password must contain at least one number or special character
+                        {t("restore.three")}
                     </div>
                 </div>
                 <form onSubmit={handleSubmit} className="flex flex-col w-full mb-[24px]">
@@ -60,19 +63,19 @@ const RestorePassword = () => {
                             onChange={(e) => setPassword(e.target.value)}
                             className='border-[1px] rounded-[8px] border-[#CED4DA] w-full h-[40px] text-[14px] py-[12px] pl-[12px] mb-[24px]'
                             type='password'
-                            placeholder='New Password' required />
+                            placeholder={t("restore.new")} required />
                         <input
                             onChange={(e) => setNewPassword(e.target.value)}
                             className='border-[1px] rounded-[8px] border-[#CED4DA] w-full h-[40px] text-[14px] py-[12px] pl-[12px] mb-[24px]'
                             type='password'
-                            placeholder='Confirm Password' required />
+                            placeholder={t("restore.confirm")} required />
                     </div>
                     <button className='cursor-pointer bg-[#343A40] text-white font-semibold text-[16px] w-full h-[40px] rounded-[8px]' type="submit">
-                        Confirm
+                        {t("restore.btn")}
                     </button>
                 </form>
                 <button data-route='/login' className='font-semibold text-[16px] underline' onClick={handleNavigation}>
-                    Log In
+                    {t("restore.login")}
                 </button>
             </div>
         </div>

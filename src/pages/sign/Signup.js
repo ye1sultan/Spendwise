@@ -8,8 +8,10 @@ import Logo from '../assets/Logo.png';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useTranslation } from 'react-i18next';
 
 const Signup = () => {
+    const { t, i18n } = useTranslation();
     const navigate = useNavigate();
 
     const [name, setName] = useState('');
@@ -177,10 +179,10 @@ const Signup = () => {
                 <div className='w-full flex justify-between items-center mb-[30px]'>
                     <div className='flex flex-col items-start'>
                         <div className='text-[32px] font-semibold'>
-                            Sign up
+                            {t("signup.title")}
                         </div>
                         <div className='text-[16px] text-[#6A6A6A]'>
-                            to calculate your budget!
+                            {t("signup.subtitle")}
                         </div>
                     </div>
                     <img className='h-16' src={Logo} alt='Logo' />
@@ -196,7 +198,7 @@ const Signup = () => {
                                 border-[1px] rounded-[8px] border-[#CED4DA] w-full 
                                 h-[40px] text-[14px] py-[12px] pl-[12px] mb-[24px]`}
                             type='text'
-                            placeholder='Name' />
+                            placeholder={t("signup.name")} />
                         <input
                             onChange={(e) => {
                                 setEmail(e.target.value);
@@ -206,7 +208,7 @@ const Signup = () => {
                                 border-[1px] rounded-[8px] border-[#CED4DA] w-full 
                                 h-[40px] text-[14px] py-[12px] pl-[12px] mb-[24px]`}
                             type='email'
-                            placeholder='Email' />
+                            placeholder={t("signup.email")} />
                         <input
                             onChange={(e) => {
                                 setPassword(e.target.value);
@@ -216,7 +218,7 @@ const Signup = () => {
                                 border-[1px] rounded-[8px] border-[#CED4DA] w-full 
                                 h-[40px] text-[14px] py-[12px] pl-[12px] mb-[24px]`}
                             type='password'
-                            placeholder='Password' />
+                            placeholder={t("signup.pwd")} />
                         <input
                             onChange={(e) => {
                                 setPasswordConfirmation(e.target.value);
@@ -226,7 +228,7 @@ const Signup = () => {
                                 border-[1px] rounded-[8px] border-[#CED4DA] w-full 
                                 h-[40px] text-[14px] py-[12px] pl-[12px] mb-[24px]`}
                             type='password'
-                            placeholder='Confirm Password' />
+                            placeholder={t("signup.confirmpwd")} />
                     </div>
                     <div className='mb-[24px] font-semibold flex flex-col justify-start items-start w-full'>
                         <div className='flex flex-row justify-start items-center w-full ml-1'>
@@ -237,19 +239,19 @@ const Signup = () => {
                                 className='w-[18px] h-[18px] mr-[24px]'
                                 onChange={handleCheckboxChange} />
                             <label htmlFor='checkbox' className='text-[14px]'>
-                                I agree to the Terms of Use
+                                {t("signup.terms")}
                             </label>
                         </div>
                     </div>
-                    <input className='cursor-pointer bg-[#343A40] text-white font-semibold text-[16px] w-full h-[40px] rounded-[8px]' value='Create Account' type='submit' />
+                    <input className='cursor-pointer bg-[#343A40] text-white font-semibold text-[16px] w-full h-[40px] rounded-[8px]' value={t("login.title")} type='submit' />
                 </form>
                 <div className='flex flex-row justify-center items-center'>
                     <button data-route='/login' className='font-semibold text-[16px] underline text-black' onClick={handleNavigation}>
-                        Log In
+                        {t("signup.login")}
                     </button>
                     <BsDot size={30} />
                     <button data-route='/terms-of-use' className='font-semibold text-[16px] underline' onClick={handleNavigation}>
-                        Terms of Use
+                        {t("signup.use")}
                     </button>
                 </div>
             </div>

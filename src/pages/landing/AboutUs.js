@@ -1,13 +1,17 @@
+import { useTranslation } from "react-i18next";
+
 const AboutUs = () => {
+    const { t, i18n } = useTranslation();
+
     return (
         <div id='about' className="bg-[#ffffff] py-[100px] 2xl:py-[150px] w-full relative">
             <div className="flex flex-col 2xl:justify-between 2xl:items-between max-w-[350px] 2xl:max-w-[1680px] h-full mx-auto z-10">
                 <div className="flex flex-col justify-start items-start mb-[100px] relative">
                     <div className="font-inter text-[36px] 2xl:text-[75px] text-[#502167] font-bold mb-[30px] 2xl:mb-0 z-10">
-                        What is Spendwise?
+                        {t("landing.us.first.title")}
                     </div>
                     <div className="font-amiri text-[24px] 2xl:text-[48px] max-w-[844px] 2xl:text-center z-10">
-                        Spendwise brings together everything from spending, balances, and budgets to your credit score and more. Access your financial life in one powerful site.
+                        {t("landing.us.first.text")}
                     </div>
                     <div className="2xl:hidden absolute top-32 left-12">
                         <svg width="307" height="157" viewBox="0 0 307 157" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -23,10 +27,10 @@ const AboutUs = () => {
                 </div>
                 <div className="flex flex-col justify-start items-start 2xl:items-center self-end relative">
                     <div className="font-inter text-[36px] 2xl:text-[75px] text-[#502167] font-bold mb-[30px] 2xl:mb-0 z-10">
-                        What is our goal ?
+                        {t("landing.us.second.title")}
                     </div>
                     <div className="font-amiri text-[24px] 2xl:text-[48px] max-w-[844px] 2xl:text-center z-10">
-                        Our goal is to help every person live in a financially independent reality.
+                        {t("landing.us.second.text")}
                     </div>
                     <div className="2xl:hidden absolute bottom-24 right-0">
                         <svg width="80" height="57" viewBox="0 0 80 57" fill="none" xmlns="http://www.w3.org/2000/svg">

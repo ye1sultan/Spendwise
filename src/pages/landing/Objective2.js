@@ -1,13 +1,17 @@
+import { useTranslation } from "react-i18next";
+
 const Objective2 = () => {
+    const { t, i18n } = useTranslation();
+
     return (
         <div id='objective-2' className="px-[20px] py-[70px] pb-[20px] 2xl:px-0 2xl:py-[100px] font-andada bg-[#ffffff] 2xl:bg-[#EBF0FEBF] flex justify-center items-center w-full h-full">
             <div className="flex flex-col justify-center items-center w-[370px] 2xl:w-full">
                 <div className="flex flex-col text-start 2xl:text-center mb-[45px] 2xl:mb-[70px]">
                     <div className="text-[40px] 2xl:text-[85px] font-bold 2xl:font-extrabold text-[#381C46] mb-[25px] 2xl:mb-0">
-                        How Spenwise Works?
+                        {t("landing.objs.title")}
                     </div>
                     <div className="text-[15px] 2xl:text-[32px] 2xl:w-[1450px]">
-                        Simplify your spending decisions without sacrificing the finer things in life, like fancy coffee drinks with hard-to-pronounce names.
+                        {t("landing.objs.text")}
                     </div>
                 </div>
                 <div className="flex flex-col 2xl:flex-row justify-center 2xl:justify-around items-center w-full h-full">
@@ -56,10 +60,10 @@ const Objective2 = () => {
                         </div>
                         <div className="flex flex-col justify-center items-center w-full">
                             <div className="text-[20px] 2xl:text-[40px] font-bold 2xl:mb-[15px]">
-                                Sign Up for Free
+                                {t("landing.objs.first.title")}
                             </div>
                             <div className="text-[14px] 2xl:text-[32px] w-[185px] 2xl:w-[500px] font-amiri text-center">
-                                Start your journey with Sing Up. It's easy—no credit card or commitment required.
+                                {t("landing.objs.first.text")}
                             </div>
                         </div>
                     </div>
@@ -118,10 +122,10 @@ const Objective2 = () => {
                         </div>
                         <div className="flex flex-col justify-center items-center w-full">
                             <div className="text-[20px] 2xl:text-[40px] font-bold 2xl:mb-[15px]">
-                                Build Your Budget
+                                {t("landing.objs.second.title")}
                             </div>
                             <div className="text-[14px] 2xl:text-[32px] w-[185px] 2xl:w-[500px] font-amiri text-center">
-                                Add your accounts and expenses, set savings targets, and share your budget with loved ones.
+                                {t("landing.objs.second.text")}
                             </div>
                         </div>
                     </div>
@@ -170,10 +174,10 @@ const Objective2 = () => {
                         </div>
                         <div className="flex flex-col justify-center items-center w-full">
                             <div className="text-[20px] 2xl:text-[40px] font-bold 2xl:mb-[15px]">
-                                Breathe Easier
+                                {t("landing.objs.third.title")}
                             </div>
                             <div className="text-[14px] 2xl:text-[32px] w-[185px] 2xl:w-[500px] font-amiri text-center">
-                                Start feeling confident, content, and secure in your financial life. You might even sleep better.
+                                {t("landing.objs.third.text")}
                             </div>
                         </div>
                     </div>
