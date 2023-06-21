@@ -1,4 +1,5 @@
-const API_URL = process.env.REACT_APP_API_URL;
+// const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = "https://personalfinance.herokuapp.com/api";
 
 export const login = async (email, password) => {
     const requestOptions = {
